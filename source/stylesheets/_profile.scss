@@ -1,0 +1,39 @@
+
+$profile-width-max: 320px;
+$profile-border: $border-line solid $color-phage-light;
+
+.profile {
+  // max-width: $profile-width-max;
+}
+
+.profile-short {
+  padding-bottom: $size-base/2;
+  margin-bottom: $size-base/2;
+  border-bottom: $profile-border;
+}
+
+.profile-image {
+  img {
+    border-radius: $size-base/2;
+  }
+}
+
+.profile-name {
+  padding-top: $size-base/2;
+  padding-bottom: 0; // $size-base/2;
+  @extend h4;
+}
+
+.profile-contact {
+  padding-bottom: $size-base/2;
+  margin-bottom: $size-base/2;
+  border-bottom: $profile-border;
+
+  a {
+    border: 0;
+  }
+}
+
+.profile-description {
+  margin-top: $size-base;
+}

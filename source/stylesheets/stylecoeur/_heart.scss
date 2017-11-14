@@ -1,0 +1,126 @@
+
+
+// essential mixins
+
+// usage @include prefix(transform,rotate(360deg));
+@mixin prefixer($name, $arguments...) {
+  -webkit-#{$name}: $arguments;
+  -ms-#{$name}: $arguments;
+  -moz-#{$name}: $arguments;
+  -o-#{$name}: $arguments;
+  #{$name}: $arguments;
+}
+
+
+
+
+// heart settings
+
+
+
+$size: 16px !default; // 16px; // based on 4*4
+$sizeline: $size * 1.5 !default; // baseline; base lineheight; line-heights follow 1.5 rule
+
+// attempt at using "standardized" sizes. success may vary. (fonts are different sized, etc.)
+
+// New: based on multiples of 4
+$size-m4:       6px     !default;
+$size-m3:       8px     !default;
+$size-m2:       10px    !default;
+$size-m1:       12px    !default; // Minus Sizes [m]
+$size-smaller:  14px    !default; // dumb but super useful
+$size-base:     $size   !default; 
+$size-larger:   20px    !default; // hard choice; 20 div by 2,4,5 and halfway; 18 div by 3, 6, 9 
+$size-p1:       24px    !default; // Plus Sizes [p]
+$size-p2:       28px    !default;
+$size-p3:       40px    !default;
+$size-p4:       48px    !default;
+$size-p5:       56px    !default;
+$size-p6:       64px    !default;
+$size-p7:       80px    !default;
+$size-p8:       96px    !default;
+$size-p9:       112px   !default;
+$size-p10:      128px   !default;
+$size-p11:      144px   !default;
+
+$size-half:     $size/2 !default;
+$size-2:        $size*2 !default;
+
+
+/* Old: based on golden ratio
+$size-m4:       4px;
+$size-m3:       7px;
+$size-m2:       9px;
+$size-m1:       12px; // Minus Sizes [m]
+$size-smaller:  14px; // dumb but super useful
+$size-base:     $size; 
+$size-larger:   19px; // dumb but super useful
+$size-p1:       21px; // Plus Sizes [p]
+$size-p2:       28px;
+$size-p3:       37px;
+$size-p4:       50px;
+$size-p5:       67px;
+$size-p6:       89px;
+$size-p7:       119px;
+$size-p8:       159px;
+
+$size-half:     $size/2;
+$size-2:        $size*2;
+*/
+
+// radius sizes
+$radius-none: 0px       !default;  ._radius-none { border-radius: 0; } ._radius-none-i { border-radius: 0 !important; }
+$radius: 4px            !default;       ._radius { border-radius: $radius }
+$radius-md: $size-base  !default;  ._radius-md { border-radius: $radius-md }
+$radius-lg: 24px        !default;   ._radius-lg { border-radius: $radius-lg }
+$radius-xl: 36px        !default;   ._radius-xl { border-radius: $radius-xl }
+$radius-sm: 2px         !default;    ._radius-sm { border-radius: $radius-sm }// subtle borders; nothing should be a jagged 90 degrees
+$gutter: $size-base/2   !default;
+
+
+// these are just the bootstrap defaults converted to my own vars
+
+// xs 0   - 767
+// sm 768 - 991
+// md 992 - 1199
+// lg 1200 + 
+
+// b/c of pixel density, these descriptions are just for ease of describing width
+// shouldn't matter what devices people use
+
+// "mobile"
+$width-xs-min: 0px      !default; 
+$width-xs-max: 767px    !default;
+
+// "tablet"
+$width-sm-min: 768px    !default;
+$width-sm-max: 991px    !default;
+
+// "desktop"
+$width-md-min: 992px    !default;
+$width-md-max: 1199px   !default;
+
+// "wide"
+$width-lg-min: 1200px   !default;
+$width-lg-max: 2100px   !default;
+
+
+// Helper Widths
+$width-site-min: 360px  !default; // absolute minimum site width
+
+// sometimes sites have a 'magical' breakpoint based on content structure
+$width-magic: 640px     !default;
+
+$width-content-max: $width-sm-max !default; // max content block width
+$width-content-max-narrow: $width-magic !default; // max content block width
+
+$width-content-paragraph: 77ch !default;
+$width-content-paragraph-narrow: 55ch !default;
+// adheres to the 75 ch per paragraph rule; ch uses the '0' symbol as char width
+
+
+
+// layout widths defined in _neck-layout
+
+
+

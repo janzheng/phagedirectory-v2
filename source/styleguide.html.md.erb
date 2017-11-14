@@ -1,0 +1,213 @@
+---
+layout: layout-styleguide
+title: styleguide
+source: ./
+submenu:
+  - [Philosophy, philosophy]
+  - [Stylecoeur, stylecoeur]
+  - ["→ Component Names", component-names]
+  - [Using Stylecoeur, using-stylecoeur]
+  - [Developing Stylecoeur, developing-stylecoeur]
+  - [Other Resources, other-resources]
+---
+
+<main markdown="1">
+  
+# Hello, Sassypants.
+
+This "Style Guide" (or cheat sheet) is a collection of loosely nested dependent components and elements. The basic ones are built with SCSS, and complex ones with SCSS + JS.
+- Each component needs to be as independent as possible. 
+
+
+## Philosophy
+
+Stylecoeur is a personal cheat sheet and boilerplate to make prototyping or development both quick and professional. It's my own alternative to Bootstrap. It prioritizes development speed over reliability and load times. It uses grids and flexbox for layouts, so modern browsers only (no polyfills provided).
+
+__Stylecoeur is for prototyping__, and not for every project.
+
+- Priotitize speed of development.
+- More reuse, less complexity. Use helpers; include files. Dno't reinvent.
+- This is only a collection of examples. Build off of them
+- Use as much open source as possible
+- Everything is _alive_; every aspect will improve over time.
+- This documentation will ALWAYS be behind (even changelog), so inspect the code for the latest updates
+
+
+
+## Stylecoeur
+
+The base framework is `stylecoeur` and is loosely based on _atomic design_.
+
+<div class="_radius _padding-bottom-2 _padding-top-2  _margin-bottom-2 _center _color-bg-ui">
+
+  <div class="_radius _padding _center _padding-bottom _color-bg-main">
+    <div class="_radius _padding _center _color-bg-yellow">
+      <div class="_radius _padding _center _color-bg-red _color-white _font-bold">
+        Heart
+      </div>
+      <div class="_padding-top-half _font-bold">Head</div> 
+    </div>
+    <div class="_padding-top _color-white _font-bold">Neck</div> 
+  </div>
+  <div class=" _font-bold _padding-top-2 ">Torso</div> 
+</div>
+
+- `_heart.scss` — contains units, sizes and other base definitions
+- `/head` — provides the core dependencies, like typography, color, animation mixins, and grids
+- `/neck` — consists of basic display assets like links, cards, and buttons
+- `/torso` — is all the components that depend on the heart, head and neck. These may also require js
+
+
+
+#### Component Names
+
+Naming convention is inspired BEM, and keeps elements and components organzied. These are not hard and fast rules, but suggestions. This is a simpler version of [BEM](http://getbem.com/introduction/).
+
+~~~html
+< element class="element _component_name-attribute1-attr2 --state_1 --state_2 ></element>
+~~~
+
+- `.element` _Local_ objects are called elements and only exists for the page or component
+- `._component` Global stylecoeur components (like buttons) contain a leading underscore
+- `.element_one` `. Use underscore to separate words
+- `_form-section-one` Use dashes to add attributes: `.element-descriptor-attribute`, `._color-bg-yellow` describes `color` with a `-bg` (background color), and `-yellow` (yellow background color)
+- `_component .--descriptor` State descriptors, are defined with `--state` flags, like `.container .--open`
+ or `._message .--success`. Descriptor flags are useful when they can be reused. 
+
+Here's a quick example of how this would work in SCSS:
+
+~~~scss
+._component-title {
+  [styles]
+
+  &.--open {
+    [open styles]
+  }
+  &.--success {
+    [success styles]
+  }
+}
+~~~
+
+- When defining styles use separate variables for definitions and context, but make sure to always refer to the context variable when possible. This separation makes changing context colors easier in the future (like switching `$color-success` to `$color-blue`):
+
+~~~scss
+ $color-green: #00ff00;         // definition
+ $color-success: $color-green;  // context
+~~~
+
+- Options for SCSS rules exist as `%placeholders`, `._classes` for ease. Sometimes it makes more sense to drop in styling like margins, paddings, and alignment straight into html with `class="_padding-top"` instead of creating lots of stylesheets 
+
+
+- Using `-` to separate names and descriptors helps with double-click selecting the entire name. BEM syntax `.my-component__list-item` is annoying b/c double clicking the component name selects the wrong parts of the name. Instead, `.my_component-list_item` allows you to select the right parts with a simple double-click
+- Avoid the use of &--state as much as possible, as these are hard to search for with `cmd-f`
+- Keep reusability and extensibility in mind
+- Use contextual variables!! Don't just copy rule definitions like colors or font size.
+
+Just remember to maintain modularity, and separate context from the definition. Helpers and components should be as reusable as possible.
+
+
+
+
+## Using stylecoeur
+
+The style guide is very modular, so only link the SCSS components you need to keep the file size down. Either include the entire thing or select what you want to import. Remember that they depend on each other to work.
+
+-  `@import '_styles/'` to automatically import the `index.scss` file which contains all parts, or 
+- individually import each part like `@import 'neck';` or
+- import each module separately `@import 'neck-code';`
+
+
+#### Copying Files
+
+__Preferred Method:__ Copy the full `styles` folder over to a new project. If the core changes, just make sure to copy over the newest version. Eventually there might be a build task to ensure it stays up to date. This method is preferred, as changes to the core won't affect the build. Copy over whatever JS files you need and/or link to them.
+
+#### Symlinked Project
+
+Creating a symlink will give control of editing the core, but changes ripple across projects if they're all symlinked. [right-click to create an alias doesn't work with the compiler] Using the command-line interface, go to your new project's SCSS folder, then:
+
+1. Create a direct symlink file: 
+
+~~~
+ln -s ~/path/to/stylecoeur_folder/styles/index.scss _stylecoeur.
+~~~
+
+Note how the name is changed to `_stylecoeur.scss` to conform to SCSS naming standards, but it doesn't really matter.
+
+2. Or create a symlink to the folder in CLI. Navigate to the project's stylesheet folder: 
+
+~~~ 
+ln -s ~/path/to/styles/stylecoeur_folder stylecoeur
+ln -s /Users/janzheng/Desktop/projects/stylecoeur/styles stylecoeur
+~~~
+
+I prefer the latter option, because you can now import the folder as a whole:
+
+~~~
+@import 'stylecoeur/stylecoeur.scss';
+~~~
+
+or pick specific compontents 
+
+~~~
+@import 'stylecoeur/components/form';
+~~~
+
+(Symlinks are simpler than using an npm module, since projects like static sites might not use symlinks)
+
+
+
+## Developing Stylecoeur
+
+Please refer to the [developing stylecoeur](./styleguide/z-001-stylecoeur-dev.html) section for running, building, deploying and developing Stylecouer further.
+
+
+
+
+
+
+
+## Other Resources
+
+- Inspiration etc.
+  [Designer Lynx](https://www.designerlynx.co)
+
+- Tympanus Codrops
+  - Good for ideas, inspiration, and implementation
+  - [Expanding Grid](https://tympanus.net/codrops/2017/11/08/expanding-grid-item-animation/)
+- Tympanus [Blueprints](https://tympanus.net/codrops/category/blueprints/)
+  - Multi-level side nav w/ nice transitions
+    - Great for more complex sidenavs, admin sidenavs
+  - [Stacked Navigation](https://tympanus.net/Blueprints/PageStackNavigation/)
+    - Looks and feels like a menu / foldering system
+  - [Zoom slider](https://tympanus.net/Blueprints/ZoomSlider/)
+    - Landing page, product view, transitions; cool for shopping grids too
+  - [Shopping Grid w/ Filters](https://tympanus.net/Blueprints/FilterableProductGrid/)
+    - cool slider within products, filters, masonry
+  - [Product Comparison](https://tympanus.net/Blueprints/ProductComparison/)
+  - [Grid Gallery](https://tympanus.net/Blueprints/GridGallery/)
+    - Combines a product grid with a gallery (cool for shopping, food menu, etc.)
+  - [Split Layout](https://tympanus.net/Blueprints/SplitLayout/)
+    - Cool idea with showing vertical strips and cool animation
+  - [On Scroll effects](https://tympanus.net/Blueprints/OnScrollEffectLayout/)
+  - [View mode switch](https://tympanus.net/Blueprints/ViewModeSwitch/)
+    - Grid v. List views
+  - [Animated Header](https://tympanus.net/Blueprints/AnimatedHeader/)
+    - Header nav shrinks a bit when scrolled down
+  - [Tooltip Menu](https://tympanus.net/Blueprints/TooltipMenu/)
+    - Like a 'dropdown' but can appear above if more space above
+  - [Responsive Prod Grid](https://tympanus.net/Blueprints/ProductGridLayout/)
+    - I like the hover effects for each product item
+  - [Slide-out massive nav menu](https://tympanus.net/Blueprints/HorizontalSlideOutMenu/#)
+  - [Vertical Timeline](https://tympanus.net/Blueprints/VerticalTimeline/)
+  - [Fixed Background Scrolling](https://tympanus.net/Blueprints/ScrollingLayout/)
+  - [Background Slideshow](https://tympanus.net/Blueprints/BackgroundSlideshow/)
+  - [Slide/Push Off-Canvas Menus](https://tympanus.net/Blueprints/SlidePushMenus/)
+  - [Quotes Rotator](https://tympanus.net/Blueprints/QuotesRotator/)
+  - [Nested Accordion](https://tympanus.net/Blueprints/NestedAccordion/)
+  - [Vertical Icon Menu](https://tympanus.net/Blueprints/VerticalIconMenu/#)
+  - [Horizontal Dropdown Mega Menu](https://tympanus.net/Blueprints/HorizontalDropDownMenu/)
+
+
+</main>
+

@@ -1,0 +1,85 @@
+
+
+$metrosrc: '../fonts/metropolis/';
+
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url($metrosrc+'Metropolis-Light.eot');
+    src: url($metrosrc+'Metropolis-Light.eot?#iefix') format('embedded-opentype'),
+        url($metrosrc+'Metropolis-Light.woff') format('woff'),
+        url($metrosrc+'Metropolis-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url($metrosrc+'Metropolis-Regular.eot');
+    src: url($metrosrc+'Metropolis-Regular.eot?#iefix') format('embedded-opentype'),
+        url($metrosrc+'Metropolis-Regular.woff') format('woff'),
+        url($metrosrc+'Metropolis-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// darker font as normal
+// @font-face {
+//     font-family: 'Metropolis';
+//     src: url($metrosrc+'Metropolis-Medium.eot');
+//     src: url($metrosrc+'Metropolis-Medium.eot?#iefix') format('embedded-opentype'),
+//         url($metrosrc+'Metropolis-Medium.woff') format('woff'),
+//         url($metrosrc+'Metropolis-Medium.ttf') format('truetype');
+//     font-weight: normal; // 500;
+//     font-style: normal;
+// }
+
+
+@font-face {
+    font-family: 'Metropolis';
+    src: url($metrosrc+'Metropolis-Bold.eot');
+    src: url($metrosrc+'Metropolis-Bold.eot?#iefix') format('embedded-opentype'),
+        url($metrosrc+'Metropolis-Bold.woff') format('woff'),
+        url($metrosrc+'Metropolis-Bold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+
+$font-h1: $size-p4;
+$font-h2: $size-p3;
+$font-h3: $size-p2;
+$font-h4: $size-p1;
+$font-h5: $size-larger; // $font-size-base !default; //$font-size-base !default;
+$font-h6: $size-m1;
+
+
+$font-bold: 800;
+%font-light, ._font-light { font-weight: $font-light; }
+%font-normal, ._font-normal {font-weight: $font-normal; }
+%font-bold, ._font-bold, strong { font-weight: $font-bold; }
+%font-heavy, ._font-heavy { font-weight: $font-heavy; }
+
+
+$font-sans: 'Metropolis', -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", Helvetica, arial, sans-serif;
+%font-sans 
+%font-basic,
+%font-body {
+  font-family: $font-sans;
+  // font-size: $font-size-base;
+  // line-height: $font-lineheight;
+}
+
+html {
+  // @extend %font-sans;
+  font-family: $font-sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-sans;
+}
+
+
+
+
+

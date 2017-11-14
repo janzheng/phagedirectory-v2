@@ -1,0 +1,22 @@
+
+<% title = current_page.data.title || "the phage directory" %>
+
+<!doctype html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%= partial '/partials/head' %>
+  </head>
+  <body class="">
+
+    <div class="_main">
+      <%= yield %>
+    </div>
+
+
+    <%= partial '/partials/footer' %>
+
+  </body>
+</html>
+
+<script src="../javascripts/site.js" type="text/javascript"></script>

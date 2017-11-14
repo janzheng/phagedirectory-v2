@@ -1,0 +1,45 @@
+
+
+// 
+//  The Heart.
+//  [ core dependencies ]
+// 
+
+//  Heart [base values]
+//    Head
+//      Neck
+//        Torso [components]
+
+@import 'heart'; // coeur
+
+//  [ depends on the heart ]
+@import 'head';
+
+//  [ depends on heart and head ]
+@import 'neck'; 
+
+//  [ depends on heart, head, neck — components] 
+@import 'torso';
+
+// re-import to let colors take precedence
+@import 'head-colors';
+
+
+
+
+// 
+// base layout styles
+// 
+body {
+  @extend %font-body;
+  background-color: $color-bg;
+  color: $color-copy;
+  margin: 0;
+}
+
+
+
+
+
+
+
