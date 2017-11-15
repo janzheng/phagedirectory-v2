@@ -279,6 +279,13 @@ $grid-gap: $size-base;
   @include griddick((4,1));
 }
 
+%grid-1-5, ._grid-1-5, ._grid-one-four {
+  @include griddick((1,4));
+}
+%grid-5-1, ._grid-5-1, ._grid-four-one {
+  @include griddick((4,1));
+}
+
 %grid-1-7, ._grid-1-7, ._grid-one-seven {
   @include griddick((1,7));
 
@@ -407,22 +414,12 @@ $grid-gap: $size-base;
 
 // applies to grid children
 ._grid-center {
-  // display: grid;
-  // grid-template-rows: 1fr;
-  // grid-template-columns: 1fr;
-  // justify-items: center; // middle (left/right)
-  // align-items: center; // middle (top/down)
-  // height: 100%; // sometimes required? maybe when set explicit height? 
-
-  @include genGridAttr(('xs','sm','sm-down','md','lg')) {
-    display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr;
-    justify-items: center; // middle (left/right)
-    align-items: center; // middle (top/down)
-    // height: 100%; // sometimes required? maybe when set explicit height? 
-  }
-
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  justify-items: center; // middle (left/right)
+  align-items: center; // middle (top/down)
+  // height: 100%; // sometimes required? maybe when set explicit height?
 }
   ._grid-center-h { // only horizontally center, not left/right
     display: grid;
@@ -433,12 +430,12 @@ $grid-gap: $size-base;
     // height: 100%; // sometimes required? maybe when set explicit height?
   }
 
-// %grid-center {
-//   // create centered grids for immediate child content
-//   & > * {
-//     @extend ._grid-center;
-//   }
-// }
+%grid-center {
+  // create centered grids for immediate child content
+  & > * {
+    @extend ._grid-center;
+  }
+}
 
 
 

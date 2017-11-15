@@ -36,8 +36,8 @@ function verticalScroll(offsetY = 0) {
 
     if (currentUrl != futureUrl) {
       // event.preventDefault();
-      // console.log('go to ', currentUrl, futureUrl);
-      window.location = futureUrl;
+      console.log('go to ', currentUrl, futureUrl, target);
+      window.location = futureUrl + target;
     }
 
     if( typeof $target.offset() !== "undefined") {
@@ -119,6 +119,10 @@ $(document).ready(function() {
   var hash = location.hash,
       navOffset = -60;
 
+  // console.log('location hash: ', hash)
+  // if(hash) {
+  //   console.log('location hash: ', hash)
+  // }
   verticalScroll(navOffset);
 });
 

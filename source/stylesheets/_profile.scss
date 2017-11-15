@@ -2,6 +2,12 @@
 $profile-width-max: 320px;
 $profile-border: $border-line solid $color-phage-light;
 
+
+.profile-container {
+  margin-top: $size-2;
+}
+
+
 .profile {
   // max-width: $profile-width-max;
 

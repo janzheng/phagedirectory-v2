@@ -10,104 +10,41 @@ layout: layout-main
     
   <%= partial '/partials/header' %>
 
-  <div class="hero-desc _align-bottom">
+  <a href="about.html#mission" class="hero-desc _align-bottom _border-none">
     A public directory of phage research <br/>
     for fighting drug-resistant diseases.
+  </a>
+</div>
+
+<div class="section _grid-1-5">
+
+<h6 class="">— background</h6>
+<div markdown="1">
+  Our first line of defense in fighting disease—antibiotics—is starting to fail, and people are getting sick and dying to previously treatable diseases. Phage therapy is an emerging method of using <a href="about.html#background">bacteriophages</a> to treat drug-resistant infections. 
+
+  [comment on the hunt for phages]
+
+  <a href="about.html#background">read more</a>
+</div>
+
+</div>
+
+
+<div class="section _grid-1-5">
+
+  <h6 class="">— media</h6>
+  <div>
+    <%= partial '/partials/media' %>
   </div>
-</div>
-
-<!-- 
-#### ...because we are only as good as our tools.
 
 </div>
 
 
-<blockquote class="">
-This is my toolkit. There are many like it, but this one is mine. My toolkit is my best friend. It is my life. I must master it as I must master my life. Without me, my toolkit is useless. Without my toolkit, I am useless.
-</blockquote>
-
-This is not a framework. This is a collection of loose concepts, ideas, SCSS, and Javascript bundled together to make prototyping faster and more efficient. Its purpose is to speed up _prototype building_, and such, will sometimes make sacrifices in load speed and efficiency. 
-{: ._padding-top-2 ._padding-bottom-2 ._center-margin ._width-content-max-narrow}
-
-</summary>
-
-
-<div class="_center-margin _center">
-  <div class="_buttonGroup --font-body-xs --outline">
-    <a class="_button" target="_blank" href="./design.html">Design System</a>
-    <a class="_button" target="_blank" href="./styleguide.html">Style Guide</a>
-    <a class="_button" target="_blank" href="./notes.html">Notes</a>
-  </div>
-  <a class="_button --text _v-top" target="_blank" href="http://github.com/janzheng/stylecoeur">Github</a>
 </div>
 
-
-<div class="_width-content-max-narrow _center-margin _padding-2" markdown="1">
-
-## Overview
-
-If you reuse design processes and UI patterns over and over, why reinvent the wheel? Save yourself time and create a toolbox of reusable components. Every designer should have their own collection. You may use this for your projects, or use this as a starting point for your own.
-
-The idea is to centralize thought, processes and learning from previous projects for the betterment of future projects. Standardizations, conventions, and checklists will reduce the amount of work, deduplicate thought, and reduce for future projects. [Surgeons use checklists to save lives](http://www.npr.org/templates/story/story.php?storyId=122226184), so let's learn from them.
-
-
-<div class="_grid-three">
-
-<div markdown="1">
-### Design Guide
-
-The design guide offers checklists and resources, and acts as a starting point for developing new brands, design systems, and design research. It's a collection of things to think about.
-</div>
-
-
-<div markdown="1">
-### Style Guide 
-<div class="_font-small _font-bold"> (Cheat Sheet) </div>
-
-The style guide is set up to provide assistance to prototypes and new projects with implementations to common UI patterns with SCSS and JS. Projects can import all of the style guide `_stylecoeur`, or selectively import certain components, then differentiate on top of the core.
-</div>
-
-
-<div markdown="1">
-### Notes
-
-This is a living, growing document. The Notes section denotes all the changes over time, and possible changes to come.
-</div>
-
-</div>
+<%= partial '/partials/directory' %>
 
 
 
-### Other Guides
-
-Refer to other style guides and design to gain useful insight.
-
-<div class="_grid-three">
-<div markdown="1">
-
-##### Style Guides
-
-- [Trello](https://design.trello.com/)
-- [Mailchimp](https://ux.mailchimp.com/)
-- [Corpus](http://jamiewilson.io/corpus/)
-- [ESFA gov.uk.co](https://das-patterns.herokuapp.com)
-
-</div>
-<div markdown="1">
-##### Design Systems
-- [Firefox Photon](http://design.firefox.com/photon/welcome.html)
-- [Saleforce](https://www.lightningdesignsystem.com/)
-- [IBM](http://www.carbondesignsystem.com/)
-- [Airbnb](http://airbnb.design/building-a-visual-language/)
-- [Atlassian](https://design.atlassian.com/product/)
-</div>
-
-<div markdown="1">
-##### Systems &amp; Frameworks
-- [Shards: Bootstrap 4](https://designrevision.com/demo/shards/)
-- [Tailwind](https://tailwindcss.com/)
-- [Corpus](http://jamiewilson.io/corpus/)
-</div>
- -->
-</div>
-
+<!-- feed data -->
+<!-- <script src="/data-feed.js"></script> -->
