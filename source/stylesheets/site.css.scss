@@ -46,7 +46,23 @@
   }
 }
 
+.content {
+  @extend ._width-content-paragraph;
+  @extend ._center-margin;
+  @extend ._padding-2;
 
+  @include screen-xs {
+    padding-left: $size-base*2;
+    padding-right: $size-base*2;
+  }
+}
+
+.hero-desc {
+  max-width: $width-content-max-narrow;
+  margin-top: $size-p4;
+  font-size: $size-p1;
+  line-height: $size-p1 * 1.5;
+}
 
 
 

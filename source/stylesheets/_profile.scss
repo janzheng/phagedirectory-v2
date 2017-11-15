@@ -4,6 +4,10 @@ $profile-border: $border-line solid $color-phage-light;
 
 .profile {
   // max-width: $profile-width-max;
+
+  a {
+    border: 0;
+  }
 }
 
 .profile-short {
