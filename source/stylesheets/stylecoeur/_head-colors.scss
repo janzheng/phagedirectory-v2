@@ -50,7 +50,7 @@ $color-main:        $color-blue !default;      ._color-main { color: $color-main
 $color-secondary:   $color-yellow !default;    ._color-secondary { color: $color-secondary }       ._color-bg-secondary { background-color: $color-secondary; }           ._color-border-secondary { border-color: $color-secondary; }
 
 //     Supporting Colors
-$color-bg: $color-white !default;              ._color-bg { color: $color-bg }                     ._color-bg-bg { background-color: $color-bg; }                         ._color-border-bg { border-color: $color-bg; }
+$color-bg: $color-silver-lighter; // $color-white !default;              ._color-bg { color: $color-bg }                     ._color-bg-bg { background-color: $color-bg; }                         ._color-border-bg { border-color: $color-bg; }
 
 $color-hover: $color-orange !default;          ._color-hover { color: $color-hover }               ._color-bg-hover { background-color: $color-hover; }                   ._color-border-hover { border-color: $color-hover; }
 $color-active: $color-orange !default;         ._color-active { color: $color-active; }            ._color-bg-active { background-color: $color-active; }                 ._color-border-active { border-color: $color-active; }

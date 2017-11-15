@@ -1,0 +1,39 @@
+
+
+
+
+.media-list {
+
+}
+
+.media-item {
+  border: 0; 
+  display: inline-block;
+  padding-bottom: $size-half;
+  @extend %ease;
+  &:hover {
+    padding-left: $size-m4;
+    @extend %ease;
+  }
+
+  display: grid;
+  grid-template-columns: 60px auto auto;
+}
+
+.media-title {
+  display: inline-block;
+  // padding-right: $size-half;
+}
+.media-source {
+  display: inline-block;
+  color: $color-ui-dark;
+  font-size: $size-m2;
+  text-align: right;
+  padding-left: $size-m2;
+}
+.media-date {
+  // padding-right: $size-half;
+  display: inline-block;
+  color: $color-ui-dark;
+  font-size: $size-m2;
+}
