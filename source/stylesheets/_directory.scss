@@ -8,7 +8,10 @@ $directory-font-smaller: $font-base - 2; // $font-size-base; // m1;
 $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base; // m1;
 
 .directory {
-
+  padding-top: $size-base;
+  border: $directory-border;
+  border-radius: $radius;
+  margin: $size-base;
 }
 
 .directory-nav {
@@ -27,7 +30,7 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 }
 
 .directory-list {
-  min-height: 40vh;
+  // min-height: 40vh;
 }
 
 .directory-item {
@@ -47,12 +50,12 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 
   border-top: $directory-border;
   &:last-child {
-    border-bottom: $directory-border;
+    // border-bottom: $directory-border;
   }
 }
   .directory-item-container {
-    @extend ._width-content-paragraph;
-    @extend ._center-margin;
+    // @extend ._width-content-max;
+    // @extend ._center-margin;
   }
 
 
@@ -67,6 +70,16 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 .directory-title-label {
   color: $directory-color-lighter;
   padding-bottom: $size-base/4;
+}
+
+.directory-img {
+  img {
+    border-radius: 100px;
+    width: $size-p4;
+    vertical-align: middle;
+    display: inline-block;
+    // margin-right: $size-half;
+  }
 }
 
 
@@ -148,17 +161,76 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
       }
       .person-phage-host {
         line-height: $directory-lineheight-smaller;
+        font-size: $size-larger;
       }
       .person-phage-org {
         font-size: $directory-font-smaller;
         line-height: $directory-lineheight-smaller;
         color: $directory-color-lighter;
         margin-top: $size-base/4;
+        padding-bottom: $size-half;
       }
 }
 
 
 
+
+
+
+
+// org directory
+
+.org {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-gap: $size-base*2;
+
+  @include screen-xs {
+    grid-template-columns: 1fr;
+    grid-gap: $size-half;
+  }
+}
+  .org-lab {
+    padding: $size-base;
+    border-radius: $radius;
+    background-color: $color-white;
+    margin-bottom: $size-base;
+  }
+  .org-lab-name {
+    // font-weight: $font-bold;
+    // font-size: $font-h5;
+    padding-bottom: $size-half;
+    // margin-bottom: $size-base;
+    &:after {
+      border-bottom: $border-line solid $color-ui-light;
+      display: block;
+      content: ' ';
+      width: $size-2;
+      padding-bottom: $size-base/2
+      // margin-bottom: $size-base;
+    }
+  }
+  .org-lab-content {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+  }
+    .org-lab-content-host {
+      // font-weight: $font-bold;
+      font-size: $size-larger;
+    }
+
+  .org-person-info {
+    display: grid;
+    grid-template-columns: 50px auto;
+    grid-gap: $size-base;
+  }
+  .org-person-info-contact {
+    font-size: $directory-font-smaller;
+  }
+    .org-person-org,
+    .org-person-role {
+      font-size: $directory-font-smaller;
+    }
 
 
 
@@ -203,18 +275,13 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
     align-items: center;
     grid-gap: $size-half;
   }
-  .host-org-person-img {
-    img {
-      border-radius: 100px;
-      width: $size-p4;
-      vertical-align: middle;
-      display: inline-block;
-      // margin-right: $size-half;
-    }
-  }
   .host-org-person-name {
     font-weight: $font-bold;
     // font-size: $size-p1;
+  }
+  .host-org-person-org,
+  .host-org-person-role {
+    font-size: $directory-font-smaller;
   }
   .host-org-person-info-contact {
     font-size: $directory-font-smaller;

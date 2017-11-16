@@ -27,7 +27,7 @@
   &:hover {
     @extend %ease;
     @include screen-sm {
-      padding-left: $size-m4;
+      // padding-left: $size-m4;
     }
   }
 

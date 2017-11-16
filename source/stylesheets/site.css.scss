@@ -98,12 +98,21 @@ body {
   }
 }
 
-.hero-desc {
-  max-width: $width-content-max-narrow;
-  margin-top: $size-p4;
-  font-size: $size-p1;
-  line-height: $size-p1 * 1.5;
+.hero {
+  margin-bottom: $size-base * 4;
 }
+  .hero-desc {
+    max-width: $width-content-max-narrow;
+    margin-top: $size-p4;
+    font-size: $size-p1;
+    line-height: $size-p1 * 1.5;
+  }
+  a.hero-twitter {
+    color: $color-ui;
+    &:hover {
+      color: $color-hover;
+    }
+  }
 
 
 
