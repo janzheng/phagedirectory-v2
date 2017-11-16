@@ -131,9 +131,27 @@ body {
     padding-bottom: $size-p2;
     border: $border-line $color-ui solid;
     margin-bottom: $size-base;
+
+    label {
+      padding-right: $size-half;
+    }
+    
+    @include screen-xs {
+      label {
+        padding-bottom: $size-base*2;
+      }
+      input {
+        display: block;
+        width: 100%;
+        margin-bottom: $size-base;
+      }
+    }
   }
   .alerts-note {
-    position: absolute
+    position: absolute;
+    @include screen-xs {
+      position: inherit;
+    }
   }
 
 
