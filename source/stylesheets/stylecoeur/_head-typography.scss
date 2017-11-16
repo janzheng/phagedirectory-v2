@@ -51,7 +51,7 @@ $font-heavy: 900 !default;
 %font-upper, ._font-upper { text-transform: uppercase; }
 %font-capitalize, ._font-capitalize { text-transform: capitalize; }
 
-$font-size-base: ($size-base - 2px) !default; // - 1px;
+$font-size-base: ($size-base - 1px) !default; // - 1px;
 $font-lineheight: $font-size-base * 1.5 !default;
 
 $font-ui: $size-base; // $size + 2px;

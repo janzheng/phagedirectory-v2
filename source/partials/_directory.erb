@@ -9,9 +9,58 @@
 
 <% source = current_page.data.source || "" %>
 
+<div class="directory" >
+
 <div class="content" markdown="1">
+### Directory
 
-## Directory
+<div class="directory-nav _tabs">
+  <button class="_tabs-item --short --outline --active" data-tab='tabPeople'>People</button>
+  <button class="_tabs-item --short --outline" data-tab='tabOrgs'>Organizations</button>
+  <button class="_tabs-item --short --outline" data-tab='tabHosts'>Target Hosts</button>
+  <!-- <button class="_tabs-item --short --outline" data-tab='tabPhages'>Phages</button> -->
+</div>
+</div>
 
-Stay Tuned, the directory is coming soon
+<div class="directory-list">
 
+  <div class="tabPeople _tabs-content --selected">
+    <!-- generate the data in data-loader -->
+
+    <!-- for testing  -->
+    <%= partial '/partials/directory_person' %>
+
+
+  </div>
+
+  <div class="tabOrgs _tabs-content">
+    <!-- generate the data in data-loader -->
+
+    <%= partial '/partials/directory_org' %>
+
+  </div>
+
+  <div class="tabHosts _tabs-content">
+    <!-- generate the data in data-loader -->
+    
+    <%= partial '/partials/directory_host' %>
+
+  </div>
+
+</div>
+
+
+<!-- tab code -->
+<script>
+  $('._tabs-item').on('click', function() {
+    let target = $(this).data("tab") || $(this).prop("hash").substr(1);
+    // set nav
+    $('._tabs-item').removeClass('--active');
+    $(this).addClass('--active');
+
+    // set content
+    $('._tabs-content').removeClass('--selected');
+    $('._tabs-content.' +target).addClass('--selected');
+
+  });
+</script>

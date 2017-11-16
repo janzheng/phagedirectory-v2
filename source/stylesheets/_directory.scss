@@ -1,0 +1,232 @@
+
+
+$tab-color-active: $color-secondary;
+$directory-border: $border-line $color-ui solid;
+$directory-color-hover: $color-ui-light;
+$directory-color-lighter: $color-gray-lightest;
+$directory-font-smaller: $font-base - 2; // $font-size-base; // m1;
+$directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base; // m1;
+
+.directory {
+
+}
+
+.directory-nav {
+  margin: 0;
+
+  // tabs buttons
+  ._tabs-item {
+    margin-right: $size-half;
+    border-radius: $radius-none;
+
+    &.--active {
+      color: $tab-color-active;
+      border-color: $tab-color-active;
+    }
+  }
+}
+
+.directory-list {
+  min-height: 40vh;
+}
+
+.directory-item {
+  @extend %ease;
+
+  padding-top: $size-2;
+  padding-bottom: $size-2;
+
+  padding-left: $size-p4;
+  padding-right: $size-p4;
+
+
+  &:hover {
+    background-color: $directory-color-hover;
+    @extend %ease;
+  }
+
+  border-top: $directory-border;
+  &:last-child {
+    border-bottom: $directory-border;
+  }
+}
+  .directory-item-container {
+    @extend ._width-content-paragraph;
+    @extend ._center-margin;
+  }
+
+
+// reusable components
+.directory-name {
+  font-size: $font-h4;
+  @extend %font-bold;
+  line-height: $font-h4 * 1.4;
+  padding-bottom: $size-base/4;
+}
+
+.directory-title-label {
+  color: $directory-color-lighter;
+  padding-bottom: $size-base/4;
+}
+
+
+
+
+
+
+// person directory
+.person {
+  grid-template-columns: 60px 250px auto;
+  display: grid;
+
+  @include screen-xs {
+    padding-left: $size-base;
+    padding-right: $size-base;
+    grid-template-columns: 80px auto;
+    grid-gap: $size-base;
+    justify-content: center;
+  }
+
+  .person-img {
+    text-align: center;
+    img {
+      border-radius: $radius-xl;
+      display: inline-block;
+      width: $size-p6;
+      height: auto;
+    }
+  }
+
+  // col 2
+  .person-info {
+    justify-items: start;
+    padding-left: $size-p2;
+
+    @include screen-xs {
+      padding-left: 0; // $size-base;
+    }
+  }
+    .person-social {
+      font-size: $size-m1;
+
+      @include screen-xs {
+      }
+
+      a {
+        line-height: $size-m1;
+        border: 0;
+        color: $directory-color-lighter;
+        &:hover {
+          color: $color-hover;
+        }
+      }
+    }
+
+  // col 3
+  .person-phages {
+
+    @include screen-xs {
+      // grid-row: 2;
+      grid-column: 1 / 3;
+      justify-items: middle;
+    }
+  }
+    .person-phagelist {
+      display: grid;
+      grid-gap: $size-base;
+      // grid-template-columns: 1fr 1fr; // repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+      .person-phage {
+        padding-bottom: $size-half;
+      }
+      .person-phage-name {
+        font-weight: $font-bold;
+        padding-right: $size-base/4;
+      }
+      .person-phage-hosts {
+      }
+      .person-phage-host {
+        line-height: $directory-lineheight-smaller;
+      }
+      .person-phage-org {
+        font-size: $directory-font-smaller;
+        line-height: $directory-lineheight-smaller;
+        color: $directory-color-lighter;
+        margin-top: $size-base/4;
+      }
+}
+
+
+
+
+
+
+
+// host directory
+
+.host {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: $size-base*2;
+
+  @include screen-xs {
+    grid-template-columns: 1fr;
+    grid-gap: $size-half;
+  }
+}
+  .host-info {
+    margin-bottom: $size-base;
+  }
+  .host-org {
+    padding-bottom: $size-base;
+
+    &:last-child {
+      // padding-bottom: 0;
+    }
+  }
+  .host-org-name {
+    font-size: $directory-font-smaller;
+    color: $directory-color-lighter;
+    padding-top: $size-half;
+    padding-bottom: $size-half;
+  }
+  .host-org-location {
+    // font-weight: $font-light;
+  }
+  .host-org-person {
+    line-height: $directory-lineheight-smaller;
+    // margin-top: $size-base/2;
+    margin-bottom: $size-base/2;
+    display: grid;
+    grid-template-columns: $size-p4 auto;
+    align-items: center;
+    grid-gap: $size-half;
+  }
+  .host-org-person-img {
+    img {
+      border-radius: 100px;
+      width: $size-p4;
+      vertical-align: middle;
+      display: inline-block;
+      // margin-right: $size-half;
+    }
+  }
+  .host-org-person-name {
+    font-weight: $font-bold;
+    // font-size: $size-p1;
+  }
+  .host-org-person-info-contact {
+    font-size: $directory-font-smaller;
+    a {
+      border: 0;
+    }
+  }
+
+
+
+
+
+
+
+

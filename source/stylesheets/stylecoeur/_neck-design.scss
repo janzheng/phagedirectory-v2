@@ -21,7 +21,7 @@
 // ._vh-100 
 // 
 @for $i from 0 through 20 {
-  @include namedElementGenerator('vh', height, #{$i * 5}, '#{$i * 5}vh');
+  @include namedElementGenerator('vh', min-height, #{$i * 5}, '#{$i * 5}vh');
 }
 
 

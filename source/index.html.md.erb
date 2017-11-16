@@ -4,9 +4,9 @@ layout: layout-main
 
 
 
-<div class="content" markdown="1">
+<div class="" >
 
-<div class="hero _vh-30" markdown="1">
+<div class="content hero" >
     
   <%= partial '/partials/header' %>
 
@@ -17,29 +17,31 @@ layout: layout-main
   <a class=" _inline-block _padding-top-half _border-none" href="https://twitter.com/phagedirectory" target="_blank">@phagedirectory</a>
 </div>
 
-<%= partial '/partials/alerts' %>
+<div class="content">
+  <div class="section _grid-1-5">
 
-<div class="section _grid-1-5">
-
-<h6 class="">— background</h6>
-<div markdown="1">
-  Our first line of defense in fighting disease—antibiotics—is starting to fail, and [hundreds of thousands of people](https://amr-review.org/sites/default/files/160525_Final%20paper_with%20cover.pdf) die of previously treatable diseases every year. Phage therapy is an emerging method of using <a href="about.html#background">bacteriophages</a> to treat drug-resistant infections. 
-
-  [comment on the hunt for phages]
-
-  <a href="about.html#background">read more</a>
-</div>
-
-</div>
-
-
-<div class="section _grid-1-5">
-
-  <h6 class="">— media</h6>
+  <h6 class="">— background</h6>
   <div>
-    <%= partial '/partials/media' %>
+    Antibiotics are failing, and people are dying of drug-resistant infections. Phage therapy is an emerging method of using bacteriophages (viruses that only kill bacteria) to treat these infections. The Phage Directory aims to connect the researchers who have phages with the patients who need them. <a href="about.html#background">more</a>
   </div>
 
+  </div>
+</div>
+
+<div class="content">
+  <%= partial '/partials/alerts' %>
+</div>
+
+
+<div class="content">
+  <div class="section _grid-1-5">
+
+    <h6 class="">— media</h6>
+    <div>
+      <%= partial '/partials/media' %>
+    </div>
+
+  </div>
 </div>
 
 

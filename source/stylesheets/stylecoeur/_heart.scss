@@ -70,11 +70,11 @@ $size-2:        $size*2;
 
 // radius sizes
 $radius-none: 0px       !default;  ._radius-none { border-radius: 0; } ._radius-none-i { border-radius: 0 !important; }
-$radius: 4px            !default;       ._radius { border-radius: $radius }
+$radius: 4px            !default;  ._radius { border-radius: $radius }
 $radius-md: $size-base  !default;  ._radius-md { border-radius: $radius-md }
-$radius-lg: 24px        !default;   ._radius-lg { border-radius: $radius-lg }
-$radius-xl: 36px        !default;   ._radius-xl { border-radius: $radius-xl }
-$radius-sm: 2px         !default;    ._radius-sm { border-radius: $radius-sm }// subtle borders; nothing should be a jagged 90 degrees
+$radius-lg: 24px        !default;  ._radius-lg { border-radius: $radius-lg }
+$radius-xl: 36px        !default;  ._radius-xl { border-radius: $radius-xl }
+$radius-sm: 2px         !default;  ._radius-sm { border-radius: $radius-sm }// subtle borders; nothing should be a jagged 90 degrees
 $gutter: $size-base/2   !default;
 
 

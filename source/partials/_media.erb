@@ -88,6 +88,19 @@
     </div>
   </a>
 
+  <a  class="media-item"
+      target="_blank"
+      href="http://www.telegraph.co.uk/news/2016/12/10/superbugs-killing-people-breast-cancer-trust-warns/" >
+    <span class="media-date">Dec 2016</span>
+    <div class="media-title">
+      Superbugs killing more people than breast cancer, trust warns
+    </div>
+    <div class="media-source">
+      Telegraph.co.uk 
+    </div>
+  </a>
+
+
 
   <a  class="media-item"
       target="_blank"
@@ -115,13 +128,20 @@
   </a>
 
 
-
-  
-
-
-
-
-
+<span class="media-all media-item" href="#">
+  <span></span>
+  <span class="">more articles</span>
+</span>
 
 
 </div>
+
+<script>
+  $('.media-all').on('click',function() {
+    $('.media-list').addClass('media-show-all');
+    $(this).hide();
+  })
+</script>
+
+
+

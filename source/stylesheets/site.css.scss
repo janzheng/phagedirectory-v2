@@ -14,6 +14,7 @@
 @import 'profile';
 @import 'media';
 
+@import 'directory';
 
 
 // local styles (for the guide itself)
@@ -60,9 +61,14 @@ body {
 // semantic layouts
 
 .section {
-  margin-top: $size-base * 3;
-  margin-bottom: $size-base * 3;
+  margin-top: $size-base * 2;
+  margin-bottom: $size-base * 2;
 
+  & > h6 {
+    @include screen-xs {
+      padding: 0;
+    }
+  }
   & > h3 { // section header
     padding-top: $size-base*2;
   }
@@ -75,11 +81,20 @@ body {
 .content {
   @extend ._width-content-paragraph;
   @extend ._center-margin;
-  @extend ._padding-2;
+
+  &.--narrower {
+  @extend ._width-content-max-narrow;
+  }
+
+  margin-top: $size-2; // will collapse nicely
+  margin-bottom: $size-2;
+
+  // padding-left: $size-2;
+  // padding-right: $size-2;
 
   @include screen-xs {
-    padding-left: $size-base*2;
-    padding-right: $size-base*2;
+    padding-left: $size-base;
+    padding-right: $size-base;
   }
 }
 
@@ -92,7 +107,11 @@ body {
 
 
 
-
+.video { // video embed
+  iframe {
+    max-width: 100%;
+  }
+}
 
 
 

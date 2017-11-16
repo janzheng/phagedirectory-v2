@@ -43,10 +43,30 @@ $tab-color-active: $color-active !default;
 }
 
 ._tabs-content {
-  display: none;
+  // display: none;
+  @extend %ease-slow;
+
+  &, * {
+    opacity: 0;
+    visibility: transparent;
+    height: 0;
+    overflow: hidden;
+    // padding: 0;
+    // margin: 0;
+    // @extend %ease;
+  }
 
   &.--selected {
-    display: inherit;
+    &, * {
+      // display: inherit;
+      visibility: visible;
+      height: inherit; // 100%;
+      // padding: inherit;
+      // margin: inherit;
+      // @extend %ease;
+      overflow: inherit;
+      opacity: 1;
+    }
   }
 }
 

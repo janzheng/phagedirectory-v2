@@ -3,7 +3,19 @@
 
 
 .media-list {
-
+  // only show a few unless turned on
+  // @include screen-xs {
+    &:not(.media-show-all) a:nth-child(n+4) {
+      // display: none;
+      &, * { // prettier animations
+        height: 0;
+        visibility: transparent;
+        overflow: hidden;
+        padding: 0;
+        margin: 0;
+      }
+    }
+  // }
 }
 
 .media-item {
@@ -11,9 +23,12 @@
   display: inline-block;
   padding-bottom: $size-half;
   @extend %ease;
+
   &:hover {
-    padding-left: $size-m4;
     @extend %ease;
+    @include screen-sm {
+      padding-left: $size-m4;
+    }
   }
 
   display: grid;
@@ -37,3 +52,24 @@
   color: $color-ui-dark;
   font-size: $size-m2;
 }
+
+
+// button to show all
+.media-all {
+  cursor: pointer; 
+
+  // .media-all-cta {
+    @extend ._font-small;
+    color: $color-black;
+    border: 0;
+    margin-top: $size-base;
+    &:hover {
+      color: $color-hover;
+    }
+  // }
+}
+
+
+
+
+
