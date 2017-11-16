@@ -47,7 +47,9 @@ body {
     border: 0;
   }
   div:last-child {
-    padding-left: $size-base;
+    a {
+      padding-left: $size-base;
+    }
   }
 }
 
@@ -135,10 +137,10 @@ body {
     label {
       padding-right: $size-half;
     }
-    
+
     @include screen-xs {
       label {
-        padding-bottom: $size-base*2;
+        padding-bottom: $size-base;
       }
       input {
         display: block;
