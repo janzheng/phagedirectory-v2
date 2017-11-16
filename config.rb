@@ -7,6 +7,7 @@
 require "kramdown"
 set :markdown_engine, ::Tilt::KramdownTemplate
 set :markdown_engine, :kramdown
+set :kramdown, :fenced_code_blocks => true
 
 
 # Per-page layout changes:

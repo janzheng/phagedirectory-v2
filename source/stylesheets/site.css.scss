@@ -46,6 +46,9 @@ body {
   a {
     border: 0;
   }
+  div:last-child {
+    padding-left: $size-base;
+  }
 }
 
 .logotype {
@@ -124,7 +127,10 @@ body {
 
 }
   .alerts-form {
-    padding-bottom: $size*2;
+    padding: $size-base;
+    padding-bottom: $size-p2;
+    border: $border-line $color-ui solid;
+    margin-bottom: $size-base;
   }
   .alerts-note {
     position: absolute
@@ -146,8 +152,8 @@ body {
     border-color: $color-secondary;
 
     &:hover {
-      color: $color-white;
-      background-color: $color-main;
+      // color: $color-white;
+      // background-color: $color-main;
     }
   }
 }
