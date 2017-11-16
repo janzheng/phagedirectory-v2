@@ -63,7 +63,8 @@ $directory-font-larger: $size-larger;
 }
   .directory-item-container {
     // @extend ._width-content-max;
-    // @extend ._center-margin;
+    @extend ._center-margin;
+    @extend ._width-content-paragraph;
     display: grid;
     grid-gap: $size-base*2;
     align-items: start;
@@ -198,7 +199,6 @@ $directory-font-larger: $size-larger;
 // person directory
 .person {
   grid-template-columns: 1fr 3fr;
-  @extend ._width-content-paragraph;
   margin: 0 auto;
 
   // left side

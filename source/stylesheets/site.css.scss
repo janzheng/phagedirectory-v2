@@ -114,19 +114,43 @@ body {
     }
   }
 
-
-
 .video { // video embed
   iframe {
     max-width: 100%;
   }
 }
 
+.alerts {
+
+}
+  .alerts-form {
+    padding-bottom: $size*2;
+  }
+  .alerts-note {
+    position: absolute
+  }
 
 
 
 
+// phage style buttons / ctas
+._input, input {
+  &.--phage {
+    border-color: $color-secondary;
+    color: $color-secondary;
+  }
+}
+._button, button {
+  &.--phage {
+    color: $color-secondary;
+    border-color: $color-secondary;
 
+    &:hover {
+      color: $color-white;
+      background-color: $color-main;
+    }
+  }
+}
 
 
 
