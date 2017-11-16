@@ -6,6 +6,8 @@ $directory-color-hover: $color-ui-light;
 $directory-color-lighter: $color-gray-lightest;
 $directory-font-smaller: $font-base - 2; // $font-size-base; // m1;
 $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base; // m1;
+$directory-gap: $size-base;
+$directory-font-larger: $size-larger;
 
 .directory {
   padding-top: $size-base;
@@ -39,13 +41,19 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
   padding-top: $size-2;
   padding-bottom: $size-2;
 
-  padding-left: $size-p4;
-  padding-right: $size-p4;
+  padding-left: $size-base;
+  padding-right: $size-base;
 
+  // better as standard color; hover makes no sense
+  background-color: $directory-color-hover;
+
+  @include screen-xs {
+    padding: $size-base;
+  }
 
   &:hover {
-    background-color: $directory-color-hover;
-    @extend %ease;
+    // background-color: $directory-color-hover;
+    // @extend %ease;
   }
 
   border-top: $directory-border;
@@ -56,10 +64,37 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
   .directory-item-container {
     // @extend ._width-content-max;
     // @extend ._center-margin;
+    display: grid;
+    grid-gap: $size-base*2;
+    align-items: start;
+
+    @include screen-xs {
+      display: block;
+      // grid-template-columns: 1fr;
+      // grid-gap: $size-half;
+    }
   }
 
 
+// left side of a directory item
+.directory-index {
+  display: grid;
+  grid-gap: $directory-gap;
+
+  @include screen-xs {
+    margin-bottom: $size-base;
+    grid-gap: 0; //$directory-gap/2;
+  }
+}
+
+
+
+
+
+// 
 // reusable components
+// 
+
 .directory-name {
   font-size: $font-h4;
   @extend %font-bold;
@@ -68,40 +103,116 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 }
 
 .directory-title-label {
-  color: $directory-color-lighter;
+  color: $color-silver;
   padding-bottom: $size-base/4;
 }
 
-.directory-img {
-  img {
-    border-radius: 100px;
-    width: $size-p4;
-    vertical-align: middle;
-    display: inline-block;
-    // margin-right: $size-half;
-  }
+
+.directory-person {
+  display: grid;
+  grid-template-columns: 50px auto;
+  grid-gap: $size-base;
+  margin-bottom: $size-base;
 }
+  .directory-img {
+    img {
+      border-radius: 100px;
+      width: $size-p4;
+      vertical-align: middle;
+      display: inline-block;
+      // margin-right: $size-half;
+    }
+  }
+  .directory-person-details {
+    font-size: $directory-font-smaller;
+    line-height: $directory-font-smaller*1.5;
+    .directory-person-name {
+      font-size: $directory-font-larger;
+      line-height: $directory-font-larger*1.4;
+    }
+    a {
+      border: 0;
+    }
+  }
+
+
+.directory-card {
+  padding: $size-base;
+  border-radius: $radius;
+  background-color: $color-white;
+  margin-bottom: $size-base;
+}
+  .directory-card-title-container {
+    padding-bottom: $size-half;
+    // margin-bottom: $size-base;
+    &:after {
+      border-bottom: $border-line solid $color-ui-light;
+      display: block;
+      content: ' ';
+      width: $size-2;
+      padding-bottom: $size-base/2
+      // margin-bottom: $size-base;
+    }
+  }
+  .directory-card-title-main {
+    font-weight: $font-bold;
+  }
+  .directory-card-title {
+    // font-weight: $font-bold;
+    // font-size: $font-h5;
+  }
+  .directory-card-section-title {
+    margin-bottom: $size-half;
+  }
+  .directory-card-content {
+    display: grid;
+  }
+
+  .directory-card-subject {
+    font-size: $directory-font-larger;
+    margin-bottom: $size-half;
+  }
+  .directory-card-list {
+    padding-left: $size-base;
+    border-left: $directory-border;
+    border-color: $color-main;
+  }
+  .directory-card-section {
+    margin-bottom: $size-base;
+  }
 
 
 
 
 
+
+
+
+
+
+
+// 
+//  section-specific; keep these to a minimum
+// 
 
 // person directory
 .person {
-  grid-template-columns: 60px 250px auto;
-  display: grid;
+  grid-template-columns: 1fr 3fr;
+  @extend ._width-content-paragraph;
+  margin: 0 auto;
 
-  @include screen-xs {
-    padding-left: $size-base;
-    padding-right: $size-base;
-    grid-template-columns: 80px auto;
-    grid-gap: $size-base;
-    justify-content: center;
+  // left side
+  .person-profile {
+    grid-template-columns: 60px auto;
+    @include screen-xs {
+      grid-template-columns: 80px auto;
+      grid-gap: $size-base;
+      justify-content: start;
+    }
   }
 
   .person-img {
-    text-align: center;
+    // text-align: center;
     img {
       border-radius: $radius-xl;
       display: inline-block;
@@ -113,7 +224,7 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
   // col 2
   .person-info {
     justify-items: start;
-    padding-left: $size-p2;
+    // padding-left: $size-p2;
 
     @include screen-xs {
       padding-left: 0; // $size-base;
@@ -174,63 +285,21 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 
 
 
-
-
-
-
 // org directory
-
 .org {
-  display: grid;
   grid-template-columns: 1fr 3fr;
-  grid-gap: $size-base*2;
 
-  @include screen-xs {
-    grid-template-columns: 1fr;
-    grid-gap: $size-half;
+  .directory-card-content {
+    grid-template-columns: 2fr 2fr;
+
+    @include screen-xs {
+      display: block;
+      & > div:first-child {
+        margin-bottom: $size-base;
+      }
+    }
   }
 }
-  .org-lab {
-    padding: $size-base;
-    border-radius: $radius;
-    background-color: $color-white;
-    margin-bottom: $size-base;
-  }
-  .org-lab-name {
-    // font-weight: $font-bold;
-    // font-size: $font-h5;
-    padding-bottom: $size-half;
-    // margin-bottom: $size-base;
-    &:after {
-      border-bottom: $border-line solid $color-ui-light;
-      display: block;
-      content: ' ';
-      width: $size-2;
-      padding-bottom: $size-base/2
-      // margin-bottom: $size-base;
-    }
-  }
-  .org-lab-content {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-  }
-    .org-lab-content-host {
-      // font-weight: $font-bold;
-      font-size: $size-larger;
-    }
-
-  .org-person-info {
-    display: grid;
-    grid-template-columns: 50px auto;
-    grid-gap: $size-base;
-  }
-  .org-person-info-contact {
-    font-size: $directory-font-smaller;
-  }
-    .org-person-org,
-    .org-person-role {
-      font-size: $directory-font-smaller;
-    }
 
 
 
@@ -238,62 +307,13 @@ $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base
 // host directory
 
 .host {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: $size-base*2;
+  grid-template-columns: 1fr 3fr;
 
-  @include screen-xs {
-    grid-template-columns: 1fr;
-    grid-gap: $size-half;
-  }
+  // @include screen-xs {
+  //   grid-template-columns: 1fr;
+  //   grid-gap: $size-half;
+  // }
 }
-  .host-info {
-    margin-bottom: $size-base;
-  }
-  .host-org {
-    padding-bottom: $size-base;
-
-    &:last-child {
-      // padding-bottom: 0;
-    }
-  }
-  .host-org-name {
-    font-size: $directory-font-smaller;
-    color: $directory-color-lighter;
-    padding-top: $size-half;
-    padding-bottom: $size-half;
-  }
-  .host-org-location {
-    // font-weight: $font-light;
-  }
-  .host-org-person {
-    line-height: $directory-lineheight-smaller;
-    // margin-top: $size-base/2;
-    margin-bottom: $size-base/2;
-    display: grid;
-    grid-template-columns: $size-p4 auto;
-    align-items: center;
-    grid-gap: $size-half;
-  }
-  .host-org-person-name {
-    font-weight: $font-bold;
-    // font-size: $size-p1;
-  }
-  .host-org-person-org,
-  .host-org-person-role {
-    font-size: $directory-font-smaller;
-  }
-  .host-org-person-info-contact {
-    font-size: $directory-font-smaller;
-    a {
-      border: 0;
-    }
-  }
-
-
-
-
-
 
 
 
