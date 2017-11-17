@@ -2,7 +2,7 @@
 
 $link-color-copy: $color-copy !default;
 $link-color-hover: $color-hover !default;
-$link-color-border: $color-copy !default;
+$link-color-border: $color-secondary; // $color-copy !default;
 
 $link-color-hover-border: $link-color-hover !default;
 
@@ -18,7 +18,7 @@ a {
   // color: rgba(#000, 0.7);
   text-decoration: none;
   @extend %ease;
-  // padding-bottom: $size-base/8;
+  padding-bottom: 2px; // $size-base/6;
   border-bottom: solid 1px $link-color-border;
 
   &, &:focus, &:active, &:visited {

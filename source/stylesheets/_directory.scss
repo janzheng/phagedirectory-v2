@@ -14,8 +14,19 @@ $directory-font-larger: $size-larger;
   border: $directory-border;
   border-radius: $radius;
   margin: $size-base;
+
+  & > .content {
+    margin-top: 0;
+  }
 }
 
+.directory-intro {
+  br {
+    @include screen-xs {
+      display: none;
+    }
+  }
+}
 .directory-nav {
   margin: 0;
 
@@ -28,6 +39,12 @@ $directory-font-larger: $size-larger;
     &.--active {
       color: $tab-color-active;
       border-color: $tab-color-active;
+    }
+
+    @include screen-xs {
+      width: 100%; 
+      display: block;
+      margin-bottom: $size-half;
     }
   }
 }

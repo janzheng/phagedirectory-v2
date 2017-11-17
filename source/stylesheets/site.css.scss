@@ -13,6 +13,7 @@
 @import 'hex';
 @import 'profile';
 @import 'media';
+@import 'quote';
 
 @import 'directory';
 
@@ -43,12 +44,15 @@ body {
 
 
 .header {
-  a {
-    border: 0;
+  div:first-child {
+    a {
+      border: 0;
+      display: inline-block;
+    }
   }
   div:last-child {
     a {
-      padding-left: $size-base;
+      margin-left: $size-base;
     }
   }
 }
@@ -81,6 +85,14 @@ body {
   &:last-child {
     margin-bottom: 0;
   }
+
+  &.--loose {
+    p {
+      padding-top: $size-half;
+      padding-bottom: $size-half;
+      // line-height: $font-size-base * 1.7;
+    }
+  }
 }
 
 .content {
@@ -112,17 +124,23 @@ body {
     font-size: $size-p1;
     line-height: $size-p1 * 1.5;
   }
-  // a.hero-twitter {
-  //   color: $color-main;
-  //   &:hover {
-  //     color: $color-hover;
-  //   }
-  // }
-  .hero-intro {
+  .hero-passage {
     // @extend ._width-content-max-narrow;
-    max-width: 380px;
+    max-width: 440px;
     padding-bottom: $size-base*2;
     padding-left: 0;
+
+    margin-left: $size-p6;
+    @include screen-xs {
+      margin: 0 auto;
+    }
+  }
+  .hero-intro {
+    // padding: $size-base;
+    // border: $border-thin solid $color-ui;
+    p:last-child {
+      margin: 0;
+    }
   }
 
 .video { // video embed
@@ -201,7 +219,12 @@ a {
 
 
 
+// about page
 
+.about-message {
+  border: $border-thin solid $color-main;
+  border-radius: $radius;
+}
 
 
 

@@ -53,6 +53,8 @@ $font-h4: $size-p1;
 $font-h5: $size-larger; // $font-size-base !default; //$font-size-base !default;
 $font-h6: $size-m1;
 
+$font-small:    $size-smaller; 
+  $line_height-small: $font-small * 1.5;
 
 $font-bold: 800;
 %font-light, ._font-light { font-weight: $font-light; }
@@ -69,6 +71,13 @@ $font-sans: 'Metropolis', -apple-system, BlinkMacSystemFont, system-ui, "Segoe U
   // font-size: $font-size-base;
   // line-height: $font-lineheight;
 }
+
+%font-larger, ._font-larger {   font-size: $font-larger; line-height: $line_height-larger; }
+%font-large, ._font-large {     font-size: $font-large; line-height: $line_height-large; }
+%font-small, ._font-small {     font-size: $font-small; line-height: $line_height-small;  }
+%font-smaller, ._font-smaller { font-size: $font-smaller; line-height: $line_height-smaller; /*line-height: ($size - 5px) * 1.5 !important;*/ }
+// %font-smallest, ._font-smallest { font-size: $size-m3 !important; }
+
 
 html {
   // @extend %font-sans;
