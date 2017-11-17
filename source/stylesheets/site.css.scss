@@ -107,16 +107,22 @@ body {
   margin-bottom: $size-base * 4;
 }
   .hero-desc {
-    max-width: $width-content-max-narrow;
-    margin-top: $size-p4;
+    // max-width: $width-content-max-narrow + 20
+    // margin-top: $size-p4;
     font-size: $size-p1;
     line-height: $size-p1 * 1.5;
   }
-  a.hero-twitter {
-    color: $color-ui;
-    &:hover {
-      color: $color-hover;
-    }
+  // a.hero-twitter {
+  //   color: $color-main;
+  //   &:hover {
+  //     color: $color-hover;
+  //   }
+  // }
+  .hero-intro {
+    // @extend ._width-content-max-narrow;
+    max-width: 380px;
+    padding-bottom: $size-base*2;
+    padding-left: 0;
   }
 
 .video { // video embed
@@ -130,12 +136,14 @@ body {
 }
   .alerts-form {
     padding: $size-base;
-    padding-bottom: $size-p2;
+    // padding-top: $size-p2;
+    padding-bottom: $size-base; // + 4px;
     border: $border-line $color-ui solid;
     margin-bottom: $size-base;
 
     label {
       padding-right: $size-half;
+      padding-bottom: 0;
     }
 
     @include screen-xs {
@@ -178,6 +186,16 @@ body {
   }
 }
 
+a {
+  &.--phage {
+    color: $color-secondary;
+    border-color: $color-secondary;
+    &:hover {
+      color: $color-hover;
+      border-color: $color-hover;
+    }
+  }
+}
 
 
 
