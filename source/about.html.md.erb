@@ -9,59 +9,16 @@ layout: layout-main
 </div>
 
 
-<div class="about-message content">
-<div class="content --narrower ">
-<div class="section" markdown="1">
-
-### Start Fighting the Fight, Now.
-
-Welcome to the launch of The Phage Directory. We have put this site together in response to Dr. Steffanie Strathdee’s request for an open source phage library:
-
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr">Right.  My dream would be to have an open source phage library that could be ever-expanding.  Phage hunters could add to it and it would be made widely available.</p>&mdash; Steffanie Strathdee (@chngin_the_wrld) <a href="https://twitter.com/chngin_the_wrld/status/928396012233703425?ref_src=twsrc%5Etfw">November 8, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
- 
-After an impressive effort by Dr. Strathdee and her team to bring phages to 25-year-old Mallory Smith in time to treat her drug-resistant pneumonia, Mallory sadly passed away on November 15, 2017. Dr. Strathdee described her dream of an open source phage library to help patients like Mallory, and we wanted to step in to help.
- 
-
-#### Community In Progress
-
-This project is a passionate work in progress, but we’re working hard to get it where it needs to be. But to get this resource going, <strong>we will need your help:</strong>
-
-__If you work with phages__, please [join our directory](https://goo.gl/forms/rKTYgG42c0LrPYcH2).
-
-__If you need to phages for a patient,__ please tweet us [@phagedirectory](https://twitter.com/phagedirectory) or email at [staff@phage.directory](mailto:staff@phage.directory).
-
-__If you want to hear about urgent requests__ [please sign up for alerts](https://tinyletter.com/phagedirectory/subscribe).
- 
-
- 
-#### A special tribute to Mallory
- 
-Mallory’s story provided the impetus for the creation of The Phage Directory. Reading of her desperate need for phages and then seeing researchers actually being asked for these phages on Twitter in real time was jarring. It became clear that of all the obstacles standing between Mallory and a potentially life-saving treatment, an improved system of communication and collaboration was a problem we could start fixing right now.
- 
-Development of The Phage Directory commenced two days prior to Mallory’s passing. It is our hope that Mallory’s legacy will prompt the greater community of phage researchers, medical professionals, regulatory personnel and families of patients to take steps to connect with each other so we can bring effective phage treatment to as many patients as possible in times to come.
- 
-Mallory wrote the following article in October 2015, and we ask you to kindly read it a call to action for all of us.
- 
-<div class="about-special _center" >
-
-<h3 class="_padding-bottom-none" > 
-  <a href="https://medium.com/@mallorybsmith/and-we-are-big-spoken-word-unspoken-39d112ea585b" target="_blank">And we are big (spoken word unspoken)</a>
-</h3>
-  <div class="about-special-by">by Mallory Smith</div>
-
-</div>
-
-
-</div>
-</div>
-</div>
-
-
 <div class="content --narrower ">
 
+<%= partial '/partials/about_nav', :locals => { :name => 'background' } %>
+
 <div class="section" markdown="1">
+
+
+<!-- <%= partial '/partials/join' %> -->
+
+### Background
 
 We are facing a global antibiotic resistance crisis and we immediately need better ways to treat patients unable to fight against bacterial infections.
 
@@ -99,7 +56,7 @@ An [ancient but scientifically-emerging](https://www.washingtonpost.com/national
 
 Phages are viruses that only kill bacteria can be found in soil, water, sewage, and just about anywhere else bacteria are found. For decades, scientists have been studying how phages kill bacteria, which ones kill which, and how we can cultivate large numbers of phages in order to use them against infectious bacteria in actual patients.
 
-#### Natural-Born Bacteria Killers
+#### Personalized Care
 
 Although phage therapy is primarily done on a case-by-case basis involving patients who are out of other options, it has been done successfully in this way for years through centers like the [Eliava Phage Therapy Center](http://eliavaphagetherapy.com) in Tblisi, Georgia. However, most phage research labs are not in the business of preparing patient-ready phages, and the list of associated challenges makes it easy to see why.
 
@@ -185,23 +142,6 @@ In the last few decades, modern medicine has relied on antibiotics to treat and 
 
 
 
-### Behind the Scenes
-
-This project is a work in a progress. For questions, suggestions, and more, please either email  at <a href="mailto:staff@phage.directory" target="_blank">staff@phage.directory</a> or tweet us at <a href="https://twitter.com/phagedirectory">@phagedirectory</a>. This directory is currently independently organized and run by us, with our own time and resources, and is not funded by any organizations.
-
-
-<blockquote class="--small">
-  <div markdown="1">I first became fascinated with microbes following an inspiring lecture on fecal transplants in mice in 2008, which led me to pursue a PhD in Microbiology and Biotechnology at the University of Alberta in Edmonton, Canada. The major research question I’ve been pursuing since has asked how bacteriophages (or phages, for short) target and kill Campylobacter jejuni, a deadly bacterial pathogen that infects humans around the world. 
-
-  Along the way, I have realized just how important the answers to questions like these are to getting us closer to solving one of the most important health hurdles humans have faced to date: that of antimicrobial resistance and multidrug-resistant infections. 
-
-  I’m passionate not only about the idea that phages can be harnessed to treat these infections, but that we are closer than we think to making phage therapy an accessible and promising option for patients.
-</div>
-  <div>
-    Jessica <a class="_border-none" target="_blank" href="http://twitter.com/jessicasacher">@jessicasacher</a>
-  </div>
-</blockquote>
-
 
 
 </div>
@@ -211,65 +151,6 @@ This project is a work in a progress. For questions, suggestions, and more, plea
 
 </div>
 
-<div class="content profile-container _grid-center-xs _grid-cols-2 _center-margin _grid-gap-large">
-
-
-
-<div class="profile _card ">
-<div class="profile-image _center">
-  <img width="140" src="https://pbs.twimg.com/profile_images/634095676171816960/v2t4zcm5_400x400.jpg">
-</div>
-<div class="profile-name _center">
-  <div>Jessica Sacher</div>
-</div>
-<div class="profile-short _center">
-  <div>Microbiology and Biotechnology PhD at UAlberta</div>
-</div>
-<div class="profile-contact _center">
-  <div><i class="fa fa-twitter _padding-right-half"></i><a href="https://twitter.com/JessicaSacher" target="_blank">@JessicaSacher</a></div>
-  <div><i class="fa fa-envelope-o _padding-right-half"></i><a href="mailto:sacher@ualberta.ca" target="_blank">sacher@ualberta.ca</a></div>
-</div>
-<div class="profile-description" markdown="1">
-  I am a Microbiology and Biotechnology PhD student at the University of Alberta studying the interactions between bacteriophage receptor binding proteins and bacterial carbohydrates. 
-
-  While I am a graduate student of the University of Alberta, I currently work in Dr. Christine Szymanski's glycobiology lab at the Complex Carbohydrate Research center at the University of Georgia as an Exchange Scholar.
-</div>
-</div>
-
-
-
-
-
-
-<div class="profile _card ">
-<div class="profile-image _center">
-  <img height="140" src="http://janzheng.com/images/me.jpg">
-</div>
-<div class="profile-name _center">
-  <div>Jan Zheng</div>
-</div>
-<div class="profile-short _center">
-  <div>Product Design &amp; Development </div>
-  <div>Masters in HCI from Carnegie Mellon</div>
-  <div></div>
-</div>
-<div class="profile-contact _center">
-  <div><i class="fa fa-twitter _padding-right-half"></i><a href="https://twitter.com/janistanian" target="_blank">@janistanian</a></div>
-  <div><i class="fa fa-envelope-o _padding-right-half"></i><a href="mailto:hello@janzheng.com" target="_blank">hello@janzheng.com</a></div>
-  <div><i class="fa fa-link _padding-right-half"></i><a class="" href="http://janzheng.com" target="_blank">janzheng.com</a></div>
-</div>
-<div class="profile-description" markdown="1">
-  I'm a product designer with a background in computer science, psychology, and a Masters in Human-Computer Interaction from Carnegie Mellon University.
-
-  In the past I've worked with companies and brands like Verizon Wireless, Cartoon Network, Coca-Cola, Microsoft, L'Oreal, and more to build and design digital products, and to improve product user experiences.
-</div>
-</div>
-
-
-
-
-
-</div>
 
 
 

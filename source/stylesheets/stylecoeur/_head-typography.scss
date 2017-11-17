@@ -54,7 +54,7 @@ $font-heavy: 900 !default;
 $font-size-base: ($size-base - 1px) !default; // - 1px;
 $font-lineheight: $font-size-base * 1.55 !default;
 
-$font-ui: $size-base; // $size + 2px;
+$font-ui: $font-size-base; // $size + 2px;
 $font-ui-lineheight: $font-ui * 1.5 !default;
 
 $font-larger:   $font-size-base + 6px !default; 

@@ -92,6 +92,9 @@ body {
       padding-bottom: $size-half;
       // line-height: $font-size-base * 1.7;
     }
+    h4 {
+      padding-top: $size-base*2;
+    }
   }
 }
 
@@ -118,6 +121,9 @@ body {
 .hero {
   margin-bottom: $size-base * 4;
 }
+  .hero-section {
+    margin-top: $size-base * 2;
+  }
   .hero-desc {
     // max-width: $width-content-max-narrow + 20
     // margin-top: $size-p4;
@@ -125,14 +131,29 @@ body {
     line-height: $size-p1 * 1.5;
   }
   .hero-passage {
+    @extend %ease;
     // @extend ._width-content-max-narrow;
     max-width: 440px;
-    padding-bottom: $size-base*2;
     padding-left: 0;
 
     margin-left: $size-p6;
     @include screen-xs {
       margin: 0 auto;
+    }
+
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    &.--appear {
+      @extend %ease;
+      padding-bottom: $size-base*2;
+      
+      visibility: visible;
+      height: 100%;
+      opacity: 1;
+      overflow: hidden;
     }
   }
   .hero-intro {
@@ -140,6 +161,15 @@ body {
     // border: $border-thin solid $color-ui;
     p:last-child {
       margin: 0;
+    }
+  }
+  .hero-hope {
+    color: $color-main;
+    @extend %ease;
+    cursor: pointer;
+    &:hover {
+      color: $color-secondary;
+      @extend %ease;
     }
   }
 
@@ -202,6 +232,16 @@ body {
       // background-color: $color-main;
     }
   }
+  &.--phage2 {
+    color: $color-white;
+    border-color: $color-main;
+    background-color: $color-main;
+    &:hover {
+      color: $color-copy;
+      background-color: $color-white;
+      border-color: $color-secondary;
+    }
+  }
 }
 
 a {
@@ -221,9 +261,26 @@ a {
 
 // about page
 
+.about_nav {
+  // height: $size-p4;
+  border: 2px solid $color-ui;
+  border-radius: $radius;
+  // padding: $size-half $size-base;
+  line-height: $button-line-height;
+  padding: ($size-base - 0.5) $size-base*3/2;
+  a {
+    border: 0;
+  }
+}
+
 .about-message {
   border: $border-thin solid $color-main;
   border-radius: $radius;
+
+  @include screen-xs {
+    margin-left: $size-base;
+    margin-right: $size-base;
+  }
 }
 
 

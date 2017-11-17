@@ -18,6 +18,10 @@ $directory-font-larger: $size-larger;
   & > .content {
     margin-top: 0;
   }
+
+  h4 {
+    padding: 0;
+  }
 }
 
 .directory-intro {
