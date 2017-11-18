@@ -129,6 +129,10 @@ body {
     // margin-top: $size-p4;
     font-size: $size-p1;
     line-height: $size-p1 * 1.5;
+
+    @include screen-xs {
+      padding-bottom: $size-base;
+    }
   }
   .hero-passage {
     @extend %ease;
