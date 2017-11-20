@@ -1,12 +1,82 @@
 
-<div class="directory-item _vh-30 _align-vertically _center">
+<!-- placeholder or loader -->
 
-  <%= partial '/partials/bethefirst' %>
+<div class="directory-item-list person-list">
+  <div class="directory-item">
+    <%= partial '/partials/bethefirst' %>
+  </div>
+</div>
+
+<!-- for js to read and render -->
+<div class="_hidden">
+
+<!-- <div class="directory-item _vh-30 _align-vertically _center"> -->
+  <!-- <%= partial '/partials/bethefirst' %> -->
+<!-- </div> -->
+<div class="directory-item person-template" id="template-person">
+  <div class="person directory-item-wrapper ">
+    <div class="directory-index">
+      <div class="person-profile">
+        <div class="person-img">
+          <img src="">
+        </div>
+        <div class="person-info">
+          <div class="person-info-core">
+            <div class="person-name"></div>
+            <div class="person-role"></div> 
+            <div class="person-twitter"><a target="_blank" href=""></a></div>
+            <!-- <div class="person-organization"></div> -->
+          </div>
+          <div class="person-social">
+            <div class="person-scholar"><a target="_blank" href=""></a></div>
+            <div class="person-researchgate"><a target="_blank" href=""></a></div>
+            <div class="person-orcid"><a target="_blank" href=""></a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="person-orgs directory-details">
+      <!-- <div class="person-org directory-card"> -->
+      <div class="person-org">
+        <div class="directory-card-title-container">
+          <div class="org-name directory-card-title">
+          </div>
+          <div class="org-pi person-org-pi">
+          </div>
+        </div>
+
+        <div class="directory-card-content">
+          <div class="person-org-labs">
+
+            <div class="person-org-lab">
+              <!-- <div class="person-org-lab-name directory-card-section-title directory-card-title-main ">
+                Complex Carbohydrate Research Center (CCRC)
+              </div> -->
+              <div class="person-org-lab-host-list
+              directory-hosts directory-card-list">
+                <!-- .directory-host will be inserted here w/ js -->
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+    <div class="directory-item-notes"></div>
+  </div>
+</div>
 
 </div>
-<!-- 
+
+
+<div class="person-org-lab-host 
+                directory-host directory-card-subject" id="template-host"></div>
+
+<!-- template / placeholder
 <div class="directory-item ">
-  <div class="person directory-item-container ">
+  <div class="person directory-item-wrapper ">
     <div class="directory-index">
       <div class="person-profile">
         <div class="person-img">
@@ -15,7 +85,7 @@
         <div class="person-info">
           <div class="person-info-core">
             <div class="directory-name">Jessica Sacher</div>
-            <div class="person-affiliation">University of Alberta</div>
+            <div class="person-organization">University of Alberta</div>
             <div class="">PhD Candidate</div> 
           </div>
           <div class="person-social">

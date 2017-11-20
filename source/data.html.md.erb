@@ -1,0 +1,261 @@
+---
+layout: layout-main
+---
+
+
+<div class="content --bottom_none " markdown="1">
+
+### Data Converter
+
+Phage Directory is currently all flat files, and data is handled semi-manually. This is the import/export tool for transcribing data into publishable, JSON-friendly format. This is currently a very manual process.
+
+- CSV can be input from the Google Form and converted to JSON data usable by the site
+- For merging, existing variable (JSON data) can be added and on tehe right
+
+
+#### Import
+
+<div class="_grid-cols-2">
+
+<div class="_form-control _margin-none">
+  <label for="data-csv" class="_form-label">CSV Import (Google form) </label>
+  <textarea rows="4" id="data-csv" class="_form-input"  type="text" name="data-csv" placeholder="CSV Data Import" ></textarea>
+  <div class="">
+    <div id="convert" class="_button --short --phage --outline">Convert Data</div>
+  </div>
+
+</div>
+
+<div class="_form-control _margin-none">
+  <label for="data-site" class="_form-label">Existing Site Data (json)</label>
+  <textarea rows="4" id="data-site" class="_form-input"  type="text" name="data-site" placeholder="Site Data Import" ></textarea>
+  <div class="">
+    <div id="render-site" class="_button --short --phage --outline">Render</div> <div id="convertjson" class="_button --short --phage --outline">Merge &amp; Convert</div>
+  </div>
+
+</div>
+</div>
+
+<hr />
+
+<div class="" markdown="1">
+##### Data
+
+Edit the data w/ [JSON Editor](http://jsoneditoronline.org/)
+
+  <div class="output-container">
+    <textarea type="text" class="output">
+    </textarea>
+  </div>
+</div>
+
+<div class="">
+  <div id="convert" class="_button --short --phage --outline">Render Data</div>
+</div>
+
+
+<hr />
+
+<div class="" markdown="1">
+##### Preview
+
+
+<div class="directory-nav _tabs _padding-bottom">
+  <button class="_tabs-item --short --outline --active" data-tab='tabPeople'>People</button>
+  <button class="_tabs-item --short --outline" data-tab='tabOrgs'>Organizations</button>
+  <button class="_tabs-item --short --outline" data-tab='tabHosts'>Host Bacteria</button>
+  <!-- <button class="_tabs-item --short --outline" data-tab='tabPhages'>Phages</button> -->
+</div>
+</div>
+
+</div>
+
+<div class="directory-list">
+
+  <div class="tabPeople _tabs-content --selected">
+    <!-- generate the data in data-loader -->
+
+    <!-- for testing  -->
+    <%= partial '/partials/directory_person' %>
+
+
+  </div>
+
+  <div class="tabOrgs _tabs-content">
+    <!-- generate the data in data-loader -->
+
+    <%= partial '/partials/directory_org' %>
+
+  </div>
+
+  <div class="tabHosts _tabs-content">
+    <!-- generate the data in data-loader -->
+    
+    <%= partial '/partials/directory_host' %>
+
+  </div>
+
+</div>
+
+
+
+
+
+<!-- <script src="javascripts/jsoneditor/jsoneditor.min.js"></script> -->
+<script src="javascripts/data-render.js"></script>
+<script src="javascripts/papaparse/papaparse.min.js"></script>
+<script src="javascripts/scriptcoeur/autoexpand.js"></script>
+
+<!-- basic data source -->
+<script src="javascripts/data.js"></script>
+
+<script>
+
+$('._tabs-item').on('click', function() {
+  let target = $(this).data("tab") || $(this).prop("hash").substr(1);
+  // set nav
+  $('._tabs-item').removeClass('--active');
+  $(this).addClass('--active');
+
+  // set content
+  $('._tabs-content').removeClass('--selected');
+  $('._tabs-content.' +target).addClass('--selected');
+});
+
+$(window).ready(function() {
+
+  // Parse CSV string
+  //var data = Papa.parse(csv);
+
+  // Convert back to CSV
+  //var csv = Papa.unparse(data);
+
+  // Parse local CSV file
+  // Papa.parse(file, {
+  //   complete: function(results) {
+  //     console.log("Finished:", results.data);
+  //   }
+  // });
+
+  // check if we have data source
+  if (data != null && typeof(data) != undefined ) {
+    // fill in data 
+    $('#data-site').val(JSON.stringify(data, null, 3));
+    render_raw(data); // auto-render from raw json data
+  }
+
+  var csv, sitedata, data_json, data_converted;
+
+  $('#convert').on('click', function() {
+    csv = $('#data-csv').val().replace(/^(\r\n|\n|\r)/gm,"").replace(/(\r\n|\n|\r)$/gm,""); // strip newline @ end of line
+    sitedata = $('#data-site').val();
+    data_json = Papa.parse(csv);
+
+    // console.log('...converting...', csv, );//sitedata, data_json, JSON.stringify(data_json));
+    // console.log('...converting...', JSON.stringify(data_json));
+
+    // get the basic CSV data conversion here
+    var data_json = convert(data_json.data, sitedata);
+    var data_str = JSON.stringify(data_json, null, 3);
+    output(data_str);
+    render_raw(data_json); // render compiles the diff. views
+  })
+
+  $('#render-site').on('click', function() {
+    // render changes in the textarea
+    render_raw(JSON.parse($('#data-site').val())); // auto-render from raw json data
+  });
+
+
+});
+
+function output(data) {
+  var output = $('.output');
+  $(output).html(data);
+  // autoexpand($(output)[0])
+}
+
+// convert data for the site
+// strip private stuff
+// make copyable
+// return json obj of array of item objects
+function convert(data_raw, data_site) {
+  // console.log('... converting ...')
+  var data_array = [];
+  console.log('...converting...', data_raw);
+
+
+  // check for duplicates against data_site
+  // - goal is to preserve notes, changes, edits, etc.
+
+
+  // convert array / csv values to real obj
+  // NEW OBJECTS ONLY
+  // 0 is metadata
+  /*
+
+    0:"Timestamp"
+    1:"Username"
+    2:"Full Name"
+    3:"Role or Position"
+    4:"Organization"
+    5:"Principal Investigator"
+    6:"Twitter Handle"
+    7:"Scholar Profiles"
+    8:"Bacterial pathogens for which you could provide phages"
+  */
+  for(i=1; i<data_raw.length; i++) {
+    var item = data_raw[i];
+    var item_data = {
+      timestamp: item[0],
+      name: item[2],
+      role: item[3],
+      org: item[4],
+      pi: item[5], 
+      profiles: {
+        twitter: item[6],
+        scholar: '',
+        orcid: '',
+        researchgate: '',
+      },
+      phages: item[8].split(','), // break down by ',' to array
+      system: {
+        published: true,
+        notes: '',
+        // profile_str: item[7],
+      } 
+    }
+    if (item[7] !== '') {
+      item_data.system['profile_str'] = item[7];
+    }
+    // console.log(i+':', item, item_data);
+    data_array.push(item_data);
+  }
+  // console.log('output: ', output)
+  // console.log(output);
+  // feed through https://github.com/jdorn/json-editor for editing?
+
+  // output as a json object, not as an array
+
+  // build the data views
+  // basic: basic data feed from csv
+  // profile: 
+
+  // var data = {
+  //   basic: data_array,
+  // }
+  return {raw: data_array};
+}
+
+</script>
+
+
+
+
+
+
+
+
+
+
+

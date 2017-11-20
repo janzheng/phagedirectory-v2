@@ -112,6 +112,10 @@ body {
   // padding-left: $size-2;
   // padding-right: $size-2;
 
+  &.--bottom_none {
+    margin-bottom: 0;
+  }
+  
   @include screen-xs {
     padding-left: $size-base;
     padding-right: $size-base;
@@ -190,7 +194,7 @@ body {
     padding: $size-base;
     // padding-top: $size-p2;
     padding-bottom: $size-base; // + 4px;
-    border: $border-line $color-ui solid;
+    border: $border-line $color-main solid;
     margin-bottom: $size-base;
 
     label {

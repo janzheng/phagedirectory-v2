@@ -2,6 +2,8 @@
 
 $tab-color-active: $color-secondary;
 $directory-border: $border-line $color-ui solid;
+$directory-color-bg: $color-whiter;
+$directory-color-bg2: $color-silver-lighter;
 $directory-color-hover: $color-ui-light;
 $directory-color-lighter: $color-gray-lightest;
 $directory-font-smaller: $font-base - 2; // $font-size-base; // m1;
@@ -60,14 +62,19 @@ $directory-font-larger: $size-larger;
 .directory-item {
   @extend %ease;
 
-  padding-top: $size-2;
-  padding-bottom: $size-2;
+  padding-top: $size;
+  padding-bottom: $size;
 
   padding-left: $size-base;
   padding-right: $size-base;
 
   // better as standard color; hover makes no sense
-  background-color: $directory-color-hover;
+  // background-color: $directory-color-bg;
+
+  // too distracting
+  // &:nth-child(2n) {
+  //   background-color: $directory-color-bg2;
+  // }
 
   @include screen-xs {
     padding: $size-base;
@@ -83,13 +90,20 @@ $directory-font-larger: $size-larger;
     // border-bottom: $directory-border;
   }
 }
-  .directory-item-container {
-    // @extend ._width-content-max;
+  .directory-item-wrapper {
+    @extend ._width-content-max;
+    // @extend ._width-content-paragraph;
     @extend ._center-margin;
-    @extend ._width-content-paragraph;
     display: grid;
     grid-gap: $size-base*2;
     align-items: start;
+
+    &.--wide {
+      @extend ._width-content-max;
+    }
+    &.--paragraph {
+      @extend ._width-content-paragraph;
+    }
 
     @include screen-xs {
       display: block;
@@ -118,7 +132,8 @@ $directory-font-larger: $size-larger;
 // reusable components
 // 
 
-.directory-name {
+.directory-name,
+.person-name, {
   font-size: $font-h4;
   @extend %font-bold;
   line-height: $font-h4 * 1.4;
@@ -173,8 +188,8 @@ $directory-font-larger: $size-larger;
       display: block;
       content: ' ';
       width: $size-2;
-      padding-bottom: $size-base/2
-      // margin-bottom: $size-base;
+      padding-bottom: $size-base/2;
+      margin-bottom: $size-base/2;
     }
   }
   .directory-card-title-main {
@@ -214,14 +229,24 @@ $directory-font-larger: $size-larger;
 
 
 
+
+
+
+
+
 // 
 //  section-specific; keep these to a minimum
 // 
 
 // person directory
 .person {
-  grid-template-columns: 1fr 3fr;
+  grid-template-columns: 2fr 5fr;
   margin: 0 auto;
+
+  // specially format org name
+  .org-name {
+    line-height: $font-h4 * 1.4;
+  }
 
   // left side
   .person-profile {
@@ -230,6 +255,26 @@ $directory-font-larger: $size-larger;
       grid-template-columns: 80px auto;
       grid-gap: $size-base;
       justify-content: start;
+    }
+  }
+  .person-organization {
+    // font-weight: $font-bold;
+    padding-bottom: $size-half;
+  }
+  .person-role {
+    // font-size: $font-smaller;
+    &:after {
+      content: ' ';
+      display: block;
+      width: $size-2;
+      border-top: $border-line solid $color-ui;
+      padding-top: $size-half/2;
+      margin-top: $size-half;
+    }
+  }
+  .person-twitter {
+    a {
+      border: 0;
     }
   }
 
@@ -243,7 +288,6 @@ $directory-font-larger: $size-larger;
     }
   }
 
-  // col 2
   .person-info {
     justify-items: start;
     // padding-left: $size-p2;
@@ -268,41 +312,39 @@ $directory-font-larger: $size-larger;
       }
     }
 
-  // col 3
-  .person-phages {
+  // // col 3
+  // .person-phages {
 
-    @include screen-xs {
-      // grid-row: 2;
-      grid-column: 1 / 3;
-      justify-items: middle;
-    }
-  }
-    .person-phagelist {
-      display: grid;
-      grid-gap: $size-base;
-      // grid-template-columns: 1fr 1fr; // repeat(auto-fill, minmax(200px, 1fr));
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    }
-      .person-phage {
-        padding-bottom: $size-half;
-      }
-      .person-phage-name {
-        font-weight: $font-bold;
-        padding-right: $size-base/4;
-      }
-      .person-phage-hosts {
-      }
-      .person-phage-host {
-        line-height: $directory-lineheight-smaller;
-        font-size: $size-larger;
-      }
-      .person-phage-org {
-        font-size: $directory-font-smaller;
-        line-height: $directory-lineheight-smaller;
-        color: $directory-color-lighter;
-        margin-top: $size-base/4;
-        padding-bottom: $size-half;
-      }
+  //   @include screen-xs {
+  //     // grid-row: 2;
+  //     grid-column: 1 / 3;
+  //     justify-items: middle;
+  //   }
+  // }
+  //   .person-phagelist {
+  //     display: grid;
+  //     grid-gap: $size-base;
+  //     // grid-template-columns: 1fr 1fr; // repeat(auto-fill, minmax(200px, 1fr));
+  //     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  //   }
+  //     .person-phage {
+  //       padding-bottom: $size-half;
+  //     }
+  //     .person-phage-name {
+  //       font-weight: $font-bold;
+  //       padding-right: $size-base/4;
+  //     }
+  //     // .person-phage-host {
+  //     //   line-height: $directory-lineheight-smaller;
+  //     //   font-size: $size-larger;
+  //     // }
+  //     .person-phage-org {
+  //       font-size: $directory-font-smaller;
+  //       line-height: $directory-lineheight-smaller;
+  //       color: $directory-color-lighter;
+  //       margin-top: $size-base/4;
+  //       padding-bottom: $size-half;
+  //     }
 }
 
 

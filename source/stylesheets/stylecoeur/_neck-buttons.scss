@@ -83,7 +83,7 @@ $button-line-height: 13px                               !default; // makes the b
   line-height: $button-line-height;
 
   margin-bottom: $size-base;
-  margin-right: $size-base;
+  margin-right: $size-half;
 
   &:last-child { 
     margin-right: 0; // margin in a row of buttons

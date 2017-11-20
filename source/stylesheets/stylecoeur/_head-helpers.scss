@@ -344,8 +344,10 @@ Tip: this outputs
 ._break-none {
   br { 
     display: none;
+  }
 
-    @include genGridAttr(('xs','sm','md','lg')) {
+  @include genGridAttr(('xs','sm','md','lg')) {
+    br { 
       display: none;
     }
   }
