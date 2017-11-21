@@ -25,7 +25,7 @@ var data = {
          },
          "phages": [
             "Escherichia coli",
-            " Salmonella enterica"
+            "Salmonella enterica"
          ],
          "system": {
             "published": true,
@@ -45,7 +45,7 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "Pseudomonas aeruginosa "
+            "Pseudomonas aeruginosa"
          ],
          "system": {
             "published": true,
@@ -86,11 +86,11 @@ var data = {
          },
          "phages": [
             "Enterococcus",
-            " Pseudomonas",
-            " Stenotrophomonas (maybe)",
-            " Escherichia coli",
-            " Streptococcus",
-            " Rothia"
+            "Pseudomonas",
+            "Stenotrophomonas",
+            "Escherichia coli",
+            "Streptococcus",
+            "Rothia"
          ],
          "system": {
             "published": true,
@@ -101,7 +101,7 @@ var data = {
          "timestamp": "2017/11/18 7:49:44 PM EST",
          "name": "Dr. Heather Hendrickson ",
          "role": "Assistant Prof. (Senior Lecturer, NZ) ",
-         "org": "Massey University ",
+         "org": "Massey University",
          "pi": "Dr. Heather Hendrickson",
          "profiles": {
             "twitter": "@DrHHNZ",
@@ -111,7 +111,7 @@ var data = {
          },
          "phages": [
             "Pseudomonas fluorescens",
-            " Mycobacterium smegmatis"
+            "Mycobacterium smegmatis"
          ],
          "system": {
             "published": true,
@@ -131,7 +131,7 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "Establishing a new lab. Hoping to procure Mycobacterium phages"
+            "Mycobacterium"
          ],
          "system": {
             "published": true,
@@ -151,15 +151,15 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "Staphlyococcus aureus",
-            " Enterococcus faecium",
-            " Yersinia enterocolitica",
-            " Yersinia pseudotuberculosis",
-            " Yersinia pesits",
-            " Klebsiella pneumoniae",
-            " Escherichia coli",
-            " Pseudomonas aeruginosa",
-            " Enterobacter cloacae"
+            "Staphylococcus aureus",
+            "Enterococcus faecium",
+            "Yersinia enterocolitica",
+            "Yersinia pseudotuberculosis",
+            "Yersinia pestis",
+            "Klebsiella pneumoniae",
+            "Escherichia coli",
+            "Pseudomonas aeruginosa",
+            "Enterobacter cloacae"
          ],
          "system": {
             "published": true,
@@ -222,10 +222,10 @@ var data = {
          },
          "phages": [
             "Escherichia coli",
-            " Pseudomonas aeruginosa",
-            " Acinetobacter baumannii",
-            " Klebsiella pneumoniae",
-            " Staphylococcus aureus"
+            "Pseudomonas aeruginosa",
+            "Acinetobacter baumannii",
+            "Klebsiella pneumoniae",
+            "Staphylococcus aureus"
          ],
          "system": {
             "published": true,
@@ -266,8 +266,8 @@ var data = {
          },
          "phages": [
             "Acinetobacter baumannii",
-            " Enterobacteriaceae",
-            " Staphylococcus aureus"
+            "Enterobacteriaceae",
+            "Staphylococcus aureus"
          ],
          "system": {
             "published": true,
@@ -311,12 +311,57 @@ var data = {
          ],
          "system": {
             "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/21 3:35:39 PM EST",
+         "name": "John Dennehy",
+         "role": "PI",
+         "org": "Queens College CUNY",
+         "pi": "John Dennehy ",
+         "profiles": {
+            "twitter": "@DrJDennehy",
+            "scholar": "https://scholar.google.com/citations?user=xHV6zmQAAAAJ&hl=en",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Pseudomonas aeruginosa",
+            "Mycobacterium tuberculosis",
+            "Klebsiella pneumoniae",
+            "Enterococcus fecium"
+         ],
+         "system": {
+            "published": true,
             "notes": "",
+         }
+      },
+      {
+         "timestamp": "2017/11/21 3:37:59 PM EST",
+         "name": "Hisham Alrubaye",
+         "role": "Researcher",
+         "org": "CUNY Queens College",
+         "pi": "John Dennehy",
+         "profiles": {
+            "twitter": "@phage4future",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Burkholderia cepacia",
+            "Pseudomonas aeruginosa",
+            "Escherichia coli (uropathogenic)",
+            "Listeria"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
          }
       }
    ]
 }
-
 
 
 
