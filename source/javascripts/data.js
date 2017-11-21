@@ -18,7 +18,8 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "E. coli Salmonella enterica"
+            "E. coli",
+            " Salmonella enterica"
          ],
          "system": {
             "published": true,
@@ -81,7 +82,7 @@ var data = {
             "Enterococcus",
             " Pseudomonas",
             " Stenotrophomonas (maybe)",
-            " E coli",
+            " Escherichia coli",
             " Streptococcus",
             " Rothia"
          ],
@@ -104,12 +105,11 @@ var data = {
          },
          "phages": [
             "Pseudomonas fluorescens",
-            " Mycobacterium smegmatis",
-            " "
+            " Mycobacterium smegmatis"
          ],
          "system": {
             "published": true,
-            "notes": "",
+            "notes": ""
          }
       },
       {
@@ -129,7 +129,7 @@ var data = {
          ],
          "system": {
             "published": true,
-            "notes": "",
+            "notes": ""
          }
       },
       {
@@ -157,7 +157,7 @@ var data = {
          ],
          "system": {
             "published": true,
-            "notes": "",
+            "notes": ""
          }
       },
       {
@@ -174,8 +174,8 @@ var data = {
          },
          "phages": [
             "Klebsiella pneumoniae",
-            " Escherichia coli",
-            " Enterobacter cloacae"
+            "Escherichia coli",
+            "Enterobacter cloacae"
          ],
          "system": {
             "published": true,
@@ -207,7 +207,7 @@ var data = {
          "name": "Dr. Grégory Resch",
          "role": "Project Director",
          "org": "University of Lausanne",
-         "pi": "Grégory Resch",
+         "pi": "Dr. Grégory Resch",
          "profiles": {
             "twitter": "",
             "scholar": "",
@@ -215,11 +215,73 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "E. coli",
-            " P. aeruginosa",
-            " A. baumannii",
-            " K. pneumoniae",
-            " S. aureus."
+            "Escherichia coli",
+            " Pseudomonas aeruginosa",
+            " Acinetobacter baumannii",
+            " Klebsiella pneumoniae",
+            " Staphylococcus aureus"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/20 11:49:25 AM EST",
+         "name": "Dr Mohammad Alhawi",
+         "role": "Assistant professor",
+         "org": "University of Jeddah",
+         "pi": "",
+         "profiles": {
+            "twitter": "@mbahawi",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Non"
+         ],
+         "system": {
+            "published": false,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/20 9:18:26 PM EST",
+         "name": "Jeremy Barr",
+         "role": "Lecturer & Group Leader",
+         "org": "Monash University",
+         "pi": "",
+         "profiles": {
+            "twitter": "@JeremyJBarr",
+            "scholar": "https://scholar.google.com.au/citations?user=Ebx3KmEAAAAJ&hl=en",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Acinetobacter baumannii",
+            " Enterobacteriaceae",
+            " Staphylococcus aureus"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/21 12:35:28 AM EST",
+         "name": "Jessica Sacher",
+         "role": "Graduate student",
+         "org": "University of Alberta, University of Georgia",
+         "pi": "Dr. Christine Szymanski",
+         "profiles": {
+            "twitter": "@JessicaSacher",
+            "scholar": "https://scholar.google.com/citations?user=r3PIVU8AAAAJ&hl=en",
+            "orcid": "0000-0003-0297-9550",
+            "researchgate": "https://www.researchgate.net/profile/Jessica_Sacher"
+         },
+         "phages": [
+            "Campylobacter jejuni"
          ],
          "system": {
             "published": true,
@@ -228,7 +290,6 @@ var data = {
       }
    ]
 }
-
 
 
 

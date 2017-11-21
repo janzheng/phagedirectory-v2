@@ -23,6 +23,16 @@ $metrosrc: '../fonts/metropolis/';
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'Metropolis';
+    src: url($metrosrc+'Metropolis-LightItalic.eot');
+    src: url($metrosrc+'Metropolis-LightItalic.eot?#iefix') format('embedded-opentype'),
+        url($metrosrc+'Metropolis-LightItalic.woff') format('woff'),
+        url($metrosrc+'Metropolis-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
 // darker font as normal
 // @font-face {
 //     font-family: 'Metropolis';

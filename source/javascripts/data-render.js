@@ -48,7 +48,7 @@ function render_profile(item) {
     return false;
   }
 
-  console.log('::: rendering: ', item); // , $('.person-list').html());
+  // console.log('::: rendering: ', item); // , $('.person-list').html());
   var tmp_person = $('#template-person').clone();
     tmp_person.removeAttr('id');
     tmp_person.find('.person-img').hide(); // no images for now
@@ -75,12 +75,12 @@ function render_profile(item) {
 
     tmp_person.find('.directory-item-notes').text(item.system.profile_str);
     tmp_person.find('.org-name').text(item.org);
-    tmp_person.find('.org-pi').text(item.pi);
+    item.pi != '' ? tmp_person.find('.org-pi').text(item.pi) : tmp_person.find('.org-pi').hide();
 
     // var tmp_host = $('#template-host').clone().removeAttr('id').html('');
     item.phages.forEach(function(phage) {
       var tmp_host = $('#template-host').clone().removeAttr('id').html('');
-      console.log('phage: ' + phage)
+      // console.log('phage: ' + phage)
       $(tmp_host).text(phage);
       tmp_person.find('.directory-hosts').append($(tmp_host));
     });

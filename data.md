@@ -23,7 +23,6 @@
 
 - Auto de-duplicator
 
-
 "Timestamp","Username","Full Name","Role or Position","Organization","Principal Investigator","Twitter Handle","Scholar Profiles","Bacterial pathogens for which you could provide phages"
 "2017/11/18 2:53:55 AM EST","ansaldi@imm.cnrs.fr","Mireille Ansaldi","PI phage research group ","CNRS","","@MireilleLCB","","E. coli Salmonella enterica"
 "2017/11/18 4:14:15 AM EST","anne.chevallereau@gmail.com","Dr. Anne Chevallereau","Postdoctoral fellow","University of Exeter ","Dr Edze Westra","","","Pseudomonas aeruginosa "
@@ -36,8 +35,9 @@ https://scholar.google.co.nz/citations?user=PKkcGsAAAAAJ&hl=en","Pseudomonas flu
 "2017/11/19 12:57:38 PM EST","rcitorik@gmail.com","Robert Citorik","Graduate Student","MIT","Timothy Lu","@rcitorik","","Klebsiella pneumoniae, Escherichia coli, Enterobacter cloacae"
 "2017/11/19 2:50:58 PM EST","stephen.stockdale@teagasc.ie","Dr. Stephen Stockdale","Postdoctoral Fellow","Teagasc Agricultural and Food Development Authority","","@SteveStockyPhD","","Staphylococcus aureus"
 "2017/11/20 5:08:05 AM EST","gregory.resch@unil.ch","Dr. Grégory Resch","Project Director","University of Lausanne","Grégory Resch","","","E. coli, P. aeruginosa, A. baumannii, K. pneumoniae, S. aureus."
-
-
+"2017/11/20 11:49:25 AM EST","bahawi@gmail.com","Dr Mohammad Alhawi","Assistant professor","University of Jeddah","","@mbahawi","","Non"
+"2017/11/20 9:18:26 PM EST","jeremy.barr@monash.edu","Jeremy Barr","Lecturer & Group Leader","Monash University","","@JeremyJBarr","https://scholar.google.com.au/citations?user=Ebx3KmEAAAAJ&hl=en","Acinetobacter baumannii, Enterobacteriaceae, Staphylococcus aureus"
+"2017/11/21 12:35:28 AM EST","sacher@ualberta.ca","Jessica Sacher","Graduate student","University of Alberta and University of Georgia","Dr. Christine Szymanski","@JessicaSacher","Google Scholar & ResearchGate: Jessica Sacher, ORCID #0000-0003-0297-9550","Campylobacter jejuni"
 
 
 

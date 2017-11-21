@@ -9,7 +9,7 @@ $directory-color-lighter: $color-gray-lightest;
 $directory-font-smaller: $font-base - 2; // $font-size-base; // m1;
 $directory-lineheight-smaller: $directory-font-smaller * 1.8; // $font-size-base; // m1;
 $directory-gap: $size-base;
-$directory-font-larger: $size-larger;
+$directory-font-larger: $font-large;
 
 .directory {
   padding-top: $size-base;
@@ -209,6 +209,9 @@ $directory-font-larger: $size-larger;
   .directory-card-subject {
     font-size: $directory-font-larger;
     margin-bottom: $size-half;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.4px;
   }
   .directory-card-list {
     padding-left: $size-base;
@@ -364,6 +367,15 @@ $directory-font-larger: $size-larger;
     }
   }
 }
+  .org-pi {
+    font-size: $font-small;
+    color: $color-gray-lightest;
+    font-weight: 300;
+    &:before {
+      content: 'PI: ',
+
+    }    
+  }
 
 
 

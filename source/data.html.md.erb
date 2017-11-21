@@ -9,10 +9,6 @@ layout: layout-main
 
 Phage Directory is currently all flat files, and data is handled semi-manually. This is the import/export tool for transcribing data into publishable, JSON-friendly format. This is currently a very manual process.
 
-- CSV can be input from the Google Form and converted to JSON data usable by the site
-- For merging, existing variable (JSON data) can be added and on tehe right
-
-
 #### Import
 
 <div class="_grid-cols-2">
@@ -21,7 +17,8 @@ Phage Directory is currently all flat files, and data is handled semi-manually. 
   <label for="data-csv" class="_form-label">CSV Import (Google form) </label>
   <textarea rows="4" id="data-csv" class="_form-input"  type="text" name="data-csv" placeholder="CSV Data Import" ></textarea>
   <div class="">
-    <div id="convert" class="_button --short --phage --outline">Convert Data</div>
+    <div id="merge" class="_button --short --phage --outline">Merge &amp; Convert</div>
+    <div id="convert" class="_button --short --phage --outline">Convert Raw</div>
   </div>
 
 </div>
@@ -30,7 +27,7 @@ Phage Directory is currently all flat files, and data is handled semi-manually. 
   <label for="data-site" class="_form-label">Existing Site Data (json)</label>
   <textarea rows="4" id="data-site" class="_form-input"  type="text" name="data-site" placeholder="Site Data Import" ></textarea>
   <div class="">
-    <div id="render-site" class="_button --short --phage --outline">Render</div> <div id="convertjson" class="_button --short --phage --outline">Merge &amp; Convert</div>
+    <div id="render-site" class="_button --short --phage --outline">Render</div>
   </div>
 
 </div>
@@ -100,6 +97,7 @@ Edit the data w/ [JSON Editor](http://jsoneditoronline.org/)
 
 
 
+<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
 
 <!-- <script src="javascripts/jsoneditor/jsoneditor.min.js"></script> -->
 <script src="javascripts/data-render.js"></script>
@@ -144,22 +142,29 @@ $(window).ready(function() {
     render_raw(data); // auto-render from raw json data
   }
 
-  var csv, sitedata, data_json, data_converted;
+  var csv, data_json, data_converted;
 
   $('#convert').on('click', function() {
     csv = $('#data-csv').val().replace(/^(\r\n|\n|\r)/gm,"").replace(/(\r\n|\n|\r)$/gm,""); // strip newline @ end of line
-    sitedata = $('#data-site').val();
     data_json = Papa.parse(csv);
+    console.log("!!!!!!!" , data_json)
 
     // console.log('...converting...', csv, );//sitedata, data_json, JSON.stringify(data_json));
     // console.log('...converting...', JSON.stringify(data_json));
 
     // get the basic CSV data conversion here
-    var data_json = convert(data_json.data, sitedata);
+    var data_json = convert(data_json.data);
     var data_str = JSON.stringify(data_json, null, 3);
     output(data_str);
     render_raw(data_json); // render compiles the diff. views
   })
+
+  $('#merge').on('click', function() {
+    csv = $('#data-csv').val().replace(/^(\r\n|\n|\r)/gm,"").replace(/(\r\n|\n|\r)$/gm,""); // strip newline @ end of line
+    data_json = Papa.parse(csv);
+    console.log("???????" , data_json)
+    var data_json = merge(data_json.data, data); // data is from the external src
+  });
 
   $('#render-site').on('click', function() {
     // render changes in the textarea
@@ -179,7 +184,7 @@ function output(data) {
 // strip private stuff
 // make copyable
 // return json obj of array of item objects
-function convert(data_raw, data_site) {
+function convert(data_raw) {
   // console.log('... converting ...')
   var data_array = [];
   console.log('...converting...', data_raw);
@@ -222,30 +227,42 @@ function convert(data_raw, data_site) {
       system: {
         published: true,
         notes: '',
-        // profile_str: item[7],
       } 
     }
     if (item[7] !== '') {
       item_data.system['profile_str'] = item[7];
     }
-    // console.log(i+':', item, item_data);
     data_array.push(item_data);
   }
-  // console.log('output: ', output)
-  // console.log(output);
-  // feed through https://github.com/jdorn/json-editor for editing?
-
-  // output as a json object, not as an array
-
-  // build the data views
-  // basic: basic data feed from csv
-  // profile: 
-
-  // var data = {
-  //   basic: data_array,
-  // }
   return {raw: data_array};
 }
+
+// merge data data
+function merge(data_raw, data_site) {
+  // elimitate dupes using timestamp
+  console.log('merge: ', data_raw, data_site);
+
+  // data_output.splice(0, 1); // get rid of the first line
+  for(i=1; i<data_raw.length; i++) {
+    // first item in data is always timestamp
+    data.raw.forEach(function(item) {
+      if (item.timestamp == data_raw[i][0]) {
+        console.log('dupe found: ', data_raw[i][0] );
+        // data_raw = data_raw.slice(0,i) + data_raw.slice(i+1,data_raw.length);
+        data_raw.splice(i, 1);
+      }
+    });
+      
+  }
+  var data_converted = convert(data_raw);
+  data_site.raw = data_site.raw.concat(data_converted.raw);
+  console.log('convert: ', data_converted, data_site);
+  output(JSON.stringify(data_site, null, 3));
+  render_raw(data_site);
+  // join converted data w/ data_site
+
+}
+
 
 </script>
 
