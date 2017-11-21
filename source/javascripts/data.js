@@ -8,8 +8,14 @@ var data = {
       {
          "timestamp": "2017/11/18 2:53:55 AM EST",
          "name": "Mireille Ansaldi",
-         "role": "PI phage research group ",
-         "org": "CNRS",
+         "role": "Principal Investigator",
+         "org": "Centre national de la recherche scientifique",
+         "orgs": [
+            {
+               "name": "Centre national de la recherche scientifique",
+               "abbr": "CNRS"
+            }
+         ],
          "pi": "",
          "profiles": {
             "twitter": "@MireilleLCB",
@@ -18,7 +24,7 @@ var data = {
             "researchgate": ""
          },
          "phages": [
-            "E. coli",
+            "Escherichia coli",
             " Salmonella enterica"
          ],
          "system": {
@@ -287,12 +293,29 @@ var data = {
             "published": true,
             "notes": ""
          }
+      },
+      {
+         "timestamp": "2017/11/21 6:04:34 AM EST",
+         "name": "Deyvid Amgarten",
+         "role": "PhD Student",
+         "org": "University of Sao Paulo",
+         "pi": "Aline Maria da Silva",
+         "profiles": {
+            "twitter": "",
+            "scholar": "https://scholar.google.com.br/citations?user=g7_AAFEAAAAJ&hl=en",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Pseudomonas aeruginosa"
+         ],
+         "system": {
+            "published": true,
+            "notes": "",
+         }
       }
    ]
 }
-
-
-
 
 
 

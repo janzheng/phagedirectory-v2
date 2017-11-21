@@ -74,7 +74,14 @@ function render_profile(item) {
     }
 
     tmp_person.find('.directory-item-notes').text(item.system.profile_str);
-    tmp_person.find('.org-name').text(item.org);
+    
+    if( typeof(item.orgs) != 'undefined') {
+      tmp_person.find('.org-name').text(item.orgs[0].name + ` (${item.orgs[0].abbr})`);
+    }
+    else 
+      tmp_person.find('.org-name').text(item.org);
+    
+
     item.pi != '' ? tmp_person.find('.org-pi').text(item.pi) : tmp_person.find('.org-pi').hide();
 
     // var tmp_host = $('#template-host').clone().removeAttr('id').html('');
