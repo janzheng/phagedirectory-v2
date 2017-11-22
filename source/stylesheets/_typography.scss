@@ -33,6 +33,16 @@ $metrosrc: '../fonts/metropolis/';
     font-style: italic;
 }
 
+@font-face {
+    font-family: 'Metropolis';
+    src: url($metrosrc+'Metropolis-BoldItalic.eot');
+    src: url($metrosrc+'Metropolis-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url($metrosrc+'Metropolis-BoldItalic.woff') format('woff'),
+        url($metrosrc+'Metropolis-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
 // darker font as normal
 // @font-face {
 //     font-family: 'Metropolis';

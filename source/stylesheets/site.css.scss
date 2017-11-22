@@ -302,6 +302,17 @@ a {
   }
 }
 
+._border-bottom-half {
+  &:after {
+    border-bottom: $border-line solid $color-ui;
+    display: block;
+    content: ' ';
+    width: $size-2;
+    padding-bottom: $size-base/2;
+    margin-bottom: $size-base/2;
+  }
+}
+
 
 
 

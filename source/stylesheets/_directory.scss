@@ -193,14 +193,6 @@ $directory-font-larger: $font-large;
   .directory-card-title-container {
     padding-bottom: $size-half;
     // margin-bottom: $size-base;
-    &:after {
-      border-bottom: $border-line solid $color-ui-light;
-      display: block;
-      content: ' ';
-      width: $size-2;
-      padding-bottom: $size-base/2;
-      margin-bottom: $size-base/2;
-    }
   }
   .directory-card-title-main {
     font-weight: $font-bold;
@@ -283,17 +275,6 @@ $directory-font-larger: $font-large;
     // font-weight: $font-bold;
     padding-bottom: $size-half;
   }
-  .person-role {
-    // font-size: $font-smaller;
-    &:after {
-      content: ' ';
-      display: block;
-      width: $size-2;
-      border-top: $border-line solid $color-ui;
-      padding-top: $size-half;
-      margin-top: $size-half;
-    }
-  }
 
   .person-img {
     // text-align: center;
@@ -313,21 +294,6 @@ $directory-font-larger: $font-large;
       padding-left: 0; // $size-base;
     }
   }
-    .person-social {
-      font-size: $size-m1;
-
-      @include screen-xs {
-      }
-
-      a {
-        line-height: $size-m1;
-        border: 0;
-        color: $directory-color-lighter;
-        &:hover {
-          color: $color-hover;
-        }
-      }
-    }
 
   // // col 3
   // .person-phages {
@@ -368,6 +334,21 @@ $directory-font-larger: $font-large;
       border: 0;
     }
   }
+  .person-social {
+    font-size: $size-m1;
+
+    @include screen-xs {
+    }
+
+    a {
+      line-height: $size-m1;
+      border: 0;
+      color: $directory-color-lighter;
+      &:hover {
+        color: $color-hover;
+      }
+    }
+  }
 
 
 
@@ -390,8 +371,8 @@ $directory-font-larger: $font-large;
   .directory-person-org-pi {
     font-size: $directory-font-smaller;
     // color: $color-gray-lightest;
-    font-style: italic;
-    font-weight: 300;
+    // font-style: italic;
+    // font-weight: 300;
     &:before {
       content: 'PI: ',
 
@@ -407,8 +388,8 @@ $directory-font-larger: $font-large;
 // host directory
 
 .host {
-  grid-template-columns: 2fr 3fr;
-  align-items: center;
+  grid-template-columns: 1fr 3fr;
+  align-items: top;
   // @include screen-xs {
   //   grid-template-columns: 1fr;
   //   grid-gap: $size-half;
@@ -418,10 +399,19 @@ $directory-font-larger: $font-large;
   & + .host-org {
     margin-top: $size-base;
   }
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  grid-gap: $size-base;
 }
 .host-org-lab-person-details {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.host-name {
+  font-weight: bold;
+  font-style: italic;
 }
 
 

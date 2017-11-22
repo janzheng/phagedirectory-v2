@@ -317,8 +317,8 @@ var data = {
       {
          "timestamp": "2017/11/21 3:35:39 PM EST",
          "name": "John Dennehy",
-         "role": "PI",
-         "org": "Queens College CUNY",
+         "role": "Principal Investigator",
+         "org": "Queens College, CUNY ",
          "pi": "John Dennehy ",
          "profiles": {
             "twitter": "@DrJDennehy",
@@ -341,7 +341,7 @@ var data = {
          "timestamp": "2017/11/21 3:37:59 PM EST",
          "name": "Hisham Alrubaye",
          "role": "Researcher",
-         "org": "CUNY Queens College",
+         "org": "Queens College, CUNY",
          "pi": "John Dennehy",
          "profiles": {
             "twitter": "@phage4future",

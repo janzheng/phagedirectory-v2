@@ -1,22 +1,28 @@
 
-<!-- <div class="directory-item template-host">
+<!-- <div class="directory-item">
   <%= partial '/partials/bethefirst' %>
 </div> -->
+
+<div class="directory-item-list host-list" >
+  <div class="directory-item">
+    <%= partial '/partials/bethefirst' %>
+  </div>
+</div>
+
+
+<div class="_hidden">
+<!-- <div> -->
 
 <div class="directory-item host-template" id="template-host">
   <div class="host directory-item-wrapper ">
     <div class="directory-index">
-      <!-- <h6 class="directory-title-label">Host Bacteria</h6> -->
-      <div class="host-name directory-name">Campylobacter jejuni</div>
+      <div class="host-name directory-name"></div>
     </div>
 
-    <div class="host-list directory-details">
-      <!-- <h6 class="directory-title-label">Organizations</h6> -->
-
-      <div class="host-org directory-card">
-        <div class="directory-card-title-container">
-          <div class="org-lab-name directory-card-title ">
-            University of Alberta, University of Georgia
+    <div class="host-orgs directory-details">
+      <div class="host-org " id="template-org">
+        <div class="directory-card-title-container ">
+          <div class="directory-organization directory-card-title ">
           </div>
         </div>
         <div class="host-org-labs">
@@ -30,10 +36,10 @@
                   <div class="host-org-lab-person-img directory-img"><img src=""/></div>
                   <div class="host-org-lab-person-details directory-person-details">
                     <div>
-                      <div class="directory-person-name ">Jessica Sacher</div>
+                      <div class="directory-person-name "></div>
                       <!-- <div class="directory-person-org">University of Alberta</div> -->
                       <div class="directory-person-contact">
-                        <span class="directory-person-twitter person-twitter"><a href="http://twitter.com/jessicasacher">@jessicasacher</a></span>
+                        <span class="person-twitter person-twitter"><a href=""></a></span>
                       </div>
                       <div class="person-social">
                         <div class="person-scholar"><a target="_blank" href=""></a></div>
@@ -42,8 +48,8 @@
                       </div>
                     </div>
                     <div>
-                      <div class="directory-person-role">PhD Candidate</div>
-                      <div class="directory-person-org-pi">Dr. Christine Szymanski</div>
+                      <div class="person-role"></div>
+                      <div class="person-org-pi org-pi"></div>
                     </div>
                   </div>
                 </div>
@@ -60,7 +66,7 @@
   </div>
 </div>
 
-
+</div>
 
 <!-- 
 <div class="directory-item ">
