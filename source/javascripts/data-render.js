@@ -33,6 +33,15 @@ function render_raw(profiles) {
     render_profile(item);
   });
 
+  // render orgs
+  var orgs = convert_orgs(profiles.raw);
+  console.log('>> orgs', orgs)
+  $('.org-list').html('');
+  Object.keys(orgs).forEach(function(org) {
+    // console.log(host + ':',hosts[host]);
+    render_orgs(orgs[org], org); 
+  });
+
   // render hosts
   var hosts = convert_hosts(profiles.raw);
   $('.host-list').html('');
@@ -103,9 +112,46 @@ function render_profile(item) {
 
 
 
+// render an ORG
+function render_orgs(org_data, org) {
+
+  var tmp_org = $('#template-org').clone();
+      tmp_org.removeAttr('id');
+      tmp_org.find('.org-name').text(org);
+
+
+  console.log(org_data);
+
+  tmp_org.find('.org-hosts').html('');
+
+  Object.keys(org_data.hosts).forEach(function(host, i) {
+    console.log('host', host, org_data.hosts[host]);
+
+    var tmp_host = $('#template-org-host').clone();
+        tmp_host.removeAttr('id');
+    tmp_host.find('.org-directory-host').text(host);
+
+    tmp_host.find('.org-host-person-list').html('')
+    org_data.hosts[host].forEach(function(profile) {
+      var tmp_person = $('#template-org-person').clone();
+          tmp_person.removeAttr('id');
+
+      tmp_person.find('.directory-person-name').text(profile.name);
+
+      tmp_host.find('.org-host-person-list').append(tmp_person);
+    })
+
+    tmp_org.find('.org-hosts').append(tmp_host);
+  });
+
+  $('.org-list').append(tmp_org);
+}
+
+
+
 // render a HOST
 function render_host(host_profiles, host) {
-  console.log('render host profiles for ' + host, host_profiles)
+  // console.log('render host profiles for ' + host, host_profiles)
 
   var tmp_host = $('#template-host').clone();
       tmp_host.removeAttr('id');
@@ -115,7 +161,7 @@ function render_host(host_profiles, host) {
 
   host_profiles.forEach(function(profile) {
     // console.log('', profile)
-    var tmp_org = $('#template-org').clone();
+    var tmp_org = $('#template-host-org').clone();
         tmp_org.removeAttr('id');
 
     // // skip if publish state is false 
@@ -123,35 +169,30 @@ function render_host(host_profiles, host) {
       return false;
     }
 
-    // console.log('::: rendering: ', item); // , $('.person-list').html());
+    tmp_org.find('.directory-person-name').text(profile.name);
+    tmp_org.find('.directory-organization').text(profile.org);
+    tmp_org.find('.person-role').text(profile.role);
 
-      // tmp_host.removeAttr('id');
-      // tmp_host.find('.person-img').hide(); // no images for now
-      tmp_org.find('.directory-person-name').text(profile.name);
-      tmp_org.find('.directory-organization').text(profile.org);
-      tmp_org.find('.person-role').text(profile.role);
+    if( typeof(profile.profiles.twitter) != 'undefined' && profile.profiles.twitter != '') {
+      tmp_org.find('.person-twitter a').attr('href','https://twitter.com/' + profile.profiles.twitter.replace(/^@/g,''));
+      tmp_org.find('.person-twitter a').text('@' + profile.profiles.twitter.replace(/^@/g,'') );
+    }
+    if( typeof(profile.profiles.scholar) != 'undefined' && profile.profiles.scholar != '') {
+      tmp_org.find('.person-scholar a').attr('href', profile.profiles.scholar);
+      tmp_org.find('.person-scholar a').text('Google Scholar' );
+    }
+    if( typeof(profile.profiles.researchgate) != 'undefined' && profile.profiles.researchgate != '') {
+      tmp_org.find('.person-researchgate a').attr('href', profile.profiles.researchgate);
+      tmp_org.find('.person-researchgate a').text('ResearchGate' );
+    }
+    if( typeof(profile.profiles.orcid) != 'undefined' && profile.profiles.orcid != '') {
+      tmp_org.find('.person-orcid a').attr('href', 'http://orcid.org/'+profile.profiles.orcid);
+      tmp_org.find('.person-orcid a').text(profile.profiles.orcid);
+    }
 
-      if( typeof(profile.profiles.twitter) != 'undefined' && profile.profiles.twitter != '') {
-        tmp_org.find('.person-twitter a').attr('href','https://twitter.com/' + profile.profiles.twitter.replace(/^@/g,''));
-        tmp_org.find('.person-twitter a').text('@' + profile.profiles.twitter.replace(/^@/g,'') );
-      }
-      if( typeof(profile.profiles.scholar) != 'undefined' && profile.profiles.scholar != '') {
-        tmp_org.find('.person-scholar a').attr('href', profile.profiles.scholar);
-        tmp_org.find('.person-scholar a').text('Google Scholar' );
-      }
-      if( typeof(profile.profiles.researchgate) != 'undefined' && profile.profiles.researchgate != '') {
-        console.log('researchgate jess')
-        tmp_org.find('.person-researchgate a').attr('href', profile.profiles.researchgate);
-        tmp_org.find('.person-researchgate a').text('ResearchGate' );
-      }
-      if( typeof(profile.profiles.orcid) != 'undefined' && profile.profiles.orcid != '') {
-        tmp_org.find('.person-orcid a').attr('href', 'http://orcid.org/'+profile.profiles.orcid);
-        tmp_org.find('.person-orcid a').text(profile.profiles.orcid);
-      }
-
-      // tmp_org.find('.person-org-pi').text(profile.pi);
-      console.log(profile.pi, tmp_org.find('.person-org-pi'));
-      profile.pi != '' ? tmp_org.find('.person-org-pi').text(profile.pi) : tmp_org.find('.person-org-pi').hide();
+    // tmp_org.find('.person-org-pi').text(profile.pi);
+    // console.log(profile.pi, tmp_org.find('.person-org-pi'));
+    profile.pi != '' ? tmp_org.find('.person-org-pi').text(profile.pi) : tmp_org.find('.person-org-pi').hide();
 
     tmp_host.find('.host-orgs').append(tmp_org);
   });
@@ -162,20 +203,60 @@ function render_host(host_profiles, host) {
 
 // add other stuff to phages
 function phage_process(phage_str) {
-  // console.log('process: ' + phage_str, /\(.*?\)/g.test(phage_str))
   return phage_str.replace(/\(.*?\)/g,"<span class='variant'>$&</span>");
-  // return phage_str.replace(/\(.*?\)/g,"<span class='var'"+/\(.*?\)/g+"</span>");
-  // find variants and add a span around them
-  // phage_arr.forEach(function(phage,i){
-    // phage_arr[i] = phage.replace(/\(.*?\)/g,"<span class='var'"+/\(.*?\)/g+"</span>")
-    // console.log('>> ', phage_arr[i])
-  // });
 }
 
 
 
 
 
+
+
+
+// convert raw data to org-centric data
+function convert_orgs(data) {
+  /*
+    this setup will have duplicate profiles but that's ok
+    in future these will be references to an index
+
+    orgs = {
+      "Org name": {
+          "phageHost": [
+            profile
+          ],
+          profiles: [
+          ]
+        }
+    }
+  */
+  var orgs = {};
+  data.forEach(function(profile) {
+    if(profile.system.published != false) {
+      if(typeof(orgs[profile.org]) != 'undefined') {
+        orgs[profile.org].profiles.push(profile) // have to convert data from
+      } else {
+        orgs[profile.org] = {profiles: [profile]};
+      }
+    }
+  })
+
+  Object.keys(orgs).forEach(function(org, i) {
+    // get hosts for eaach org
+    // org.profiles.forEach(function(profile) {
+    console.log(orgs[org]);
+    var hosts = convert_hosts(orgs[org].profiles);
+    orgs[org]['hosts'] = hosts;
+    console.log(hosts);
+    // })
+  });
+  return orgs;
+}
+
+
+
+
+// convert raw data to host-centric data
+// input: profile array
 function convert_hosts(data) {
   /*
     this setup will have duplicate profiles but that's ok
@@ -189,7 +270,6 @@ function convert_hosts(data) {
   data.forEach(function(profile) {
     // look through phages, add the profile to phages obj
     // if !exist add profile to a new phages obj
-  // console.log('host convert data: ', convert_item(profile))
     if(profile.system.published != false) {
       profile.phages.forEach(function(phage) {
         // console.log('convert_hosts profile:', profile)
@@ -235,6 +315,7 @@ function convert_hosts(data) {
 // make copyable
 // return json obj of array of item objects
 function convert_profile(item) {
+  console.log('Convert Profile: ', item)
   var item_data = {
     timestamp: item[0],
     name: item[2],
@@ -256,11 +337,11 @@ function convert_profile(item) {
   if (item[7] !== '') {
     item_data.system['profile_str'] = item[7];
   }
+  return item_data;
 }
 function convert(data_raw) {
-  // console.log('... converting ...')
   var data_array = [];
-  // console.log('...converting...', data_raw);
+  console.log('Converting Raw: ', data_raw);
 
 
   // check for duplicates against data_site
@@ -282,9 +363,8 @@ function convert(data_raw) {
     7:"Scholar Profiles"
     8:"Bacterial pathogens for which you could provide phages"
   */
-  for(i=1; i<data_raw.length; i++) {
-    
-    // var item = data_raw[i];
+  for(i=0; i<data_raw.length; i++) {
+    console.log(data_raw[i])
     data_array.push(convert_profile(data_raw[i]));
   }
   return {raw: data_array};

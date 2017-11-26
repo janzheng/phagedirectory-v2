@@ -6,6 +6,27 @@
 var data = {
    "raw": [
       {
+         "timestamp": "Timestamp",
+         "name": "Full Name",
+         "role": "Role or Position",
+         "org": "Organization",
+         "pi": "Principal Investigator",
+         "profiles": {
+            "twitter": "Twitter Handle",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Bacterial pathogens for which you could provide phages"
+         ],
+         "system": {
+            "published": false,
+            "notes": "",
+            "profile_str": "Scholar Profiles"
+         }
+      },
+      {
          "timestamp": "2017/11/18 2:53:55 AM EST",
          "name": "Mireille Ansaldi",
          "role": "Principal Investigator",
@@ -122,7 +143,8 @@ var data = {
          "timestamp": "2017/11/19 12:55:22 AM EST",
          "name": "Rachit Agarwal",
          "role": "Assistant Professor",
-         "org": "Indian Institute of Science, Bangalore, India",
+         "org": "Indian Institute of Science",
+         "location": "Bangalore, India",
          "pi": "Rachit Agarwal",
          "profiles": {
             "twitter": "@Rachit_Agarwal",
@@ -318,7 +340,7 @@ var data = {
          "timestamp": "2017/11/21 3:35:39 PM EST",
          "name": "John Dennehy",
          "role": "Principal Investigator",
-         "org": "Queens College, CUNY ",
+         "org": "Queens College, CUNY",
          "pi": "John Dennehy ",
          "profiles": {
             "twitter": "@DrJDennehy",
@@ -334,7 +356,7 @@ var data = {
          ],
          "system": {
             "published": true,
-            "notes": "",
+            "notes": ""
          }
       },
       {
@@ -359,11 +381,74 @@ var data = {
             "published": true,
             "notes": ""
          }
+      },
+      {
+         "timestamp": "2017/11/22 7:57:08 AM EST",
+         "name": "Dr. Kristin Parent",
+         "role": "Assistant Professor",
+         "org": "Michigan State University ",
+         "pi": "@Phage4lyfe",
+         "profiles": {
+            "twitter": "@Phage4lyfe",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Shigella",
+            "Salmonella",
+            "Escherichia coli"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/24 8:25:03 PM EST",
+         "name": "Daria Van Tyne",
+         "role": "Postdoc",
+         "org": "Harvard Medical School",
+         "pi": "Michael Gilmore",
+         "profiles": {
+            "twitter": "@DariaVanTyne",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Enterococcus"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/25 9:38:34 PM EST",
+         "name": "Janis Doss",
+         "role": "Ph.D. Candidate",
+         "org": "Old Dominion University",
+         "pi": "David Gauthier",
+         "profiles": {
+            "twitter": "@Janis0616",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": "http://www.researchgate.net/profile/janis_doss"
+         },
+         "phages": [
+            "Mycobacterium marinum",
+            "mycobacterium fortuitum",
+            "mycobacterium chelonae"
+         ],
+         "system": {
+            "published": true,
+            "notes": "",
+            "profile_str": "www.linkedin.com/in/janisdoss/ "
+         }
       }
    ]
 }
-
-
 
 
 

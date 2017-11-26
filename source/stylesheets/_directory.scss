@@ -381,6 +381,24 @@ $directory-font-larger: $font-large;
   .directory-person-org-pi {
     // padding-bottom: $size-half;
   }
+.org-host {
+  & + .org-host {
+    margin-top: $size-base;
+  }
+
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  grid-gap: $size-base;
+  margin-top: $size-half;
+
+  .directory-card-title-container  {
+    padding: 0;
+  }
+  .directory-host {
+    margin: 0;
+  }
+}
 
 
 
