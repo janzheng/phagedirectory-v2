@@ -485,14 +485,38 @@ var data = {
          ],
          "system": {
             "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/28 12:45:00 AM EST",
+         "name": "Rob Edwards",
+         "role": "Professor",
+         "org": "San Diego State University",
+         "pi": "Me",
+         "profiles": {
+            "twitter": "@linsalrob",
+            "scholar": "https://scholar.google.com/citations?user=e7fvl1kAAAAJ&hl=en",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Acinetobacter",
+            "Bacteroides",
+            "Clostridium",
+            "Collinsella",
+            "Dorea",
+            "Enterococcus",
+            "Parabacteroides",
+            "Ruminococcaceae"
+         ],
+         "system": {
+            "published": true,
             "notes": "",
          }
       }
    ]
 }
-
-
-
 
 
 
