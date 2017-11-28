@@ -56,7 +56,7 @@ var data = {
       {
          "timestamp": "2017/11/18 4:14:15 AM EST",
          "name": "Dr. Anne Chevallereau",
-         "role": "Postdoctoral fellow",
+         "role": "Postdoctoral Fellow",
          "org": "University of Exeter ",
          "pi": "Dr Edze Westra",
          "profiles": {
@@ -407,7 +407,7 @@ var data = {
       {
          "timestamp": "2017/11/24 8:25:03 PM EST",
          "name": "Daria Van Tyne",
-         "role": "Postdoc",
+         "role": "Postdoctoral Fellow",
          "org": "Harvard Medical School",
          "pi": "Michael Gilmore",
          "profiles": {
@@ -420,7 +420,7 @@ var data = {
             "Enterococcus"
          ],
          "system": {
-            "published": true,
+            "published": false,
             "notes": ""
          }
       },
@@ -438,19 +438,58 @@ var data = {
          },
          "phages": [
             "Mycobacterium marinum",
-            "mycobacterium fortuitum",
-            "mycobacterium chelonae"
+            "Mycobacterium fortuitum",
+            "Mycobacterium chelonae"
          ],
          "system": {
             "published": true,
             "notes": "",
             "profile_str": "www.linkedin.com/in/janisdoss/ "
          }
+      },
+      {
+         "timestamp": "2017/11/24 3:08:47 PM EST",
+         "name": "Daria Van Tyne",
+         "role": "Postdoctoral Fellow",
+         "org": "Harvard Medical School",
+         "pi": "",
+         "profiles": {
+            "twitter": "@DariaVanTyne",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Enterococcus faecalis"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/27 7:49:36 PM EST",
+         "name": "Sarah Doore",
+         "role": "Postdoctoral Fellow",
+         "org": "Michigan State University",
+         "pi": "Kristin Parent (@phage4lyfe)",
+         "profiles": {
+            "twitter": "@virus_husbandry",
+            "scholar": "",
+            "orcid": "0000-0002-7672-2355",
+            "researchgate": ""
+         },
+         "phages": [
+            "Shigella species",
+            "Citrobacter freundii"
+         ],
+         "system": {
+            "published": true,
+            "notes": "",
+         }
       }
    ]
 }
-
-
 
 
 
