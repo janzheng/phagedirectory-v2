@@ -405,26 +405,6 @@ var data = {
          }
       },
       {
-         "timestamp": "2017/11/24 8:25:03 PM EST",
-         "name": "Daria Van Tyne",
-         "role": "Postdoctoral Fellow",
-         "org": "Harvard Medical School",
-         "pi": "Michael Gilmore",
-         "profiles": {
-            "twitter": "@DariaVanTyne",
-            "scholar": "",
-            "orcid": "",
-            "researchgate": ""
-         },
-         "phages": [
-            "Enterococcus"
-         ],
-         "system": {
-            "published": false,
-            "notes": ""
-         }
-      },
-      {
          "timestamp": "2017/11/25 9:38:34 PM EST",
          "name": "Janis Doss",
          "role": "Ph.D. Candidate",
@@ -512,9 +492,140 @@ var data = {
          ],
          "system": {
             "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/28 12:00:54 PM EST",
+         "name": "James Gurney",
+         "role": "Postdoctoral Fellow",
+         "org": "Georgia Institute of Technology",
+         "pi": "Sam Brown",
+         "profiles": {
+            "twitter": "@jamesrgurney",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Pseudomonas aeruginosa"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/28 1:37:15 PM EST",
+         "name": "Joseph Kreitz",
+         "role": "Undergraduate",
+         "org": "Duke University",
+         "pi": "Lingchong You",
+         "profiles": {
+            "twitter": "",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Burkholderia cepacia"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/24 8:25:03 PM EST",
+         "name": "Daria Van Tyne",
+         "role": "Postdoc",
+         "org": "Harvard Medical School",
+         "pi": "Michael Gilmore",
+         "profiles": {
+            "twitter": "@DariaVanTyne",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Enterococcus"
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/29 12:45:18 AM EST",
+         "name": "Randall DeJong",
+         "role": "Professor",
+         "org": "Calvin College",
+         "pi": "",
+         "profiles": {
+            "twitter": "@RandallJDeJong",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Mycobacterium smegmatis",
+            "Gordonia terrae",
+            "Agrococcus sp.",
+            "Citrobacter sp.",
+            "Enterobacter sp."
+         ],
+         "system": {
+            "published": true,
+            "notes": ""
+         }
+      },
+      {
+         "timestamp": "2017/11/29 9:21:13 AM EST",
+         "name": "Abbas Soleimani Delfan",
+         "role": "Graduate Student",
+         "org": "University of Isfahan",
+         "pi": "",
+         "profiles": {
+            "twitter": "",
+            "scholar": "https://scholar.google.com/citations?user=O2ALfG4AAAAJ&hl=en",
+            "orcid": "",
+            "researchgate": ""
+         },
+         "phages": [
+            "Escherichia coli",
+            "Klebsiella pneumoniae",
+            "Klebsiella oxytoca",
+            "Enterococcus faecalis",
+            "Pseudomonas aeruginosa"
+         ],
+         "system": {
+            "published": true,
             "notes": "",
          }
-      }
+      },
+      {
+         "timestamp": "2017/11/29 10:19:46 AM EST",
+         "name": "Adriana Hernandez",
+         "role": "Ph.D Candidate",
+         "org": "Texas A&M University | Center for Phage Technology",
+         "pi": "Ryland Young",
+         "profiles": {
+            "twitter": "@adricarosmile",
+            "scholar": "",
+            "orcid": "",
+            "researchgate": "https://www.researchgate.net/profile/Adriana_Carolina_Hernandez2"
+         },
+         "phages": [
+            "Klebsiella pneumoniae",
+            "Acinetobacter baumannii",
+            "Citrobacter freundii"
+         ],
+         "system": {
+            "published": true,
+            "notes": "",
+            "profile_str": ""
+         }
+      },
    ]
 }
 

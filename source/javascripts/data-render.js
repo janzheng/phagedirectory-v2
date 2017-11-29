@@ -33,14 +33,14 @@ function render_raw(profiles) {
     render_profile(item);
   });
 
-  // render orgs
-  var orgs = convert_orgs(profiles.raw);
-  console.log('>> orgs', orgs)
-  $('.org-list').html('');
-  Object.keys(orgs).forEach(function(org) {
-    // console.log(host + ':',hosts[host]);
-    render_orgs(orgs[org], org); 
-  });
+  // render orgs / not really useful right now
+  // var orgs = convert_orgs(profiles.raw);
+  // console.log('>> orgs', orgs)
+  // $('.org-list').html('');
+  // Object.keys(orgs).forEach(function(org) {
+  //   // console.log(host + ':',hosts[host]);
+  //   render_orgs(orgs[org], org); 
+  // });
 
   // render hosts
   var hosts = convert_hosts(profiles.raw);
@@ -315,7 +315,7 @@ function convert_hosts(data) {
 // make copyable
 // return json obj of array of item objects
 function convert_profile(item) {
-  console.log('Convert Profile: ', item)
+  // console.log('Convert Profile: ', item)
   var item_data = {
     timestamp: item[0],
     name: item[2],
@@ -379,11 +379,11 @@ function merge(data_raw, data_site) {
   // console.log('merge: ', data_raw, data_site);
 
   // data_output.splice(0, 1); // get rid of the first line
-  for(i=1; i<data_raw.length; i++) {
+  for(i=0; i<data_raw.length; i++) {
     // first item in data is always timestamp
     data.raw.forEach(function(item) {
       if (item.timestamp == data_raw[i][0]) {
-        // console.log('dupe found: ', data_raw[i][0] );
+        console.log('Dupe found: ', data_raw[i] );
         // data_raw = data_raw.slice(0,i) + data_raw.slice(i+1,data_raw.length);
         data_raw.splice(i, 1);
       }
