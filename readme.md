@@ -1,6 +1,6 @@
 
 
-# The Phage Directory
+# Phage Directory
 
 Visit us at [phage.directory](http://phage.directory).
 
