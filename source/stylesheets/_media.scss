@@ -33,6 +33,18 @@
 
   display: grid;
   grid-template-columns: 60px auto auto;
+
+  // our featured stories
+  &.--special {
+    .media-title {
+      color: $color-secondary;
+    }
+    &:hover {
+      .media-title {
+        color: $color-main;
+      }
+    }
+  }
 }
 
 .media-title {
