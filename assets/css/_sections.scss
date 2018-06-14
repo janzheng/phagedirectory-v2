@@ -1,0 +1,113 @@
+
+.Header {
+  a {
+    font-size: $size-larger;
+  }
+  .nuxt-link-exact-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+  .Header-orgs.nuxt-link-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+}
+
+.Footer {
+  a {
+    border: 0;
+    // font-weight: 900;
+    // color: $color-body;
+
+    &:hover {
+      // @extend %ease;
+      // color: $color-hover;
+      // padding-left: $offset*3;
+      // &:after {
+
+      //   left: $offset *3;
+      // }
+    }
+  }
+}
+
+
+
+
+.DetailsPage {
+  .DetailsPage-image-container {
+  }
+  .DetailsPage-type {
+    padding-bottom: $size-base;
+  }
+  .DetailsPage-image {
+    max-height: 50px;
+    width: auto;
+  }
+  .DetailsPage-title {
+    padding-top: $size-base;
+    // color: $color-black;
+  }
+  .DetailsPage-tags {
+    // margin-bottom: $size-2;
+    ._tag {
+      background-color: $color-white;
+    }
+  }
+  .DetailsPage-sidebar {
+    @extend %md-sans_serif;
+
+    a {
+      text-decoration: none !important;
+      border: 0;
+    }
+    .DetailsPage-sidebar-header {
+      font-size: 12px;
+    }
+  }
+  .DetailsPage-link {
+    font-size: $font-large;
+  }
+  .DetailsPage-lineheader {
+    font-weight: bold;
+  }
+  .DetailsPage-small {
+    font-size: $font-small;
+    line-height: $font-small + 6px;
+    font-style: italic;
+    // @extend %font-serif;
+  }
+  .DetailsPage-no_paragraphs {
+    p {
+      display: inline;
+      margin: 0;
+    }
+  }
+  .DetailsPage-sans_serif {
+    @extend %md-sans_serif;
+  }
+  .DetailsPage-addWork {
+    border: solid $color-ui $border-thin;
+    border-radius: $radius;
+    padding: $size-base;
+  }
+  .DetailsPage-application {
+    // position: sticky;
+    // top: $size-base;
+  }
+  .DetailsPage-exercise-desc {
+    background-color: $color-main;
+    padding: $size-base;
+
+  }
+}
+
+
+
+
+
+
+
+
+
+

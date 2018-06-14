@@ -1,0 +1,29 @@
+
+$color-yellow: #FFDF0A;
+$color-gray: #565656;
+
+
+$color-main: $color-yellow;
+$color-secondary: $color-gray;
+
+$color-active: $color-main;
+
+$color-body: $color-secondary;
+// $color-hover: $color-main;
+// $color-active: $color-main;
+
+
+$offset: 5px;
+
+@import '../../node_modules/coeur/stylecoeur/index.scss';
+
+
+%font-mono,
+._font-mono {
+  font-family: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace;
+} ._font-mono, ._font-code { @extend %font-mono; }
+
+%font-display,
+._font-display {
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
