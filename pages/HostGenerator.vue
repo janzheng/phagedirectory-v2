@@ -1,37 +1,96 @@
 <template>
 
-  <article class="NameGenerator container">
-    <Header/>
+  <div class="Wrapper">
+    <article class="NameGenerator container">
+      <Header/>
 
-    <section class="narrow copy">
+      <section class=" copy">
 
-    <h1 class="Orgs-title title">
-      Host Generator
-    </h1>
+      <h1 class="Orgs-title title">
+        Host Generator 
+        <!-- {{this['😍']}} -->
+      </h1>
 
-    This is an internal tool, but anyone is welcome to use it.
+      This is an internal tool, but anyone is welcome to use it. It generates the Host genus and species names for the complete Hosts table
 
 
-    Note to self: 
-    
-    airtable doesn't do table joining, so this code is in lieu of that.
-    It combines the tables genus (Escherichia) and its species (coli) and generates all combinations like (Escherichia coli)
+      Note to self: 
 
-    Currently it does NOT write to DB, so you have to do that part manually. Don't overwrite current DB values as it'll most like remove current links from Orgs etc.
+      airtable doesn't do table joining, so this code is in lieu of that.
+      It combines the tables genus (Escherichia) and its species (coli) and generates all combinations like (Escherichia coli)
 
-    <div>
-      <ul>
-        <li v-for="host of joinGenus" :key="host">
-          {{host}}
-        </li>
-      </ul>
-    </div>
+      Currently it does NOT write to DB, so you have to do that part manually. Don't overwrite current DB values as it'll most like remove current links from Orgs etc.
 
-    <hr/>
 
-    </section>
+
+      <hr/>
+
+      <div>
+        New/Unique Generated Hosts:
+        <table class="_margin-top">
+          <tr v-for="host of newHosts" :key="host.id">
+            <td v-for="field of Object.keys(host)" :key="host[field]">
+              {{host[field]}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <hr/>
+
+      <div class="_margin-top-2">
+        Hybrid List
+        <table class="_margin-top" ref="copyarea" @click="copyText()" contenteditable="true">
+          <tr v-for="host of hybridHosts" :key="host.fields.Name">
+            <td>{{host.fields.Name}}</td>
+            <td>{{getLinked(host.fields.HostGenus, 'HostGenus')}}</td>
+            <td>{{getLinked(host.fields.HostSpecies, 'HostSpecies')}}</td>
+            <td>{{getLinked(host.fields.People, 'People')}}</td>
+            <!-- doesn't work b/c can't guarantee order of tables in the object :(
+            <td v-for="field of Object.keys(host.fields)" :key="field">
+              <span v-if="!Array.isArray(host.fields[field])">{{host.fields[field]}}</span>
+              <span v-if="Array.isArray(host.fields[field])">{{getLinked(host.fields[field], field)}}</span>
+            </td> -->
+          </tr>
+          <tr v-for="host of newHosts" :key="host.id">
+            <td v-for="field of Object.keys(host)" :key="host[field]">
+              {{host[field]}}
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <hr/>
+
+      <div class="_margin-top-2">
+        Generated Host List
+        <table class="_margin-top">
+          <tr v-for="host of genHostNames" :key="host.Name">
+            <td v-for="field of Object.keys(host)" :key="host[field]">
+              {{host[field]}}
+            </td>
+          </tr>
+        </table>
+      </div> -->
+
+
+  <!-- 
+      <div>
+        Current Host List
+        <table class="_margin-top">
+          <tr v-for="host of hosts" :key="host">
+            <td>{{host.fields.Name}}</td><td>{{getPersons(host.fields.People)}}</td>
+          </tr>
+        </table>
+      </div> -->
+
+
+      <hr/>
+
+      </section>
+    </article>
     <Footer/>
-  </article>
+  </div>
 
 </template>
 
@@ -56,9 +115,12 @@ export default {
 
   data: function () {
     return {
-      family: this.$store.state.HostFamily,
-      genus: this.$store.state.HostGenus,
-      species: this.$store.state.HostSpecies,
+      HostFamily: this.$store.state.HostFamily,
+      HostGenus: this.$store.state.HostGenus,
+      HostSpecies: this.$store.state.HostSpecies,
+      People: this.$store.state.People,
+      Hosts: this.$store.state.Hosts,
+      '😍': '😍😍😍😍😍',
     }
   },
 
@@ -87,19 +149,87 @@ export default {
       }
       return obj
     },
+    getPersons: function(person) {
+      if(this.people && person) {
+        const _people = getCytosis().getLinkedRecords(person, this.people)
+        // console.log('skills:' , skills, this.skills, _skills)
+        return _people.join(', ')
+      }
+    },
+    getLinked: function(linkedRecords, table) {
+      // console.log('getlinked:' , linkedRecords, table, this[table])
+      if(linkedRecords && this[table]) {
+        const linked = getCytosis().getLinkedRecords(linkedRecords, this[table])
+        // console.log('skills:' , skills, this.skills, _skills)
+        return linked.join(', ')
+      }
+    },
+    copyText: function() {
+      // console.log(this.$refs.copyarea.innerText)
+      // this.$refs.copyarea.select();
+      const txt = document.createElement("textarea")
+      txt.innerText = this.$refs.copyarea.innerText
+      txt.select();
+      document.execCommand('copy');
+    }
   },
 
   computed: {
-    joinGenus () {
+    genHostNames () {
       let result = []
-      for (let gen of this.genus ) {
-        console.log(' ehh : ' , gen.fields['HostSpecies'], this.species)
-        let species = getCytosis().getLinkedRecords(gen.fields['HostSpecies'], this.species, true)
+      for (let gen of this.HostGenus ) {
+        let species = getCytosis().getLinkedRecords(gen.fields['HostSpecies'], this.HostSpecies, true)
         for (let spe of species ) {
-          result.push(`${gen.fields.Name} ${spe.fields.Name}`)
+          const obj = {
+            Name: `${gen.fields.Name} ${spe.fields.Name}`,
+            HostGenus: gen.fields.Name,
+            HostSpecies: spe.fields.Name,
+            People: ' ',
+            // Notes: '(generated by HostGenerator)'
+          }
+          result.push(obj)
+          // result.push(`${gen.fields.Name} ${spe.fields.Name}`)
         }
       }
       return result
+    },
+    newHosts () {
+      let curHosts = this.Hosts // current hosts
+      // console.log(' oooh : ' , curHosts)
+      const genHosts = this.genHostNames
+      // DO NOT TOUCH HOSTS or it'll get out of sync with the generated list!
+      // generate new Genus/Species names; should include all names in HostNames (unless you screwed with Hosts)
+
+      if (curHosts.length == genHosts.length) {
+        console.log('no new hosts found')
+        return []
+      }
+
+      let results = []
+      for (let host of genHosts) {
+        // console.log('host:' , host)
+        let res = curHosts.find( (genHost) => {
+          // console.log('genHost:', host, genHost.fields.Name, host == genHost.fields.Name)
+          return (host.Name == genHost.fields.Name)
+          return true
+        })
+        if(!res) {
+          // push not found names onto results list
+          results.push(host)
+        }
+      }
+      return results
+    },
+    hybridHosts () {
+      let result = []
+      let hosts = this.Hosts // current hosts
+      // hosts.concat(this.newHosts) // just tie the two tables together in view
+      // need to push Name object onto every host :\
+      for (let host of hosts) {
+        // if(host.fields.People) // don't add empty name to an empty field
+          host.fields['People'] = host.fields['People'] ? host.fields['People'] : '&'
+      }
+      return hosts
     },
   }
 

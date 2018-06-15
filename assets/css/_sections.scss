@@ -1,4 +1,18 @@
 
+// can't believe these actually work
+// .😍 {
+//   background-color: pink !important;
+// }
+// .♥ {
+//   background-color: green;
+// }
+
+// article wraps all the content
+article {
+  background-color: $color-bg;
+  position: relative;
+}
+
 .Header {
   a {
     font-size: $size-larger;
@@ -14,10 +28,11 @@
 }
 
 .Footer {
+  background-color: $color-secondary;
   a {
     border: 0;
     // font-weight: 900;
-    // color: $color-body;
+    color: $color-bg;
 
     &:hover {
       // @extend %ease;

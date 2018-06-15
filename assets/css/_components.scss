@@ -122,18 +122,16 @@
 }
 
 
-.buildatl {
-  @extend h3;
-  // font-weight: 300;
-  @extend %font-display;
-  .build {
-    // font-style: italic;
-    padding-right: $size-base/4;
-  }
-  .awesome {
+
+.phagedirectory-logo--sm {
+  width: 45px;
+  // height: 100%;
+  vertical-align: middle;
+  padding-bottom: 4px;
+  padding-right: $size-half;
+}
+.phagedirectory {
+  span {
     font-weight: 700;
-  }
-  &.--h1 {
-    @extend h1;
   }
 }
