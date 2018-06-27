@@ -100,7 +100,6 @@ import Cytosis from 'cytosis'
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-import Message from '~/components/Message.vue'
 
 import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
 
@@ -110,7 +109,6 @@ export default {
   components: {
     Header,
     Footer,
-    Message
   },
 
   data: function () {
@@ -125,10 +123,11 @@ export default {
   },
 
   async asyncData({ app, store, params }) {
-    let cytosis = await fetchCytosis(store, params)
-    // return {
-    //   cytosis: cytosis
-    // }
+    let cytosis = store.cytosis ? store.cytosis : await fetchCytosis(store, params)
+    console.log('store cytosis: ' , this.$store)
+    return {
+      cytosis: cytosis
+    }
   },
 
   mounted: function () {

@@ -1,6 +1,10 @@
-# buildatl
+# Phage Directory
 
-> Nuxt.js project
+This is the Phage Directory core project. Built on Vue/Nuxt
+
+
+
+
 
 ## Build Setup
 

@@ -1,0 +1,36 @@
+
+.SideNav._sidebar {
+  padding-top: $size-2;
+  padding-left: 0;
+
+  overflow-y: inherit;
+  overflow-x: inherit;
+  height: auto;
+  min-width: auto;
+
+  a {
+    display: block;
+    padding-left: $size-2;
+    padding-right: $size-2;
+    margin-right: 0;
+    margin-bottom: $size-base;
+    font-size: $font-large;
+    text-decoration: none;
+
+    &.nuxt-link-exact-active {
+      font-weight: $font-bold;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  ._sidebar-content {
+    position: sticky;
+    // top: $size-2;
+    top: $size-base;
+    // background-color: $color-ui-light;
+    padding-top: 0;
+    padding-bottom: $size-base;
+    text-align: right;
+  }
+}

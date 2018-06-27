@@ -82,7 +82,7 @@ const createStore = () => {
         // USE THIS SPARINGLY, most likely a state obj doesn't exist b/c of typo or race condition
         // if(!silent)
         // debug('Store.updateCreate', 'Creating', payload, state)
-        console.log('UPDATECREATE', payload)
+        // console.log('UPDATECREATE', payload)
 
         // iterator 
         Object.keys(payload).map((name, i) => {
@@ -107,6 +107,11 @@ const createStore = () => {
           debug('Store.clear', 'Store clear failed; object doesn’t exist for', name)
       },
 
+
+      // specifically overwrites the cytosis object
+      setCytosis (state, cytosis) {
+        state['cytosis'] = cytosis
+      }
     },
 
     actions: {

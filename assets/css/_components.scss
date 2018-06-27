@@ -1,14 +1,28 @@
 
 
-.Message {
-  // for nonprofits or professionals
-  & > div {
-    background: $color-main;
-    padding: $size-base;
-    padding-bottom: $size-2;
-  }
-  .Message-title {
-  }
+
+@import '/components/blog';
+@import '/components/sidenav';
+
+
+
+
+
+
+.Policy {
+  background: $color-phdir;
+  color: $color-gray;
+  border-radius: $radius;
+
+  padding: $size-base;
+  margin-bottom: $size-base;
+
+  // position: fixed;
+  position: sticky;
+  left: $size-base;
+  z-index: $z-popup;
+  bottom: $size-half;
+  width: calc(100% - #{$size-2});
 }
 
 .Note {
@@ -17,81 +31,19 @@
 }
 
 
-._dash {
-  border-radius: $radius;
-  padding: $size-2;
-  background-color: $color-ui-light;
+
+
+
+
+
+
+
+._content {
+  padding: 0;
   margin-top: $size-2;
-  margin-bottom: $size-2;
-  // @extend %width-content-paragraph-narrow;
-
-  &.--transparent {
-    background: $color-ui-lighter;
-  }
-  &.--half {
-    padding: $size-base;
-    margin-bottom: $size-half;
-  }
 }
 
 
-
-
-// extends coeur cards
-._card {
-  // box-shadow: none; // drop the shadow
-  padding: $size-base;
-  padding-top: $size-2;
-
-  &:hover {
-    background-color: $color-ui-lighter;
-  }
-
-  a {
-    border: none !important;
-    text-decoration: none !important;
-  
-    // to fill the entire card
-    display: grid;
-    grid-template-rows: auto auto;
-    height: 100%;
-  }
-
-  ._card-lower {
-    @extend ._align-bottom;
-  }
-  ._card-container {
-    padding-top: $size-base;
-    padding-bottom: $size-base;
-  }
-  ._card-image {
-    padding-bottom: $size-half;
-    max-height: 50px;
-    width: auto;
-  }
-  ._card-type,
-  ._card-duration {
-    // font-size: $font-small;
-    @extend %font-serif;
-    font-style: italic;
-  }
-  ._card-title {
-    font-size: $font-large;
-    line-height: $font-large + 5px;
-    font-weight: 700;
-    letter-spacing: -0.3px;
-    // @extend %font-bold;
-    padding-top: $size-base;
-    padding-bottom: $size-half;
-  }
-  ._card-description {
-    height: 70px;
-    overflow: ellipsis; 
-  }
-  ._card-tags {
-    margin-bottom: $size-half;
-  }
-}
 
 ._tag {
   font-size: $size-m1;
@@ -135,3 +87,6 @@
     font-weight: 700;
   }
 }
+
+
+

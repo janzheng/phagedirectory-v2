@@ -18,26 +18,17 @@ export default {
 
   data: function () {
     return {
-      projects: this.$store.state.Projects,
-      content: this.$store.state.Content,
-      orgs: this.$store.state.Organizations,
-      tags: this.$store.state.Tags,
-      blog: this.$store.state.Blog,
     }
   },
 
-  async fetch({ store, params }) {
-    return fetchCytosis(store, params)
-  },
-
-  head () {
-    return {
-      title: this.title,
-      meta: [
-        { hid: 'description', name: 'description', content: 'My custom description' }
-      ]
-    }
-  },
+  // head () {
+  //   return {
+  //     title: this.title,
+  //     meta: [
+  //       { hid: 'description', name: 'description', content: 'My custom description' }
+  //     ]
+  //   }
+  // },
 
   mounted: function () {
   },

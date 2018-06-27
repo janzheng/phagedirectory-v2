@@ -1,9 +1,9 @@
 <template>
 
-  <ContentFrame class="About container">
+  <ContentFrame class="Alerts container">
     <section class="narrow copy">
-      <h1 class="About-title title">
-        About
+      <h1 class="Alerts-title title">
+        Alerts
       </h1>
 
 

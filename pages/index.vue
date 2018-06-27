@@ -1,21 +1,21 @@
 <template>
 
-  <article class="Home Projects container">
+  <div class="Home container">
     <Header/>
 
     <section class="_center copy">
 
-      <div class="Home-title _padding-bottom">
+      <!-- <div class="Home-title _padding-bottom">
         <div class="buildatl --h1 ">
           <span class="_font-bold">Make a <span class="_links-bg">difference</span> to </span> 
           <img class="logo-sm" src="~/static/atl.png"/>
         </div>
         <div class="subtitle" v-html="$md.render(getContent('Home-Intro'))">
         </div>
-      </div>
+      </div> -->
 
     </section>
-
+<!-- 
     <section class="max">
       <div class="_card-container _grid-3">
         <div class="_card" v-for="proj in projects" v-if="proj.fields.isPublished" :key="proj.id">
@@ -59,13 +59,11 @@
         </div>
       </div>
     </section>
-
-    <section class="narrow copy">
-      <Message/>
-    </section>
-
+ -->
+ 
+    <Policy/>
     <Footer/>
-  </article>
+  </div>
 </template>
 
 
@@ -75,9 +73,10 @@
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-import Message from '~/components/Message.vue'
+import Policy from '~/components/Policy.vue'
 
-import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
+// import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
+import { cytosis } from '~/assets/helpers.js'
 
 
 export default {
@@ -85,49 +84,38 @@ export default {
   components: {
     Header,
     Footer,
-    Message
+    Policy
   },
 
   data: function () {
     return {
-      projects: this.$store.state.Projects,
-      content: this.$store.state.Content,
-      orgs: this.$store.state.Organizations,
-      skills: this.$store.state.Skills,
-      tags: this.$store.state.Tags,
-      blog: this.$store.state.Blog,
     }
   },
 
-  async fetch({ store, params }) {
-    return fetchCytosis(store, params)
+  async fetch({ env, store, params }) {
+    cytosis(env, store);
+    // return fetchCytosis(store, params)
   },
 
   mounted: function () {
-    const _this = this
-    this.$nextTick(function () {
-      // Code that will run only after the
-      // entire view has been rendered
-      console.log('Data Loaded: ', _this)
-    })
   },
 
   methods: {
-    getContent: function(findStr) {
-        console.log('gC:', findStr, this.content)
-      let obj = ''
-      if(this.content) {
-        obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
-      }
-      return obj
-    },
-    getSkills: function(skills) {
-      if(this.skills && skills) {
-        const _skills = getCytosis().getLinkedRecords(skills, this.skills)
-        // console.log('skills:' , skills, this.skills, _skills)
-        return _skills
-      }
-    }
+    // getContent: function(findStr) {
+    //     console.log('gC:', findStr, this.content)
+    //   let obj = ''
+    //   if(this.content) {
+    //     obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
+    //   }
+    //   return obj
+    // },
+    // getSkills: function(skills) {
+    //   if(this.skills && skills) {
+    //     const _skills = getCytosis().getLinkedRecords(skills, this.skills)
+    //     // console.log('skills:' , skills, this.skills, _skills)
+    //     return _skills
+    //   }
+    // }
 
 
   }

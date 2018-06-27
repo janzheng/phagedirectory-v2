@@ -1,19 +1,48 @@
 
+
+//  Colors
+
 $color-phdir: #71EFF5;
+$color-teal: $color-phdir;
+$color-main: $color-phdir;
+
+$color-dull: #90D9DD;
+
+$color-yellow: #FCCB4C;
+$color-pink: #FA5486;
+
 $color-gray: #374F6A;
+$color-gray-light: #F0F0F0;
 
 
 $color-main: $color-phdir;
 $color-secondary: $color-gray;
 
 $color-active: $color-main;
+$color-link: $color-pink;
 
 $color-body: $color-secondary;
 // $color-hover: $color-main;
 // $color-active: $color-main;
 
+$sidebar-color-link: $color-pink;
 
+
+
+
+
+
+//   Measurements
 $offset: 5px;
+$z-popup: 100; // 
+
+
+
+
+
+
+
+
 
 @import '../../node_modules/coeur/stylecoeur/index.scss';
 
@@ -25,5 +54,6 @@ $offset: 5px;
 
 %font-display,
 ._font-display {
-  font-family: 'Playfair Display', 'Georgia', serif;
+  // font-family: 'Playfair Display', 'Georgia', serif;
+  @extend %font-sans;
 }

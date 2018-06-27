@@ -36,7 +36,7 @@
     </section>
 
     <section class="narrow copy">
-      <Message/>
+      <Policy/>
     </section>
 
     <Footer/>
@@ -48,7 +48,7 @@
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-import Message from '~/components/Message.vue'
+import Policy from '~/components/Policy.vue'
 
 import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
 
@@ -59,7 +59,7 @@ export default {
   components: {
     Header,
     Footer,
-    Message
+    Policy
   },
 
   // data () {

@@ -1,6 +1,11 @@
 
 // note: nuxt requires Node 8+ to run properly 
 
+
+
+
+
+
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
 // these are the default social sharing items
 // make sure to use the Head component for generated data
@@ -13,7 +18,7 @@ const site_color = '#374F6A';
 const site_title = 'Phage Directory';
 const site_description = 'Phage Directory curates a database of phage labs, phages, and host strains to advance research and phage therapy.';
 
-const site_ico = '/ico.png';
+const site_ico = '/ico_dull.png';
 const site_image = '/share_img.png';
 const site_search = 'index,follow';
 const site_author = 'Jan Zheng';
@@ -25,8 +30,8 @@ module.exports = {
   mode: 'spa', // 'universal'  — spa useful for airtable data updates; universal is faster
   env: {
     site_fb: site_fb,
-    cytosis_reader_api: 'keyAe6M1KoPfg25aO',
-    cytosis_base: 'appSCAap8SWbFRtu0',
+    airtable_api: 'keyXANccmXa0cr7ae', // < MASTER KEY, DO NOT UPLOAD 'keyAe6M1KoPfg25aO',
+    airtable_base: 'appSCAap8SWbFRtu0',
   },
 
   /*
@@ -205,7 +210,10 @@ module.exports = {
     preset: 'default',
     linkify: true,
     breaks: true,
-    injected: true
+    injected: true,
+    use: [
+      'markdown-it-attrs'
+    ]
   },
 
 
@@ -253,15 +261,47 @@ module.exports = {
 
   router: {
     extendRoutes (routes, resolve) {
+      // capsid should resolve anything from phages
+      // to people and orgs; easier w/ a uniform id resolver
       routes.push(
         {
-          name: 'org',
-          path: '/orgs/:id',
+          name: 'capsid',
+          path: '/d/:capsid',
           component: resolve(__dirname, 'pages/OrgPage.vue')
         },
         {
-          name: 'project',
-          path: '/projects/:id',
+          name: 'phages',
+          path: '/d/phages',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'hosts',
+          path: '/d/hosts',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'diseases',
+          path: '/d/diseases',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'antibiotics',
+          path: '/d/antibiotics',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'orgs',
+          path: '/d/orgs',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'labs',
+          path: '/d/labs',
+          component: resolve(__dirname, 'pages/ProjectPage.vue')
+        },
+        {
+          name: 'people',
+          path: '/d/people',
           component: resolve(__dirname, 'pages/ProjectPage.vue')
         },
         // {
@@ -269,11 +309,58 @@ module.exports = {
         //   path: '/projects/:id/apply',
         //   component: resolve(__dirname, 'pages/ApplyPage.vue')
         // },
+
+        // news alerts
+        {
+          name: 'alerts',
+          path: '/alerts/:id',
+          component: resolve(__dirname, 'pages/Alerts.vue')
+        },
+
+
+        // blog / news / 'viral' newsletter; resolves to generic Blog page
+        {
+          name: 'blog',
+          path: '/blog/:slug',
+          component: resolve(__dirname, 'pages/Blog.vue')
+        },
+        {
+          name: 'blog-alt',
+          path: '/news',
+          component: resolve(__dirname, 'pages/Blog.vue')
+        },
+        {
+          name: 'blog-slug',
+          path: '/news/:slug',
+          component: resolve(__dirname, 'pages/Blog.vue')
+        },
       )
-    }
+    },
+    // scrollBehavior(to, from, savedPosition) {
+    //   if (savedPosition) {
+    //     return savedPosition
+    //   } else {
+    //     let position = {}
+    //     if (to.matched.length < 2) {
+    //       position = { x: 0, y: 0 }
+    //     } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
+    //       position = { x: 0, y: 0 }
+    //     }
+    //     if (to.hash) {
+    //       position = { selector: to.hash }
+    //     }
+    //     return position
+    //   }
+    // }
+
   },
   generate: {
     fallback: true, // if you want to use '404.html'
-  }
+  },
 
 }
+
+
+
+
+

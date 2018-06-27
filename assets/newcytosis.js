@@ -146,7 +146,7 @@ import * as Airtable from 'airtable'
 // }
 
 
-let NewCytosis = {
+let Cytosis = {
   init: function(opts) {
 
     opts = opts || {};
@@ -635,7 +635,7 @@ Cytosis.configure = function(opts) {
   Cytosis.airtableBase = opts.airtableBase;         // airtable base (support multiple later)
 };
 
-export default NewCytosis
+export default Cytosis
 
 
 

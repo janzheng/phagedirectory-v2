@@ -1,25 +1,23 @@
 
 <template>
   <section class="Header container">
-    <div class="_grid-2 _align-vertically">
-      <div class="_center-xs">
-        <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/phagedirectory.png"/></router-link>
+    <div class="_grid-3-1 _align-vertically">
+      <div class="_grid-auto-1 _center-xs _align-vertically">
+        <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/phagedirectory.png"/></router-link> -->
+        <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/ico.png"/></router-link>
+
+        <div class="Header-left">
+          <router-link to='/' class="_margin-right-2 --border-none">Phages</router-link>
+          <router-link to='/' class="_margin-right-2 --border-none">Labs</router-link>
+          <span>Search search search</span>
+        </div>
       </div>
 
       <div class="_center-xs _right-sm">
-        <span class="_margin-right-2">
-          <router-link to='/' class="--border-none" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link>
-        </span>
-        <span class="_margin-right-2">
-          <router-link to='/orgs' class="Header-orgs --border-none">Orgs</router-link>
-        </span>
-        <span>
-          <router-link to='/about' class="--border-none">Mission</router-link>
-        </span>
+        <!-- <router-link to='/' class="--border-none _margin-right-2" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link> -->
+          <router-link to='/news' class="_margin-right-2 --border-none">News</router-link>
+        <a target="_blank" href="https://twitter.com/phagedirectory" class="">@PhageDirectory</a>
       </div>
-        <!-- <span><a href=""><i class="fa fas far fa-email"></i></a>hello@buildatl.com</span>
-        <span><a href=""><i class="fa fas far fa-twitter"></i></a>@buildatl</span>
-      </span> -->
     </div>
   </section>
 </template>
@@ -34,7 +32,10 @@
 <style lang="scss" scoped>
 
 .logo {
-  width: 250px;
+  position: relative;
+  // width: 60px;
+  width: 45px;
+  top: 3px;
   // height: 100%;
 }
 
