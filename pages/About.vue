@@ -16,6 +16,15 @@
       </div>
 
       <div class="About-profile _card">
+        <div class="" v-html="content('Content.about-jess')"></div>
+      </div>
+
+      <div class="About-profile _card">
+        <div class="" v-html="content('Content.about-jan')"></div>
+      </div>
+<!-- 
+
+      <div class="About-profile _card">
         <div class="_grid-1-3">
           <div class="profile-image">
             <img width="140" src="https://pbs.twimg.com/profile_images/634095676171816960/v2t4zcm5_400x400.jpg">
@@ -29,12 +38,7 @@
               <div>Microbiology and Biotechnology PhD, U of Alberta</div>
             </div>
             <div class="profile-contact">
-              <!-- <div> -->
-                <!-- <i class="fa fa-twitter _padding-right-half"></i> -->
-                <!-- <a href="https://twitter.com/JessicaSacher" target="_blank">@JessicaSacher</a> -->
-              <!-- </div> -->
               <div>
-                <!-- <i class="fa fa-envelope-o _padding-right-half"></i> -->
                 <a href="mailto:jessica@phage.directory" target="_blank">jessica@phage.directory</a>
               </div>
             </div>
@@ -62,12 +66,7 @@
               <div>Masters in Human-Computer Interaction, CMU</div>
             </div>
             <div class="profile-contact">
-              <!-- <div> -->
-                <!-- <i class="fa fa-twitter _padding-right-half"></i> -->
-                <!-- <a href="https://twitter.com/janistanian" target="_blank">@janistanian</a> -->
-              <!-- </div> -->
               <div>
-                <!-- <i class="fa fa-envelope-o _padding-right-half"></i> -->
                 <a href="mailto:jan@phage.directory" target="_blank">jan@phage.directory</a>
               </div>
             </div>
@@ -78,7 +77,7 @@
 
           In the past I've worked with companies and brands like Verizon Wireless, Cartoon Network, Coca-Cola, Microsoft, L'Oreal, and more to build and design digital products, and to improve product user experiences.
         </div>
-      </div>
+      </div> -->
 
 
     </section>
@@ -121,7 +120,7 @@ export default {
       let content = this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
       content = content || '' // the field could be null
       return this.$md.render(content)
-    }
+    },
   }
 
 }

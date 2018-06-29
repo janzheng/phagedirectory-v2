@@ -208,6 +208,8 @@ module.exports = {
 
   markdownit: {
     preset: 'default',
+    html: true,
+    typographer: true,
     linkify: true,
     breaks: true,
     injected: true,
@@ -341,6 +343,11 @@ module.exports = {
           name: 'questions',
           path: '/questions',
           component: resolve(__dirname, 'pages/Feedback.vue')
+        },
+        {
+          name: 'legal',
+          path: '/legal',
+          component: resolve(__dirname, 'pages/Policies.vue')
         },
       )
     },

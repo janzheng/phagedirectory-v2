@@ -4,6 +4,11 @@
     <div class="_margin-bottom">
       <slot></slot>
     </div>
+
+    <div class="AlertSignup-container">
+      <AlertSignup classes="footer" :description="true" />
+    </div>
+
     <Policy/>
     <Footer/>
   </div>
@@ -18,6 +23,7 @@ import VueScrollTo from 'vue-scrollto'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Policy from '~/components/Policy.vue'
+import AlertSignup from '~/components/AlertSignup.vue'
 
 export default {
 
@@ -26,7 +32,8 @@ export default {
   components: {
     Header,
     Footer,
-    Policy
+    Policy,
+    AlertSignup
   },
 
   // head () {
@@ -44,6 +51,7 @@ export default {
     const _this = this
     this.$nextTick(function () {
       this.$router.afterEach((r) => {
+        // console.log('router hash scroll') 
         if(_this.$route.hash)
           VueScrollTo.scrollTo(this.$route.hash, 500, {
            offset: -20
@@ -51,10 +59,12 @@ export default {
         return true
       })
 
-      if(_this.$route.hash)
+      if(_this.$route.hash) {
+        // console.log('-- hash scroll')
         VueScrollTo.scrollTo(this.$route.hash, 500, {
           offset: -20
         })
+      }
 
     })
   },

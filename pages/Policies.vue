@@ -4,9 +4,7 @@
     <!-- header -->
     <div class="_grid-1-5">
       <div></div>
-      <div>
-        <h1 class="Policies-title">Site Policies</h1>
-      </div>
+      <article class="narrow" v-html="content('Content.policies-intro')"></article>
     </div>
 
     <!-- body -->
@@ -14,14 +12,16 @@
 
       <div class="SideNav _sidebar">
         <div class="_sidebar-content">
-          <router-link href="#typography" to="#typography">Typography</router-link>
-          <router-link href="#forms" to="#forms">Forms</router-link>
+          <router-link to="#terms">Terms of Use</router-link>
+          <router-link to="#privacy">Privacy</router-link>
+          <router-link to="#alerts">Alerts</router-link>
+          <router-link to="#cookies">Cookies</router-link>
         </div>
       </div>
 
-      <div class="Policies-content">
+      <article class="Policies-content narrow">
         <div class="" v-html="content('Content.site-policy')"></div>
-      </div>
+      </article>
     </div>
 
   </ContentFrame>

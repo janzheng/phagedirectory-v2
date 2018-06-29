@@ -17,9 +17,9 @@
 
       <!-- margin-right is for avoiding the drift box -->
       <div class="Footer-right _center-xs">
-        <div class="_margin-bottom _right-sm _center-xs">
+        <!-- <div class="_margin-bottom _right-sm _center-xs">
         <AlertSignup classes="footer" />
-        </div>
+        </div> -->
 
         <div class="_margin-bottom-half _right-sm _center-xs">
           <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->

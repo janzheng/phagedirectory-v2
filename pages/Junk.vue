@@ -1,5 +1,5 @@
 <!-- test all kinds of junk here -->
-
+<!-- 
 <template>
 
   <ContentFrame class="Join container">
@@ -95,4 +95,4 @@ export default {
 <style lang="scss" scoped>
 
 </style>
-
+ -->

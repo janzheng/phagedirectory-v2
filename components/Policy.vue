@@ -3,7 +3,7 @@
 <template>
   <div class="Policy _grid-1-auto-xs _align-vertically" v-if="policy!='1.0.0'">
     <div class="">
-      We use cookies for site analytics, but we don’t track your personal data. Read our <router-link to="/policies">site policies</router-link>.
+      We use cookies for site analytics and customer service, but we don’t track your personal data. Read our <router-link to="/policies">site policies here</router-link>.
     </div>
 
     <div class="_right">

@@ -8,7 +8,6 @@
         <AlertSignup classes="_font-bold" />
       </div>
 
-
       <div class="Alerts-list">
         <div class="Alerts-item _card" v-for="alert of Alerts" :key="alert.fields.Name" v-if="alert.fields.isPublished" :class="alert.fields.Status">
           <div class="Alerts-status" >
@@ -17,7 +16,7 @@
               <span class="_right">{{alert.fields.Date}}</span>
             </div>
           </div>
-          <div class="Alerts-title" >{{alert.fields.Name}}</div>
+          <div class="Alerts-title" v-html="$md.render(alert.fields.Name)"></div>
           <div class="Alerts-tags">
             <span class="Alerts-tag _tag" v-for="tag of alert.fields.Tags" :key="tag">
               {{tag}}

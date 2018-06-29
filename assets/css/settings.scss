@@ -7,20 +7,20 @@
 //  Colors
 
 $color-phdir: #71EFF5;            @include colorate('phdir', $color-phdir);
-$color-teal: $color-phdir;        @include colorate('teal', $color-phdir);
+$color-teal: $color-phdir;        @include colorate('teal', $color-teal);
 
-$color-dull: #90D9DD;             @include colorate('dull', $color-phdir);
+$color-dull: #90D9DD;             @include colorate('dull', $color-dull);
 
-$color-yellow: #FCCB4C;           @include colorate('yellow', $color-phdir);
-$color-pink: #FA5486;             @include colorate('pink', $color-phdir);
+$color-yellow: #FCCB4C;           @include colorate('yellow', $color-yellow);
+$color-pink: #FA5486;             @include colorate('pink', $color-pink);
 
-$color-gray: #374F6A;             @include colorate('gray', $color-phdir);
-$color-gray-light: #F0F0F0;       @include colorate('gray-light', $color-phdir);
+$color-gray: #374F6A;             @include colorate('gray', $color-gray);
+$color-gray-light: #F0F0F0;       @include colorate('gray-light', $color-gray-light);
 
 
-$color-main: $color-phdir;        @include colorate('main', $color-phdir);
-$color-secondary: $color-gray;    @include colorate('secondary', $color-phdir);
-$color-tertiary: $color-gray;     @include colorate('tertiary', $color-phdir);
+$color-main: $color-phdir;        @include colorate('main', $color-main);
+$color-secondary: $color-gray;    @include colorate('secondary', $color-secondary);
+$color-tertiary: $color-pink;     @include colorate('tertiary', $color-tertiary);
 
 $color-active: $color-main;       @include colorate('active', $color-phdir);
 $color-link: $color-pink;         
