@@ -1,10 +1,10 @@
 <template>
 
-  <ContentFrame class="Blog container">
+  <ContentFrame class="Terms container">
     <section class="narrow copy">
 
       <!-- show article if param given -->
-      <div class="Blog-article" v-if="slug && blog">
+      <!-- <div class="Terms-article" v-if="slug && term">
         <div><router-link to="/blog">Blog</router-link></div>
         <div class="Blog-title">{{blog.fields.Name}}</div>
         <div class="Blog-lede">{{blog.fields.Lede}}</div>
@@ -14,21 +14,22 @@
           </span>
         </div>
         <div class="Blog-content" v-html="$md.render(blog.fields.Markdown)"></div>
-      </div>
+      </div> -->
 
       <!-- show full blog if no params given -->
-      <div class="Blog-body" v-else>
-        <h1 class="Blog-title title">
-          News
+      <div class="Terms-body" >
+        <h1 class="Terms-title title">
+          Terms
         </h1>
-        <div class="Blog-list" v-if="Blog">
-          <div class="Blog-item _margin-bottom" v-for="blog of Blog" :key="blog.fields.Name" v-if="blog.fields.isPublished">
-            <div class="Blog-title" ><router-link :to="{path: `/blog/${blog.fields.Slug}`}">{{blog.fields.Name}}</router-link></div>
-            <div class="Blog-lede" >{{blog.fields.Lede}}</div>
-            <div class="Blog-tags">
-              <span class="Blog-tag _tag" v-for="tag of blog.fields.Tags" :key="tag">
+        <div class="Terms-list">
+          <div class="Terms-item _margin-bottom" v-for="term of Terms" :key="term.fields.Name" >
+            <div class="Terms-title" >{{term.fields.Name}}</div>
+            <div class="Terms-tags">
+              <span class="Terms-tag _tag" v-for="tag of term.fields.Tags" :key="tag">
                 {{tag}}
               </span>
+            </div>
+            <div class="Terms-content" v-html="$md.render(term.fields.Markdown || '')">
             </div>
           </div>
         </div>
@@ -65,23 +66,18 @@ export default {
     return {
       cytosis: this.$store.cytosis,
       slug: this.$route.params.slug,
-      blog: undefined, // loaded in 'mounted'
+      term: undefined, // loaded in 'mounted'
     }
   },
 
   mounted: async function () {
     const slug = unescape(this.$route.params.slug)
-    // console.log('!!!', this.$store.state.cytosis.find(slug, [this.Blog], ['Slug'])[0], ' vs. ', this.cytosis.find(slug, [this.Blog], ['Slug'])[0])
-    // console.log('???', this.$store.state.cytosis.find(slug, [this.Blog], ['Slug'])[0])
-    const blog = this.cytosis.find(slug, [this.Blog], ['Slug'])[0]
-    if (blog && blog.fields.isPublished)
-      this.blog = blog
+    const term = this.cytosis.find(slug, [this.Terms], ['Slug'])[0]
+    if (term && term.fields.isPublished)
+      this.term = term
   },
 
   computed: {
-    blogs() { // show the published blogs
-      return ''
-    }
   },
 
 

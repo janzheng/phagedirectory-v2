@@ -1,0 +1,46 @@
+
+
+.Alerts {
+  .Alerts-item {
+    margin-top: $size-base;
+    margin-bottom: $size-base;
+    padding-bottom: $size-base;
+    margin-top: $size-base;
+    padding-top: $size-base;
+
+    border-top: $border-thin solid $color-pink;
+
+    &.Resolved { 
+      opacity: 0.7;
+      background-color: $color-silver-lighter;
+      border: 0;
+    }
+  }
+  .Alerts-status {
+    margin-top: $size-base;
+    margin-bottom: $size-base;
+    .Alerts-status-tag {
+      padding: $size-half $size-base;
+      background-color: $color-ui-light;
+      border-radius: $radius;
+    }
+    .Resolved {
+      // avoid using green; default to gray
+    }
+    .Urgent {
+      $background-color: $color-danger;
+    }
+    .Low {
+      background-color: transparent;
+      border: $border-thin solid $color-ui-light;
+    }
+  }
+  .Alerts-title {
+    font-size: $font-larger;
+    line-height: $font-larger + 8px;
+    padding-bottom: $size-base;
+  }
+  .Alerts-tags {
+    margin-bottom: $size-base;
+  }
+}

@@ -30,7 +30,7 @@ module.exports = {
   mode: 'spa', // 'universal'  — spa useful for airtable data updates; universal is faster
   env: {
     site_fb: site_fb,
-    airtable_api: 'keyXANccmXa0cr7ae', // < MASTER KEY, DO NOT UPLOAD 'keyAe6M1KoPfg25aO',
+    airtable_api: 'keyAe6M1KoPfg25aO',
     airtable_base: 'appSCAap8SWbFRtu0',
   },
 
@@ -333,6 +333,14 @@ module.exports = {
           name: 'blog-slug',
           path: '/news/:slug',
           component: resolve(__dirname, 'pages/Blog.vue')
+        },
+
+
+        // other resolvers
+        {
+          name: 'questions',
+          path: '/questions',
+          component: resolve(__dirname, 'pages/Feedback.vue')
         },
       )
     },

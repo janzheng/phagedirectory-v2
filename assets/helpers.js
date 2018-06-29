@@ -3,6 +3,19 @@
 import Cytosis from 'cytosis'
 
 
+
+
+// tracks input types for item fields
+export const INPUT_TYPES = {
+  "TEXT":     'TEXT', // input text, generic; default
+  "EMAIL":    'EMAIL', // email input
+  "NUMBER":   'NUMBER', // number input
+  "TEXTAREA": 'TEXTAREA', // text area
+  "RADIO":    'RADIO', // radio button group
+  "CHECKBOX": 'CHECKBOX', // checkbox group        
+}
+
+
 // export const test = function() {
 export async function cytosis(env, store) {
 
@@ -12,7 +25,7 @@ export async function cytosis(env, store) {
   }
 
   let cytosis
-  console.log('Get cytosis; check store: ', store)
+  // console.log('Get cytosis; check store: ', store)
 
   // return a preloaded cytosis to save on data
   if(!store.state.cytosis) {
@@ -55,54 +68,4 @@ export async function cytosis(env, store) {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-export const initCytosis = async function(env, store=undefined) {
-
-  let cytosis = new Cytosis({
-    airtableApiKey: env.airtable_api,
-    airtableBaseId: env.airtable_base
-  })
-
-  if(store && !store.state.cytosis) {
-    let result
-    await cytosis.initConfig()
-    console.log('cytosis init:', cytosis)
-
-    let tables = await cytosis.getTables({view: "Grid view"})
-    console.log('tables:', tables)
-    // result = await cytosis.find("Test Content", tables)
-    // console.log('Result 1:', result)
-    // let _test = shallowClone(cytosis)
-    let obj = { cytosis: cytosis, ...tables }
-
-    store.commit('updateCreate', obj)
-  }
-  return new Promise(function(resolve, reject) {
-    resolve(cytosis)
-  })
-}
-
-// nonasync constructor
-export const getCytosis = function() {
-  return new Cytosis({
-    airtableApiKey: api,
-    airtableBase: {id: base}
-  })
-}
-*/
 

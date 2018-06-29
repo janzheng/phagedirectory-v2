@@ -126,6 +126,12 @@ p {
 }
 
 
+._md--margin-none {
+  p {
+    margin: 0;
+  }
+}
+
 
 @import 'components';
 @import 'sections';

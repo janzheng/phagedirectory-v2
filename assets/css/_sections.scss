@@ -1,4 +1,11 @@
 
+
+
+@import '/sections/alerts';
+
+
+
+
 // can't believe these actually work
 // .😍 {
 //   background-color: pink !important;
@@ -37,10 +44,11 @@ section {
 
 .Footer {
   background-color: $color-secondary;
+  color: $color-bg;
   a {
     text-decoration: none;
-    border: 0;
     color: $color-bg;
+    border: 0;
     &:hover {
       color: $color-phdir;
     }
@@ -49,10 +57,11 @@ section {
     @extend %links-bg;
     @extend %font-bold;
   }
-  .Header-orgs.nuxt-link-active {
-    @extend %links-bg;
-    @extend %font-bold;
+  .Footer-right,
+  .Footer-top {
+    margin-right: $size-p8;
   }
+
 }
 
 

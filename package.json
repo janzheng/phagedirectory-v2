@@ -19,11 +19,13 @@
     "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/markdownit": "^1.2.1",
+    "axios": "^0.18.0",
     "coeur": "^0.1.58",
     "cytosis": "0.0.211",
     "markdown-it-attrs": "^2.2.0",
     "nuxt": "^1.0.0",
-    "vue-scrollto": "^2.11.0"
+    "vue-scrollto": "^2.11.0",
+    "vuelidate": "^0.7.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
