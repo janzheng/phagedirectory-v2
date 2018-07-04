@@ -269,42 +269,47 @@ module.exports = {
         {
           name: 'capsid',
           path: '/d/:capsid',
-          component: resolve(__dirname, 'pages/OrgPage.vue')
+          component: resolve(__dirname, 'pages/Dir.vue')
+        },
+        {
+          name: 'search',
+          path: '/search/:searchstr',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'phages',
-          path: '/d/phages',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/phages',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'hosts',
-          path: '/d/hosts',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/hosts',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'diseases',
-          path: '/d/diseases',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/diseases',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'antibiotics',
-          path: '/d/antibiotics',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/antibiotics',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'orgs',
-          path: '/d/orgs',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/orgs',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'labs',
-          path: '/d/labs',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/labs',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         {
           name: 'people',
-          path: '/d/people',
-          component: resolve(__dirname, 'pages/ProjectPage.vue')
+          path: '/people',
+          component: resolve(__dirname, 'pages/Dir.vue')
         },
         // {
         //   name: 'apply',
@@ -322,18 +327,28 @@ module.exports = {
 
         // blog / news / 'viral' newsletter; resolves to generic Blog page
         {
-          name: 'blog',
+          name: 'Blog.item',
           path: '/blog/:slug',
           component: resolve(__dirname, 'pages/Blog.vue')
         },
         {
-          name: 'blog-alt',
+          name: 'News',
           path: '/news',
           component: resolve(__dirname, 'pages/Blog.vue')
         },
         {
-          name: 'blog-slug',
+          name: 'News.item',
           path: '/news/:slug',
+          component: resolve(__dirname, 'pages/Blog.vue')
+        },
+        {
+          name: 'Updates',
+          path: '/updates',
+          component: resolve(__dirname, 'pages/Blog.vue')
+        },
+        {
+          name: 'Updates.item',
+          path: '/updates/:slug',
           component: resolve(__dirname, 'pages/Blog.vue')
         },
 

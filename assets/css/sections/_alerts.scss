@@ -65,12 +65,27 @@
       border-color: $color-tertiary;
     }
   }
+  .AlertSignup-sub {
+    font-weight: bold;
+  }
+  .AlertSignup-cta {
+    margin-bottom: 0;
+    @include screen-xs {
+      width: 100%;
+      margin-top: $size-base;
+    }
+  }
 
   &.footer {
     margin: 0;
     text-align: center;
     margin-left: $size-2;
     margin-right: $size-2;
+
+    @include screen-xs {
+      margin-left: $size-base;
+      margin-right: $size-base;
+    }
   }
 }
 .AlertSignup-container {

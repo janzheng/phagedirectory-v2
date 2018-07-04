@@ -1,6 +1,109 @@
 
-.Blog {
-  
+// Blog page; a page with a list of headlines
 
+
+// Article Post; a page with lots of text
+.Article {
+  .Article-frontmatter {
+    margin-bottom: $size-2;
+  }
+
+  .Article-back {
+    font-weight: $font-bold;
+  }
+  .Article-title {
+  }
+  .Article-lede {
+    margin-bottom: $size-base;
+    &, p {
+      font-size: $font-large;
+    }
+  }
+  .Article-image {
+    width: 100%;
+  }
   
+  .Article-tags {
+    margin-bottom: $size-base;
+  }
 }
+
+
+
+
+
+// for article sharing and rendering
+// refer to sidebar.io's format
+// note: don't use <article> tag as it's a formatting tag
+// some of these are specified in markdown, so the markup should be very simple
+.BlogList-item {
+  display: block;
+  width: 100%;
+
+  margin-top: $size-base;
+  margin-bottom: $size-2;
+
+  // border: $border-thin solid $color-tertiary;
+  border-radius: $radius;
+
+  // blog item with image
+  &.--image {
+    display: grid;
+    grid-template-areas: "content image";
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr auto;
+    grid-gap: $size-base;
+    align-items: center;
+  }
+  .BlogList-date {
+    font-size: $font-small;
+    margin-right: $size-half;
+    @extend %font-500;
+    // & + .BlogList-title {
+    //   padding-top: 0;
+    // }
+  }
+  .BlogList-source {
+    // display: block;
+    font-size: $font-small;
+    // @extend %font-600;
+    // color: $color-gray;
+    // @extend %font-serif;
+    // font-style: italic;
+    text-decoration: none;
+    // @extend ._antialias;
+  }
+  .BlogList-title {
+    padding-top: 0;
+  }
+  .BlogList-lede {
+    padding-bottom: $size-half;
+  }
+  .BlogList-content {
+    grid-area: content;
+    .BlogList-title {
+      // display: block;
+      // font-size: $font-larger;
+      // line-height: $font-larger + 8px;
+      // font-style: italic;
+      // @extend %font-serif;
+      padding-bottom: $size-half;
+      text-decoration: none;
+    }
+    .BlogList-desc {
+      padding-bottom: $size-half;
+      font-size: $font-small;
+    }
+  }
+  .BlogList-image {
+    display: block;
+    grid-area: image;
+    width: 150px;
+    height: auto;
+
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+

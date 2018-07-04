@@ -48,6 +48,8 @@ export default {
     Formlet,
   },
 
+  middleware: 'pageload',
+  
   async asyncData({ app, store, env, params }) {
     let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
     return {
@@ -58,7 +60,7 @@ export default {
 
   data: function () {
     return {
-      cytosis: this.$store.cytosis,
+      cytosis: this.$store.state.cytosis,
       postUrl: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input',
       isFormValid: false,
       Name: '',

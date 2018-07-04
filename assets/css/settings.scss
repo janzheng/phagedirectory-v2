@@ -1,52 +1,75 @@
 
 
 
-@import '../../node_modules/coeur/stylecoeur/index.scss';
-
 
 //  Colors
 
-$color-phdir: #71EFF5;            @include colorate('phdir', $color-phdir);
-$color-teal: $color-phdir;        @include colorate('teal', $color-teal);
+$color-phdir: #71EFF5;            
+$color-teal: $color-phdir;        
 
-$color-dull: #90D9DD;             @include colorate('dull', $color-dull);
+$color-dull: #90D9DD;             
 
-$color-yellow: #FCCB4C;           @include colorate('yellow', $color-yellow);
-$color-pink: #FA5486;             @include colorate('pink', $color-pink);
+$color-yellow: #FCCB4C;           
+$color-pink: #FA5486;             
 
-$color-gray: #374F6A;             @include colorate('gray', $color-gray);
-$color-gray-light: #F0F0F0;       @include colorate('gray-light', $color-gray-light);
+$color-gray: #374F6A;             
+// $color-gray-light: #F0F0F0; // specced out, but unusable bc of coeur   
 
 
-$color-main: $color-phdir;        @include colorate('main', $color-main);
-$color-secondary: $color-gray;    @include colorate('secondary', $color-secondary);
-$color-tertiary: $color-pink;     @include colorate('tertiary', $color-tertiary);
+$color-main: $color-phdir;        
+$color-secondary: $color-gray;    
+$color-tertiary: $color-pink;     
 
-$color-active: $color-main;       @include colorate('active', $color-phdir);
-$color-link: $color-pink;         
+$color-active: $color-pink;       
+$color-links: $color-pink;         
 $color-body: $color-secondary;    
 // $color-hover: $color-main;
 // $color-active: $color-main;
 
-$sidebar-color-link: $color-pink; 
 
+$sidebar-color-link: $color-links; 
 
+$size-base: 15px;
+$font-lineheight: 22px;
+// $font-size-base: 18px;
 
+$font-small: $size-base - 2px;
+$font-large: $size-base + 3px;
 
 
 
 //   Measurements
 $offset: 5px;
 $z-popup: 100; // 
+$z-top: 90;
+
+$color-focus: $color-tertiary;
 
 
 
 
 
+@import '../../node_modules/coeur/stylecoeur/index.scss';
 
 
+@include colorate('phdir', $color-phdir);
+@include colorate('teal', $color-teal);
+@include colorate('dull', $color-dull);
+@include colorate('yellow', $color-yellow);
+@include colorate('pink', $color-pink);
+@include colorate('gray', $color-gray);
+@include colorate('gray-light', $color-gray-light);
+@include colorate('main', $color-main);
+@include colorate('secondary', $color-secondary);
+@include colorate('tertiary', $color-tertiary);
+@include colorate('active', $color-phdir);
 
 
+%focus-pink {
+  // border: solid rgba($color-tertiary, 1) ;
+  // outline: none;
+  // box-shadow: 0px 0px 2px 0px rgba($color-tertiary, 1);
+}
 
 %font-mono,
 ._font-mono {
@@ -58,3 +81,9 @@ $z-popup: 100; //
   // font-family: 'Playfair Display', 'Georgia', serif;
   @extend %font-sans;
 }
+
+
+
+
+
+

@@ -1,13 +1,21 @@
 <template>
   <div class="ContentFrame container">
     <Header/>
-    <div class="_margin-bottom">
+
+    <div class="_margin-bottom" v-if="search">
+      <Directory :isSearch="true"/>
+    </div>
+
+
+    <div class="_margin-bottom" v-if="!search">
       <slot></slot>
     </div>
 
     <div class="AlertSignup-container">
       <AlertSignup classes="footer" :description="true" />
     </div>
+
+    {{ initDrift }}
 
     <Policy/>
     <Footer/>
@@ -23,6 +31,8 @@ import VueScrollTo from 'vue-scrollto'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 import Policy from '~/components/Policy.vue'
+import Directory from '~/components/Directory.vue'
+
 import AlertSignup from '~/components/AlertSignup.vue'
 
 export default {
@@ -33,7 +43,8 @@ export default {
     Header,
     Footer,
     Policy,
-    AlertSignup
+    AlertSignup,
+    Directory
   },
 
   // head () {
@@ -44,22 +55,28 @@ export default {
   //     ]
   //   }
   // },
+  data: function () {
+    return {
+    }
+  },
+
 
   mounted: function (params) {
     this.addListeners()
 
     const _this = this
     this.$nextTick(function () {
+      let scrolled = false
       this.$router.afterEach((r) => {
         // console.log('router hash scroll') 
         if(_this.$route.hash)
           VueScrollTo.scrollTo(this.$route.hash, 500, {
            offset: -20
          })
-        return true
+        scrolled = true
       })
 
-      if(_this.$route.hash) {
+      if(_this.$route.hash && !scrolled) {
         // console.log('-- hash scroll')
         VueScrollTo.scrollTo(this.$route.hash, 500, {
           offset: -20
@@ -67,6 +84,7 @@ export default {
       }
 
     })
+
   },
   beforeDestroy: function() {
     this.removeListeners()
@@ -89,40 +107,54 @@ export default {
       }
     },
     removeListeners() {
-      for (let i = 0; i < this._links.length; i++) {
-        this._links[i].removeEventListener('click', this.navigate, false)
+      if(this._links) {
+        for (let i = 0; i < this._links.length; i++) {
+          this._links[i].removeEventListener('click', this.navigate, false)
+        }
+        this._links = []
       }
-      this._links = []
+    }
+  },
+
+  computed: {
+    search() {
+      return this.$store.state.search.string
+    },
+    initDrift() {
+
+      // drift for drift@phage.directory
+      if(this.$store.state.policy && !this.$store.state.drift) {
+        this.$store.dispatch('updateCreate', {drift: true}
+          )
+        !function() {
+          var t = window.driftt = window.drift = window.driftt || [];
+          if (!t.init) {
+            if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
+            t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+            t.factory = function(e) {
+              return function() {
+                var n = Array.prototype.slice.call(arguments);
+                return n.unshift(e), t.push(n), t;
+              };
+            }, t.methods.forEach(function(e) {
+              t[e] = t.factory(e);
+            }), t.load = function(t) {
+              var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
+              o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
+              var i = document.getElementsByTagName("script")[0];
+              i.parentNode.insertBefore(o, i);
+            };
+          }
+        }();
+        drift.SNIPPET_VERSION = '0.3.1';
+        drift.load('ks35ggadwzyw');
+      }
+      return undefined
     }
   }
 
 }
 
-
-
-// drift for drift@phage.directory
-!function() {
-  var t = window.driftt = window.drift = window.driftt || [];
-  if (!t.init) {
-    if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-    t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-    t.factory = function(e) {
-      return function() {
-        var n = Array.prototype.slice.call(arguments);
-        return n.unshift(e), t.push(n), t;
-      };
-    }, t.methods.forEach(function(e) {
-      t[e] = t.factory(e);
-    }), t.load = function(t) {
-      var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-      o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-      var i = document.getElementsByTagName("script")[0];
-      i.parentNode.insertBefore(o, i);
-    };
-  }
-}();
-drift.SNIPPET_VERSION = '0.3.1';
-drift.load('ks35ggadwzyw');
 
 
 

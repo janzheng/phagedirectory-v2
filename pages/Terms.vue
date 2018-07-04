@@ -54,6 +54,8 @@ export default {
     ContentFrame
   },
 
+  middleware: 'pageload',
+  
   async asyncData({ app, store, env, params }) {
     let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
     return {
@@ -64,7 +66,7 @@ export default {
 
   data: function () {
     return {
-      cytosis: this.$store.cytosis,
+      cytosis: this.$store.state.cytosis,
       slug: this.$route.params.slug,
       term: undefined, // loaded in 'mounted'
     }

@@ -19,6 +19,7 @@ export default {
     ContentFrame
   },
 
+  middleware: 'pageload',
 
   data: function () {
     return {

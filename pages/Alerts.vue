@@ -1,6 +1,6 @@
 <template>
 
-  <ContentFrame class="Alerts container">
+  <ContentFrame class="Alerts">
     <section class="narrow copy">
 
       <div class="Alerts-intro _margin-bottom-2">
@@ -44,6 +44,8 @@ export default {
     ContentFrame,
     AlertSignup
   },
+  
+  middleware: 'pageload',
 
   async asyncData({ app, store, env, params }) {
     let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
@@ -55,7 +57,7 @@ export default {
 
   data: function () {
     return {
-      cytosis: this.$store.cytosis,
+      cytosis: this.$store.state.cytosis,
       slug: this.$route.params.slug,
       alert: undefined, // loaded in 'mounted'
     }

@@ -1,18 +1,61 @@
 <template>
 
-  <div class="Home container">
-    <Header/>
+  <ContentFrame class="Home">
 
-    <section class="_center copy">
+    <section class="narrow copy">
 
-      <!-- <div class="Home-title _padding-bottom">
-        <div class="buildatl --h1 ">
-          <span class="_font-bold">Make a <span class="_links-bg">difference</span> to </span> 
-          <img class="logo-sm" src="~/static/atl.png"/>
+      <div class="Home-intro">
+        <h1 class="Home-title title">
+          Phage Directory is
+        </h1>
+
+        1. Goal is to make phage therapy a reality
+        2. Science-backed
+        3. Get phage researchers together to improve phage therapy 
+
+        <div class="Home-tag">
+          a directory of researchers 
+          <s>fighting antibiotic resistance with phages.</s>
+
+          Our antibiotics are failing. 
+          People are dying of drug-resistant infections.
+          But there is hope.
+
+          Phage therapy—a way of treating infections with bacteria-killing viruses called bacteriophages—is difficult, personalized, and needs researchers, medical professionals, governments, and families to work together.
+
+          Phage Directory connects the right people to 
+          safely bring the right phages to 
+          patients who need them.
+
+          — @phagedirectory
+
         </div>
-        <div class="subtitle" v-html="$md.render(getContent('Home-Intro'))">
+        <div class="Home-boxes _grid-3">
+          <div>Make phage therapy a reality</div>
+          <div>Towards phage research</div>
+
+          working together to accelerate phage research towards making phage therapy a reality
         </div>
-      </div> -->
+
+        Our mission, goals, and how we're getting there
+
+        <div class="_card">
+          Join the fight message
+        </div>
+      </div>
+
+      <hr />
+
+      <div class="Home-media _grid-2">
+        <div>
+          News service
+        </div>
+        <div>
+          <Twitter />
+        </div>
+      </div>
+
+      <hr />
 
     </section>
 <!-- 
@@ -61,9 +104,7 @@
     </section>
  -->
  
-    <Policy/>
-    <Footer/>
-  </div>
+  </ContentFrame>
 </template>
 
 
@@ -71,9 +112,8 @@
 
 <script>
 
-import Header from '~/components/Header.vue'
-import Footer from '~/components/Footer.vue'
-import Policy from '~/components/Policy.vue'
+import ContentFrame from '~/components/ContentFrame.vue'
+import Twitter from '~/components/Twitter.vue'
 
 // import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
 import { cytosis } from '~/assets/helpers.js'
@@ -82,11 +122,12 @@ import { cytosis } from '~/assets/helpers.js'
 export default {
 
   components: {
-    Header,
-    Footer,
-    Policy
+    ContentFrame,
+    Twitter
   },
 
+  middleware: 'pageload',
+  
   data: function () {
     return {
     }

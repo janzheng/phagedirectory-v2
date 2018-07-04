@@ -1,28 +1,30 @@
 <template>
 
   <ContentFrame class="Policies container">
-    <!-- header -->
-    <div class="_grid-1-5">
-      <div></div>
-      <article class="narrow" v-html="content('Content.policies-intro')"></article>
-    </div>
-
-    <!-- body -->
-    <div class="_grid-1-5">
-
-      <div class="SideNav _sidebar">
-        <div class="_sidebar-content">
-          <router-link to="#terms">Terms of Use</router-link>
-          <router-link to="#privacy">Privacy</router-link>
-          <router-link to="#alerts">Alerts</router-link>
-          <router-link to="#cookies">Cookies</router-link>
-        </div>
+    <section class="">
+      <!-- header -->
+      <div class="_grid-1-5">
+        <div></div>
+        <article class="narrow" v-html="content('Content.policies-intro')"></article>
       </div>
 
-      <article class="Policies-content narrow">
-        <div class="" v-html="content('Content.site-policy')"></div>
-      </article>
-    </div>
+      <!-- body -->
+      <div class="_grid-1-5">
+
+        <div class="SideNav _sidebar">
+          <div class="_sidebar-content">
+            <router-link to="#terms">Terms of Use</router-link>
+            <router-link to="#privacy">Privacy</router-link>
+            <router-link to="#alerts">Alerts</router-link>
+            <router-link to="#cookies">Cookies</router-link>
+          </div>
+        </div>
+
+        <article class="Policies-content narrow">
+          <div class="" v-html="content('Content.site-policy')"></div>
+        </article>
+      </div>
+    </section>
 
   </ContentFrame>
 </template>
@@ -37,10 +39,12 @@ export default {
   components: {
     ContentFrame
   },
+  
+  middleware: 'pageload',
 
   async asyncData({ app, store, env, params }) {
     let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    console.log('store cytosis: ' , store.state)
+    // console.log('store cytosis: ' , store.state)
     return {
       cytosis: _cytosis
     }
@@ -49,7 +53,7 @@ export default {
   data: function () {
     // console.log('policies data:', this.cytosis, this)
     return {
-      cytosis: this.$store.cytosis,
+      cytosis: this.$store.state.cytosis,
     }
   },
 

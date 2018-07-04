@@ -5,8 +5,12 @@
 
   overflow-y: inherit;
   overflow-x: inherit;
-  height: auto;
   min-width: auto;
+  height: auto !important;
+
+  @include screen-xs {
+    padding-top: $size-base;
+  }
 
   a {
     display: block;
@@ -31,7 +35,10 @@
     top: $size-base;
     // background-color: $color-ui-light;
     padding-top: 0;
-    padding-bottom: $size-base;
-    text-align: right;
+    // padding-bottom: $size-base;
+    padding-left: $size-base;
+    @include screen-sm {
+      text-align: right;
+    }
   }
 }

@@ -11,7 +11,8 @@
         <router-link class="" to="/">
           <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/>
           <span class="phagedirectory"><span>Phage</span> Directory, </span>
-          <span class="_font-small">2017-{{thisYear}}</span>
+          <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
+          <span class="_font-small">{{thisYear}}</span>
         </router-link>
       </div>
 
@@ -24,22 +25,23 @@
         <div class="_margin-bottom-half _right-sm _center-xs">
           <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
           <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
-          <span class="_margin-right "><router-link to="/feedback">Questions &amp; Feedback</router-link></span>
+          <span class="_margin-right "><router-link to="/feedback">Contact Us</router-link></span>
+          <span class="_margin-right "><router-link to="/updates">Updates</router-link></span>
           <span class=" "><router-link to="/policies">Site Policy</router-link></span>
         </div>
         <div class="_right-sm _center-xs">
-          <span class="_margin-right ">
+          <span class="_margin-right _block-xs _margin-bottom-half-xs">
             <!-- <i class="fa far fa-envelope _margin-right-half"></i> -->
             <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
           </span>
-          <span class="_margin-right-half">
+          <span class="_margin-right-half _block-xs ">
             <!-- <i class="fa far fa-twitter _margin-right-half"></i> -->
             <a target="_blank" href="https://twitter.com/phagedirectory">@phagedirectory</a>
           </span>
-          <span class="_margin-right-half">
+          <span class="_margin-right-half _hidden-xs">
             <a target="_blank" href="https://twitter.com/phagedirectory"><i class="fa fa-fw far fa-twitter"></i></a>
           </span>
-          <span>
+          <span class="_hidden-xs">
             <a target="_blank" href="https://www.facebook.com/phagedirectory"><i class="fa fa-fw far fa-facebook"></i></a>
           </span>
           <!-- <span>

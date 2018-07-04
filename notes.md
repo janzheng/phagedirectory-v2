@@ -1,10 +1,31 @@
 notes.md
 
+
+
 ## Todo
 
-- phage system (replicate current)
-- news suggestion
-  - twitter, email, link, title, text
+- updates intro
+- policy page
+- join, routes, copy, forms, and intro
+  - also strategy
+- BLOG POST: our goals, roadmap, how we're getting to phage therapy
+- Add all media links to airtable for the news section
+- Policy: - cancellation / change info
+- Join - cancellation / change info details
+
+Strategy
+  - feedback page vs. contact page - split these up?
+    - what feedback do we elicit?
+    - how can researchers help us improve?
+
+
+
+## Later
+
+- Rename, combine news + updates with 'Instill' branding
+  - news suggestion box (use sidebar as inspiration)
+    - twitter, email, link, title, text
+- switch header search to content search across all of phage directory, including media
 
 ## Planning
 
@@ -34,7 +55,7 @@ notes.md
     - names: viral, the path (pathogen), 
       - health, microbiology, treatments, disease, infections, reveal, remedy, scratch (opposite word?), the streak, (medium, method, the drip, trickle, the flow, the stream), hex, the loop, moment, veracity, sincerity, truth, veritas, message/note/memo/missive; powerthesaurus.org
       - basic / basicc.org / thebasic.pub
-      - whether.pub
+      - whether.pub, instill.pub
       - moment, instant, juncture
       - the span / spann, realm
       - grok, grokk, grasp, the grasp
@@ -97,10 +118,12 @@ notes.md
 ## Done
 
 - add ATLX forms thing to Feedback page
-- add Webtask system for sending feedback into PhDir Input; secure layer
+- add Webtask system for sending feedback into PhDir Input; secure layer webtask/phdir-input
 - create a writer@zeee.co account to write to the input (just cytosis@zeee.co)
-
-
+- added webtask to mailgun feedback / contact updates
+- added mini browse/search
+- phage/labs/orgs etc. browse page + search page
+- phage system (replicate current)
 
 
 

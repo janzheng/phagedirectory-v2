@@ -101,7 +101,7 @@ import Cytosis from 'cytosis'
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
 
-import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
+import {cytosis} from '~/assets/helpers.js'
 
 
 export default {
@@ -113,20 +113,16 @@ export default {
 
   data: function () {
     return {
-      HostFamily: this.$store.state.HostFamily,
-      HostGenus: this.$store.state.HostGenus,
-      HostSpecies: this.$store.state.HostSpecies,
-      People: this.$store.state.People,
-      Hosts: this.$store.state.Hosts,
+      ... this.$store.state.cytosis.tables,
       '😍': '😍😍😍😍😍',
     }
   },
 
-  async asyncData({ app, store, params }) {
-    let cytosis = store.cytosis ? store.cytosis : await fetchCytosis(store, params)
-    console.log('store cytosis: ' , this.$store)
+  async asyncData({ app, store, env, params }) {
+    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
+    console.log('store cytosis: ' , store.state)
     return {
-      cytosis: cytosis
+      cytosis: _cytosis
     }
   },
 
@@ -150,7 +146,7 @@ export default {
     },
     getPersons: function(person) {
       if(this.people && person) {
-        const _people = getCytosis().getLinkedRecords(person, this.people)
+        const _people = this.cytosis.getLinkedRecords(person, this.people)
         // console.log('skills:' , skills, this.skills, _skills)
         return _people.join(', ')
       }
@@ -158,7 +154,7 @@ export default {
     getLinked: function(linkedRecords, table) {
       // console.log('getlinked:' , linkedRecords, table, this[table])
       if(linkedRecords && this[table]) {
-        const linked = getCytosis().getLinkedRecords(linkedRecords, this[table])
+        const linked = this.cytosis.getLinkedRecords(linkedRecords, this[table])
         // console.log('skills:' , skills, this.skills, _skills)
         return linked.join(', ')
       }
@@ -177,7 +173,7 @@ export default {
     genHostNames () {
       let result = []
       for (let gen of this.HostGenus ) {
-        let species = getCytosis().getLinkedRecords(gen.fields['HostSpecies'], this.HostSpecies, true)
+        let species = this.cytosis.getLinkedRecords(gen.fields['HostSpecies'], this.HostSpecies, true)
         for (let spe of species ) {
           const obj = {
             Name: `${gen.fields.Name} ${spe.fields.Name}`,

@@ -5,6 +5,11 @@ import _ from 'lodash'
 const createStore = () => {
   return new Vuex.Store({
     state: { 
+      policy: false,
+      search: {
+        string: '',
+        url: '',
+      }
     },
 
     mutations: {
@@ -29,7 +34,6 @@ const createStore = () => {
             // debug('Store.update', 'Updating:', name, payload, state)
             if(state[name] !== undefined) {
               state[name] = value
-              setLocalState(state)
             } else {
               // console.log('Store update failed; object doesn’t exist for', name, state)
               debug('Store.update', 'Failed: object doesn’t exist:', name, value, state)
@@ -68,7 +72,6 @@ const createStore = () => {
           // debug('Store.update', 'Updating:', name, payload, state)
           if(state[name] !== undefined) {
             state[name] = value
-            setLocalState(state)
           }
           else
             // console.log('Store update failed; object doesn’t exist for', name, state)
@@ -111,6 +114,12 @@ const createStore = () => {
       // specifically overwrites the cytosis object
       setCytosis (state, cytosis) {
         state['cytosis'] = cytosis
+      },
+
+
+      // track policy accepted or not, from Policy.vue
+      setPolicy (state, el) {
+        state['policy'] = el
       }
     },
 

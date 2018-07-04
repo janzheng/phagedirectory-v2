@@ -3,9 +3,7 @@
 
 @import '/components/blog';
 @import '/components/sidenav';
-
-
-
+@import '/components/directory';
 
 
 
@@ -86,6 +84,49 @@
   span {
     font-weight: 700;
   }
+}
+
+// input {
+//   &:focus {
+//     @extend %focus-pink;
+//     background-color: transparent; // $color-white !important;
+//   }
+// }
+
+
+
+
+// Button Components
+// (reusable)
+
+.Directory-btn {
+  font-weight: 600;
+  text-decoration: none; // <a>s might have underlines
+  &._button.--outline {
+    &:hover {
+      border-color: $color-links;
+      color: $color-links;
+    }
+  }
+
+  &._button.--active,
+  &._button.nuxt-link-exact-active,
+  ._button.nuxt-link-active {
+    &, &:hover {
+      border-color: $color-links;
+      color: $color-links;
+    }
+  }
+}
+
+
+
+
+// Special Classes / 'Objects'
+// can be found / reused throughout, as special components
+
+._OrganismName { // formatting of an organism name e.g. Escherichia coli or E. coli
+  font-style: italic !important;
 }
 
 

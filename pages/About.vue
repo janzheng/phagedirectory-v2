@@ -1,6 +1,6 @@
 <template>
 
-  <ContentFrame class="About container">
+  <ContentFrame class="About">
     <section class="narrow copy">
       <h1 class="About-title title">
         About
@@ -95,6 +95,8 @@ export default {
     ContentFrame
   },
 
+  middleware: 'pageload',
+  
   async asyncData({ app, store, env, params }) {
     let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
     console.log('store cytosis: ' , store.state)

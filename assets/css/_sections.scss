@@ -19,16 +19,92 @@ article,
 .container {
   background-color: $color-bg;
   position: relative;
+
+  // @include screen-xs {
+  //   padding-left: $size-base;
+  //   padding-right: $size-base;
+  // }
 }
 
 section {
   padding-left: $size-2;
   padding-right: $size-2;
+  @include screen-xs {
+    padding-left: $size-base;
+    padding-right: $size-base;
+  }
 }
 
-.Header {
+section.copy {
   a {
-    font-size: $font-large;
+    text-decoration: underline;
+    text-decoration-color: $color-links;
+    &:hover {
+      color: $color-links;
+    }
+  }
+}
+
+section.narrow {
+  @extend ._width-content-magic;
+  // @include screen-xs {
+  //   padding-left: 0;
+  //   padding-right: 0;
+  // }
+}
+section.max {
+  @extend %width-content-max;
+}
+
+article.narrow {
+  @extend ._width-content-magic;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+// narrow, text-friendly widths
+// this doesn't have the padding constraints
+.narrow {
+  max-width: $width-magic;
+}
+
+// block of contextually separate content
+.block {
+  margin-top: $size-base;
+  margin-bottom: $size-2;
+}
+
+
+blockquote {
+  &, p {
+    border-color: $color-tertiary;
+    font-size: $font-larger;
+    line-height: $font-larger + 8px;
+    @extend %font-serif;
+    font-style: italic;
+    @extend ._antialias;
+  }
+  .source {
+    @extend %font-serif;
+    color: $color-gray;
+    font-size: $font-small;
+  }
+}
+
+
+
+.Header {
+
+  .Header-content {
+    @include screen-sm {
+      // @include gridAutoCols(2);
+    }
+  }
+
+  a {
+    @include screen-sm {
+      font-size: $font-large;
+    }
     // font-size: $size-larger;
     text-decoration: none;
   }
@@ -39,6 +115,28 @@ section {
   .Header-orgs.nuxt-link-active {
     @extend %links-bg;
     @extend %font-bold;
+  }
+  .Header-search {
+    border: $border-thin solid $color-ui-light;
+    border-radius: $radius;
+    @extend %ease;
+    &:hover {
+      border-color: $color-tertiary;
+    }
+    &:focus {
+      border: $border-thin solid $color-tertiary;
+      padding: $size-half $size-base;
+      @extend %ease;
+    }
+  }
+  .Header-join {
+    background-color: $color-tertiary;
+    color: $color-bg;
+    &:hover {
+      // border-color: $color-tertiary;
+      border-color: $color-main;
+      background-color: $color-main;
+    }
   }
 }
 
@@ -62,8 +160,19 @@ section {
     margin-right: $size-p8;
   }
 
+  @include screen-xs {
+    margin-bottom: $size-p8;
+    // to make room for driftt
+  }
 }
 
+
+
+// Outline and framework for all Pages
+// Not all pages have these
+.Page-header {
+  margin-bottom: $size-2;
+}
 
 
 
