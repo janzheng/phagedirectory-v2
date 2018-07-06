@@ -1,5 +1,5 @@
 <!-- test all kinds of junk here -->
-<!-- 
+
 <template>
 
   <ContentFrame class="Join container">
@@ -8,10 +8,15 @@
         Junk
       </h1>
 
-      <Formlet :inputs="getForm('alerts-form')" @handler="formHandler"
-      ></Formlet>
+      Regular
+      <div v-html="output"></div>
 
-      <div class="_button" @click="submit">Submit!</div>
+      Markdown
+      <div v-html="$md.render(output)"></div>
+
+      <textarea v-model="output">
+        
+      </textarea>
 
     </section>
   </ContentFrame>
@@ -23,7 +28,7 @@ import { cytosis } from '~/assets/helpers.js'
 
 import ContentFrame from '~/components/ContentFrame.vue'
 import Formlet from '~/components/Formlet.vue'
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
 
@@ -32,13 +37,13 @@ export default {
     ContentFrame,
   },
 
-  async asyncData({ app, store, env, params }) {
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    return {
-      cytosis: _cytosis,
-      ... _cytosis.tables
-    }
-  },
+  // async asyncData({ app, store, env, params }) {
+  //   let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
+  //   return {
+  //     cytosis: _cytosis,
+  //     ... _cytosis.tables
+  //   }
+  // },
 
 
   created: function () {
@@ -52,6 +57,7 @@ export default {
       Name: '',
       Email: '',
       Feedback: '',
+      output: ''
     }
   },
 
@@ -95,4 +101,4 @@ export default {
 <style lang="scss" scoped>
 
 </style>
- -->
+

@@ -1,6 +1,8 @@
 notes.md
 
 
+# Header
+
 
 ## Todo
 
@@ -12,7 +14,7 @@ notes.md
 - Add all media links to airtable for the news section
 - Policy: - cancellation / change info
 - Join - cancellation / change info details
-
+  
 Strategy
   - feedback page vs. contact page - split these up?
     - what feedback do we elicit?
@@ -26,6 +28,8 @@ Strategy
   - news suggestion box (use sidebar as inspiration)
     - twitter, email, link, title, text
 - switch header search to content search across all of phage directory, including media
+
+
 
 ## Planning
 
@@ -124,6 +128,10 @@ Strategy
 - added mini browse/search
 - phage/labs/orgs etc. browse page + search page
 - phage system (replicate current)
+- added dynamic form (Form component) so forms can be spun up and down very easily, and written to airtable
+- Dynamic forms
+  - ensure radio and checkboxes all work
+  - form component version
 
 
 

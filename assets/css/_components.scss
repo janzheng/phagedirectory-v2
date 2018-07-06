@@ -21,6 +21,12 @@
   z-index: $z-popup;
   bottom: $size-half;
   width: calc(100% - #{$size-2});
+
+  .Policy-btn {
+    &:hover {
+      background-color: $color-links;
+    }
+  }
 }
 
 .Note {
@@ -128,6 +134,35 @@
 ._OrganismName { // formatting of an organism name e.g. Escherichia coli or E. coli
   font-style: italic !important;
 }
+
+
+// dynamic form
+.Form {
+  .Form-btn {
+    &:hover {
+      background-color: $color-links;
+      color: $color-bg;
+      border-color: $color-links;
+    }
+    &:active, &:focus {
+      background-color: $color-links;
+      color: $color-bg;
+      border-color: $color-gray;
+    }
+  }
+
+  // broken in coeur
+  ._form-checkbox {
+    input:focus {
+      & + span {
+        // border-color: $color-links;
+
+        border-bottom: $border-thin solid $color-links;
+      }
+    }
+  }
+}
+
 
 
 

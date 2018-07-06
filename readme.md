@@ -8,6 +8,8 @@ This is the Phage Directory core project. Built on Vue/Nuxt
 
 ## Build Setup
 
+Don't forget to use a newer npm: `nvm use 8.11.2`
+
 ``` bash
 # install dependencies
 $ npm install # Or yarn install

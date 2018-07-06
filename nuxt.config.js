@@ -9,6 +9,7 @@
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
 // these are the default social sharing items
 // make sure to use the Head component for generated data
+const site_policy = '1.0.2'
 const site_ga = 'UA-109657404-1' 
 const site_url = 'https://phage.directory'
 const site_name = 'Phage Directory';
@@ -32,6 +33,8 @@ module.exports = {
     site_fb: site_fb,
     airtable_api: 'keyAe6M1KoPfg25aO',
     airtable_base: 'appSCAap8SWbFRtu0',
+    site_policy: site_policy,
+    ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
   },
 
   /*

@@ -1,4 +1,7 @@
 
+
+$dir-gray: $color-gray-lighter;
+
 .Directory {
   .Directory-name {
     padding-bottom: 0;
@@ -26,13 +29,6 @@
 // 
 .DirectoryView {
 
-  .DirectoryView-search {
-    span {
-      color: $color-gray-lighter;
-      text-transform: none;
-    }
-  }
-
   .DirectoryView-item {
     @extend ._grid-1-3;
     margin-bottom: $size-base;
@@ -43,15 +39,34 @@
 
   .DirectoryView-view {
     padding-top: 0;
-    margin-bottom: $size-base;
-    text-transform: capitalize;
+    margin-bottom: $size-2;
+    @extend ._grid-3-1;
+    h3 { 
+      text-transform: capitalize;
+      padding: 0;
+    }
+  }
+  .DirectoryView-contact {
+    font-size: $font-small;
+    text-align: right;
+  }
+  .DirectoryView-search {
+    span {
+      color: $dir-gray;
+      text-transform: none;
+    }
   }
 
 
 
+  // "Template" styles used across all views
 
-  &.phages {
-    .phage-name {
+  .DirectoryView-head {
+    position: sticky;
+    top: $size-p5;
+  }
+    .DirectoryView-title {
+      // phage-name, lab-name
       // @extend h5;
       font-size: $font-large;
       @extend %font-600;
@@ -59,6 +74,109 @@
 
       position: sticky;
       top: $size-p5;
+    }
+      .DirectoryView-title-desc {
+        font-size: $font-small;
+        line-height: $font-small + 4px;
+        color: $dir-gray;
+        padding-top: $size-half;
+      }
+
+  .DirectoryView-body {
+  }
+    .DirectoryView-subitem {
+      // padding: $size-base $size-2;
+      padding: $size-base;
+      background-color: $color-ui-light;
+      border-radius: $radius;
+      margin-bottom: $size-half;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+
+  // people needs to be standardized
+  .person-info {
+    // @extend ._grid-2-1-xs;
+  }
+    .person-pi {
+      background-color: $color-bg;
+      // border: $color-gray solid $border-line;
+      padding-top: 0;
+      padding-bottom: 0;
+      color: $color-gray;
+      position: relative;
+      bottom: 0px;
+      // float: left;
+    }
+    .person-meta {
+      font-size: $font-small;
+      margin-right: $size-base;
+      // float: left;
+    }
+    .person-name {
+      @extend %font-600;
+    }
+    .person-social {
+      a {
+        // display: block;
+        font-size: $font-small;
+        text-decoration: none;
+        text-align: right;
+        margin-right: $size-half;
+        color: $color-gray-light;
+        // float:left;
+        &:hover {
+          color: $color-links;
+        }
+      }
+      .person-twitter {
+        // float: right;
+        // @extend %font-bold;
+      }
+    }
+
+
+
+
+
+
+  // labs view
+
+  &.labs {
+    .labs-org {
+
+    }
+    .lab-name {
+      padding-bottom: $size-base;
+      // @extend %font-600;
+    }
+    .lab-person {
+      @extend ._grid-2-xs;
+      padding-bottom: $size-base;
+      & + .lab-person {
+        // border-top: solid $color-ui $border-line;
+        padding-top: $size-half;
+      }
+    }
+    .person-social {
+      display: block;
+    }
+  }
+
+
+
+
+
+
+
+
+
+  // phages view
+
+  &.phages {
+    .phage-name {
     }
     .DirectoryView-body {
       // padding: $size-base;
@@ -69,25 +187,6 @@
         text-align: right;
       }
     }
-    .phage-lab {
-      // padding: $size-base $size-2;
-      padding: $size-base;
-      background-color: $color-ui-light;
-      border-radius: $radius;
-      margin-bottom: $size-half;
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-      .person-pi {
-        background-color: $color-bg;
-        // border: $color-gray solid $border-line;
-        padding-top: 0;
-        padding-bottom: 0;
-        color: $color-gray;
-        position: relative;
-        bottom: 0px;
-      }
       .phage-lab-name {
         // @extend %font-600;
       }
@@ -99,27 +198,17 @@
       .phage-lab-content {
         @extend ._grid-1-3;
       }
-      .labs-person {
+      .lab-person {
         padding-bottom: $size-base;
 
         &:last-child {
           padding-bottom: 0;
         }
-      }
-      .person-name {
-        @extend %font-600;
-      }
-      .person-meta {
-        font-size: $font-small;
-      }
-      .person-twitter {
-        font-size: $font-small;
-        text-decoration: none;
-        margin-left: $size-half;
-        // float: right;
-      }
-      .person-info {
-        @extend ._grid-3-1-xs;
+
+        & + .lab-person {
+          // border-top: solid $color-ui $border-line;
+          padding-top: $size-half;
+        }
       }
   }
 

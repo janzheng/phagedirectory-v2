@@ -10,7 +10,7 @@
     </div>
 
     <div class="_right">
-      <div class="_button --short _margin-none" @click="acceptPolicy" >
+      <div class="Policy-btn _button --short _margin-none" @click="acceptPolicy" >
         I accept
       </div>
     </div>
@@ -26,15 +26,23 @@ export default {
   data: function () {
     return {
       policy: false,
-      currentPolicy: '1.0.1', 
+      currentPolicy: '', 
       // 1.0.1 7/1/18 updated w/ targeted ads msg from the verge
     }
+  },
+
+  fetch ({ store, params, env }) {
+    this.currentPolicy = env.site_policy
   },
 
   mounted: function () {
     this.policy = localStorage.getItem('pd-policy', this.policy)
     this.$store.commit('setPolicy', this.policy)
     // console.log('Message beforeCreate', this.policy)
+
+    if(this.policy!=this.currentPolicy) {
+      this.$store.commit('setPolicy', undefined)
+    }
   },
 
   methods: {

@@ -34,7 +34,7 @@
         <div class="_form-radio --inline" v-for="option in input.options" :key="option.value">
           <label :for="option.value" class="_form-radio-label"> 
             <input v-model.trim="fieldData[input.name]" :value="option.value" type="radio" :id="option.value" :name="input.name" />
-            <span :for="option.value"> {{ option.label }}</span>
+            <span :for="option.value">{{ option.label }}</span>
           </label>
         </div>
       </div>
