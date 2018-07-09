@@ -204,7 +204,8 @@ module.exports = {
   modules: [
     '@nuxtjs/font-awesome',
     ['@nuxtjs/google-analytics', {
-      id: site_ga
+      id: site_ga,
+      disabled: true // gdpr: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
     ['@nuxtjs/markdownit', { linkify: true } ]
   ],

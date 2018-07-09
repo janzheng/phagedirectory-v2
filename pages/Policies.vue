@@ -14,9 +14,9 @@
         <div class="SideNav _sidebar">
           <div class="_sidebar-content">
             <router-link to="#terms">Terms of Use</router-link>
-            <router-link to="#privacy">Privacy</router-link>
-            <router-link to="#alerts">Alerts</router-link>
-            <router-link to="#cookies">Cookies</router-link>
+            <router-link to="#privacy">Privacy Policy</router-link>
+            <router-link to="#alerts">Phage Alerts</router-link>
+            <router-link to="#cookies">Cookies Policy</router-link>
           </div>
         </div>
 
