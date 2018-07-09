@@ -68,16 +68,21 @@ export default {
     this.$nextTick(function () {
       let scrolled = false
       this.$router.afterEach((r) => {
-        // console.log('router hash scroll') 
-        if(_this.$route.hash)
-          VueScrollTo.scrollTo(this.$route.hash, 500, {
-           offset: -20
-         })
+        console.log('router hash scroll') 
+        if(_this.$route.hash) {
+          const _this=this
+          const scroll = _.debounce(function (e) {
+            VueScrollTo.scrollTo(_this.$route.hash, 500, {
+                offset: -20
+              })
+          }, 200)
+          scroll()
+        }
         scrolled = true
       })
 
       if(_this.$route.hash && !scrolled) {
-        // console.log('-- hash scroll')
+        console.log('-- basic hash scroll')
         VueScrollTo.scrollTo(this.$route.hash, 500, {
           offset: -20
         })

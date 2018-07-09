@@ -36,8 +36,8 @@
                 <div class="phage-lab-body">
                   <div class="DirectoryView-subcontent lab-person person-info" v-for="person of getPerson(lab)" :key="person.fields.Name" v-if="person.get('isPublished')">
                     <div class="person-name">{{ person.fields.Name }}</div>
-                    <div>
-                      <span class="_tag person-pi" v-if="person.fields.PI">PI</span>
+                    <div class="person-miniprofile">
+                      <span class="_tag --light person-pi" v-if="person.fields.PI">PI</span>
                       <span class="person-meta" v-if="person.fields.Role">{{person.fields.Role}}</span>
                       <span class="person-social">
                         <a :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" v-if="person.fields.Twitter">@{{person.fields.Twitter}}</a>
@@ -45,6 +45,9 @@
                         <a :href="`https://orcid.org/${person.fields.ORCID}`" target="_blank" class="person-orcid" v-if="person.fields.ORCID">ORCID</a>
                         <a :href="`${person.fields.ResearchGate}`" target="_blank" class="person-rgate" v-if="person.fields.ResearchGate">RG</a>
                       </span>
+                    </div>
+                    <div class="person-phages" v-if="person.fields.Phages">
+                      <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields">{{phage.fields['Name']}}</span>
                     </div>
                   </div>
                 </div>
@@ -98,9 +101,13 @@
                       </span>
                     </div>
                   </div>
-                  <div class="person-phages">
-                    <div class="DirectoryView-subcontent-item person-hosts _OrganismName" v-for="host of getHosts(person)" :key="host.fields.Name">
-                      {{ hostDisplayName(host) }}
+                  <div class="person-phagehosts">
+                    <div class="DirectoryView-subcontent-item person-hosts " v-for="host of getHosts(person)" :key="host.fields.Name">
+                      <div class="_OrganismName">{{ hostDisplayName(host) }}</div>
+
+                      <div class="person-phages" v-if="person.fields.Phages">
+                        <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields">{{phage.fields['Name']}}</span>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -177,7 +184,7 @@ export default {
           labArr = [...labArr, ...p.fields.Labs]
         else {
           p['isPerson'] = true;
-          console.log('isPerson:', p)
+          // console.log('isPerson:', p)
           ppl.push(p)
         }
       }
@@ -217,6 +224,22 @@ export default {
       if (host.fields.Name.indexOf('*') > 0)
         return host.fields.Name.substring(0, host.fields.Name.indexOf('*') - 1)
       return host.fields.Name
+    },
+    getHostPersonPhages(host, person) {
+
+      const name = person.get('Name')
+      const hostPhages = this.cytosis.getLinkedRecords(host.get('Phages'), this.Phages, true) 
+      let results = []
+      // const hostPeopleIds = host.get('People')
+
+      // for each phage, see if it has People by personName, if it does, add it to results
+      for (const phage of hostPhages) {
+        const phagePeople = this.cytosis.getLinkedRecords(phage.get('People'), this.People, true)
+        if(search(name, phagePeople, ['Name'], this.cytosis ).length > 0)
+          results.push(phage)
+      }
+
+      return results
     },
 
     filterHost(str, host) {

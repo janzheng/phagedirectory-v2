@@ -4,7 +4,8 @@
 
     <section class="narrow copy">
 
-      <div class="Home-intro">
+      <div class="Home-intro" v-html="content('Content.home-intro')">
+<!-- 
         <h1 class="Home-title title">
           Phage Directory is
         </h1>
@@ -42,10 +43,15 @@
         <div class="_card">
           Join the fight message
         </div>
+         -->
       </div>
 
       <hr />
 
+      <div class="Home-media">
+        <Twitter />
+      </div>
+      <!-- 
       <div class="Home-media _grid-2">
         <div>
           News service
@@ -56,7 +62,7 @@
       </div>
 
       <hr />
-
+ -->
     </section>
 <!-- 
     <section class="max">
@@ -128,20 +134,29 @@ export default {
 
   middleware: 'pageload',
   
-  data: function () {
+  async asyncData({ app, store, env, params }) {
+    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
+    // console.log('store cytosis: ' , store.state)
     return {
+      cytosis: _cytosis
     }
   },
 
-  async fetch({ env, store, params }) {
-    cytosis(env, store);
-    // return fetchCytosis(store, params)
+  data: function () {
+    // console.log('policies data:', this.cytosis, this)
+    return {
+      cytosis: this.$store.state.cytosis,
+    }
   },
-
+  
   mounted: function () {
   },
 
   methods: {
+    content(findStr) {
+      let content = this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
+      return this.$md.render(content)
+    }
     // getContent: function(findStr) {
     //     console.log('gC:', findStr, this.content)
     //   let obj = ''

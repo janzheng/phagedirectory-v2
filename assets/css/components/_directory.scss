@@ -100,7 +100,10 @@ $dir-gray: $color-gray-lighter;
   .person-info {
     // @extend ._grid-2-1-xs;
   }
-    .person-pi {
+    ._tag {
+      display: inline-block;
+    }
+    ._tag.--light {
       background-color: $color-bg;
       // border: $color-gray solid $border-line;
       padding-top: 0;
