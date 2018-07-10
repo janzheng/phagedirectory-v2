@@ -3,7 +3,7 @@
     <Header/>
 
     <div class="_margin-bottom" v-if="search">
-      <Directory :isSearch="true"/>
+      <Directory :fromSearch="true"/>
     </div>
 
 

@@ -12,6 +12,9 @@ $dir-gray: $color-gray-lighter;
     &:hover, &:focus, &:active {
       border-color: $color-active;
     }
+    @include screen-xs {
+      display: none; // removes redundancy on small screen
+    }
   }
   
   .Directory-nav-container {
@@ -35,6 +38,9 @@ $dir-gray: $color-gray-lighter;
     @include screen-sm {
       grid-gap: $size-2;
     }
+    @include screen-xs {
+      margin-top: $size-2;
+    }
   }
 
   .DirectoryView-view {
@@ -48,7 +54,10 @@ $dir-gray: $color-gray-lighter;
   }
   .DirectoryView-contact {
     font-size: $font-small;
-    text-align: right;
+    margin-bottom: $size-base;
+    // @include screen-sm {
+    //   text-align: right;
+    // }
   }
   .DirectoryView-search {
     span {
@@ -62,8 +71,6 @@ $dir-gray: $color-gray-lighter;
   // "Template" styles used across all views
 
   .DirectoryView-head {
-    position: sticky;
-    top: $size-p5;
   }
     .DirectoryView-title {
       // phage-name, lab-name
@@ -72,8 +79,10 @@ $dir-gray: $color-gray-lighter;
       @extend %font-600;
       padding-top: 0;
 
-      position: sticky;
-      top: $size-p5;
+      @include screen-sm {
+        position: sticky;
+        top: $size-p5;
+      }
     }
       .DirectoryView-title-desc {
         font-size: $font-small;
@@ -133,6 +142,11 @@ $dir-gray: $color-gray-lighter;
         &:hover {
           color: $color-links;
         }
+
+        @include screen-xs {
+          float: left;
+          display: block;
+        }
       }
       .person-twitter {
         // float: right;
@@ -156,7 +170,7 @@ $dir-gray: $color-gray-lighter;
       // @extend %font-600;
     }
     .lab-person {
-      @extend ._grid-2-xs;
+      @extend ._grid-2-3-xs;
       padding-bottom: $size-base;
       & + .lab-person {
         // border-top: solid $color-ui $border-line;

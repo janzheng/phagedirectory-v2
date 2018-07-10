@@ -9,14 +9,20 @@
 <template>
 
   <div class="DirectoryView _margin-top" :class="view" >
+    <!-- <div class="DirectoryView-contact">
+      Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
+    </div> -->
     <!-- DirectoryView view: {{view}} search: {{search}} -->
 
     <div class="DirectoryView phages" v-if="view == 'phages' ">
       <div class="DirectoryView-view">
-        <h3 >Phage Hosts<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3>
-        <div class="DirectoryView-contact">
-          Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
+        <div>
+          <!-- <h3 >Phage Hosts<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3> -->
+          <h3 v-if="search">Host Search<span class="DirectoryView-search">: <span>{{search}}</span></span></h3>
         </div>
+        <!-- <div class="DirectoryView-contact">
+          Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
+        </div> -->
       </div>
 
       <div class="DirectoryView-items" v-for="genus of getGenus" :key="genus.fields.Name">
@@ -62,9 +68,13 @@
 
     <div class="DirectoryView labs" v-if="view == 'labs' ">
       <div class="DirectoryView-view">
-        <h3 >Phage Labs<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3>
+        <!-- <h3 >Phage Labs<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3>
         <div class="DirectoryView-contact">
           Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
+        </div> -->
+        <div>
+          <!-- <h3 >Phage Hosts<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3> -->
+          <h3 v-if="search">Lab Search<span class="DirectoryView-search">: <span>{{search}}</span></span></h3>
         </div>
       </div>
 
@@ -91,7 +101,7 @@
                   <div class="person-info">
                     <div class="person-name">{{ person.fields.Name }}</div>
                     <div>
-                      <span class="_tag person-pi" v-if="person.fields.PI">PI</span>
+                      <span class="_tag --light person-pi" v-if="person.fields.PI">PI</span>
                       <span class="person-meta" v-if="person.fields.Role">{{person.fields.Role}}</span>
                       <span class="person-social">
                         <a :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" v-if="person.fields.Twitter">@{{person.fields.Twitter}}</a>
@@ -243,8 +253,6 @@ export default {
     },
 
     filterHost(str, host) {
-      // console.log(host)
-
       if(!host.get('People'))
         return false // no people or labs attached to some generated hosts
 
@@ -264,6 +272,14 @@ export default {
         // match against Lab and Org name
         if(search(str, this.getLabs(host), ['Name', 'Organization'], this.cytosis ).length > 0)
           return true
+
+        // match against phage names (a host's people's phages)
+        for (const person of people) {
+          const curatorPhages = this.getHostPersonPhages(host, person)
+          console.log('host phage person name match:', curatorPhages)
+          if(search(str, curatorPhages, ['Name'], this.cytosis ).length > 0)
+            return true
+        }
 
         return false
       }
@@ -293,14 +309,23 @@ export default {
         }
 
         // match through each person's Host names
-        for (let person of people) {
+        for (const person of people) {
           // console.log('person:',person)
           // const hosts = person.get('Hosts')
           const hosts = this.cytosis.getLinkedRecords(person.get('Hosts'), this.Hosts, true)
           if (search(str, hosts, ['Name'], this.cytosis ).length > 0) {
             return true
           }
+
+          // match against phage names (a host's people's phages)
+          for (const host of hosts) {
+            const curatorPhages = this.getHostPersonPhages(host, person)
+            console.log('host phage person name match:', curatorPhages)
+            if(search(str, curatorPhages, ['Name'], this.cytosis ).length > 0)
+              return true
+          }
         }
+
 
         // // match against Lab and Org name
         // if(search(str, this.getLabs(host), ['Name', 'Organization'], this.cytosis ).length > 0)

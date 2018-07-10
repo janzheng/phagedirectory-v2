@@ -4,9 +4,11 @@
   <section class="Directory" :class="classes" >
     <!-- Directory search: {{search}} / view: {{view}} -->
 
-    <section class="Directory-intro narrow">
+    <!-- <section class="Directory-intro narrow"> -->
+    <div class="Directory-intro" v-if="!search">
       <!-- <h1 class="Directory-name">Phage Directory</h1> -->
       <h1 class="Directory-name">{{viewName}} Directory</h1>
+      <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
       <!-- <h6 class="Directory-name">Phage Directory</h6> -->
       <div class="Directory-desc block" v-html="content('directory-phages')" v-if="view == 'phages'"></div>
       <div class="Directory-desc block" v-html="content('directory-labs')" v-if="view == 'labs'"></div>
@@ -15,14 +17,14 @@
       Their emails are hidden for privacy reasons. If you need to contact them, please email your request [staff@phage.directory](staff@phage.directory) or tweet us and the researcher of interest.
 
       Join the fight, [join the list](/join). -->
-    </section>
+    </div>
+    <!-- </section> -->
 
 
     <div class="Directory-list">
       <div class="Directory-nav-container">
         <div class="Directory-nav _grid-auto-1">
           <div>
-            <!-- <span class="Directory-sort">Sort by </span> -->
             <router-link to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none" :class="{'--active': view == 'phages'}">Phages</router-link>
             <router-link to="/labs" class="Directory-btn _button Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
           </div>
@@ -77,7 +79,7 @@ import { cytosis } from '~/assets/helpers.js'
 import DirectoryView from '~/components/DirectoryView.vue'
 
 export default {
-  // props: ['isSearch'],
+  props: ['fromSearch'],
 
   components: {
     DirectoryView
