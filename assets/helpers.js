@@ -123,4 +123,19 @@ export function sort(array) {
 }
 
 
+// given an array of airtable objects, get an array of a certain field
+// e.g. get a combined, flat array from the Tags field of each object
+export function getFieldsOf(array, fieldName) {
+  let results = []
+  // console.log('fOf', array, fieldName)
+  array.map((val, i) => {
+    console.log('fOf val', val, val.fields)
+    if(val.fields && val.fields[fieldName])
+      results = [...results, ... val.fields[fieldName]]
+  })
+  // console.log('fieldsOf:', results)
+  return results
+}
+
+
 

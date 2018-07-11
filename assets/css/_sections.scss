@@ -51,6 +51,10 @@ section.narrow {
   //   padding-left: 0;
   //   padding-right: 0;
   // }
+  &.--left {
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 section.max {
   @extend %width-content-max;

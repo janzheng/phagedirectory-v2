@@ -5,19 +5,19 @@
     <!-- Directory search: {{search}} / view: {{view}} -->
 
     <!-- <section class="Directory-intro narrow"> -->
-    <div class="Directory-intro" v-if="!search">
+    <section class="Directory-intro narrow --left" v-if="!search">
       <!-- <h1 class="Directory-name">Phage Directory</h1> -->
       <h1 class="Directory-name">{{viewName}} Directory</h1>
-      <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
-      <!-- <h6 class="Directory-name">Phage Directory</h6> -->
       <div class="Directory-desc block" v-html="content('directory-phages')" v-if="view == 'phages'"></div>
       <div class="Directory-desc block" v-html="content('directory-labs')" v-if="view == 'labs'"></div>
+      <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
+      <!-- <h6 class="Directory-name">Phage Directory</h6> -->
       <!-- The following individuals and organizations work with phages of bacterial hosts of the phages.
 
       Their emails are hidden for privacy reasons. If you need to contact them, please email your request [staff@phage.directory](staff@phage.directory) or tweet us and the researcher of interest.
 
       Join the fight, [join the list](/join). -->
-    </div>
+    </section>
     <!-- </section> -->
 
 
@@ -141,7 +141,7 @@ export default {
 
   methods: {
     content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] ?  this.cytosis.find(findStr)[0].fields.Markdown : '')
+      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
     },
   }
 

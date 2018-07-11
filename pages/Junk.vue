@@ -8,6 +8,9 @@
         Junk
       </h1>
 
+      <h3>VomFeedback test</h3>
+      <FormVomFeedback :postUrl="postUrl" />
+<!-- 
       Regular
       <div v-html="output"></div>
 
@@ -17,7 +20,7 @@
       <textarea v-model="output">
         
       </textarea>
-
+ -->
     </section>
   </ContentFrame>
 </template>
@@ -28,6 +31,7 @@ import { cytosis } from '~/assets/helpers.js'
 
 import ContentFrame from '~/components/ContentFrame.vue'
 import Formlet from '~/components/Formlet.vue'
+import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 // import axios from 'axios'
 
 export default {
@@ -35,15 +39,17 @@ export default {
   components: {
     Formlet,
     ContentFrame,
+    FormVomFeedback
   },
 
-  // async asyncData({ app, store, env, params }) {
-  //   let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-  //   return {
-  //     cytosis: _cytosis,
-  //     ... _cytosis.tables
-  //   }
-  // },
+  async asyncData({ app, store, env, params }) {
+    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
+    return {
+      postUrl: env.ext_handler,
+      cytosis: _cytosis,
+      ... _cytosis.tables
+    }
+  },
 
 
   created: function () {

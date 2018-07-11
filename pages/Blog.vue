@@ -23,7 +23,7 @@
             v-if="blog.fields.isPublished && categoryFilter(blog)">
             <div class="BlogList-content">
               <div>
-                <span class="BlogList-date" v-if="blog.fields.Date">{{blog.fields.Date}}</span>
+                <span class="BlogList-date" v-if="blog.fields.PubDate">{{blog.fields.PubDate}}</span>
                 <span class="BlogList-source" v-if="blog.fields.Source">{{blog.fields.Source}}</span>
               </div>
               <h3 class="BlogList-title _padding-bottom-half">
@@ -113,7 +113,7 @@ export default {
 
   methods: {
     content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] ?  this.cytosis.find(findStr)[0].fields.Markdown : '')
+      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
     },
     categoryFilter(blog) {
       if (this.category == 'Blog')

@@ -44,7 +44,10 @@ module.exports = {
   head: {
     title: site_title,
     meta: [
+
+      
       { charset: 'utf-8' },
+      // { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }, // max-scale prevents auto-zoom on mobile, may prevent zoom
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
 
       { hid: 'description', name: 'description', content: site_description },

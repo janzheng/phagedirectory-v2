@@ -7,13 +7,14 @@ notes.md
 ## Todo
 
 - updates intro
-- policy page
 - join, routes, copy, forms, and intro
   - also strategy
 - BLOG POST: our goals, roadmap, how we're getting to phage therapy
+  - tone down the scare factor, tone up the science-backed factor, supporting research for phage therapy
+- SEARCH: exclude non-searched labs
+
 - Add all media links to airtable for the news section
-- Policy: - cancellation / change info
-- Join - cancellation / change info details
+  - need to pick and choose
   
 Strategy
   - feedback page vs. contact page - split these up?
@@ -132,6 +133,9 @@ Strategy
 - Dynamic forms
   - ensure radio and checkboxes all work
   - form component version
+- policy page
+- Policy: - cancellation / change info
+  - Join - cancellation / change info details
 
 
 

@@ -148,7 +148,7 @@
 
 <script>
 
-import { cytosis, deduplicate, sort, search } from '~/assets/helpers.js'
+import { cytosis, deduplicate, sort, search, getFieldsOf } from '~/assets/helpers.js'
 import DirectoryView from '~/components/DirectoryView.vue'
 
 export default {
@@ -182,7 +182,7 @@ export default {
 
   methods: {
     content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] ?  this.cytosis.find(findStr)[0].fields.Markdown : '')
+      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
     },
     getLabs(org) {
       // instead of creating a Host > Lab link (more work), we look at the curators and their labs
@@ -259,9 +259,11 @@ export default {
       str = str.toLowerCase()
 
       if(str) {
-        // match against Host name and People
+        // match against Host name and People, and their orgs
         const people = this.cytosis.getLinkedRecords(host.get('People'), this.People, true)
         const hostName = host.get('Name').toLowerCase()
+        const hostLabs = this.getLabs(host)
+
         if( hostName.includes(str) ||
             search(str, people, ['Name'], this.cytosis ).length > 0
           ) {
@@ -270,13 +272,17 @@ export default {
         }
 
         // match against Lab and Org name
-        if(search(str, this.getLabs(host), ['Name', 'Organization'], this.cytosis ).length > 0)
+        if(search(str, hostLabs, ['Name'], this.cytosis ).length > 0)
+          return true
+
+        // match against Org name
+        const hostOrgs = this.cytosis.getLinkedRecords(getFieldsOf(hostLabs, 'Organization'), this.Organizations, true) 
+        if(search(str, hostOrgs, ['Name'], this.cytosis ).length > 0)
           return true
 
         // match against phage names (a host's people's phages)
         for (const person of people) {
           const curatorPhages = this.getHostPersonPhages(host, person)
-          console.log('host phage person name match:', curatorPhages)
           if(search(str, curatorPhages, ['Name'], this.cytosis ).length > 0)
             return true
         }

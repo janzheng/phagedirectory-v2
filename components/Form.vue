@@ -82,7 +82,7 @@ export default {
 
   methods: {
     content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] ?  this.cytosis.find(findStr)[0].fields.Markdown : '')
+      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
     },
 
     getForm(findStr) {
@@ -109,9 +109,11 @@ export default {
           alert: this.alert,
           data: {
             ... this.form.$model,
-            ... this.payload
+            ... this.payload,
+            Source: this.source
           }
         }
+
 
         this.sending = true
 

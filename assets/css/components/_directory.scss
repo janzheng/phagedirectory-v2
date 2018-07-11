@@ -3,6 +3,9 @@
 $dir-gray: $color-gray-lighter;
 
 .Directory {
+  .Directory-intro {
+    padding-left: 0;
+  }
   .Directory-name {
     padding-bottom: 0;
     // color: $color-ui-dark;
@@ -143,10 +146,11 @@ $dir-gray: $color-gray-lighter;
           color: $color-links;
         }
 
-        @include screen-xs {
-          float: left;
-          display: block;
-        }
+        // only for labs view
+        // @include screen-xs {
+        //   float: left;
+        //   display: block;
+        // }
       }
       .person-twitter {
         // float: right;
@@ -179,6 +183,18 @@ $dir-gray: $color-gray-lighter;
     }
     .person-social {
       display: block;
+      a {
+        @include screen-xs {
+          float: left;
+          // display: block;
+        }
+      }
+      .person-twitter {
+        // float: right;
+        // @extend %font-bold;
+        width: 100%;
+        text-align: left;
+      }
     }
   }
 
