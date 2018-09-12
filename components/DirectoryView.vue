@@ -53,7 +53,7 @@
                       </span>
                     </div>
                     <div class="person-phages" v-if="person.fields.Phages">
-                      <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields">{{phage.fields['Name']}}</span>
+                      <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields && phage.get('isPublished')" >{{phage.fields['Name']}}</span>
                     </div>
                   </div>
                 </div>
@@ -116,7 +116,7 @@
                       <div class="_OrganismName">{{ hostDisplayName(host) }}</div>
 
                       <div class="person-phages" v-if="person.fields.Phages">
-                        <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields">{{phage.fields['Name']}}</span>
+                        <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields && phage.get('isPublished')">{{phage.fields['Name']}}</span>
                       </div>
                     </div>
                   </div>

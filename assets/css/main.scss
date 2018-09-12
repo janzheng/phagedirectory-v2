@@ -135,5 +135,22 @@ p {
 
 
 
+/*  VOM JOIN FORM */
+
+.Join-options {
+
+  &.--one {
+    @extend ._width-content-magic;
+    margin: 0 auto;
+  }
+  &.--two {
+    @extend ._grid-2;
+  }
+  &.--three {
+    @extend ._grid-3;
+  }
+}
+
+
 
 

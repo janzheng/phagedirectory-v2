@@ -28,7 +28,8 @@
       // avoid using green; default to gray
     }
     .Urgent {
-      $background-color: $color-danger;
+      background-color: $color-danger;
+      color: $color-bg;
     }
     .Low {
       background-color: transparent;

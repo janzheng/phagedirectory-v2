@@ -1,40 +1,35 @@
 
 <template>
 
-  <div class="Formlet item--fields" v-if="inputs">
+  <div class="item--fields" v-if="inputs">
     <div class="item--field" v-for="input in inputs" :class="input.required ? '--required' : '' " :key="input.name">
       <!-- <div>INPUT: {{ input }}</div> -->
       <div class="_form-control" v-if="input.type==INPUT_TYPES.TEXT">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label :for="input.name" class="_form-label">{{ input.label }}</label>
         <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="text" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
       </div>
 
       <div class="_form-control" v-if="input.type==INPUT_TYPES.EMAIL">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label :for="input.name" class="_form-label">{{ input.label }}</label>
         <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="email" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
       </div>
 
       <div class="_form-control" v-if="input.type==INPUT_TYPES.NUMBER">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label :for="input.name" class="_form-label">{{ input.label }}</label>
         <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="number" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
       </div>
 
       <div class="_form-control" v-if="input.type==INPUT_TYPES.TEXTAREA">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label :for="input.name" class="_form-label">{{ input.label }}</label>
         <textarea v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" rows="4" :id="input.name" class="_form-input" type="text" :name="input.name" :placeholder="input.placeholder" :required="input.required"></textarea>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
       </div>
 
       <div class="_form-control _form-radiogroup" v-if="input.type==INPUT_TYPES.RADIO">
-        <label class="_form-radiogroup-title" :for="input.name" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label class="_form-radiogroup-title" :for="input.name">{{ input.label }}</label>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
         <div class="_form-radio --inline" v-for="option in input.options" :key="option.value">
           <label :for="option.value" class="_form-radio-label"> 
@@ -45,8 +40,7 @@
       </div>
 
       <div class="_form-control" v-if="input.type==INPUT_TYPES.CHECKBOX">
-        <label class="_form-group-title" :for="input.name" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
+        <label class="_form-group-title" :for="input.name">{{ input.label }}</label>
         <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
         <div class="_form-checkbox --inline" v-for="option in input.options" :key="option.value">
           <label :for="option.value">
@@ -55,7 +49,6 @@
           </label>
         </div>
       </div>
-      
     </div>
   </div>
 
@@ -167,12 +160,6 @@ export default {
         return message
       }
     },
-    markdown (input) {
-      if(input)
-        return this.$md.render(input)
-
-      return ''
-    }
   }
 
 }

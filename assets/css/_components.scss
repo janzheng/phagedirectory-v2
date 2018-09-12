@@ -108,8 +108,17 @@
 .Directory-btn {
   font-weight: 600;
   text-decoration: none; // <a>s might have underlines
+  &._button {
+    &:hover {
+      background-color: $color-links;
+      border-color: $color-links;
+      color: $color-bg;
+    }
+  }
+
   &._button.--outline {
     &:hover {
+      background-color: inherit;
       border-color: $color-links;
       color: $color-links;
     }
@@ -119,6 +128,7 @@
   &._button.nuxt-link-exact-active,
   ._button.nuxt-link-active {
     &, &:hover {
+      background-color: inherit;
       border-color: $color-links;
       color: $color-links;
     }
@@ -177,5 +187,32 @@
 }
 
 
+
+
+
+.Formlet {
+  h1, h2, h3, h4, h5, h6 {
+    padding-bottom: 0;
+  }
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ._form-control {
+    margin-bottom: $size-2;
+  }
+  ._form-label {
+    &, p {
+      font-size: $font-large;
+    }
+  }
+  ._form-desc {
+    &, p {
+      font-size: $font-small;
+    }
+  }
+}
 
 

@@ -48,7 +48,7 @@ export default {
   },
 
   // note: set :json='true' to dump the payload into a table named JSON, to prevent throwing errors
-  props: ['intro', 'source', 'privacy', 'cta', 'thanks', 'errorMsg', 'payload', 'table', 'json', 'postUrl', 'alert'],
+  props: ['intro', 'source', 'privacy', 'cta', 'thanks', 'errorMsg', 'payload', 'table', 'json', 'postUrl', 'alert', 'notes'],
 
   // middleware: 'pageload',
   
@@ -107,6 +107,7 @@ export default {
           table: this.table,
           json: this.json,
           alert: this.alert,
+          notes: this.notes,
           data: {
             ... this.form.$model,
             ... this.payload,

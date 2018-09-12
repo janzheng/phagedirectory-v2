@@ -129,7 +129,7 @@ export function getFieldsOf(array, fieldName) {
   let results = []
   // console.log('fOf', array, fieldName)
   array.map((val, i) => {
-    console.log('fOf val', val, val.fields)
+    // console.log('fOf val', val, val.fields)
     if(val.fields && val.fields[fieldName])
       results = [...results, ... val.fields[fieldName]]
   })
