@@ -1,12 +1,12 @@
 <template>
   <div class="VomJoin Research _card">
     <Form class=""
-          :intro="rawContent('join-research-form')"
-          source="join-research-form"
-          :cta="rawContent('join-form-cta')"
-          :thanks="rawContent('join-form-thanks')"
+          :intro="intro"
+          :source="source"
+          :cta="cta"
+          :thanks="thanks"
 
-          privacy="privacy-forms"
+          :privacy="privacy"
           errorMsg="Something went wrong, please try again"
           table="Dynamic"
           :postUrl="postUrl"
@@ -25,7 +25,7 @@ import { cytosis } from '~/assets/helpers.js'
 
 export default {
 
-  props: ['postUrl'],
+  props: ['postUrl', 'intro', 'source', 'cta', 'thanks', 'privacy'],
   components: {
     Form,
   },

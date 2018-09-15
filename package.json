@@ -1,6 +1,6 @@
 {
   "name": "phagedirectory",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Phage Directory app",
   "author": "janzheng <janeazy@gmail.com>",
   "private": true,
@@ -12,17 +12,17 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "surge": "npm run generate; cd dist; surge . -d phagedirectory.surge.sh",
+    "stage": "npm run generate; cd dist; surge . -d phagedirectory.surge.sh",
     "prod": "npm run generate; cd dist; surge . -d phage.directory"
   },
   "dependencies": {
-    "@nuxtjs/font-awesome": "^1.0.3",
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/markdownit": "^1.2.1",
     "axios": "^0.18.0",
-    "coeur": "^0.1.58",
-    "cytosis": "0.0.211",
-    "markdown-it-attrs": "^2.2.0",
+    "coeur": "^0.2.1",
+    "cytosis": "^0.0.306",
+    "markdown-it": "^8.4.2",
+    "markdown-it-attrs": "^2.3.1",
     "nuxt": "^1.0.0",
     "vue-scrollto": "^2.11.0",
     "vuelidate": "^0.7.4"
@@ -47,7 +47,7 @@
     "eslint-plugin-vue": "^4.0.0",
     "lodash": "^4.17.10",
     "node-dir": "^0.1.17",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.3",
     "sass-loader": "^7.0.3"
   }
 }

@@ -12,7 +12,7 @@
         ></Formlet>
         <div class=" _grid-2-1 _align-vertically" >
           <div>
-            <span class="Form-privacy _md--margin-none" v-html="content(privacy)"></span>
+            <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)"></span>
           </div>
           <button class="Form-btn _button _margin-none _center" @click="submit" v-if="!sending">{{cta}}</button>
           <button class="Form-btn _button --outline _margin-none _center" v-if="sending">Sending...</button>
@@ -33,39 +33,23 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
-import { cytosis } from '~/assets/helpers.js'
-
 import Formlet from '~/components/Formlet.vue'
 import axios from 'axios'
 
 export default {
 
   components: {
-    ContentFrame,
     Formlet,
-    // Formlet,
   },
 
-  // note: set :json='true' to dump the payload into a table named JSON, to prevent throwing errors
+  // source is the form's json source
+  // set :json='true' to dump the payload into a table named JSON, to prevent throwing errors
+  // alert: sends us an email alert (this is through the server)
   props: ['intro', 'source', 'privacy', 'cta', 'thanks', 'errorMsg', 'payload', 'table', 'json', 'postUrl', 'alert', 'notes'],
-
-  // middleware: 'pageload',
-  
-  async asyncData({ app, store, env, params }) {
-    console.log('async env', env)
-
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    return {
-      cytosis: _cytosis,
-      ... _cytosis.tables
-    }
-  },
 
   data: function () {
     return {
       sending: false,
-      cytosis: this.$store.state.cytosis,
       // postUrl: '', // https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input
       isFormValid: false,
       Name: '',
@@ -81,12 +65,10 @@ export default {
 
 
   methods: {
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
 
-    getForm(findStr) {
-      const form = JSON.parse(this.cytosis.find(findStr)[0].fields.JSON) || undefined
+    getForm(formStr) {
+      // console.log('getform:', formStr)
+      const form = JSON.parse(formStr) || undefined
       return form.inputs
     },
     formHandler(data) {

@@ -1,19 +1,21 @@
 <template>
-  <div class="Footer container">
+  <div class="Footer container --antialiased">
     <!-- <section class=" _right-sm _center-xs ">
       <div class="Footer-top">
         Alert service
       </div>
     </section> -->
-    <section class="_grid-1-2 _align-vertically">
+    <section class="_grid-1-2 _align-vertically _padding-top _padding-bottom  _width-content-max _margin-center">
 
       <div class="Footer-left _center-xs">
-        <router-link class="" to="/">
+        <!-- <router-link class="" to="/"> -->
+        <a href="/">
           <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/>
           <span class="phagedirectory"><span>Phage</span> Directory, </span>
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
           <span class="_font-small">{{thisYear}}</span>
-        </router-link>
+        </a>
+        <!-- </router-link> -->
       </div>
 
       <!-- margin-right is for avoiding the drift box -->
@@ -34,16 +36,16 @@
             <!-- <i class="fa far fa-envelope _margin-right-half"></i> -->
             <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
           </span>
-          <span class="_margin-right-half _block-xs ">
+          <span class=" _block-xs ">
             <!-- <i class="fa far fa-twitter _margin-right-half"></i> -->
             <a target="_blank" href="https://twitter.com/phagedirectory">@phagedirectory</a>
           </span>
-          <span class="_margin-right-half _hidden-xs">
+          <!-- <span class="_margin-right-half _hidden-xs">
             <a target="_blank" href="https://twitter.com/phagedirectory"><i class="fa fa-fw far fa-twitter"></i></a>
           </span>
           <span class="_hidden-xs">
             <a target="_blank" href="https://www.facebook.com/phagedirectory"><i class="fa fa-fw far fa-facebook"></i></a>
-          </span>
+          </span> -->
           <!-- <span>
             <router-link to="/design#forms">design</router-link>
           </span> -->

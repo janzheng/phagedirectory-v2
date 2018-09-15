@@ -1,25 +1,29 @@
 <template>
   <div class="VomFeedback _card">
-    <Form class=""
-          :intro="rawContent('vomfeedback-intro')"
-          source="vomfeedback-form"
-          :cta="rawContent('vomfeedback-cta')"
-          :thanks="rawContent('vomfeedback-thanks')"
 
-          privacy="privacy-forms"
+    <div v-html="$md.render(vomfeedbackIntro)"></div>
+    <!-- <Form class=""
+          :intro="vomfeedbackIntro"
+          source="vomfeedbackForm"
+          :cta="vomfeedbackCta"
+          :thanks="vomfeedbackThanks"
+
+          privacy="privacyForms"
           errorMsg="Something went wrong, please try again"
           table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
     >
-    </Form>
+    </Form> -->
   </div>
 </template>
 
 <script>
 
 import Form from '~/components/Form.vue'
-import { cytosis } from '~/assets/helpers.js'
+import Cytosis from '~/other/cytosis'
+
+import { mapState } from 'vuex'
 
 export default {
 
@@ -29,34 +33,52 @@ export default {
   },
 
   middleware: 'pageload',
-  
-  async asyncData({ app, store, env, params }) {
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    return {
-      // postUrl: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input',
-      cytosis: _cytosis,
-      ... _cytosis.tables
-    }
-  },
 
   data: function () {
     return {
-      cytosis: this.$store.state.cytosis,
     }
   },
 
+  asyncData({ app, store, env, params }) {
+    // let cytosis = store.state.cytosis
+    // if(!cytosis) {
+    //   cytosis = await store.dispatch('loadCytosis', {
+    //     env,
+    //     tableIndex: 'static',
+    //   })
+    // }
+
+    // console.log('err: ', Cytosis.find('vomfeedback-intro', cytosis.tables)[0]['fields']['Markdown'],)
+    // return {
+    //   // cytosis,
+    //   banana: 'banana',
+    //   // vomfeedbackIntro: Cytosis.find('vomfeedback-intro', cytosis.tables)[0]['fields']['Markdown'],
+    //   // vomfeedbackForm: cytosis.find('vomfeedback-form')[0]['fields']['JSON'],
+    //   // vomfeedbackCta: cytosis.find('vomfeedback-cta')[0]['fields']['Markdown'],
+    //   // vomfeedbackThanks: cytosis.find('vomfeedback-thanks')[0]['fields']['Markdown'],
+    //   // privacyForms: cytosis.find('Content.privacy-forms')[0]['fields']['Markdown']
+    // }
+  },
 
   computed: {
+    ...mapState([
+      'cytosis',
+      'Content',
+      ]),
+
+    vomfeedbackIntro() {
+      return Cytosis.find('Content.vomfeedback-intro', this.cytosis.tables)[0]['fields']['Markdown']
+    },
   },
 
 
   methods: {
-    rawContent(findStr) {
-      return this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
-    },
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
+    // rawContent(findStr) {
+    //   return this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
+    // },
+    // content(findStr) {
+    //   return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
+    // },
 
   }
 

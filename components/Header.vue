@@ -1,6 +1,6 @@
 
 <template>
-  <section class="Header">
+  <section class="Header _padding-top _padding-bottom --antialiased _width-content-max _margin-center">
     <div class="Header-content _grid-2--auto _block-xs _align-vertically">
       <div class="_grid-auto-1 _center-xs _align-vertically">
         <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/phagedirectory.png"/></router-link> -->

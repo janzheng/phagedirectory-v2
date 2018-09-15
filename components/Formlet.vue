@@ -63,7 +63,14 @@
 
 <script>
 
-import { INPUT_TYPES } from '~/assets/helpers.js'
+const INPUT_TYPES = {
+  "TEXT":     'TEXT', // input text, generic; default
+  "EMAIL":    'EMAIL', // email input
+  "NUMBER":   'NUMBER', // number input
+  "TEXTAREA": 'TEXTAREA', // text area
+  "RADIO":    'RADIO', // radio button group
+  "CHECKBOX": 'CHECKBOX', // checkbox group        
+}
 
 // used for validation
 import { validationMixin } from 'vuelidate'
@@ -129,11 +136,11 @@ export default {
         _this.isValidating = false
 
         if(_this.isFormValid()) {
-          console.log('is valid! ')
+          // console.log('is valid! ')
           _this.$emit('handler', _this.$v.fieldData)
         }
         else {
-          console.log('not valid')
+          // console.log('not valid')
           _this.$emit('handler', undefined)
         }
       }

@@ -28,14 +28,32 @@ const page_name = ''; // placeholder for the copy+paste
 const site_fb = '172737416727733'; // buildAtl fb id
 
 module.exports = {
-  mode: 'spa', // 'universal'  — spa useful for airtable data updates; universal is faster
+  mode: 'universal',
+  // mode: 'spa', // 'universal'  — spa useful for airtable data updates; universal is faster
   env: {
     site_fb: site_fb,
-    airtable_api: 'keyAe6M1KoPfg25aO',
+    airtable_api: 'keyAe6M1KoPfg25aO',  // cytosisreader@zeee.co handler
     airtable_base: 'appSCAap8SWbFRtu0',
     site_policy: site_policy,
     ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
   },
+
+  render: {
+    // https://nuxtjs.org/api/configuration-render#resourcehints
+    // disable prefetch of all the pages; saves bg download data
+    // resourceHints: false,
+
+    // Content-Security-Policy
+    // https://nuxtjs.org/api/configuration-render#csp
+    // csp: {
+    //   hashAlgorithm: 'sha256',
+    //   allowedSources: undefined,
+    //   policies: undefined
+    // }
+
+  },
+
+
 
   /*
       Headers of the page
@@ -108,7 +126,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Playfair+Display:400, 700' }
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Playfair+Display:400, 700' }
     ],
   },
 
@@ -204,43 +222,62 @@ module.exports = {
   */
 
 
+  plugins: [
+    // '~plugins/filters.js',
+    // '~plugins/vue-highlightjs.js',
+    // { src: '~/plugins/plugintest.js', ssr: false }
+    { src: '~/plugins/policy.js', ssr: false },
+    { src: '~/plugins/markdownit.js' },
+    { src: '~/plugins/cytosis.js' },
+    // { src: '~/plugins/dynamicData.js' } // done as middleware instead
+  ],
+
   modules: [
-    '@nuxtjs/font-awesome',
+    // '@nuxtjs/font-awesome',
     ['@nuxtjs/google-analytics', {
       id: site_ga,
       disabled: true // gdpr: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
-    ['@nuxtjs/markdownit', { linkify: true } ]
+    ['@nuxtjs/markdownit', {
+      html: true,
+    }],
   ],
-
   markdownit: {
     preset: 'default',
+    injected: false, // markdownit.js plugin takes over injection
+    // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
+    // use the custom plugin/markdownit to inject properly; the official thing is broken
+    // injected: true, // commented out to allow attrs in lang="md" blocks
+    // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
+    //      options: Object.assign({}, options, this.options.markdownit)
+    //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
+    // otherwise plugins will break
     html: true,
     typographer: true,
     linkify: true,
     breaks: true,
-    injected: true,
     use: [
-      'markdown-it-attrs'
-    ]
+      'markdown-it-attrs',
+      ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
+    ],
   },
-
-
 
   build: {
     styleResources: {
-      // scss: './assets/css/settings.scss', // import coeur and other helpers here
       options: {
         // See https://github.com/yenshih/style-resources-loader#options
         // Except `patterns` property
-      }
+      },
+      scss: [
+      // './assets/css/shared.scss' // shared files
+      ],
     },
 
     babel: {
       presets: ['es2015', 'stage-2'],
       plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
     },
-    vendor: ['cytosis'],
+    // vendor: ['cytosis'],
     extend (config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push(
@@ -255,20 +292,31 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    // postcss: false,
+    // this enables cssvars
+    postcss: [
+      require('postcss-cssnext')({
+        features: {
+          map: false,
+          customProperties: false
+        }
+      })
+    ],
   },
 
 
   css: [
     // coeur style guide
     // '@/assets/css/settings.scss',
-    // '@/node_modules/coeur/stylecoeur/index.scss', // this imports EVERYTHING; is going to be huge; overrides 'settings'
+    // '@/node_modules/coeur/styles/index.scss', // this imports EVERYTHING; is going to be huge; overrides 'settings'
 
     // main project styles
     '@/assets/css/main.scss'
   ],
 
   router: {
+    middleware: 'pageload',
     extendRoutes (routes, resolve) {
       // capsid should resolve anything from phages
       // to people and orgs; easier w/ a uniform id resolver
@@ -338,11 +386,11 @@ module.exports = {
           path: '/blog/:slug',
           component: resolve(__dirname, 'pages/Blog.vue')
         },
-        {
-          name: 'News',
-          path: '/news',
-          component: resolve(__dirname, 'pages/Blog.vue')
-        },
+        // { // split up into the news component
+        //   name: 'News',
+        //   path: '/news',
+        //   component: resolve(__dirname, 'pages/Blog.vue')
+        // },
         {
           name: 'News.item',
           path: '/news/:slug',

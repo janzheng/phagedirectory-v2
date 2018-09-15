@@ -1,12 +1,39 @@
 
+/* 
 
+  This needs to be overhauled...
+
+ */
 
 
 //  Colors
 
-$color-phdir: #71EFF5;            
-$color-teal: $color-phdir;        
+$theme-sizes: (
+  size: 15px,
+  size-diff: 0,
+  radius: 4px,
+) !default;
 
+
+
+$size: 15px;
+$font-lineheight: 22px;
+// $font-size-base: 18px;
+
+$font-small: $size - 2px;
+$font-large: $size + 3px;
+
+
+
+//   Measurements
+$offset: 5px;
+$z-popup: 100; // 
+$z-top: 90;
+
+
+
+$color-phdir: #71EFF5;            
+$color-teal: $color-phdir;  
 $color-dull: #90D9DD;             
 
 $color-yellow: #FCCB4C;           
@@ -15,7 +42,8 @@ $color-pink: #FA5486;
 $color-gray: #374F6A;             
 // $color-gray-light: #F0F0F0; // specced out, but unusable bc of coeur   
 
-
+      
+$color-body: $color-phdir;
 $color-main: $color-phdir;        
 $color-secondary: $color-gray;    
 $color-tertiary: $color-pink;     
@@ -27,21 +55,8 @@ $color-body: $color-secondary;
 // $color-active: $color-main;
 
 
-$sidebar-color-link: $color-links; 
+$sidebar-color-link: $color-links;
 
-$size-base: 15px;
-$font-lineheight: 22px;
-// $font-size-base: 18px;
-
-$font-small: $size-base - 2px;
-$font-large: $size-base + 3px;
-
-
-
-//   Measurements
-$offset: 5px;
-$z-popup: 100; // 
-$z-top: 90;
 
 $color-focus: $color-tertiary;
 
@@ -49,20 +64,18 @@ $color-focus: $color-tertiary;
 
 
 
-@import '../../node_modules/coeur/stylecoeur/index.scss';
 
-
-@include colorate('phdir', $color-phdir);
-@include colorate('teal', $color-teal);
-@include colorate('dull', $color-dull);
-@include colorate('yellow', $color-yellow);
-@include colorate('pink', $color-pink);
-@include colorate('gray', $color-gray);
-@include colorate('gray-light', $color-gray-light);
-@include colorate('main', $color-main);
-@include colorate('secondary', $color-secondary);
-@include colorate('tertiary', $color-tertiary);
-@include colorate('active', $color-phdir);
+// @include colorate('phdir', $color-phdir);
+// @include colorate('teal', $color-teal);
+// @include colorate('dull', $color-dull);
+// @include colorate('yellow', $color-yellow);
+// @include colorate('pink', $color-pink);
+// @include colorate('gray', $color-gray);
+// @include colorate('gray-light', $color-gray-light);
+// @include colorate('main', $color-main);
+// @include colorate('secondary', $color-secondary);
+// @include colorate('tertiary', $color-tertiary);
+// @include colorate('active', $color-phdir);
 
 
 %focus-pink {
@@ -81,6 +94,37 @@ $color-focus: $color-tertiary;
   // font-family: 'Playfair Display', 'Georgia', serif;
   @extend %font-sans;
 }
+
+
+
+@import '../../node_modules/coeur/styles/index.scss';
+
+@include addtheme($theme-sizes)
+
+
+$phdir_: (
+  phdir: #71EFF5,
+  teal: #71EFF5,
+  dull: #90D9DD,
+  yellow: #FCCB4C,
+  pink: #FA5486,
+  gray: #374F6A,
+);
+@include colorate($phdir_);
+
+
+$context_: (
+  main: usetheme(phdir, $colors_),
+  secondary: usetheme(gray, $colors_),
+  tertiary: usetheme(pink, $colors_),
+
+  active: usetheme(pink, $colors_),
+  links: usetheme(pink, $colors_),
+  body: usetheme(secondary, $colors_),
+
+);
+@include colorate($context_);
+
 
 
 

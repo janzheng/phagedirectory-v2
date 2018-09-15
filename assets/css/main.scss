@@ -1,8 +1,5 @@
 
 
-
-
-
 @import 'settings.scss';
 
 
@@ -27,15 +24,15 @@ h1 {
 }
 
 h2 {
-  // font-size: $size-p2;
+  // font-size: $size-2;
   line-height: $font-h2 * 1.2;
   // padding-top:0;
   // padding-bottom: 0;
 }
 
 h3 {
-  font-size: $size-p2;
-  line-height: $size-p3;
+  font-size: $size-2;
+  line-height: $size-3;
   // padding-top:0;
   // padding-bottom: 0;
 }
@@ -74,8 +71,8 @@ h3 {
 }
 .subtitle {
   &, p {
-    font-size: $size-p1;
-    line-height: $size-p2;
+    font-size: $size-1;
+    line-height: $size-2;
     @extend %font-serif;
   }
 }

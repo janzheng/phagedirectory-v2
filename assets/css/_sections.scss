@@ -86,7 +86,7 @@ blockquote {
     line-height: $font-larger + 8px;
     @extend %font-serif;
     font-style: italic;
-    @extend ._antialias;
+    @extend .--antialias;
   }
   .source {
     @extend %font-serif;
@@ -161,11 +161,11 @@ blockquote {
   }
   .Footer-right,
   .Footer-top {
-    margin-right: $size-p8;
+    margin-right: $size-8;
   }
 
   @include screen-xs {
-    margin-bottom: $size-p8;
+    margin-bottom: $size-8;
     // to make room for driftt
   }
 }

@@ -2,16 +2,19 @@
 
   <ContentFrame class="Home">
 
-    <section class="Home-intro Home-container max copy _padding-2" v-html="content('Content.home-intro')">
+    <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
     </section>
+
     <section class="Home-container max copy _padding-2 _grid-3-1">
       <div>
-        <FormVomFeedback :postUrl="postUrl" class=""/>
+        <!-- <FormVomFeedback :postUrl="postUrl" class=""/> -->
       </div>
 
       <div>
         <div class="Home-media">
-          <Twitter />
+          <no-ssr>
+            <Twitter />
+          </no-ssr>
         </div>
       </div>
     </section>
@@ -28,10 +31,9 @@ import ContentFrame from '~/components/ContentFrame.vue'
 import Twitter from '~/components/Twitter.vue'
 import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 
-// import {fetchCytosis, getCytosis} from '~/assets/helpers.js'
-import { cytosis } from '~/assets/helpers.js'
-
-
+import { mapState } from 'vuex'
+// import Cytosis from 'cytosis'
+// import Cytosis from '~/other/cytosis'
 export default {
 
   components: {
@@ -42,54 +44,59 @@ export default {
 
   middleware: 'pageload',
   
-  async asyncData({ app, store, env, params }) {
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    // console.log('store cytosis: ' , store.state)
+  async asyncData({app, env, route, store}) {
+    // console.log('asyncdata store: ', store.state.cytosis)
+    // const cytosis = await store.dispatch('loadCytosis', {
+    //   env,
+    //   tableIndex: 'static',
+    // })
     return {
       postUrl: env.ext_handler,
-      cytosis: _cytosis
+      cytosis: store.state.cytosis,
+      intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown']
     }
   },
 
   data: function () {
-    // console.log('policies data:', this.cytosis, this)
+    // console.log('data cyt:', this.$store.state.cytosis) 
     return {
-      cytosis: this.$store.state.cytosis,
+      // cytosis: this.$store.state.cytosis,
     }
   },
   
   mounted: function () {
   },
 
+  computed: {
+    ...mapState([
+      'Content',
+      ]),
+
+  },
+
   methods: {
-    rawContent(findStr) {
-      return this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : ''
+    // rawContent(findStr) {
+    //   // return this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : ''
 
-      // return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
-    content(findStr) {
-      // let content = this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
-      // return this.$md.render(content)
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    }
-    // getContent: function(findStr) {
-    //     console.log('gC:', findStr, this.content)
-    //   let obj = ''
-    //   if(this.content) {
-    //     obj = getCytosis().find(findStr, [this.content])[0]['fields']['Markdown']
-    //   }
-    //   return obj
+    //   // return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
     // },
-    // getSkills: function(skills) {
-    //   if(this.skills && skills) {
-    //     const _skills = getCytosis().getLinkedRecords(skills, this.skills)
-    //     // console.log('skills:' , skills, this.skills, _skills)
-    //     return _skills
+    // content(findStr) {
+    //   console.log ('cczzzzcc', this.cytosis, orange.find)
+    //   // console.log ('???', this.$store.state.cytosis.get('recX0na4jnDb3ThuZ' ))
+    //   if (!this.cytosis.find) { // wait for init
+    //     console.log('no cytosis?', this.cytosis,)
+    //     return ''
     //   }
+
+    //   const record = this.cytosis.find(findStr)[0]
+    //   if(record.fields.Markdown) {
+    //     return this.$md.render( record.fields.Markdown )
+    //   }
+
+    //   return this.Content[0].fields.Markdown // if error
     // }
+  },
 
-
-  }
 
 }
 </script>

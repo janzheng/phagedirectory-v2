@@ -15,9 +15,14 @@
       <AlertSignup classes="footer" :description="true" />
     </div>
 
-    {{ initDrift }}
+    <no-ssr>
+      {{ initDrift }}
+    </no-ssr>
 
-    <Policy/>
+    <!-- <no-ssr placeholder="Loading..."> -->
+    <no-ssr>
+      <Policy/>
+    </no-ssr>
     <Footer/>
   </div>
 </template>
@@ -126,9 +131,10 @@ export default {
       return this.$store.state.search.string
     },
     initDrift() {
-
+      console.log('[Checking drift...]')
       // drift for drift@phage.directory
-      if(this.$store.state.policy && !this.$store.state.drift) {
+      if(this.$store.state.policy && !this.$store.state.drift && !process.server) {
+        console.log('[Starting drift...]')
         this.$store.dispatch('updateCreate', {drift: true}
           )
         !function() {
