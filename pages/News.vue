@@ -1,9 +1,7 @@
 <template>
 
   <ContentFrame class="News">
-    <section class="narrow copy _margin-center">
-
-      News Component
+    <section class="narrow copy _margin-top _margin-center">
 
       <Article :blog="blog" :categoryName="getCategoryName" v-if="slug && blog"/>
 

@@ -243,7 +243,7 @@ module.exports = {
     }],
   ],
   markdownit: {
-    preset: 'default',
+    // preset: 'default',
     injected: false, // markdownit.js plugin takes over injection
     // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
     // use the custom plugin/markdownit to inject properly; the official thing is broken
@@ -381,30 +381,30 @@ module.exports = {
 
 
         // blog / news / 'viral' newsletter; resolves to generic Blog page
-        {
-          name: 'Blog.item',
-          path: '/blog/:slug',
-          component: resolve(__dirname, 'pages/Blog.vue')
-        },
+        // {
+        //   name: 'Update.item',
+        //   path: '/updates/:slug',
+        //   component: resolve(__dirname, 'pages/Updates.vue')
+        // },
         // { // split up into the news component
         //   name: 'News',
         //   path: '/news',
         //   component: resolve(__dirname, 'pages/Blog.vue')
         // },
-        {
-          name: 'News.item',
-          path: '/news/:slug',
-          component: resolve(__dirname, 'pages/Blog.vue')
-        },
-        {
-          name: 'Updates',
-          path: '/updates',
-          component: resolve(__dirname, 'pages/Blog.vue')
-        },
+        // {
+        //   name: 'News.item',
+        //   path: '/news/:slug',
+        //   component: resolve(__dirname, 'pages/Blog.vue')
+        // },
+        // {
+        //   name: 'Updates',
+        //   path: '/updates',
+        //   component: resolve(__dirname, 'pages/Blog.vue')
+        // },
         {
           name: 'Updates.item',
           path: '/updates/:slug',
-          component: resolve(__dirname, 'pages/Blog.vue')
+          component: resolve(__dirname, 'pages/Updates.vue')
         },
 
 

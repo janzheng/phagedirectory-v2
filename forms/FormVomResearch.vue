@@ -1,5 +1,5 @@
 <template>
-  <div class="VomJoin Research _card">
+  <div class="VomJoin Research">
     <Form class=""
           :intro="intro"
           :source="source"
@@ -7,7 +7,7 @@
           :thanks="thanks"
 
           :privacy="privacy"
-          errorMsg="Something went wrong, please try again"
+          :errorMsg="error"
           table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
@@ -15,24 +15,36 @@
           notes="FormVomResearch submission"
     >
     </Form>
+
+
   </div>
 </template>
 
 <script>
 
 import Form from '~/components/Form.vue'
-import { cytosis } from '~/assets/helpers.js'
 
 export default {
 
-  props: ['postUrl', 'intro', 'source', 'cta', 'thanks', 'privacy'],
+  // props: ['postUrl', 'intro', 'source', 'cta', 'thanks', 'privacy'],
   components: {
     Form,
   },
 
   data: function () {
+    const cytosis = this.$store.state.cytosis
     return {
-      cytosis: this.$store.state.cytosis,
+      postUrl: this.$store.state.ext_handler,
+      cytosis,
+
+      intro: this.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['Markdown'],
+      source: this.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['JSON'],
+      isPublished: this.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'],
+      
+      error: this.$cytosis.find('Content.error-form', cytosis.tables)[0]['fields']['Markdown'],
+      thanks: this.$cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
+      cta: this.$cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],
+      privacy: this.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
@@ -40,12 +52,6 @@ export default {
   },
 
   methods: {
-    rawContent(findStr) {
-      return this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
-    },
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
 
   }
 

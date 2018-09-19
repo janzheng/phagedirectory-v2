@@ -216,3 +216,35 @@
 }
 
 
+
+// embedded links to artices, videos, etc.
+
+.Outlink {
+  padding: $size;
+  margin-bottom: $size;
+  background-color: $color-ui-light;
+  border-radius: $radius;
+
+  &.--article {
+    @extend ._grid-2-1;
+
+    .Outlink-title {
+      @extend h5;
+    }
+    .Outlink-desc {
+      margin-bottom: $size-half;
+    }
+    .Outlink-source {
+      // @extend ._tag;
+      font-size: $font-small;
+    }
+    .Outlink-image {
+      width: 100%;
+    }
+
+
+  }
+}
+
+
+

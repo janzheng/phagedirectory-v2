@@ -1,6 +1,6 @@
 <template>
 
-  <ContentFrame class="Join">
+  <div class="Join">
     <section class="narrow copy _width-content-max _margin-center " >
       <div class="Join-intro" v-html="$md.render(intro || '')"></div>
     </section>
@@ -10,104 +10,71 @@
          :class="JoinOptionsClasses"
     >
       <div class="Join-research Join-grid _card _padding" v-if="researchFormPublished">
-        <div class="_margin-bottom" v-html="$md.render(researchFormContent || '')"></div>
+        <div class="_margin-bottom" v-html="$md.render(researchFormIntro || '')"></div>
         <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='research'"></div>
       </div>
-<!-- 
-      <div class="Join-lab Join-grid _card" v-if="find('Content.join-lab-form').get('isPublished')">
-        <div class="_margin-bottom" v-html="content('Content.join-lab')"></div>
-        <div class="Join-cta _button Directory-btn _width-full" v-html="rawContent('Content.join-cta')" @click="mode='lab'">CTA</div>
+
+      <div class="Join-research Join-grid _card _padding" v-if="labFormPublished">
+        <div class="_margin-bottom" v-html="$md.render(labFormIntro || '')"></div>
+        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='lab'"></div>
       </div>
 
-      <div class="Join-industry Join-grid _card" v-if="find('Content.join-industry-form').get('isPublished')">
-        <div class="_margin-bottom" v-html="content('Content.join-industry')"></div>
-        <div class="Join-cta _button Directory-btn _width-full" v-html="rawContent('Content.join-cta')" @click="mode='industry'">CTA</div>
+      <div class="Join-industry Join-grid _card _padding" v-if="industryFormPublished">
+        <div class="_margin-bottom" v-html="$md.render(industryFormIntro || '')"></div>
+        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='industry'">CTA</div>
       </div>
-       -->
     </div>
-    
 
     <section class="narrow copy _card Join-form _width-content-max _margin-center _padding" v-if="mode!=='select'">
       <div class="Join-back _button --short Directory-btn" @click="mode='select'">Back</div>
-      <Form class=""
-          v-if="mode=='research'" 
-          :intro="researchFormContent"
-          :source="researchForm"
-          :cta="joinCta"
-          :thanks="thanks"
-
-          :privacy="privacy"
-          errorMsg="Something went wrong, please try again"
-          table="Dynamic"
-          :postUrl="postUrl"
-          :alert="true"
-          :json="true"
-          notes="FormVomResearch submission"
-      >
-      </Form>
+      <FormVomResearch v-if="mode=='research'"/>
+      <FormVomLab v-if="mode=='lab'"/>
+      <FormVomIndustry v-if="mode=='industry'"/>
     </section>
 
-<!-- 
-      <div class="Join-cta _grid-2">
-        <div>Researchers</div>
-        <div>Medical professionals</div>
-        <div>Patients</div>
-      </div>
-
-      <div class="Join-message">
-        the join now / fight message
-      </div> -->
-
-  </ContentFrame>
+  </div>
 </template>
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
 import { mapState } from 'vuex'
-import Cytosis from '~/other/cytosis'
-import Form from '~/components/Form.vue'
 
-// import FormVomIndustry from '~/forms/FormVomIndustry.vue'
-// import FormVomLab from '~/forms/FormVomLab.vue'
-// import FormVomResearch from '~/forms/FormVomResearch.vue'
+import FormVomIndustry from '~/forms/FormVomIndustry.vue'
+import FormVomLab from '~/forms/FormVomLab.vue'
+import FormVomResearch from '~/forms/FormVomResearch.vue'
 
 export default {
 
   components: {
-    ContentFrame,
-    Form,
-    // FormVomIndustry,
-    // FormVomLab,
-    // FormVomResearch
+    FormVomIndustry,
+    FormVomLab,
+    FormVomResearch
   },
 
+  layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({env, route, store}) {
-    const cytosis = await store.dispatch('loadCytosis', {
-      env,
-      tableIndex: 'static',
-    })
+  async asyncData({app, env, route, store}) {
+
+    const cytosis = store.state.cytosis
     return {
       postUrl: env.ext_handler,
       cytosis,
 
-      intro: Cytosis.find('Content.join-intro', cytosis.tables)[0]['fields']['Markdown'],
+      intro: app.$cytosis.find('Content.join-intro', cytosis.tables)[0]['fields']['Markdown'],
 
-      researchFormContent: Cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['Markdown'],
-      researchForm: Cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['JSON'],
-      researchFormPublished: Cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'],
+      researchFormIntro: app.$cytosis.find('Content.join-research', cytosis.tables)[0]['fields']['Markdown'],
+      researchFormPublished: true, //app.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'] || false,
       
-      labForm: Cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['JSON'],
-      labFormPublished: Cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'],
+      labFormIntro: app.$cytosis.find('Content.join-lab', cytosis.tables)[0]['fields']['Markdown'],
+      labFormPublished: true, //app.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'] || false,
       
-      industryForm: Cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['JSON'],
-      industryFormPublished: Cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['isPublished'],
+      industryFormIntro: app.$cytosis.find('Content.join-industry', cytosis.tables)[0]['fields']['Markdown'],
+      industryFormPublished: true, //app.$cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['isPublished'] || false,
 
-      thanks: Cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
-      joinCta: Cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],
-      privacy: Cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
+      thanks: app.$cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
+      joinCta: app.$cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],
+      privacy: app.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

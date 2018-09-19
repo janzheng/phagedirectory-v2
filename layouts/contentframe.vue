@@ -1,14 +1,17 @@
 <template>
-  <div class="ContentFrame container">
+  <div class="ContentFrame container" id="top" >
     <Header/>
-
-    <div class="_margin-bottom" v-if="search">
-      <Directory :fromSearch="true"/>
+<!-- 
+    <div class="_margin-bottom" v-if="searchString">
+      <Directory />
     </div>
 
-
-    <div class="_margin-bottom" v-if="!search">
-      <slot></slot>
+    <div class="_margin-bottom" v-if="!searchString">
+      <nuxt/>
+    </div>
+ -->
+    <div class="_width-content-max _margin-center _margin-bottom" >
+      <nuxt/>
     </div>
 
     <div class="AlertSignup-container">
@@ -30,7 +33,7 @@
 
 <script>
 
-
+import { mapState } from 'vuex'
 import VueScrollTo from 'vue-scrollto'
 
 import Header from '~/components/Header.vue'
@@ -42,8 +45,6 @@ import AlertSignup from '~/components/AlertSignup.vue'
 
 export default {
 
-  props: [],
-
   components: {
     Header,
     Footer,
@@ -52,84 +53,102 @@ export default {
     Directory
   },
 
-  // head () {
-  //   return {
-  //     title: this.title,
-  //     meta: [
-  //       { hid: 'description', name: 'description', content: 'My custom description' }
-  //     ]
-  //   }
-  // },
-  data: function () {
+  head () {
     return {
+      title: this.$store.state.pageName || 'Phage Directory',
     }
   },
 
+  async asyncdata () {
+  },
 
-  mounted: function (params) {
-    this.addListeners()
+  data () {
+    return {
+      scrollY: 0,
+      route: '',
+      // searchString: 'testStr'
+      // children: route ? route.children : undefined,
+    }
+  },
 
-    const _this = this
-    this.$nextTick(function () {
+  beforeUpdate () {
+    const route = this.$router.options.routes.find((route) => {
+      return route.path === this.$route.path
+    })
+
+    // console.log('new route', route)
+    this.route = route
+  },
+
+  watch: {
+    '$route' (to, from) {
+      // react to route changes...
+      // console.log('ROUTE OBJECT', to, from)
+      const _this = this
       let scrolled = false
-      this.$router.afterEach((r) => {
-        console.log('router hash scroll') 
+      this.$nextTick(function () {
+        if(_this.$route.hash && !scrolled) {
+          // console.log('-- hash scroll')
+        } 
         if(_this.$route.hash) {
-          const _this=this
-          const scroll = _.debounce(function (e) {
+          const scroll = _.throttle(function (e) {
             VueScrollTo.scrollTo(_this.$route.hash, 500, {
-                offset: -20
-              })
-          }, 200)
+             offset: -20
+           })
+          }, 300)
           scroll()
         }
         scrolled = true
       })
 
-      if(_this.$route.hash && !scrolled) {
-        console.log('-- basic hash scroll')
-        VueScrollTo.scrollTo(this.$route.hash, 500, {
-          offset: -20
-        })
-      }
-
-    })
-
+    }
   },
-  beforeDestroy: function() {
-    this.removeListeners()
-  },
+
 
   // link intercept idea from: https://github.com/nuxt/nuxtjs.org/blob/master/components/HtmlParser.vue
   
   methods: {
-    navigate(event) {
-      const href = event.target.getAttribute('href')
-      if (href && href[0] === '/') {
-        event.preventDefault()
-        this.$router.push(href)
-      }
-    },
-    addListeners() {
-      this._links = this.$el.getElementsByTagName('a')
-      for (let i = 0; i < this._links.length; i++) {
-        this._links[i].addEventListener('click', this.navigate, false)
-      }
-    },
-    removeListeners() {
-      if(this._links) {
-        for (let i = 0; i < this._links.length; i++) {
-          this._links[i].removeEventListener('click', this.navigate, false)
-        }
-        this._links = []
+    // handleScroll: _.throttle(function (e) {
+    //   // console.log(e)
+    //   this.scrollY = window.scrollY
+    // }, 200),
+    handleScroll(e) {
+      if(process.browser) {
+        const _this = this
+        _.throttle(function (e) {
+          _this.scrollY = window.scrollY
+        }, 200)()
       }
     }
+
+    // navigate(event) {
+    //   const href = event.target.getAttribute('href')
+    //   if (href && href[0] === '/') {
+    //     event.preventDefault()
+    //     this.$router.push(href)
+    //   }
+    // },
+    // addListeners() {
+    //   this._links = this.$el.getElementsByTagName('a')
+    //   for (let i = 0; i < this._links.length; i++) {
+    //     this._links[i].addEventListener('click', this.navigate, false)
+    //   }
+    // },
+    // removeListeners() {
+    //   if(this._links) {
+    //     for (let i = 0; i < this._links.length; i++) {
+    //       this._links[i].removeEventListener('click', this.navigate, false)
+    //     }
+    //     this._links = []
+    //   }
+    // }
   },
 
   computed: {
-    search() {
-      return this.$store.state.searchString
-    },
+    ...mapState([
+      'searchString'
+      ]),
+
     initDrift() {
       console.log('[Checking drift...]')
       // drift for drift@phage.directory
@@ -162,8 +181,16 @@ export default {
       }
       return undefined
     }
-  }
+  },
 
+  created () {
+    if(process.browser)
+      window.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    if(process.browser)
+      window.removeEventListener('scroll', this.handleScroll);
+  }
 }
 
 

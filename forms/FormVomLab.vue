@@ -1,36 +1,50 @@
 <template>
-  <div class="VomJoin Lab _card">
+  <div class="VomJoin Lab">
     <Form class=""
-          :intro="rawContent('join-lab-form')"
-          source="join-lab-form"
-          :cta="rawContent('join-form-cta')"
-          :thanks="rawContent('join-form-thanks')"
+          :intro="intro"
+          :source="source"
+          :cta="cta"
+          :thanks="thanks"
 
-          privacy="privacy-forms"
-          errorMsg="Something went wrong, please try again"
+          :privacy="privacy"
+          :errorMsg="error"
           table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
+          :json="true"
+          notes="FormVomLab submission"
     >
     </Form>
+
+
   </div>
 </template>
 
 <script>
 
 import Form from '~/components/Form.vue'
-import { cytosis } from '~/assets/helpers.js'
 
 export default {
 
-  props: ['postUrl'],
+  // props: ['postUrl', 'intro', 'source', 'cta', 'thanks', 'privacy'],
   components: {
     Form,
   },
 
   data: function () {
+    const cytosis = this.$store.state.cytosis
     return {
-      cytosis: this.$store.state.cytosis,
+      postUrl: this.$store.state.ext_handler,
+      cytosis,
+
+      intro: this.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['Markdown'],
+      source: this.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['JSON'],
+      isPublished: this.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'],
+      
+      error: this.$cytosis.find('Content.error-form', cytosis.tables)[0]['fields']['Markdown'],
+      thanks: this.$cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
+      cta: this.$cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],
+      privacy: this.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
@@ -38,12 +52,6 @@ export default {
   },
 
   methods: {
-    rawContent(findStr) {
-      return this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
-    },
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
 
   }
 

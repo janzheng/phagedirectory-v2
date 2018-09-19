@@ -13,15 +13,19 @@ export default async function ({route, env, store}) {
   const routeName = route.name;
   // console.log('pageload ctx:', context);
 
-  if(routeName != 'phages' && routeName != 'labs') {
-  // console.log('clear search.');
-    store.dispatch('update', 
-      {search: {
-          string: '',
-          url: ''
-        }
-      }
-    )
+  // if(routeName != 'phages' && routeName != 'labs') {
+  // // console.log('clear search.');
+  //   store.dispatch('update', 
+  //     {
+  //       searchString: '',
+  //       searchUrl: '',
+  //     }
+  //   )
+  // }
+
+  // add the external handler to store
+  if(!store.state.ext_handler || store.state.ext_handler == '') {
+    store.commit('update', {ext_handler: env.ext_handler})
   }
 
   console.log('pageload:', process.server, process.client, process.static)
@@ -36,12 +40,12 @@ export default async function ({route, env, store}) {
     if(process.server) {
       // checks to prevent over-eager fetching?
       let staticData, dynamicData
-      if(!store.state.Content) {
-        staticData = store.dispatch('loadCytosis', {
-          env,
-          tableIndex: 'static',
-        })
-      }
+      // if(!store.state.Content) {
+      //   staticData = store.dispatch('loadCytosis', {
+      //     env,
+      //     tableIndex: 'static',
+      //   })
+      // }
 
       // Load dynamic data
       // checks to prevent over-eager fetching?

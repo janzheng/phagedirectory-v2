@@ -17,7 +17,7 @@
               <router-link to='/news' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">News</router-link>
               <router-link to='/join' class="Header-join --short _hidden-sm _button _margin-none">Join</router-link>
             </div>
-            <input v-model.trim="searchString" class="Header-search _form-input --width-full _inline" type="text" name="searchbar" id="searchbar" placeholder="Search"/>
+            <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" @input="search"/>
           </div>
           
         </div>
@@ -47,29 +47,30 @@ export default {
   computed: {
     searchString: {
       get: function () {
-        return this.$store.state.search.string
+        return this.$store.state.searchString
       },
       // setter
       set: function (str) {
-        // console.log('setter')
         const url = `/search/${this.searchString}`
         this.$store.dispatch('updateCreate', {
-          search: {
-            string: str || '',
-            url: url
-          }
+          searchSource: 'header',
+          searchString: str || '',
+          searchUrl: url,
         })
       }
     }
   },
 
   methods: {
-    search() {
-      const url = `/search/${this.searchString}`
+    search(str) {
+      console.log('handling search:',this.searchString)
+      // const url = `/search/${this.searchString}`
+      const url = `/phages`
       // console.log('search url:', url, '?', this.$router.history)
       // $router history push forces a page reload... use window to replace
       // store the searchstring into store?
-      // this.$router.replace(url)
+      if(this.searchString != '')
+        this.$router.replace(url)
 
       // window.location = url;
       // this.$store.dispatch('updateCreate', {

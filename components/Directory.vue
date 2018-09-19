@@ -1,15 +1,16 @@
 
 <template>
 
-  <section class="Directory" :class="classes" >
+  <section class="Directory" >
+    <!-- src: {{ searchSource }} / {{ search }} -->
     <!-- Directory search: {{search}} / view: {{view}} -->
 
     <!-- <section class="Directory-intro narrow"> -->
     <section class="Directory-intro narrow --left" v-if="!search">
       <!-- <h1 class="Directory-name">Phage Directory</h1> -->
       <h1 class="Directory-name">{{viewName}} Directory</h1>
-      <div class="Directory-desc block" v-html="content('directory-phages')" v-if="view == 'phages'"></div>
-      <div class="Directory-desc block" v-html="content('directory-labs')" v-if="view == 'labs'"></div>
+      <div class="Directory-desc block" v-html="$md.render(phagesText)" v-if="view == 'phages'"></div>
+      <div class="Directory-desc block" v-html="$md.render(labText)" v-if="view == 'labs'"></div>
       <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
       <!-- <h6 class="Directory-name">Phage Directory</h6> -->
       <!-- The following individuals and organizations work with phages of bacterial hosts of the phages.
@@ -20,7 +21,6 @@
     </section>
     <!-- </section> -->
 
-
     <div class="Directory-list">
       <div class="Directory-nav-container">
         <div class="Directory-nav _grid-auto-1">
@@ -28,7 +28,7 @@
             <router-link to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none" :class="{'--active': view == 'phages'}">Phages</router-link>
             <router-link to="/labs" class="Directory-btn _button Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
           </div>
-          <input v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" ref="search" />
+          <input ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" />
         </div>
       </div>
 
@@ -75,11 +75,10 @@
 
 <script>
 
-import { cytosis } from '~/assets/helpers.js'
+import { mapState } from 'vuex'
 import DirectoryView from '~/components/DirectoryView.vue'
 
 export default {
-  props: ['fromSearch'],
 
   components: {
     DirectoryView
@@ -87,18 +86,25 @@ export default {
 
   data: function () {
     return {
-      cytosis: this.$store.state.cytosis,
-      classes: '',
-      test: undefined
+      phagesText: this.$cytosis.find('Content.directory-phages', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      labText: this.$cytosis.find('Content.directory-labs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
   mounted: async function () {
+    // console.log('mounted')
+    this.setFocus()
   },
   updated: async function () {
+    this.setFocus()
   },
 
   computed: {
+    ...mapState([
+      'searchSource',
+      // 'test'
+      ]),
+
     view() {
       if(this.$route.name == 'phages' || this.$route.name == 'labs')
         return this.$route.name
@@ -114,35 +120,37 @@ export default {
 
       return 'Phage'
     },
+
+
     search: {
       get: function () {
-        // return this.test
-        return this.$store.state.search.string
+        // return this.$store.state.test
+        return this.$store.state.searchString
       },
       // setter
       set: function (str) {
         const url = `/search/${this.search}`
-        this.test = str
         this.$store.dispatch('update', {
-          search: {
-            string: str,
-            url: url
-          }
+          searchSource: 'page',
+          searchUrl: url
         })
-        this.$nextTick(() => {
-          if(this.$refs.search) // might unfocus and unmount the component before tick
-            this.$refs.search.focus()
-        }) // required bc dispatch updates this component
 
+        this.$store.dispatch('update', {searchString: str})
       }
     }
   },
 
 
   methods: {
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
+    setFocus() {
+      this.$nextTick(() => {
+        // this.$refs.search.focus()
+        if(this.$refs.search) { // might unfocus and unmount the component before tick
+          this.$refs.search.focus()
+        }
+      }) // required bc dispatch updates this component
+
+    }
   }
 
 }

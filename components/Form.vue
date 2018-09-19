@@ -1,6 +1,13 @@
 <template>
 
-<!-- need a sending state -->
+<!-- 
+
+  JSON mode means JSON-ONLY!! all content will be saved into the JSON column
+  - normally form data is saved into Airtable columns. Sometimes there's a mismatch, and airtable won't save correctly
+  - this also means that your forms will quietly drop user form data
+  - with JSON-mode, all data is purely saved into the JSON column, meaning you'll get all your data, but it'll be fugly 
+
+ -->
 
   <div class="Form"> 
     <div class="Form-intro " v-html="$md.render(intro)" v-if="intro">
@@ -103,9 +110,11 @@ export default {
         // console.log('Submitting test data: ', data)
         axios.post(this.postUrl, data)
         .then(function (response) {
-          console.log('response', response);
-          _this.success = true
-          _this.sending = false
+          console.log('Message sent! Status:', response.status);
+          // if(status.status == 200) {
+            _this.success = true
+            _this.sending = false
+          // }
         })
         .catch(function (error) {
           console.log('error', error);

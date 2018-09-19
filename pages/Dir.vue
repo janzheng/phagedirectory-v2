@@ -1,36 +1,39 @@
 <template>
-  <ContentFrame class="Design container">
-    <Directory /> 
-  </ContentFrame>
+  <Directory />
 </template>
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
 import Directory from '~/components/Directory.vue'
-
-import { cytosis } from '~/assets/helpers.js'
 
 export default {
 
   components: {
-    ContentFrame,
     Directory,
   },
 
+  layout: 'contentframe',
   middleware: 'pageload',
-  
-  async asyncData({ app, store, env, params }) {
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
+
+  async asyncData({app, env, route, store}) {
+    const cytosis = store.state.cytosis
+
+    const slug = unescape(route.params.slug)
+    const article = app.$cytosis.find(slug, [store.state.Blog], ['Slug'])
+
+    if (article && article.fields.isPublished == false)
+      this.article = undefined
+
     return {
-      cytosis: _cytosis,
-      ... _cytosis.tables
+      intro: app.$cytosis.find('Content.updates-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      title: app.$cytosis.find('Content.updates-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      slug,
+      article
     }
   },
 
   data: function () {
     return {
-      cytosis: this.$store.statecytosis,
     }
   },
 
@@ -40,11 +43,7 @@ export default {
   computed: {
   },
 
-
   methods: {
-    content(findStr) {
-      return this.$md.render( this.cytosis.find(findStr)[0] && this.cytosis.find(findStr)[0].fields.Markdown ? this.cytosis.find(findStr)[0].fields.Markdown : '')
-    },
   }
 }
 

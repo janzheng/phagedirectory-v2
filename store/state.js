@@ -1,13 +1,14 @@
 export default { 
 
+  ext_handler: '',
   policy: false,
   currentPolicy: false,
-  search: {
-    string: '',
-    url: '',
-  },
+  searchSource: '',
+  searchString: '',
+  searchUrl: '',
   cytosis: {},
   
+  // test: 'init test',
   // populate the tables so they can be reactive
   // Content: {},
   // Blog: {},

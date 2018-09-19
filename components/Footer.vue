@@ -27,7 +27,7 @@
         <div class="_margin-bottom-half _right-sm _center-xs">
           <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
           <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
-          <span class="_margin-right "><router-link to="/feedback">Contact Us</router-link></span>
+          <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
           <span class="_margin-right "><router-link to="/updates">Updates</router-link></span>
           <span class=" "><router-link to="/policies">Site Policy</router-link></span>
         </div>

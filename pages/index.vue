@@ -1,13 +1,13 @@
 <template>
 
-  <ContentFrame class="Home">
+  <div class="Home">
 
     <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
     </section>
 
-    <section class="Home-container max copy _padding-2 _grid-3-1">
+    <section class="Home-container copy _padding-2 _grid-3-1">
       <div>
-        <!-- <FormVomFeedback :postUrl="postUrl" class=""/> -->
+        <FormVomFeedback class=""/>
       </div>
 
       <div>
@@ -19,7 +19,7 @@
       </div>
     </section>
  
-  </ContentFrame>
+  </div>
 </template>
 
 
@@ -42,8 +42,9 @@ export default {
     FormVomFeedback
   },
 
+  layout: 'contentframe',
   middleware: 'pageload',
-  
+
   async asyncData({app, env, route, store}) {
     // console.log('asyncdata store: ', store.state.cytosis)
     // const cytosis = await store.dispatch('loadCytosis', {

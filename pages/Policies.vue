@@ -1,59 +1,52 @@
 <template>
 
-  <ContentFrame class="Policies container">
-    <section class="">
-      <!-- header -->
-      <div class="_grid-1-5">
-        <div></div>
-        <article class="narrow" v-html="content('Content.policies-intro')"></article>
-      </div>
+  <div class="Policies container">
+    <!-- header -->
+    <div class="_grid-1-5">
+      <div></div>
+      <article class="narrow" v-html="$md.render(intro || '')"></article>
+    </div>
 
-      <!-- body -->
-      <div class="_grid-1-5">
+    <!-- body -->
+    <div class="_grid-1-5 _grid-gap-large">
 
-        <div class="SideNav _sidebar">
-          <div class="_sidebar-content">
-            <router-link to="#terms">Terms of Use</router-link>
-            <router-link to="#privacy">Privacy Policy</router-link>
-            <router-link to="#alerts">Phage Alerts</router-link>
-            <router-link to="#cookies">Cookies Policy</router-link>
-          </div>
+      <div class="SideNav _sidebar">
+        <div class="_sidebar-content">
+          <router-link to="#terms">Terms of Use</router-link>
+          <router-link to="#privacy">Privacy Policy</router-link>
+          <router-link to="#alerts">Phage Alerts</router-link>
+          <router-link to="#cookies">Cookies Policy</router-link>
         </div>
-
-        <article class="Policies-content narrow">
-          <div class="" v-html="content('Content.site-policy')"></div>
-        </article>
       </div>
-    </section>
 
-  </ContentFrame>
+      <article class="Policies-content narrow">
+        <div class="" v-html="$md.render(policies || '')"></div>
+      </article>
+    </div>
+
+  </div>
 </template>
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
-import { cytosis } from '~/assets/helpers.js'
-
 export default {
 
   components: {
-    ContentFrame
   },
   
+  layout: 'contentframe',
   middleware: 'pageload',
-
-  async asyncData({ app, store, env, params }) {
-    let _cytosis = store.cytosis ? store.cytosis : await cytosis(env, store)
-    // console.log('store cytosis: ' , store.state)
+  
+  async asyncData({app, env, route, store}) {
+    const cytosis = store.state.cytosis
     return {
-      cytosis: _cytosis
+      intro: app.$cytosis.find('Content.policies-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      policies: app.$cytosis.find('Content.site-policy', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
   data: function () {
-    // console.log('policies data:', this.cytosis, this)
     return {
-      cytosis: this.$store.state.cytosis,
     }
   },
 
@@ -65,10 +58,6 @@ export default {
 
 
   methods: {
-    content(findStr) {
-      let content = this.cytosis.find(findStr)[0] ? this.cytosis.find(findStr)[0].fields.Markdown : ''
-      return this.$md.render(content)
-    }
   }
 
 }

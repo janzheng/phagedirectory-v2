@@ -1,28 +1,28 @@
 <template>
-
-  <section class="AnonFeedback container narrow copy _margin-center">
-    <FormVomFeedback />
+  <section class="Contact container narrow copy _margin-center">
+    <FormContact />
   </section>
 </template>
 
 <script>
 
-import FormVomFeedback from '~/forms/FormVomFeedback.vue'
+import ContentFrame from '~/components/ContentFrame.vue'
+import FormContact from '~/forms/FormContact.vue'
 
 export default {
 
   components: {
-    FormVomFeedback
+    ContentFrame,
+    FormContact
   },
 
   layout: 'contentframe',
   middleware: 'pageload',
-
+  
   async asyncData({ app, store, env, params }) {
     return {
     }
   },
-
 
   created: function () {
   },
@@ -39,6 +39,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 </style>
 

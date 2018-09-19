@@ -25,7 +25,7 @@ export default {
           state[name] = value
         } else {
           // console.log('Store update failed; object doesn’t exist for', name, state)
-          debug('Store.update', 'Failed: object doesn’t exist:', name, value, state)
+          console.error('Store.update', 'Failed: object doesn’t exist:', name, value, state)
         }
       }
     } else {
@@ -64,7 +64,7 @@ export default {
       }
       else
         // console.log('Store update failed; object doesn’t exist for', name, state)
-        debug('Store.update', 'Failed: object doesn’t exist:', name, value, state)
+        console.error('Store.update', 'Failed: object doesn’t exist:', name, value, state)
     }
   },
   // generalized mutator for creating or updating new value
@@ -96,7 +96,7 @@ export default {
     }
     else
       // console.log('Store clear failed; object doesn’t exist for', name)
-      debug('Store.clear', 'Store clear failed; object doesn’t exist for', name)
+      console.error('Store.clear', 'Store clear failed; object doesn’t exist for', name)
   },
 
 

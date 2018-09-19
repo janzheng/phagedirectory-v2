@@ -82,8 +82,8 @@ article.narrow {
 blockquote {
   &, p {
     border-color: $color-tertiary;
-    font-size: $font-larger;
-    line-height: $font-larger + 8px;
+    font-size: $font-large;
+    line-height: $font-large-lineheight;
     @extend %font-serif;
     font-style: italic;
     @extend .--antialias;
@@ -155,7 +155,8 @@ blockquote {
       color: $color-phdir;
     }
   }
-  .nuxt-link-exact-active {
+  .nuxt-link-exact-active, 
+  .nuxt-link-active {
     @extend %links-bg;
     @extend %font-bold;
   }
