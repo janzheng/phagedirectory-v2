@@ -27,10 +27,12 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
+const mode = 'spa' // 'universal'
 module.exports = {
-  mode: 'universal',
-  // mode: 'spa', // 'universal'  — spa useful for airtable data updates; universal is faster
+  // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
+  mode: mode, // for development, or for real-time airtable changes
   env: {
+    mode: mode,
     site_fb: site_fb,
     airtable_api: 'keyAe6M1KoPfg25aO',  // cytosisreader@zeee.co handler
     airtable_base: 'appSCAap8SWbFRtu0',
@@ -331,6 +333,12 @@ module.exports = {
           name: 'capsid',
           path: '/capsid',
           component: resolve(__dirname, 'pages/News.vue')
+        },
+        {
+          // opens each issue separately, good for deeplinking, possibly comments
+          name: 'capsidIssue',
+          path: '/capsid/:slug',
+          component: resolve(__dirname, 'pages/NewsPage.vue')
         },
 
         {

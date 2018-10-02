@@ -19,7 +19,7 @@
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/markdownit": "^1.2.1",
     "axios": "^0.18.0",
-    "coeur": "^0.2.2",
+    "coeur": "^0.2.3",
     "cytosis": "^0.0.306",
     "markdown-it": "^8.4.2",
     "markdown-it-attrs": "^2.3.1",

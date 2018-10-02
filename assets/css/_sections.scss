@@ -144,6 +144,27 @@ blockquote {
   }
 }
 
+
+// for alerts and mailchimp
+// custom breakpoint
+.Signup-container {
+  $width-signup: 996px;
+    margin-left: auto;
+    margin-right: auto;
+
+  @media (max-width: $width-signup) {
+    display: block;
+
+    .Mailchimp {
+      max-width: 100% !important;
+      margin-bottom: $size;
+    }
+    div {
+      // display: block;
+    }
+  }
+}
+
 .Footer {
   background-color: $color-secondary;
   color: $color-bg;

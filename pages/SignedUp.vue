@@ -24,9 +24,22 @@ export default {
   created: function () {
   },
 
+
+  async asyncData({app, env, route, store}) {
+    // console.log('asyncdata store: ', store.state.cytosis)
+    // const cytosis = await store.dispatch('loadCytosis', {
+    //   env,
+    //   tableIndex: 'static',
+    // })
+    return {
+      postUrl: env.ext_handler,
+      cytosis: store.state.cytosis,
+      signedup: app.$cytosis.find('Content.mailchimp-signedup', store.state.cytosis.tables)[0]['fields']['Markdown']
+    }
+  },
+
   data: function () {
     return {
-      signedup: this.$cytosis.find('Content.mailchimp-signedup', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

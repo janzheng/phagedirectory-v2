@@ -78,7 +78,11 @@ export default {
       ]),
 
     issues() {
-      return this['C&T']
+
+      const result = this.$cytosis.search(this.slug, this['C&T'], ['Slug'])
+      console.log('issue slug: ', result)
+
+      return result
     }
 
   },

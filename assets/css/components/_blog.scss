@@ -59,7 +59,7 @@
   width: 100%;
 
   margin-top: $size-base;
-  margin-bottom: $size-2;
+  margin-bottom: $size-4;
 
   // border: $border-thin solid $color-tertiary;
   border-radius: $radius;
@@ -108,14 +108,26 @@
       padding-top: 0;
       text-decoration: none;
       @extend %font-serif;
-      font-size: $font-larger * 1.19;
-      line-height: $font-larger * 1.66;
-      letter-spacing: -0.24px;
-      padding-bottom: 0;
+      // font-size: $font-larger * 1.19;
+      // line-height: $font-larger * 1.66;
+      // letter-spacing: -0.24px;
+
+      // typeface testing
+      font-size: 28px;
+      line-height: 34px;
+      letter-spacing: -0.4px;
+      // padding-bottom: 0; // to get author closer
+    
     }
   }
+  .Periodical-item-author {
+    margin-top: -$size-half;
+    padding-bottom: $size;
+    // opacity: 0.5;
+    color: $color-ui-dark;
+  }
   .Periodical-item-lede {
-    padding-bottom: $size-half;
+    padding-bottom: $size;
   }
   .Periodical-item-header {
     // padding-bottom: $size-half;
@@ -145,8 +157,17 @@
 
     height: 100%;
     object-fit: cover;
+
+    &.--contain {
+    object-fit: contain;
+    }
   }
 }
+  .Periodical-updates {
+    padding-top: $size;
+    padding-bottom: $size;
+  }
+
   .Periodical-updates-title {
     display: inline-block;
     &:after {

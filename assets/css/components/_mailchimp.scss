@@ -1,7 +1,13 @@
 
 .Mailchimp {
-  background-color: rgba($color-teal,0.5);
+  background-color: $color-teal-50;
   border-radius: $radius;
   padding: $size;
   // margin-bottom: $size;
+
+  input[type='email'] {
+    &:focus, &:hover {
+      background-color: $color-bg;
+    }
+  }
 }

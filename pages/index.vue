@@ -5,7 +5,9 @@
     <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
     </section>
 
-    <MailchimpBanner />
+    <div class="_padding-left-2">
+      <MailchimpBanner />
+    </div>
     
     <section class="Home-container copy _padding-2 _grid-3-1">
       <div>

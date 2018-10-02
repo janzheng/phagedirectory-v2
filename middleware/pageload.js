@@ -37,7 +37,11 @@ export default async function ({route, env, store}) {
     //   tableIndex: 'static',
     // })
 
-    if(process.server) {
+    // if universal mode, don't load data when not serer
+    if(process.mode == 'universal' && !process.server)
+      return false;
+
+    // if(process.server) {
       // checks to prevent over-eager fetching?
       let staticData, dynamicData, newsData
       if(!store.state.Content) {
@@ -65,7 +69,7 @@ export default async function ({route, env, store}) {
 
       // const results = await Promise.all([staticData, dynamicData])
       return Promise.all([staticData, dynamicData])
-    }
+    // }
   }
 
   // only do it on server-side

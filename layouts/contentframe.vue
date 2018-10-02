@@ -14,7 +14,7 @@
       <nuxt/>
     </div>
 
-    <div class="Signup-container _width-content-max _grid-3-2 _margin-left-2 _margin-right-2 _margin-bottom">
+    <div class="Signup-container _width-content-max _grid-3-2 _margin-bottom">
       <div class="Mailchimp-container">
         <Mailchimp class="footer _height-100"/>
       </div>
