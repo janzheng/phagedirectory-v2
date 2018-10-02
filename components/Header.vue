@@ -14,7 +14,7 @@
               <router-link to='/phages' class="_margin-right-sm _margin-right-xs --border-none">Phages</router-link>
               <router-link to='/labs' class="_margin-right-xs _hidden-xs --border-none">Labs</router-link>
               <router-link to='/alerts' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">Alerts</router-link>
-              <router-link to='/news' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">News</router-link>
+              <router-link to='/capsid' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">Capsid &amp; Tail</router-link>
               <router-link to='/join' class="Header-join --short _hidden-sm _button _margin-none">Join</router-link>
             </div>
             <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" @input="search"/>
@@ -27,7 +27,7 @@
         <!-- <router-link to='/' class="--border-none _margin-right-2" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link> -->
           <!-- <router-link to='/terms' class="_margin-right-2 --border-none">Terms</router-link> -->
         <router-link to='/alerts' class="_margin-right --border-none">Alerts</router-link>
-        <router-link to='/news' class="_margin-right --border-none">News</router-link>
+        <router-link to='/capsid' class="_margin-right --border-none">Capsid &amp; Tail</router-link>
         <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
         <!-- <a target="_blank" href="https://twitter.com/phagedirectory" class="">@PhageDirectory</a> -->
       </div>

@@ -1,4 +1,8 @@
+<!-- 
 
+  This is for rendering a blog post, sorry for the bad naming
+
+ -->
 <template>
 
   <div class="Article" >
@@ -17,7 +21,7 @@
 
     <div class="Article-content" v-html="$md.render(content.fields.Markdown || '')"></div>
 
-    <!-- required to load twitter -->
+    <!-- required to render twitter embeds properly -->
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" v-if="content.fields.hasTweets"></script>
   </div>
 

@@ -53,12 +53,11 @@
 // will have a class specifying where itis
 .AlertSignup {
 
-
-  margin-top: $size-base;
-  margin-bottom: $size-base;
+  // margin-top: $size-base;
+  // margin-bottom: $size-base;
 
   .AlertSignup-form {
-    padding: $size-base $size-2;
+    padding: $size-base $size-base;
     border: $color-main $border-thin solid;
     border-radius: $radius;
 
@@ -91,8 +90,8 @@
 }
 .AlertSignup-container {
   background-color: $color-ui-lighter;
-  padding-top: $size-base;
-  padding-bottom: $size-base;
+  // padding-top: $size-base;
+  // padding-bottom: $size-base;
   .footer {
     margin-top: 0;
     margin-bottom: 0;

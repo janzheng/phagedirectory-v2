@@ -19,6 +19,7 @@
     - user still has to save each new split field to Airtable
     - can now unsplit Airtable data and data will appear "normal"
   - changed the way getTables is accessed: takes a single object arg now
+  - changed _cytosis column from 'Items' to 'Tables' -> will be severely breaking
 */
 
 /*
@@ -223,7 +224,7 @@ class Cytosis {
       _this.airKey = opts.airKey || opts.airKey;
       _this.airBase = { id: opts.airBase || opts.airBaseId };
       _this.airBase.tables = opts.tables || []
-      _this.airBase.tableIndex = opts.tableIndex || '';
+      _this.airBase.tableIndex = opts.tableIndex || 'tables';
       _this.airBase.options = opts.options || {view: "Grid view"};
     }
 
@@ -234,6 +235,7 @@ class Cytosis {
 
     _this.base = Cytosis.getBase(this.airBase.id)
 
+    // console.log('opts: ', opts)
     // return a promise if the callee needs to do something w/ the result
     return new Promise(function(resolve, reject) {
       // first retrieve the _cytosis table of tables
@@ -287,6 +289,9 @@ class Cytosis {
   init (tableIndex, reset=true) {
     // console.log('Starting cytosis')
     const _this = this
+
+    // console.log('initializing from index: ', tableIndex)
+
     return new Promise(function(resolve, reject) {
 
       // return current state if we don't want to reinitialize
@@ -306,20 +311,20 @@ class Cytosis {
           _this['config'] = _config
 
           // this requires a table named '_cytosis' with a tableIndex row named 'tableNames' or 'tables' or a user given name and a 
-          // column 'Items' with a Multiple Select of all the table names in the base
+          // column 'Tables' with a Multiple Select of all the table names in the base
           // (this is required b/c Airtable API won't let you get all table names)
           // init tables from config if they don't exist
           if ( !_this.airBase.tables || _this.airBase.tables.length == 0 ) {
             for(let config of _config._cytosis) {
-              if ( (config.fields['Name'] == tableIndex || config.fields['Name'] == 'tableNames') && config.fields['Items']) {
-                _this.airBase.tables = config.fields['Items']
+              if ( config.fields['Name'] == tableIndex && config.fields['Tables']) {
+                _this.airBase.tables = config.fields['Tables']
               }
             }
           }
         }
 
         if(!_config || !_this.airBase.tables || _this.airBase.tables.length == 0) {
-          throw new Error(`[Cytosis] — couldn’t find a '_cytosis' table with row ${tableIndex} or 'tableNames' filled out with the names of tables to load`)
+          throw new Error(`[Cytosis] — couldn’t find a '_cytosis' table with row ${tableIndex} or 'tables' filled out with the names of tables to load`)
           reject(_this)
         }
         // console.log('Cytosis tables: ', _this.airBase, _this.airBase.tables)
@@ -557,7 +562,7 @@ class Cytosis {
   // Input:
   //    findStr: a specially formatted string used to retrieve data
   //    tables: an object of Airtable arrays, ex: { Tags: [records], Content: [records] }
-  //    fields: which fields (columns) to search in (an array of strings). Airtable's key field default is 'Name'
+  //    fields: an array of which fields (columns) to search in (an array of strings). Airtable's key field default is 'Name'
   // Output:
   //    if findStr is just a RowName, returns the first found // FUTURE: an array of results if many matches, or one result if only one found
   //    returns the field's contents, usually a string or array
@@ -575,7 +580,7 @@ class Cytosis {
         // console.log('Matching', str, tables, fields, table, tables[table])
 
         if(!tables[table])
-          throw new Error(`[Cytosis] — couldn’t find the reference ${tables[table]} in the given table object. Make sure all the tables specified in the _cytosis table exist.`)
+          throw new Error(`[Cytosis] — couldn’t find the reference ${tables[table]} in the given table (@${table}) object. Make sure all the tables specified in the _cytosis table exist.`)
         // each airtable record
         for (let record of tables[table]) {
           for (let field of fields) {
@@ -882,6 +887,21 @@ class Cytosis {
     return results
   }
 
+
+  // similar to getNames and getFieldValues but w/ arbitrary fieldname and null filtering & deduplication
+  // fieldName is a string
+  // useful for getting a list of 
+  static getFields(recordArray, fieldName) {
+    let results = []
+
+    for (let record of recordArray) {
+      if(record.fields && record.fields[fieldName])
+        results.push(record.fields[fieldName])
+    }
+    // deduplicate fields
+    return this.deduplicate(results)
+    // return results
+  }
 
 
   // adds "preset" API and Base keys for future instances

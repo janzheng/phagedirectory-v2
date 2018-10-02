@@ -1,10 +1,5 @@
 <template>
   <div class="Footer container --antialiased">
-    <!-- <section class=" _right-sm _center-xs ">
-      <div class="Footer-top">
-        Alert service
-      </div>
-    </section> -->
     <section class="_grid-1-2 _align-vertically _padding-top _padding-bottom  _width-content-max _margin-center">
 
       <div class="Footer-left _center-xs">
@@ -20,10 +15,6 @@
 
       <!-- margin-right is for avoiding the drift box -->
       <div class="Footer-right _center-xs">
-        <!-- <div class="_margin-bottom _right-sm _center-xs">
-        <AlertSignup classes="footer" />
-        </div> -->
-
         <div class="_margin-bottom-half _right-sm _center-xs">
           <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
           <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
@@ -58,12 +49,10 @@
 
 <script>
 
-import AlertSignup from '~/components/AlertSignup.vue'
 
 export default {
 
   components: {
-    AlertSignup
   },
   props: [],
 

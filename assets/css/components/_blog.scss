@@ -1,6 +1,17 @@
 
 // Blog page; a page with a list of headlines
 
+/* 
+
+  Relates to
+  - News.vue
+  - Article.vue
+  - Updates.vue
+
+  (used to be one page, now split up, needs cleaning)
+
+ */
+
 
 // Article Post; a page with lots of text
 .Article {
@@ -36,7 +47,14 @@
 // refer to sidebar.io's format
 // note: don't use <article> tag as it's a formatting tag
 // some of these are specified in markdown, so the markup should be very simple
-.BlogList-item {
+.Periodical-header {
+  @extend %font-serif;
+  font-style: italic;
+  // font-size: $font-large;
+  color: $color-gray-light;
+}
+
+.Periodical-item {
   display: block;
   width: 100%;
 
@@ -54,8 +72,18 @@
     grid-template-columns: 1fr auto;
     grid-gap: $size-base;
     align-items: center;
+
+    @include screen-xs {
+      grid-template-areas: "image"
+                           "content";
+      grid-template-rows: auto 1fr;
+      grid-template-columns: 1fr;
+      width: 100%;
+      max-width: 240px;
+      height: auto;
+    }
   }
-  .BlogList-date {
+  .Periodical-item-date {
     font-size: $font-small;
     margin-right: $size-half;
     @extend %font-500;
@@ -63,23 +91,37 @@
     //   padding-top: 0;
     // }
   }
-  .BlogList-source {
+  .Periodical-item-source {
     // display: block;
-    font-size: $font-small;
+    // font-size: $font-small;
     // @extend %font-600;
     // color: $color-gray;
-    // @extend %font-serif;
-    // font-style: italic;
+    @extend %font-serif;
+    font-style: italic;
     text-decoration: none;
+    color: $color-gray;
     // @extend .--antialias;
+    // padding-bottom: $size-half;
   }
-  .BlogList-title {
-    padding-top: 0;
+  .Periodical-item-title {
+    &, a {
+      padding-top: 0;
+      text-decoration: none;
+      @extend %font-serif;
+      font-size: $font-larger * 1.19;
+      line-height: $font-larger * 1.66;
+      letter-spacing: -0.24px;
+      padding-bottom: 0;
+    }
   }
-  .BlogList-lede {
+  .Periodical-item-lede {
     padding-bottom: $size-half;
   }
-  .BlogList-content {
+  .Periodical-item-header {
+    // padding-bottom: $size-half;
+    line-height: $font-larger * 1.66;
+  }
+  .Periodical-item-content {
     grid-area: content;
     .BlogList-title {
       // display: block;
@@ -90,12 +132,12 @@
       padding-bottom: $size-half;
       text-decoration: none;
     }
-    .BlogList-desc {
+    .Periodical-item-desc {
       padding-bottom: $size-half;
       font-size: $font-small;
     }
   }
-  .BlogList-image {
+  .Periodical-item-image {
     display: block;
     grid-area: image;
     width: 150px;
@@ -105,5 +147,25 @@
     object-fit: cover;
   }
 }
+  .Periodical-updates-title {
+    display: inline-block;
+    &:after {
+      content: ' ';
+      display: block;
+      width: 40%;
+      padding-top: $size-half;
+      border-bottom: $border-thin $color-pink solid;
+    }
+  }
+
+
+  // for the C&T subtitle ('A weekly phage periodical')
+  .cnt-subtitle {
+    @extend ._font-large;
+    @include screen-sm {
+      // typographical alignment
+      padding-bottom: 16px;
+    }
+  }
 
 

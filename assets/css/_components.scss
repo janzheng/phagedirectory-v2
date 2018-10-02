@@ -4,7 +4,7 @@
 @import '/components/blog';
 @import '/components/sidenav';
 @import '/components/directory';
-
+@import '/components/mailchimp';
 
 
 .Policy {
@@ -247,4 +247,9 @@
 }
 
 
+._tag {
+  &.--sponsor {
+    background-color: $color-teal;
+  }
+}
 

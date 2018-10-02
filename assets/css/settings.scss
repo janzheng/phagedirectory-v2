@@ -6,6 +6,7 @@
  */
 
 
+
 //  Colors
 
 $theme-sizes: (
@@ -21,7 +22,7 @@ $font-lineheight: 22px;
 // $font-size-base: 18px;
 
 $font-small: $size - 2px;
-$font-large: $size + 3px;
+$font-large: $size + 2px;
 
 
 
@@ -32,8 +33,9 @@ $z-top: 90;
 
 
 
-$color-phdir: #71EFF5;            
-$color-teal: $color-phdir;  
+$color-phdir: #71EFF5;
+$color-teal: $color-phdir;
+$color-teal-50: rgba($color-phdir,0.5);
 $color-dull: #90D9DD;             
 
 $color-yellow: #FCCB4C;           
@@ -98,7 +100,20 @@ $color-focus: $color-tertiary;
 
 $use-cssvars: false;
 
+// $font-serif: "PT Serif", "Georgia", serif;
+// $font-display: "PT Serif", "Georgia", serif;
+
 @import '../../node_modules/coeur/styles/index.scss';
+
+
+%font-display,
+._font-display {
+  // nothing here for stylecoeur
+  // @extend %font-sans;
+  // font-family: $font-display;
+}
+
+
 
 @include addtheme($theme-sizes)
 

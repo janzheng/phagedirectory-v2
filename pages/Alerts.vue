@@ -1,10 +1,10 @@
 <template>
 
-  <section class="Alerts narrow copy _margin-center">
+  <section class="Alerts narrow copy _margin-center _padding-top-2">
 
     <div class="Alerts-intro _margin-bottom-2">
       <div class="" v-html="$md.render(intro)"></div>
-      <AlertSignup classes="_font-bold" />
+      <AlertSignup class="_margin-top _margin-bottom" />
     </div>
 
     <div class="Alerts-list">
@@ -35,7 +35,6 @@
 
 import AlertSignup from '~/components/AlertSignup.vue'
 import { mapState } from 'vuex'
-import Cytosis from '~/other/cytosis'
 
 export default {
 
@@ -47,24 +46,13 @@ export default {
   middleware: 'pageload',
 
   async asyncData({env, route, store}) {
-    let cytosis
-    if(!store.state.Content) {
-      cytosis = await store.dispatch('loadCytosis', {
-        env,
-        tableIndex: 'static',
-      })
-    } else {
-      cytosis = store.state.cytosis
-    }
-
     return {
-      cytosis,
-      intro: Cytosis.find('Content.alerts-intro', cytosis.tables)[0]['fields']['Markdown']
     }
   },
 
   data: function () {
     return {
+      intro: this.$cytosis.find('Content.alerts-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug: this.$route.params.slug,
       // alert: undefined, // loaded in 'mounted'
     }

@@ -39,24 +39,29 @@ export default async function ({route, env, store}) {
 
     if(process.server) {
       // checks to prevent over-eager fetching?
-      let staticData, dynamicData
-      // if(!store.state.Content) {
-      //   staticData = store.dispatch('loadCytosis', {
-      //     env,
-      //     tableIndex: 'static',
-      //   })
-      // }
+      let staticData, dynamicData, newsData
+      if(!store.state.Content) {
+        staticData = store.dispatch('loadCytosis', {
+          env,
+          tableIndex: 'static',
+        })
+      }
 
       // Load dynamic data
       // checks to prevent over-eager fetching?
       // if(!store.state.Organizations)
       // const cytosis = await store.dispatch('loadCytosis', {
       if(!store.state.Organizations) {
-          dynamicData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-            env,
-            tableIndex: 'dynamic',
-          })
+        dynamicData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
+          env,
+          tableIndex: 'dynamic',
+        })
       }
+
+      // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
+      //   env,
+      //   tableIndex: 'news',
+      // })
 
       // const results = await Promise.all([staticData, dynamicData])
       return Promise.all([staticData, dynamicData])

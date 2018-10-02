@@ -10,9 +10,9 @@
  -->
 
 <template>
-  <section class="narrow copy _center-margin _padding-top-2">
+  <section class="Updates narrow copy _margin-center _padding-top-2">
 
-    <Article category="Updates" :content="article" v-if="slug && article"/>
+    <Article :content="article" v-if="slug && article"/>
 
     <!-- show full list of articles if no params given -->
     <!-- <div class="Blog-body" v-else> -->

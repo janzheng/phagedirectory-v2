@@ -126,7 +126,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Playfair+Display:400, 700' }
+      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Serif' }
     ],
   },
 
@@ -229,6 +229,7 @@ module.exports = {
     { src: '~/plugins/policy.js', ssr: false },
     { src: '~/plugins/markdownit.js' },
     { src: '~/plugins/cytosis.js' },
+    { src: '~/plugins/date.js' },
     // { src: '~/plugins/dynamicData.js' } // done as middleware instead
   ],
 
@@ -321,11 +322,17 @@ module.exports = {
       // capsid should resolve anything from phages
       // to people and orgs; easier w/ a uniform id resolver
       routes.push(
+        // {
+        //   name: 'capsid',
+        //   path: '/d/:capsid',
+        //   component: resolve(__dirname, 'pages/Dir.vue')
+        // },
         {
           name: 'capsid',
-          path: '/d/:capsid',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          path: '/capsid',
+          component: resolve(__dirname, 'pages/News.vue')
         },
+
         {
           name: 'search',
           path: '/search/:searchstr',

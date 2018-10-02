@@ -107,8 +107,11 @@ export default {
 
   setCytosis (state, cytosis) {
 
-    // use the latest cytosis object
-    // console.log('setCyt before:', cytosis)
+    // use the latest cytosis object, but combine all tables
+    // console.log('setCyt before:', cytosis, state.cytosis)
+    const aggregateTables = {...state.cytosis.tables, ...cytosis.tables}
+    // console.log('setCyt aggregate:', aggregateTables)
+    cytosis.tables = aggregateTables
     state.cytosis = _.cloneDeep(cytosis) 
 
     // spread each tables into state so mapstate can use them
