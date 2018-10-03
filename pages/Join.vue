@@ -64,13 +64,13 @@ export default {
       intro: app.$cytosis.find('Content.join-intro', cytosis.tables)[0]['fields']['Markdown'],
 
       researchFormIntro: app.$cytosis.find('Content.join-research', cytosis.tables)[0]['fields']['Markdown'],
-      researchFormPublished: true, //app.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'] || false,
+      researchFormPublished: app.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'] || false,
       
       labFormIntro: app.$cytosis.find('Content.join-lab', cytosis.tables)[0]['fields']['Markdown'],
-      labFormPublished: true, //app.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'] || false,
+      labFormPublished: app.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'] || false,
       
       industryFormIntro: app.$cytosis.find('Content.join-industry', cytosis.tables)[0]['fields']['Markdown'],
-      industryFormPublished: true, //app.$cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['isPublished'] || false,
+      industryFormPublished: app.$cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['isPublished'] || false,
 
       thanks: app.$cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
       joinCta: app.$cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],

@@ -27,7 +27,8 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-const mode = 'spa' // 'universal'
+// const mode = 'spa' // 'universal'
+const mode = 'universal' // 'universal'
 module.exports = {
   // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
   mode: mode, // for development, or for real-time airtable changes

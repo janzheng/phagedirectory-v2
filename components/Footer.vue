@@ -4,12 +4,12 @@
 
       <div class="Footer-left _center-xs">
         <!-- <router-link class="" to="/"> -->
-        <a href="/">
+        <router-link to="/" >
           <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/>
           <span class="phagedirectory"><span>Phage</span> Directory, </span>
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
-          <span class="_font-small">{{thisYear}}</span>
-        </a>
+          <span class="_font-small">2017-{{thisYear}}</span>
+        </router-link>
         <!-- </router-link> -->
       </div>
 
