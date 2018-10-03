@@ -21,9 +21,9 @@
             <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown' || ''])"></div>
           </div>
         </div>
+        <!-- <hr class="_padding-top-2" /> -->
       </div>
 
-      <hr class="_padding-top-2" />
 
       <div class="Periodical-item" v-for="article of getArticles(issue)" :key="article.id"
         :class="{'--image': article.fields.Images}"

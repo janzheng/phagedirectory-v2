@@ -164,8 +164,9 @@
   }
 }
   .Periodical-updates {
-    padding-top: $size;
-    padding-bottom: $size;
+    padding: $size;
+    background-color: $color-ui-lighter;
+    border-radius: $radius;
   }
 
   .Periodical-updates-title {
