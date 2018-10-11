@@ -3,6 +3,8 @@
 <!-- <template> -->
 <ContentFrame class="Home">
 
+<a href="http://phage-futures.com/test" target="_blank" >Link out test</a>
+
 ## Lang render {{ banana }}
 
 {{banana}} [._color-phdir]

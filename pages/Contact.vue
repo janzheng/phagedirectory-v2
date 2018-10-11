@@ -6,13 +6,11 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
 import FormContact from '~/forms/FormContact.vue'
 
 export default {
 
   components: {
-    ContentFrame,
     FormContact
   },
 

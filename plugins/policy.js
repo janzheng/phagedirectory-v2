@@ -1,8 +1,9 @@
 
 
 
+import Vue from 'vue'
 
-export default ({ app, env, store }, inject) => {
+export default ({ app, env, store, route }, inject) => {
 
   // window.onNuxtReady(() => {
   if(!process.server) {
@@ -14,9 +15,21 @@ export default ({ app, env, store }, inject) => {
     const currentPolicy = env.site_policy
     store.commit('setCurrentPolicy', currentPolicy)
 
+
     if(browserPolicy == currentPolicy) {
       store.commit('setPolicy', currentPolicy)
-    }
+
+      console.log('enable ga (policy.js)', Vue.$ga)
+      Vue.$ga.enable()
+      // Vue.$ga("send", "pageview", route.path)
+
+      return currentPolicy
+    } 
+
+    // disable if no policy
+    Vue.$ga.disable()
+    return undefined
+
 
     // if(!process.server) {
     //   context.store.commit('setPolicy', 'bananarama')

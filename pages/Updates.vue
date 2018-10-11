@@ -56,7 +56,6 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
 import Article from '~/components/Article.vue'
 import { mapState } from 'vuex'
 
@@ -64,7 +63,6 @@ import { mapState } from 'vuex'
 export default {
 
   components: {
-    ContentFrame,
     Article
   },
 

@@ -5,13 +5,13 @@
     <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
     </section>
 
-    <div class="_padding-left-2">
+    <div class="_padding-left-2-sm">
       <MailchimpBanner />
     </div>
     
     <section class="Home-container copy _padding-2 _grid-3-1">
       <div>
-        <FormVomFeedback class=""/>
+        <FormCapsidFeedback class=""/>
       </div>
 
       <div>
@@ -31,9 +31,9 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
 import Twitter from '~/components/Twitter.vue'
 import FormVomFeedback from '~/forms/FormVomFeedback.vue'
+import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 import Mailchimp from '~/components/Mailchimp.vue'
 import MailchimpBanner from '~/components/MailchimpBanner.vue'
 
@@ -43,9 +43,9 @@ import { mapState } from 'vuex'
 export default {
 
   components: {
-    ContentFrame,
     Twitter,
-    FormVomFeedback,
+    // FormVomFeedback,
+    FormCapsidFeedback,
     Mailchimp,
     MailchimpBanner,
   },

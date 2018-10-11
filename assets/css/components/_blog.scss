@@ -54,6 +54,17 @@
   color: $color-gray-light;
 }
 
+// in favor of plain text instead of lots of links like sidebar
+.Periodical-content {
+  iframe {
+    margin-bottom: $size-2;
+  }
+
+  img {
+    // width: 100%;
+  }
+}
+
 .Periodical-item {
   display: block;
   width: 100%;
@@ -167,6 +178,11 @@
     padding: $size;
     background-color: $color-ui-lighter;
     border-radius: $radius;
+    margin-bottom: $size-2;
+    
+    img {
+      width: 100%;
+    }
   }
 
   .Periodical-updates-title {

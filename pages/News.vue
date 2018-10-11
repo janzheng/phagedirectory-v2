@@ -23,7 +23,7 @@
     <MailchimpBanner class="_margin-center" />
 
     <Periodical :issues="issues" />
-    
+
   </div>
 </template>
 
@@ -58,6 +58,7 @@ export default {
       title: app.$cytosis.find('Content.news-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       intro: app.$cytosis.find('Content.news-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
+      showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }
   },
 

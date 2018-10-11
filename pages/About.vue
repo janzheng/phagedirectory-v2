@@ -1,6 +1,7 @@
 <template>
 
-  <ContentFrame class="About">
+  <!-- <ContentFrame class="About"> -->
+  <div class="About">
     <section class="narrow copy _margin-center">
       <h1 class="About-title title">
         {{aboutTitle}}
@@ -23,7 +24,7 @@
       </div>
 
     </section>
-  </ContentFrame>
+  </div>
 </template>
 
 <script>

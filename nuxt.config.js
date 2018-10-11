@@ -9,7 +9,9 @@
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
 // these are the default social sharing items
 // make sure to use the Head component for generated data
-const site_policy = '1.0.2'
+const site_policy = '1.0.3' 
+// 1.0.3: added Hot Jar and improved granularity; still probably needs a lot of tweaking
+
 const site_ga = 'UA-109657404-1' 
 const site_url = 'https://phage.directory'
 const site_name = 'Phage Directory';
@@ -27,8 +29,8 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-// const mode = 'spa' // 'universal'
-const mode = 'universal' // 'universal'
+const mode = 'spa' // loads airtable dynamically
+// const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 module.exports = {
   // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
   mode: mode, // for development, or for real-time airtable changes
@@ -129,7 +131,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', href: site_ico }, // <link rel="icon" sizes="192x192" href="/path/to/icon.png">
       { rel: 'apple-touch-icon', href: site_ico }, // default resolution is 192x192 <link rel="apple-touch-icon" href="/path/to/apple-touch-icon.png">
       { rel: 'mask-icon',  href: site_ico, color: site_color}, // <link rel="mask-icon" href="/path/to/icon.svg" color="blue"> <!-- Safari Pinned Tab Icon -->
-      { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Serif' }
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=PT+Serif' }
     ],
   },
 
@@ -226,10 +228,11 @@ module.exports = {
 
 
   plugins: [
-    // '~plugins/filters.js',
+    // '~plugins/filters.js',nuxtjs/google-tag-manager
     // '~plugins/vue-highlightjs.js',
     // { src: '~/plugins/plugintest.js', ssr: false }
     { src: '~/plugins/policy.js', ssr: false },
+    // { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
     { src: '~/plugins/markdownit.js' },
     { src: '~/plugins/cytosis.js' },
     { src: '~/plugins/date.js' },
@@ -240,10 +243,13 @@ module.exports = {
     // '@nuxtjs/font-awesome',
     ['@nuxtjs/google-analytics', {
       id: site_ga,
-      disabled: true // gdpr: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
+      // disabled: true // gdpr, policy.js enables it: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
     ['@nuxtjs/markdownit', {
       html: true,
+    }],
+    ['@nuxtjs/google-tag-manager', { 
+      id: 'GTM-WCR3X43' 
     }],
   ],
   markdownit: {

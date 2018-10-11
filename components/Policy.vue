@@ -22,6 +22,8 @@
 
 <script>
 
+
+import Vue from 'vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -39,6 +41,9 @@ export default {
       localStorage.setItem('pd-policy', this.$store.state.currentPolicy)
       this.$store.commit('updatePolicy')
       this.policy = this.$store.state.currentPolicy
+      
+      console.log('enable ga (policy.js)', Vue.$ga)
+      Vue.$ga.enable()
     }
   },
 
