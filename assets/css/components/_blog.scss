@@ -65,6 +65,22 @@
   }
 }
 
+.Periodical-card {
+
+  padding: $size;
+  background-color: $color-ui-lighter;
+  border-radius: $radius;
+  margin-bottom: $size-2;
+  img {
+    width: 100%;
+  }
+
+  &.--callout {
+    background-color: $color-teal-50;
+    // color: $color-bg;
+  }
+}
+
 .Periodical-item {
   display: block;
   width: 100%;
@@ -174,15 +190,18 @@
     }
   }
 }
-  .Periodical-updates {
+  
+  .Periodical-callout {
     padding: $size;
     background-color: $color-ui-lighter;
     border-radius: $radius;
     margin-bottom: $size-2;
+  }
     
-    img {
-      width: 100%;
-    }
+
+  .Periodical-updates {
+    @extend .Periodical-card;
+
   }
 
   .Periodical-updates-title {

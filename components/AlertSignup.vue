@@ -13,12 +13,12 @@
           <div class="AlertSignup-sub" >Subscribe to phage alerts:</div>
           <!-- <div  class="AlertSignup-note _font-small ">No spam. <a href="https://tinyletter.com" target="_blank">TinyLetter</a></div> -->
         </label> 
-        <div class="_flex-row _width-content-input">
+        <div class="_flex-row _flex-wrap _width-content-input">
           <input type="text" name="email" id="tlemail" 
-                 class="_flex-1 _form-input --short --phage --width-full-xs _margin-right-half"
+                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full-xs"
                  placeholder="Your email" required/>
           <input type="hidden" value="1" name="embed"/>
-          <input class="AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />
+          <input class="_flex-1 AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />
         </div>
       </div>
       <div class="AlertSignup-note _font-small _padding-top-half">Alerts are only sent when phages are requested to treat urgent infections. <a class="--nowrap" href="/policies#alerts">Please review our policies.</a></div>

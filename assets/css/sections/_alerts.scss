@@ -68,10 +68,17 @@
   .AlertSignup-sub {
     font-weight: bold;
   }
+  .AlertSignup-input {
+    @include screen-xs {
+      margin-right: 0;
+    }
+  }
   .AlertSignup-cta {
     margin-bottom: 0;
     @include screen-xs {
       width: 100%;
+      display: block;
+      margin-top: $size-half;
       // margin-top: $size-base;
     }
   }

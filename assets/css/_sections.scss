@@ -141,6 +141,11 @@ blockquote {
       border-color: $color-main;
       background-color: $color-main;
     }
+
+    @include screen-xs {
+      padding-right: $size-half;
+      padding-left: $size-half;
+    }
   }
 }
 

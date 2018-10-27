@@ -158,7 +158,7 @@ export default {
       ]),
 
     initDrift() {
-      console.log('[Checking drift...]')
+      // console.log('[Checking drift...]')
       // drift for drift@phage.directory
       if(this.$store.state.policy && !this.$store.state.drift && !process.server) {
         console.log('[Starting drift...]')

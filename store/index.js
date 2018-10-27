@@ -2,6 +2,8 @@
 import Vuex from 'vuex'
 import _ from 'lodash'
 
+import vuexCache from 'vuex-cache'
+
 import state from './state.js';
 import getters from './getters.js';
 import mutations from './mutations.js';
@@ -12,7 +14,8 @@ const createStore = () => {
     state,
     mutations,
     getters,
-    actions
+    actions,
+    plugins: [vuexCache],
   })
 }
 

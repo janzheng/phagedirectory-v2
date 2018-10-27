@@ -152,7 +152,7 @@ export default {
     },
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Articles'], true)
-      console.log('get updates:', updates)
+      // console.log('get updates:', updates)
       return updates || undefined
     },
     getArticleName(article) {

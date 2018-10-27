@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 
   <article class="Orgs container">
     <Header/>
@@ -113,3 +113,4 @@ export default {
 
 </style>
 
+ -->

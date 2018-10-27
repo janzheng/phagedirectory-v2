@@ -2,10 +2,6 @@
 // note: nuxt requires Node 8+ to run properly 
 
 
-
-
-
-
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
 // these are the default social sharing items
 // make sure to use the Head component for generated data
@@ -29,16 +25,26 @@ const page_name = ''; // placeholder for the copy+paste
 
 const site_fb = '172737416727733'; // buildAtl fb id
 
-const mode = 'spa' // loads airtable dynamically
+const airtable_api = 'keyAe6M1KoPfg25aO'; // cytosisreader@zeee.co handler
+const airtable_base = 'appSCAap8SWbFRtu0';
+
+
+
+let mode = 'universal' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
+if (process.env.NODE_ENV == 'production') {
+  mode = 'spa'
+  // mode = 'universal'
+}
+
 module.exports = {
   // mode: 'universal', // use this for deployment; need to rebuild the site every time airtable content changes
   mode: mode, // for development, or for real-time airtable changes
   env: {
     mode: mode,
     site_fb: site_fb,
-    airtable_api: 'keyAe6M1KoPfg25aO',  // cytosisreader@zeee.co handler
-    airtable_base: 'appSCAap8SWbFRtu0',
+    airtable_api: airtable_api,  
+    airtable_base: airtable_base,
     site_policy: site_policy,
     ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input'
   },
@@ -313,6 +319,10 @@ module.exports = {
         }
       })
     ],
+
+    extractCSS: {
+      allChunks: true
+    },
   },
 
 
@@ -339,55 +349,55 @@ module.exports = {
         {
           name: 'capsid',
           path: '/capsid',
-          component: resolve(__dirname, 'pages/News.vue')
+          component: resolve(__dirname, 'pages/news.vue')
         },
         {
           // opens each issue separately, good for deeplinking, possibly comments
           name: 'capsidIssue',
           path: '/capsid/:slug',
-          component: resolve(__dirname, 'pages/NewsPage.vue')
+          component: resolve(__dirname, 'pages/newsPage.vue')
         },
 
         {
           name: 'search',
           path: '/search/:searchstr',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'phages',
           path: '/phages',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'hosts',
           path: '/hosts',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'diseases',
           path: '/diseases',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'antibiotics',
           path: '/antibiotics',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'orgs',
           path: '/orgs',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
         {
           name: 'labs',
           path: '/labs',
-          component: resolve(__dirname, 'pages/Dir.vue')
+          component: resolve(__dirname, 'pages/dir.vue')
         },
-        {
-          name: 'people',
-          path: '/people',
-          component: resolve(__dirname, 'pages/Dir.vue')
-        },
+        // {
+        //   name: 'people',
+        //   path: '/people',
+        //   component: resolve(__dirname, 'pages/Dir.vue')
+        // },
         // {
         //   name: 'apply',
         //   path: '/projects/:id/apply',
@@ -398,7 +408,7 @@ module.exports = {
         {
           name: 'alerts',
           path: '/alerts/:id',
-          component: resolve(__dirname, 'pages/Alerts.vue')
+          component: resolve(__dirname, 'pages/alerts.vue')
         },
 
 
@@ -426,20 +436,19 @@ module.exports = {
         {
           name: 'Updates.item',
           path: '/updates/:slug',
-          component: resolve(__dirname, 'pages/Updates.vue')
+          component: resolve(__dirname, 'pages/updates.vue')
         },
-
 
         // other resolvers
         {
           name: 'questions',
           path: '/questions',
-          component: resolve(__dirname, 'pages/Feedback.vue')
+          component: resolve(__dirname, 'pages/feedback.vue')
         },
         {
           name: 'legal',
           path: '/legal',
-          component: resolve(__dirname, 'pages/Policies.vue')
+          component: resolve(__dirname, 'pages/policies.vue')
         },
       )
     },
@@ -462,6 +471,7 @@ module.exports = {
 
   },
   generate: {
+    interval: 150, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
     fallback: true, // if you want to use '404.html'
   },
 

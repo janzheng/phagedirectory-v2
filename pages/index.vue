@@ -51,7 +51,7 @@ export default {
   },
 
   layout: 'contentframe',
-  middleware: 'pageload',
+  // middleware: 'pageload',
 
   async asyncData({app, env, route, store}) {
     // console.log('asyncdata store: ', store.state.cytosis)

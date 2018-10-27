@@ -25,7 +25,7 @@
       <div class="Directory-nav-container">
         <div class="Directory-nav _grid-auto-1">
           <div>
-            <router-link to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none" :class="{'--active': view == 'phages'}">Phages</router-link>
+            <router-link to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none" :class="{'--active': view == 'phages'}">Phage Hosts</router-link>
             <router-link to="/labs" class="Directory-btn _button Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
           </div>
           <input ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" />

@@ -9,7 +9,55 @@
 
 import _ from 'lodash'
 
-export default async function ({route, env, store}) {
+import {loadStatic, loadDynamic} from '~/other/loaders'
+
+
+
+
+async function loadDataOnServer(routeName, store, env) {
+  // Load static data
+  // await store.dispatch('loadCytosis', {
+  //   env,
+  //   tableIndex: 'static',
+  // })
+
+  // if universal mode, don't load data when not server
+  if(process.mode == 'universal' && !process.server)
+    return false;
+
+  console.log('loading cytosis. Data:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
+  // if(process.server) {
+    // checks to prevent over-eager fetching?
+    let staticData, dynamicData, newsData
+
+    staticData = loadStatic(env, store, routeName)
+
+    // Load dynamic data
+    // checks to prevent over-eager fetching?
+    // if(!store.state.Organizations)
+    // const cytosis = await store.dispatch('loadCytosis', {
+    dynamicData = loadDynamic(env, store, routeName)
+
+    // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
+    //   env,
+    //   tableIndex: 'news',
+    // })
+
+    // const results = await Promise.all([staticData, dynamicData])
+    
+    // return Promise.all([staticData, dynamicData]).then((results) => {
+    //   console.log('loaded:', !!staticD, !!dynamicD)
+    //   return Promise.resolve(results)
+    // })
+
+    return Promise.all([staticData, dynamicData])
+  // }
+}
+
+
+
+
+export default function ({route, env, store}) {
   const routeName = route.name;
   // console.log('pageload ctx:', context);
 
@@ -28,53 +76,18 @@ export default async function ({route, env, store}) {
     store.commit('update', {ext_handler: env.ext_handler})
   }
 
-  console.log('pageload:', process.server, process.client, process.static)
-
-  async function loadDataOnServer() {
-    // Load static data
-    // await store.dispatch('loadCytosis', {
-    //   env,
-    //   tableIndex: 'static',
-    // })
-
-    // if universal mode, don't load data when not serer
-    if(process.mode == 'universal' && !process.server)
-      return false;
-
-    // if(process.server) {
-      // checks to prevent over-eager fetching?
-      let staticData, dynamicData, newsData
-      if(!store.state.Content) {
-        staticData = store.dispatch('loadCytosis', {
-          env,
-          tableIndex: 'static',
-        })
-      }
-
-      // Load dynamic data
-      // checks to prevent over-eager fetching?
-      // if(!store.state.Organizations)
-      // const cytosis = await store.dispatch('loadCytosis', {
-      if(!store.state.Organizations) {
-        dynamicData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-          env,
-          tableIndex: 'dynamic',
-        })
-      }
-
-      // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
-      //   env,
-      //   tableIndex: 'news',
-      // })
-
-      // const results = await Promise.all([staticData, dynamicData])
-      return Promise.all([staticData, dynamicData])
-    // }
-  }
+  console.log('Pageload:', routeName, `[server:${process.server} / client:${process.client} / static:${process.static}]`)
 
   // only do it on server-side
   // static is loaded on client on every page load/refresh, dynamic is only on generation
-  return loadDataOnServer();
+  
+  // nuxt expects a promise for async middleware
+  // const data = await loadDataOnServer()
+  return loadDataOnServer(routeName, store, env)
+
+
+  // console.log('Pageload finished? new state:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
+  // return true;
 
   // loads once on client; if cytosis exists it'll 
   // loadOnce();
