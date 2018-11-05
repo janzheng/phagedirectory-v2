@@ -355,7 +355,7 @@ module.exports = {
           // opens each issue separately, good for deeplinking, possibly comments
           name: 'capsidIssue',
           path: '/capsid/:slug',
-          component: resolve(__dirname, 'pages/newsPage.vue')
+          component: resolve(__dirname, 'pages/newspage.vue')
         },
 
         {
