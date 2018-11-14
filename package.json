@@ -12,13 +12,16 @@
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint",
-    "stage": "npm run generate; cd dist; surge . -d phagedirectory.surge.sh",
-    "prod": "npm run generate; cd dist; surge . -d phage.directory"
+    "stagedeploy": "cd dist; surge . -d phagedirectory.surge.sh",
+    "stage": "NODE_ENV=spa; npm run generate; npm run stagedeploy",
+    "stagebuild": "npm run generate; npm run stagedeploy",
+    "prod": "npm run generate; cd dist; surge . -d phage.directory",
+    "prodspa": "NODE_ENV=spa; npm run generate; cd dist; surge . -d phage.directory"
   },
   "dependencies": {
     "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/google-tag-manager": "^2.1.0",
-    "@nuxtjs/markdownit": "^1.2.1",
+    "@nuxtjs/pwa": "^2.6.0",
     "axios": "^0.18.0",
     "coeur": "^0.2.3",
     "cytosis": "^0.0.306",
@@ -26,6 +29,7 @@
     "markdown-it-attrs": "^2.3.1",
     "moment": "^2.22.2",
     "nuxt": "^1.4.4",
+    "nuxt-device-detect": "^1.1.2",
     "vue-scrollto": "^2.11.0",
     "vuelidate": "^0.7.4",
     "vuex-cache": "^1.3.0"

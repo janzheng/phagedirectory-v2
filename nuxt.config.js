@@ -32,7 +32,7 @@ const airtable_base = 'appSCAap8SWbFRtu0';
 
 let mode = 'universal' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
-if (process.env.NODE_ENV == 'production') {
+if (process.env.NODE_ENV == 'spa') {
   mode = 'spa'
   // mode = 'universal'
 }
@@ -251,31 +251,69 @@ module.exports = {
       id: site_ga,
       // disabled: true // gdpr, policy.js enables it: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
-    ['@nuxtjs/markdownit', {
-      html: true,
-    }],
+    // ['@nuxtjs/markdownit', {
+    //   html: true,
+    // }],
     ['@nuxtjs/google-tag-manager', { 
       id: 'GTM-WCR3X43' 
     }],
+    '@nuxtjs/pwa',
+    'nuxt-device-detect',
   ],
-  markdownit: {
-    // preset: 'default',
-    injected: false, // markdownit.js plugin takes over injection
-    // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
-    // use the custom plugin/markdownit to inject properly; the official thing is broken
-    // injected: true, // commented out to allow attrs in lang="md" blocks
-    // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
-    //      options: Object.assign({}, options, this.options.markdownit)
-    //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
-    // otherwise plugins will break
-    html: true,
-    typographer: true,
-    linkify: true,
-    breaks: true,
-    use: [
-      'markdown-it-attrs',
-      ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
-    ],
+  // this is buggy, using own plugin instead
+  // markdownit: {
+  //   // preset: 'default',
+  //   injected: false, // markdownit.js plugin takes over injection
+  //   // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
+  //   // use the custom plugin/markdownit to inject properly; the official thing is broken
+  //   // injected: true, // commented out to allow attrs in lang="md" blocks
+  //   // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
+  //   //      options: Object.assign({}, options, this.options.markdownit)
+  //   //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
+  //   // otherwise plugins will break
+  //   html: true,
+  //   typographer: true,
+  //   linkify: true,
+  //   breaks: true,
+  //   use: [
+  //     'markdown-it-attrs',
+  //     ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
+  //   ],
+  // },
+
+
+  manifest: {
+    name: 'Phage Directory',
+    short_name: 'phagedirectory',
+    display: 'standalone',
+    start_url: 'https://phage.directory/',
+    theme_color: site_color,
+    background_color: '#FFFFFF',
+    lang: 'en',
+    // icons: PWAIcons
+  },
+
+  workbox: {
+    runtimeCaching: [
+      {
+          urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
+          handler: 'cacheFirst',
+          method: 'GET',
+          strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      },
+      // {
+      //     urlPattern: 'https://fonts.googleapis.com/.*',
+      //     handler: 'cacheFirst',
+      //     method: 'GET',
+      //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      // },
+      // {
+      //     urlPattern: 'https://fonts.gstatic.com/.*',
+      //     handler: 'cacheFirst',
+      //     method: 'GET',
+      //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+      // },
+    ]
   },
 
   build: {
@@ -383,11 +421,11 @@ module.exports = {
           path: '/antibiotics',
           component: resolve(__dirname, 'pages/dir.vue')
         },
-        {
-          name: 'orgs',
-          path: '/orgs',
-          component: resolve(__dirname, 'pages/dir.vue')
-        },
+        // {
+        //   name: 'orgs',
+        //   path: '/orgs',
+        //   component: resolve(__dirname, 'pages/dir.vue')
+        // },
         {
           name: 'labs',
           path: '/labs',
@@ -405,11 +443,11 @@ module.exports = {
         // },
 
         // news alerts
-        {
-          name: 'alerts',
-          path: '/alerts/:id',
-          component: resolve(__dirname, 'pages/alerts.vue')
-        },
+        // {
+        //   name: 'alerts',
+        //   path: '/alerts/:id',
+        //   component: resolve(__dirname, 'pages/alerts.vue')
+        // },
 
 
         // blog / news / 'viral' newsletter; resolves to generic Blog page

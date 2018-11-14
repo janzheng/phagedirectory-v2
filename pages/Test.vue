@@ -1,5 +1,5 @@
 
-<template lang="md">
+<template>
 <!-- <template> -->
 <ContentFrame class="Home">
 

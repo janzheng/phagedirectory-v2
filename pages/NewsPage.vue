@@ -14,8 +14,8 @@
     <section class="Periodical narrow copy _margin-center _padding-top-2">
 
       <div class="News-intro _margin-bottom _flex _flex-bottom">
-        <div class="" v-html="$md.render(title)"></div>
-        <div class="" v-html="$md.render(intro)"></div>    
+        <div class="" v-html="$md.render(title || '')"></div>
+        <div class="" v-html="$md.render(intro || '')"></div>    
       </div>
 
     </section>
@@ -24,7 +24,7 @@
 
     <Periodical :issues="issues" :showPreview="showPreview" />
 
-    <div class="Periodical-card _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine)"></div>
+    <div class="Periodical-card _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')"></div>
   </div>
 </template>
 
