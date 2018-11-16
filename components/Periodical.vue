@@ -37,7 +37,7 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['issues', 'showPreview', 'closed'],
+  props: ['issues', 'showPreview'],
 
   components: {
   },

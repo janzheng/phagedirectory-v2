@@ -225,6 +225,23 @@
     }
   }
 
+  // used to display short headlines on Capsid & Tail
+  .PeriodicalStub {
+    // each item links out w/ a <a> wrapper
+    
+    // don't highlight / underline some parts
+    .PeriodicalStub-item {
+      &,* {
+        text-decoration: none;
+      }
+      h2 {
+        text-decoration: underline;
+        text-decoration-color: $color-links;
+      }
+    }
+
+  }
+
 
   // for the C&T subtitle ('A weekly phage periodical')
   .cnt-subtitle {

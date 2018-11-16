@@ -1,4 +1,9 @@
+<!-- 
 
+  Originally meant to get a list of links like Sidebar, this is now unused
+
+
+ -->
 <template>
 
   <section class="Periodical narrow copy _margin-center _padding-top-2">

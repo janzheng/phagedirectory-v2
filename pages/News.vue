@@ -22,9 +22,9 @@
     
     <MailchimpBanner class="_margin-center" />
 
-    <Periodical :issues="issues" />
+    <Periodical :issues="latest" />
 
-    <Periodical :issues="issues" :closed="true" />
+    <PeriodicalStub :issues="notLatest" />
 
   </div>
 </template>
@@ -34,6 +34,7 @@
 import Article from '~/components/Article.vue'
 import MailchimpBanner from '~/components/MailchimpBanner.vue'
 import Periodical from '~/components/Periodical.vue'
+import PeriodicalStub from '~/components/PeriodicalStub.vue'
 import { mapState } from 'vuex'
 
 
@@ -42,7 +43,8 @@ export default {
   components: {
     Article,
     MailchimpBanner,
-    Periodical
+    Periodical,
+    PeriodicalStub,
   },
 
   layout: 'contentframe',
@@ -79,6 +81,15 @@ export default {
       'Articles',
       'Tags',
       ]),
+
+    latest() {
+      // NOTE: this always pulls the TOP item from airtable. Make sure it's the right one!
+      return [this['C&T'][0]] // return an array of the first issue only
+    },
+
+    notLatest() {
+      return this['C&T'].slice(1)
+    },
 
     issues() {
       return this['C&T']
