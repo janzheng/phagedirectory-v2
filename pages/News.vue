@@ -79,7 +79,6 @@ export default {
       'Content',
       'C&T',
       'Articles',
-      'Tags',
       ]),
 
     latest() {

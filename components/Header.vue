@@ -1,36 +1,54 @@
 
 <template>
   <section class="Header _padding-top _padding-bottom --antialiased _width-content-max _margin-center">
-    <div class="Header-content _grid-2--auto _block-xs _align-vertically">
-      <div class="_grid-auto-1 _center-xs _align-vertically">
-        <!-- <router-link to='/' class="logo-link _border-none-i"><img class="logo" src="~/static/phagedirectory.png"/></router-link> -->
-        <router-link to='/' class="_hidden-xs logo-link _border-none-i"><img class="logo" src="~/static/ico.png"/></router-link>
+    <div class="Header-content">
 
-        <div class="Header-left">
-          <div class="_grid-auto-1 _align-vertically">
-            <div class="_left-xs">
-              <router-link to='/' class="_hidden-sm logo-link _border-none-i"><img class="logo-xs" src="~/static/ico.png"/></router-link>
-              <!-- <router-link to='/' class="_margin-right-2-sm _margin-right-xs --border-none">Browse</router-link> -->
-              <router-link to='/phages' class="_margin-right-sm _margin-right-xs --border-none">Phages</router-link>
-              <router-link to='/labs' class="_margin-right-xs _hidden-xs --border-none">Labs</router-link>
-              <router-link to='/alerts' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">Alerts</router-link>
-              <router-link to='/capsid' class="_hidden-sm _margin-right-sm _margin-right-xs --border-none">Capsid &amp; Tail</router-link>
-              <router-link to='/join' class="Header-join --short _hidden-sm _button _margin-none">Join</router-link>
+      <!-- Mobile Menu -->
+      <div class=" _center-xs _align-vertically">
+        <!-- <router-link to='/' class="_hidden-xs logo-link _border-none-i"><img class="logo" src="~/static/ico.png"/></router-link> -->
+
+
+        <div class="Header-left _hidden-sm">
+          <div class="_flex _left-xs _align-vertically _margin-bottom">
+            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/ico.png"/></router-link>
+            <router-link to='/phages' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Phages</router-link>
+            <!-- <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link> -->
+            <router-link to='/alerts' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Alerts</router-link>
+            <router-link to='/jobs' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Jobs</router-link>
+            <router-link to='/capsid' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">C&amp;T</router-link>
+            <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
+          </div>
+          <div>
+            <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline " type="text" name="searchbar" id="searchbar" placeholder="Search" @input="search"/>
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Desktop menu -->
+        <div class="Header-left _hidden-xs _padding-left-2 ">
+          <div class="_flex _left-xs _align-vertically _margin-bottom">
+            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/ico.png"/></router-link>
+            <div class="Header-inset">
+              <router-link to='/phages' class="_button --text --short _padding-none _margin-none --border-none">Phages</router-link>
+              <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link>
             </div>
+            <router-link to='/alerts' class="_button --text --short _padding-none _margin-none --border-none">Alerts</router-link>
+            <router-link to='/jobs' class="_button --text --short _padding-none _margin-none --border-none">Jobs</router-link>
+            <router-link to='/capsid' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Capsid &amp; Tail</router-link>
+            <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
+          </div>
+          <div>
             <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" @input="search"/>
           </div>
-          
         </div>
-      </div>
-
-      <div class="_hidden-xs _right-sm _margin-top-xs">
-        <!-- <router-link to='/' class="--border-none _margin-right-2" :class="{'nuxt-link-exact-active':Projects==true}">Projects</router-link> -->
-          <!-- <router-link to='/terms' class="_margin-right-2 --border-none">Terms</router-link> -->
+      <!-- <div class="_hidden-xs _right-sm _margin-top-xs">
         <router-link to='/alerts' class="_margin-right --border-none">Alerts</router-link>
+        <router-link to='/jobs' class="_margin-right --border-none">Jobs</router-link>
         <router-link to='/capsid' class="_margin-right --border-none">Capsid &amp; Tail</router-link>
         <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
-        <!-- <a target="_blank" href="https://twitter.com/phagedirectory" class="">@PhageDirectory</a> -->
-      </div>
+      </div> -->
     </div>
   </section>
 </template>
@@ -94,9 +112,9 @@ export default {
 
 .logo-xs {
   position: relative;
-  width: 34px;
-  top: 3px;
-  margin-right: 16px;
+  width: 45px; //34px;
+  // top: 3px;
+  // margin-right: 16px;
   vertical-align: bottom;
 }
 

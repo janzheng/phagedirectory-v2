@@ -3,7 +3,7 @@
   <section class="Alerts narrow copy _margin-center _padding-top-2">
 
     <div class="Alerts-intro _margin-bottom-2">
-      <div class="" v-html="$md.render(intro)"></div>
+      <div class="_padding-bottom" v-html="$md.render(intro)"></div>
       <AlertSignup class="_margin-top _margin-bottom" />
     </div>
 

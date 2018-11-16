@@ -86,7 +86,6 @@ export default {
       'Content',
       'C&T',
       'Updates',
-      'Tags',
       ]),
   },
 
