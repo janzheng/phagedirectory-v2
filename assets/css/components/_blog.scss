@@ -239,7 +239,13 @@
         text-decoration-color: $color-links;
       }
     }
+  }
 
+  .Periodical-twitter {
+    img {
+      vertical-align: middle;
+      margin-right: $size/4;
+    }
   }
 
 

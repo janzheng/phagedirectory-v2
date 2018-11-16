@@ -3,12 +3,20 @@
 
   <section class="Periodical narrow copy _margin-center _padding-top-2">
 
-    <div class="_card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <div class="CapsidnTail _card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
       <div class="Periodical-header _grid-2">
         <div class="Periodical-title">{{ issue.fields['Name'] }}</div>
         <div class="Periodical-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
       <div class="Periodical-description _margin-bottom-2" v-html="$md.render(issue.fields['Markdown'] || '')"></div>
+
+      <!-- twitter share on top -->
+      <div class="Periodical-share _margin-bottom-2" v-if="issue.fields['TwitterText']">
+        <p class="Periodical-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+        </p>
+      </div>
 
       <div class="Periodical-updates" v-if="getUpdates(issue)">
         <h5 class="Periodical-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h5>
@@ -24,6 +32,14 @@
       </div>
 
       <!-- list has been moved to PeriodicalList.vue -->
+
+      <!-- twitter share on bottom -->
+      <div class="Periodical-share" v-if="issue.fields['TwitterText']">
+        <p class="Periodical-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+        </p>
+      </div>
 
     </div>
 

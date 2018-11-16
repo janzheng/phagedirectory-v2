@@ -16,6 +16,16 @@
       </div> -->
       <div class="Periodical-description _margin-bottom-2" v-html="$md.render(issue.fields['Markdown'] || '')"></div>
 
+      <!-- twitter share on top -->
+      <div class="Periodical-share" v-if="issue.fields['TwitterText']">
+        <p class="Periodical-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >&nbsp;
+          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+        </p>
+      </div>
+
+      <br/><br/>
+
       <div class="Periodical-updates" v-if="getUpdates(issue)">
         <h3 class="Periodical-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}<br/>
         <span style="color:#fa5486">&mdash;</span></h3>
@@ -33,6 +43,16 @@
       </div>
 
       <!-- list has been moved to PeriodicalList.vue -->
+      
+      <br/><br/>
+
+      <!-- twitter share on bottom -->
+      <div class="Periodical-share" v-if="issue.fields['TwitterText']">
+        <p class="Periodical-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >&nbsp;
+          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+        </p>
+      </div>
 
     </div>
 

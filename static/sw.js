@@ -4,12 +4,12 @@ importScripts('/_nuxt/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/_nuxt/app.5f54baa4e9fef86513eb1e72a1d1348f.css",
-    "revision": "5f54baa4e9fef86513eb1e72a1d1348f"
+    "url": "/_nuxt/app.5e93d19a37837604585cb61421c914e1.css",
+    "revision": "5e93d19a37837604585cb61421c914e1"
   },
   {
-    "url": "/_nuxt/app.752c441d6fb4e8edbd90.js",
-    "revision": "a37ae58d7a2d69c6da2282c6f9f0fb6b"
+    "url": "/_nuxt/app.e983b33aadfae40ca796.js",
+    "revision": "56681c2a4e5d69e09d0fadbe922a2cf8"
   },
   {
     "url": "/_nuxt/layouts/contentframe.a74d76e6b7808c8bf028.js",
@@ -20,8 +20,8 @@ workbox.precaching.precacheAndRoute([
     "revision": "ac9b8f753bc9e09ea10f27f91959cc21"
   },
   {
-    "url": "/_nuxt/manifest.03389396bad7b761b890.js",
-    "revision": "593fea77f5a7e822661b2c0a26037f00"
+    "url": "/_nuxt/manifest.b1dd1b18c48f28f5038c.js",
+    "revision": "0bd4850c6179e46b551cdbe9a85df68f"
   },
   {
     "url": "/_nuxt/pages/about.816826a900561487e5ac.js",
@@ -40,12 +40,12 @@ workbox.precaching.precacheAndRoute([
     "revision": "6b61f0049ca702b427bb9bf874a51058"
   },
   {
-    "url": "/_nuxt/pages/dir.d8c31e89cc770d4733ed.js",
-    "revision": "97c3eb5ad8ca2979597c89bee2fb06ec"
+    "url": "/_nuxt/pages/dir.cbe48d3fb2a60741a6e6.js",
+    "revision": "243186d4c3a9a15f846374fe0e76fe5d"
   },
   {
-    "url": "/_nuxt/pages/emailpage.fbc744f870a92f3d3350.js",
-    "revision": "1090eec59aa37f9de88b81060ae44650"
+    "url": "/_nuxt/pages/emailpage.9b9eea91c263b872d9ca.js",
+    "revision": "5470aaf988310d43099375e6b140ef98"
   },
   {
     "url": "/_nuxt/pages/feedback.7c79c821633f666669ce.js",
@@ -64,12 +64,12 @@ workbox.precaching.precacheAndRoute([
     "revision": "3909ffe5a27c1a3a6de0a759592f7289"
   },
   {
-    "url": "/_nuxt/pages/news.5fc233fda5acd1244dd7.js",
-    "revision": "f4f350d398498e37debcee5adcf69395"
+    "url": "/_nuxt/pages/news.b45d641efa231deb8e1b.js",
+    "revision": "277ecaa748f77ed4ae09f3f4ff2cbd95"
   },
   {
-    "url": "/_nuxt/pages/newspage.a56c15d3da3694d1ae4d.js",
-    "revision": "184489300bd0a7becf45aace5cd3929d"
+    "url": "/_nuxt/pages/newspage.b56b0494b353b508a162.js",
+    "revision": "c77cbf39089809b21fb0953e097c2a1e"
   },
   {
     "url": "/_nuxt/pages/orgs.b1f85dbf51c01fb3db52.js",
