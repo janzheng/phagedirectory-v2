@@ -47,6 +47,16 @@
 // refer to sidebar.io's format
 // note: don't use <article> tag as it's a formatting tag
 // some of these are specified in markdown, so the markup should be very simple
+
+.Periodical {
+  // change the header sizes a bit 
+  // they need to stay semantic in order to be copied into mailchimp
+  h3 {
+    font-size: $font-h5;
+    line-height: $lineheight-h5;
+  }
+}
+
 .Periodical-header {
   @extend %font-serif;
   font-style: italic;

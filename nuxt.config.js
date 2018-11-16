@@ -294,6 +294,11 @@ module.exports = {
   },
 
   workbox: {
+    globPatterns: ['**/*.{js,css}', '**/img/*'],
+    offlinePage: '/404.html',
+    generate: {
+      fallback: true
+    },
     runtimeCaching: [
       {
           urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
@@ -394,6 +399,12 @@ module.exports = {
           name: 'capsidIssue',
           path: '/capsid/:slug',
           component: resolve(__dirname, 'pages/newspage.vue')
+        },
+        {
+          // email-generated issue to be pasted into mailchimp
+          name: 'capsidEmail',
+          path: '/capsidemail/:slug',
+          component: resolve(__dirname, 'pages/emailpage.vue')
         },
 
         {

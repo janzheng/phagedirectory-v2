@@ -4,32 +4,32 @@ importScripts('/_nuxt/workbox.4c4f5ca6.js')
 
 workbox.precaching.precacheAndRoute([
   {
-    "url": "/_nuxt/app.253071f9d990a91c5714c72ffce0f101.css",
-    "revision": "253071f9d990a91c5714c72ffce0f101"
+    "url": "/_nuxt/app.5f54baa4e9fef86513eb1e72a1d1348f.css",
+    "revision": "5f54baa4e9fef86513eb1e72a1d1348f"
   },
   {
-    "url": "/_nuxt/app.cc9790e51a425e5093d4.js",
-    "revision": "8c7478e8c8f1e9b0b3d44b7cd982470d"
+    "url": "/_nuxt/app.752c441d6fb4e8edbd90.js",
+    "revision": "a37ae58d7a2d69c6da2282c6f9f0fb6b"
   },
   {
     "url": "/_nuxt/layouts/contentframe.a74d76e6b7808c8bf028.js",
     "revision": "43ff45dedfa2888e42d875462772be7f"
   },
   {
-    "url": "/_nuxt/layouts/default.3cd8d663ae8ec5a69baf.js",
-    "revision": "b51efaee0de5d22351de7e0fa24df0ab"
+    "url": "/_nuxt/layouts/default.dcd329cb2281c9761472.js",
+    "revision": "ac9b8f753bc9e09ea10f27f91959cc21"
   },
   {
-    "url": "/_nuxt/manifest.0bec86b0d6025699859e.js",
-    "revision": "df0a6cbf5482d96c1cb40b1bc35f3d50"
+    "url": "/_nuxt/manifest.03389396bad7b761b890.js",
+    "revision": "593fea77f5a7e822661b2c0a26037f00"
   },
   {
-    "url": "/_nuxt/pages/about.a848433aae3f10e74a41.js",
-    "revision": "ce4256a9f05e0f155999ed8523370b9c"
+    "url": "/_nuxt/pages/about.816826a900561487e5ac.js",
+    "revision": "bfa83d934cf7ea2c76ae70a3b558110e"
   },
   {
-    "url": "/_nuxt/pages/alerts.4855ca8d2affb6c6d8ed.js",
-    "revision": "e29bd85ae0888261cc361a066dd33575"
+    "url": "/_nuxt/pages/alerts.8b2089e8ab434c906dc9.js",
+    "revision": "49f6bbfd74b22576384acbeb13978150"
   },
   {
     "url": "/_nuxt/pages/contact.51a80768d599c902de51.js",
@@ -44,12 +44,16 @@ workbox.precaching.precacheAndRoute([
     "revision": "97c3eb5ad8ca2979597c89bee2fb06ec"
   },
   {
+    "url": "/_nuxt/pages/emailpage.fbc744f870a92f3d3350.js",
+    "revision": "1090eec59aa37f9de88b81060ae44650"
+  },
+  {
     "url": "/_nuxt/pages/feedback.7c79c821633f666669ce.js",
     "revision": "35352870d2904fa183337f5e482dc93c"
   },
   {
-    "url": "/_nuxt/pages/hostgen.f7886aaecd34fd882789.js",
-    "revision": "687fa53172a941aa786fe24d7bf610ae"
+    "url": "/_nuxt/pages/hostgen.ad23072b89879120a40b.js",
+    "revision": "ecdf3a00749d7c9769cff1aeb6a9160b"
   },
   {
     "url": "/_nuxt/pages/index.c172573d12463a42b13b.js",
@@ -60,40 +64,48 @@ workbox.precaching.precacheAndRoute([
     "revision": "3909ffe5a27c1a3a6de0a759592f7289"
   },
   {
-    "url": "/_nuxt/pages/news.2039696686419ec63845.js",
-    "revision": "63a8eae43ea7549747f2f43920b9a87c"
+    "url": "/_nuxt/pages/news.5fc233fda5acd1244dd7.js",
+    "revision": "f4f350d398498e37debcee5adcf69395"
   },
   {
-    "url": "/_nuxt/pages/newspage.09ec4f52da7867cb7a3f.js",
-    "revision": "d2d3dd03de915c13a7bada360b310f0f"
+    "url": "/_nuxt/pages/newspage.a56c15d3da3694d1ae4d.js",
+    "revision": "184489300bd0a7becf45aace5cd3929d"
   },
   {
-    "url": "/_nuxt/pages/orgs.26261ebd77501ecb134d.js",
-    "revision": "5c2e1967cdf61d9c27e3dc31965971c1"
+    "url": "/_nuxt/pages/orgs.b1f85dbf51c01fb3db52.js",
+    "revision": "3aaca5286096c9775d18b2300516195b"
   },
   {
-    "url": "/_nuxt/pages/policies.054d62116cab681f3678.js",
-    "revision": "2002c9df9225ebc5c9bca345d44f055a"
+    "url": "/_nuxt/pages/policies.656557e662de72f05546.js",
+    "revision": "0e6aa0ca92b63bbc442c3978cd4ff3e5"
   },
   {
-    "url": "/_nuxt/pages/signedup.cdeb9a8d5f1f0a5645ac.js",
-    "revision": "5b494f1d89090eb66c6395a525a7d3e8"
+    "url": "/_nuxt/pages/signedup.8832df6bf4eb811cdb7c.js",
+    "revision": "0ea01e4f9eab23764ceda970be3a277d"
   },
   {
-    "url": "/_nuxt/pages/subscribe.db89b1d505e0b42f2255.js",
-    "revision": "4db478eb6aa8fb21b7fe4fa20723f929"
+    "url": "/_nuxt/pages/subscribe.e507692033279ba9383b.js",
+    "revision": "5c5e53bb2dd07d4cb3984164cbb320e1"
   },
   {
     "url": "/_nuxt/pages/Test.75f0b0962e9e1a338d81.js",
     "revision": "6bf221e3d2a1e4e4398ee04d1bb36a8a"
   },
   {
-    "url": "/_nuxt/pages/updates.df21ab180d392dd03cbc.js",
-    "revision": "7f1bf1c4d7837da78bb7f6b18b52d812"
+    "url": "/_nuxt/pages/updates.8f6337f1204b507f981f.js",
+    "revision": "16b0787dd5a4b75a00208d6f56cc9aa9"
   },
   {
-    "url": "/_nuxt/vendor.0c9961278e6b1f6cf4b8.js",
-    "revision": "885fe8287b0950352307e86c9d24d015"
+    "url": "/_nuxt/vendor.9b5b4f18a9be5d2efa8a.js",
+    "revision": "fdea5987ab59f90b3bb02b2777308829"
+  },
+  {
+    "url": "/_nuxt/img/ico_rings.2b993ed.png",
+    "revision": "2b993edbbcd2d57c7507a149dd93d396"
+  },
+  {
+    "url": "/_nuxt/img/ico.47402d8.png",
+    "revision": "47402d81ca669f8d29b3c438902fd847"
   }
 ], {
   "cacheId": "phagedirectory",
@@ -101,7 +113,7 @@ workbox.precaching.precacheAndRoute([
   "cleanUrls": false
 })
 
-
+workbox.precaching.precacheAndRoute(['/404.html'])
 
 workbox.clientsClaim()
 workbox.skipWaiting()
@@ -109,11 +121,15 @@ workbox.skipWaiting()
 
 workbox.routing.registerRoute(new RegExp('/_nuxt/.*'), workbox.strategies.cacheFirst({}), 'GET')
 
-workbox.routing.registerRoute(new RegExp('/.*'), workbox.strategies.networkFirst({}), 'GET')
-
 workbox.routing.registerRoute(new RegExp('https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*'), workbox.strategies.cacheFirst({"cacheableResponse":{"statuses":[0,200]}}), 'GET')
 
 
 
+// offlinePage support
+const strategy = workbox.strategies.networkOnly()
+workbox.routing.registerRoute(new RegExp('/.*'), ({event}) => {
+  return strategy.handle({event})
+    .catch(() => caches.match('/404.html'))
+})
 
 

@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "commit": "git add . -A ; git commit ; git push origin master ",
-    "dev": "NODE_ENV=production nuxt",
+    "dev": "NODE_ENV=spa nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
