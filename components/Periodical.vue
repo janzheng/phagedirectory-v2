@@ -18,7 +18,7 @@
         </p>
       </div>
 
-      <div class="Periodical-updates" v-if="getUpdates(issue)">
+      <div class="Periodical-updates" v-if="getUpdates(issue).length>0">
         <h5 class="Periodical-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h5>
         <div class="Periodical-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
           <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
@@ -34,7 +34,7 @@
       <!-- list has been moved to PeriodicalList.vue -->
 
       <!-- twitter share on bottom -->
-      <div class="Periodical-share" v-if="issue.fields['TwitterText']">
+      <div class="Periodical-share" v-if="issue.fields['TwitterText'] && getUpdates(issue).length>0" >
         <p class="Periodical-twitter">
           <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
           <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>

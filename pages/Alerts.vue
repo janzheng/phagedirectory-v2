@@ -12,7 +12,7 @@
         <div class="Alerts-status" >
           <div class="_grid-auto-1-xs _align-vertically">
             <span class="Alerts-status-tag" :class="alert.fields.Status">{{alert.fields.Status}}</span>
-            <span class="_right">{{alert.fields.Date}}</span>
+            <span class="_right">{{alert.fields.Date | niceDate }}</span>
           </div>
         </div>
         <div class="Alerts-title" v-html="$md.render(alert.fields.Name)"></div>

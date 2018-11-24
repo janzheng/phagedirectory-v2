@@ -7,6 +7,15 @@
 @import '/components/mailchimp';
 
 
+
+
+._card {
+  // adds slightly more visibility
+  border: 1px solid $color-silver-lighter;
+}
+
+
+
 .Policy {
   background: $color-phdir;
   color: $color-gray;
@@ -178,7 +187,7 @@
 .Twitter {
   width: 100%;
   max-width: 100%;
-  overflow: scroll;
+  // overflow: scroll;
   .Twitter-timeline,
   #twitter-widget-0 {
     // max-width: $width-xs-max !important;

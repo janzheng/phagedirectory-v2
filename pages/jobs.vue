@@ -12,20 +12,28 @@
 
       <div class="Jobs-intro _margin-bottom-2" v-html="$md.render(intro)"></div>
 
-
       <div class="Jobs-container">
-        <div class="Jobs-item _card _margin-bottom-2 _padding-2" v-for="job of Jobs" :key="job.id" v-if="job.fields['isPublished']">
-          <div class="Job-status">
-            <span class="_tag">{{ getStatus }}</span>
+        <div class="Jobs-item _card _margin-bottom-2 _padding-2" 
+          :class="getStatus"
+          v-for="job of Jobs" :key="job.id" v-if="showJob(job)">
+          <div class="Job-meta">
+            <div class="Job-status _margin-bottom" v-if="getStatus(job)">
+              <span class="_tag">{{ getStatus(job) }}</span>
+            </div>
+            <div class="Job-posted _font-small">
+              {{ job.fields['PostedDate'] | niceDate }}
+            </div>
           </div>
-          <div class="Job-posted">
-            Posted: {{ job.fields['PostedDate'] | 'niceDate'}}
+          <a class="Job-link" :href="job.fields['URL']">
+            <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
+          </a>
+          <div>
+            <div class="Job-org _font-bold" >{{ job.fields['Org'] }}</div>
+            <p class="Job-org" v-if="job.fields['Supervisor']">{{ job.fields['Supervisor'] }}</p>
           </div>
-          <div class="Job-title">{{ job.fields['Name'] }}</div>
           <div class="Job-description" 
             v-html="$md.render(job.fields['Markdown'] || '')">    
           </div>
-          <div class="Job-link"><a :href="job.fields['URL']">Apply Here</a></div>
           <div class="Job-tags">
             <span class="_tag" v-for="tag of job.fields['Tags']" :key="tag">{{ tag }}</span>
           </div>
@@ -77,16 +85,30 @@ export default {
       'Content',
       'Jobs',
       ]),
-
-    getStatus() {
-      // todo: return 'Active' if now < expiration date, 'Expired' otherwise
-      return 'Active'
-      // job.fields['Status']
-    }
-
   },
 
   methods: {
+    showJob(job) {
+      if (!job.fields['isPublished'])
+        return undefined 
+
+      if (job.fields['Status'] == 'Expired')
+        return undefined 
+
+      if (Date(job.fields['ExpirationDate']) < Date.now())
+        return undefined 
+
+      return true
+    },
+    getStatus(job) {
+      // todo: return 'Active' if now < expiration date, 'Expired' otherwise
+      // return 'Active'
+      // const exp = Date(job.fields['ExpirationDate'])
+      // const now = Date.now()
+      // console.log('??',job)
+      return job.fields['Status'] || undefined
+    }
+
   }
 
 }

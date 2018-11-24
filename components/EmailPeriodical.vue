@@ -7,13 +7,21 @@
  -->
 <template>
 
-  <section class="Email">
+  <section class="Email-section">
 
     <div  v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
 
-      <div style="box-shadow: 0px 4px 8px rgba(70, 70, 70, .1); color: #333333; background-color: #FCFCFC; border-radius: 4px; padding: 30px; margin-bottom: 15px;">
+      <div>
+        <span style="font-size:14px"><strong>{{ issue.fields['Name'] }}</strong>, {{ issue.fields['Date'] | niceDate }}</span><br />
+        <span style="font-size:12px"><a :href="`http://phage.directory/capsid/${issue.fields['Slug']}`" target="_blank">Read on Phage Directory</a></span>
+      </div>
+
+      <div class="Email" style="box-shadow: 0px 4px 8px rgba(70, 70, 70, .1); color: #333333; background-color: #FCFCFC; border-radius: 4px; padding: 30px; margin-bottom: 15px;">
+
         <div class="Periodical-description _margin-bottom-2" v-html="$md.render(issue.fields['Markdown'] || '')"></div>
 
+        <br />
+        
         <!-- twitter share on top -->
         <div class="Periodical-share" v-if="issue.fields['TwitterText']">
           <p class="Periodical-twitter">
