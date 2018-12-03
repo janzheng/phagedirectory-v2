@@ -14,8 +14,7 @@
 <div> hey hey!! </div>
 
 
-<div v-html="$md.render(mdd)" v-if="$md">
-</div>
+<div v-html="$md.render(mdd)" v-if="$md"></div>
 
 </ContentFrame>
 </template>
@@ -66,9 +65,17 @@ export default {
       ]),
     mdd() {
       return `
-# Injected
 
-what the hell? [._color-green] {._color-red}
+# Injected [._color-green]
+
+I AM GREEN COLOR[._color-green]
+
+UND I M REDD{._color-red}
+
+BIG WORDS!!! [._font-largest]
+
+tiny wrds {._font-tiny}
+
 
 [hey](google.com)
 

@@ -3,7 +3,9 @@
 
   <section class="Periodical narrow copy _margin-center _padding-top-2">
 
+
     <div class="CapsidnTail _card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+      {{ setHeader(issue) }}
       <div class="Periodical-header _grid-2">
         <div class="Periodical-title">{{ issue.fields['Name'] }}</div>
         <div class="Periodical-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
@@ -14,7 +16,7 @@
       <div class="Periodical-share _margin-bottom-2" v-if="issue.fields['TwitterText']">
         <p class="Periodical-twitter">
           <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
         </p>
       </div>
 
@@ -28,16 +30,30 @@
         </div>
       </div>
 
+      <div class="Jobs-updates" v-if="getJobs(issue).length>0">
+        <h5 class="Jobs-updates-title">{{issue.fields['JobsTitle'] || 'Job Board'}}</h5>
+        <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+          <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+          <div class="_margin-top-half" v-if="update.fields['Tags']">
+            <span class="Jobs-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+          </div>
+        </div>
+      </div>
+
+
+
       <div class="Periodical-content" v-if="issue.fields['ArticleContent']" v-html="$md.render(issue.fields['ArticleContent'] || '')">
       </div>
+
+
 
       <!-- list has been moved to PeriodicalList.vue -->
 
       <!-- twitter share on bottom -->
-      <div class="Periodical-share" v-if="issue.fields['TwitterText'] && getUpdates(issue).length>0" >
+      <div class="Periodical-share _margin-bottom-2" v-if="issue.fields['TwitterText']">
         <p class="Periodical-twitter">
           <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-          <a :href="`https://twitter.com/intent/tweet?text=${issue.fields['TwitterText']}`" >Tweet this issue!</a>
+          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
         </p>
       </div>
 
@@ -55,11 +71,35 @@ import { mapState } from 'vuex'
 export default {
   props: ['issues', 'showPreview'],
 
+  head () {
+
+    // NOTE: might or might not work SSR no idea
+    // console.log('og-image: ', this.headImageURL)
+
+    let meta
+    let title = "Capsid & Tail"
+    let description = "description"
+
+    if(this.headImageURL) {
+      meta = [
+        { hid: 'og-image', property: 'og:image', content: `${this.headImageURL}` },
+        { hid: 'og-title', property: 'og:title', content: title },
+        { hid: 'og-description', property: 'og:description', content: description },
+      ]
+    }
+
+    return {
+      title,
+      meta,
+    }
+  },
+
   components: {
   },
 
   data: function () {
     return {
+      headImageURL: undefined,
     }
   },
 
@@ -81,11 +121,54 @@ export default {
       // console.log('tags:', issue.fields['Tags'])
       // return this.$cytosis.getLinkedRecords(issue.fields['Tags'], this['Tags'], true)
     },
+
+    setHeader(issue) {
+      console.log('setHeader', issue.fields['HeadImageURL'])
+      this.headImageURL = issue.fields['HeadImageURL']
+    },
+
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
       // console.log('get updates:', updates)
       return updates || undefined
     },
+
+    getJobs(issue) {
+      // jobs also pull from Updates tab
+      const jobs = this.$cytosis.getLinkedRecords(issue.fields['Jobs'], this['Updates'], true)
+      // console.log('get updates:', updates)
+      return jobs || undefined
+    },
+
+    getTwitterLink(issue) {
+      /*
+        https://www.thesocialmediahat.com/article/how-attach-images-tweet-buttons
+
+        https://stackoverflow.com/questions/9127808/how-do-you-include-hashtags-within-fitter-share-link-text
+        
+        https://twitter.com/intent/tweet?
+        url=<url to tweet>
+        text=<text to tweet>
+        hashtags=<comma separated list of hashtags, with no # on them>
+
+        https://twitter.com/intent/tweet?url=http://www.example.com&text=I+am+eating+branston+pickel+right+now&hashtags=bransonpickel,pickles
+
+        Image example
+        - must already have shared on twitter somewhere
+        https://twitter.com/intent/tweet?&text=Phage+Therapy+Crowdsourcing+Infographic+by+@phagedirectory+pic.twitter.com/JMJfiertE1&hashtags=phagetherapy,phage,crowdsourcing,phagedirectory
+      */
+       
+       // issue.fields['TwitterText']
+
+       // generated from janistanian
+       // https://pbs.twimg.com/media/DtRXxsOUwAAo-Iz.jpg:large
+      const text = issue.fields['TwitterText']
+      const url = issue.fields['TwitterURL']
+      const tags = issue.fields['TwitterTags']
+
+      return `https://twitter.com/intent/tweet?url=${url}&text=${text}&hashtags=${tags}`
+
+    }
   }
 
 }

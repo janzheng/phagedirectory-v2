@@ -1,12 +1,8 @@
 
 <!-- 
 
-  Note: "blog" is the catch-all term for blog items, news articles, etc.
-  this includes Capsid & Tail articles as well
-
-  This page is used specifically for Phage Directory updates and blog
-  On the "Blog" table these are of the type "Updates"
-
+  Newspage: covers a specific issue in /capsid/:slug (should probably combine at some point)
+  
  -->
 
 <template>

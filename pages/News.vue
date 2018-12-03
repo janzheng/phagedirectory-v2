@@ -1,11 +1,7 @@
 
 <!-- 
 
-  Note: "blog" is the catch-all term for blog items, news articles, etc.
-  this includes Capsid & Tail articles as well
-
-  This page is used specifically for Phage Directory updates and blog
-  On the "Blog" table these are of the type "Updates"
+  NEWS: covers the main /capsid/ list
 
  -->
 
@@ -39,6 +35,12 @@ import { mapState } from 'vuex'
 
 
 export default {
+
+  head () {
+    return {
+      title: "Capsid & Tail"
+    }
+  },
 
   components: {
     Article,

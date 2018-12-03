@@ -13,16 +13,24 @@
     <div class="Form-intro " v-html="$md.render(intro)" v-if="intro">
     </div>
 
+    {{ output }}
+
     <div class="Form-body">
       <div class="" v-if="!success && !error">
-        <Formlet :inputs="getForm(source)" @handler="formHandler" ref="form"
-        ></Formlet>
+        <FormletSimple :inputs="getForm(source)" @handler="formHandler" ref="form"
+        ></FormletSimple>
         <div class=" _grid-2-1 _align-vertically" >
           <div>
             <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)"></span>
           </div>
-          <button class="Form-btn _button _margin-none _center" @click="submit" v-if="!sending">{{cta}}</button>
+
+          ?!?!!?!?!?!?
+
+          <button class="Form-btn _button _margin-none _center" @click="explode">CLICK ME!!</button>
+
+          <button class="Form-btn _button _margin-none _center" @click="submit" v-if="!sending">{{cta}}!!!!</button>
           <button class="Form-btn _button --outline _margin-none _center" v-if="sending">Sending...</button>
+
         </div>
       </div>
 
@@ -40,13 +48,13 @@
 
 <script>
 
-import Formlet from '~/components/Formlet.vue'
+import FormletSimple from '~/components/FormletSimple.vue'
 import axios from 'axios'
 
 export default {
 
   components: {
-    Formlet,
+    FormletSimple,
   },
 
   // source is the form's json source
@@ -63,7 +71,9 @@ export default {
       Email: '',
       Feedback: '',
       success: false,
-      error: false
+      error: false,
+      formdata: {},
+      output: "",
     }
   },
 
@@ -79,16 +89,28 @@ export default {
       return form.inputs
     },
     formHandler(data) {
-      if(data) {
-        this.form = data
+      console.log('form handler data:', data)
+      if(!!data) {
+        this.formdata = data
         this.isFormValid = true
+        console.log('data valid:',this.formdata)
       } else {
         this.isFormValid = false // required if validator is dirty
       }
+      console.log('end data:',this.formdata)
     },
+
+
+    explode() {
+      alert('EXPLODE!')
+      this.output = "EXPLOOOODE"
+    },
+
     submit() {
       const _this = this
-      this.$refs.form.touch()
+      // this.$refs.form.touch()
+
+      console.log('submit dataform:', this.formdata)
 
       if(this.isFormValid && !this.sending) {
         const data = {
@@ -98,7 +120,8 @@ export default {
           alert: this.alert,
           notes: this.notes,
           data: {
-            ... this.form.$model,
+            // ... this.form.$model,
+            content: this.formdata,
             ... this.payload,
             Source: this.source
           }
@@ -106,20 +129,28 @@ export default {
 
         this.sending = true
 
+
+        // TESITNG
+
+        console.log('axios:', data)
+        alert(`axios sends`)
+        this.output = data
+        this.sending = false
+
         // console.log('Submitting test data: ', data)
-        axios.post(this.postUrl, data)
-        .then(function (response) {
-          console.log('Message sent! Status:', response.status);
-          // if(status.status == 200) {
-            _this.success = true
-            _this.sending = false
-          // }
-        })
-        .catch(function (error) {
-          console.log('error', error);
-          _this.error = error
-          _this.sending = false
-        });
+        // axios.post(this.postUrl, data)
+        // .then(function (response) {
+        //   console.log('Message sent! Status:', response.status);
+        //   // if(status.status == 200) {
+        //     _this.success = true
+        //     _this.sending = false
+        //   // }
+        // })
+        // .catch(function (error) {
+        //   console.log('error', error);
+        //   _this.error = error
+        //   _this.sending = false
+        // });
       }
     }
   }

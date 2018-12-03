@@ -1,27 +1,32 @@
 notes.md
 
 
-# Header
+# Phage Directory v3
 
 
 ## Todo
+- Transition to Nuxt 2, babel 7 and IE11 support
 
+### Instill
+- warning message for non es5
+  - SSR helps
 - updates intro
 - join, routes, copy, forms, and intro
   - also strategy
 - BLOG POST: our goals, roadmap, how we're getting to phage therapy
   - tone down the scare factor, tone up the science-backed factor, supporting research for phage therapy
 - SEARCH: exclude non-searched labs
-
 - Add all media links to airtable for the news section
   - need to pick and choose
-  
-Strategy
-  - feedback page vs. contact page - split these up?
-    - what feedback do we elicit?
-    - how can researchers help us improve?
+- add human-led channels
+  - jessica’s face on capsid, plus name and instill account 
+
+### Instill
+- profiles
+- share/chat
 
 
+--- 
 
 ## Later
 
@@ -52,47 +57,7 @@ Strategy
     - '/join/research'
       - for labs with phages
       - add phage form
-  - Newsletter (needs better name — 'viral'?)
-    - combined w/ Phage Directory blog
-      - *** the problem is that we really still do need a place to say our things
-            but if they were split up, there'd be too many places
-    - the gist: summary of health + research + pharmacology, from a public's perspective
-    - names: viral, the path (pathogen), 
-      - health, microbiology, treatments, disease, infections, reveal, remedy, scratch (opposite word?), the streak, (medium, method, the drip, trickle, the flow, the stream), hex, the loop, moment, veracity, sincerity, truth, veritas, message/note/memo/missive; powerthesaurus.org
-      - basic / basicc.org / thebasic.pub
-      - whether.pub, instill.pub
-      - moment, instant, juncture
-      - the span / spann, realm
-      - grok, grokk, grasp, the grasp
-      - the angst,
-      - cover, coverage, 
-      - clarify
-      - distil, vapor, clarify, refine, purify, express, pure, form
-      - relief, gather, the dig, the take, 
-      - peruse
-      - the gist
-      - outlier
-      - outcome
-      - together (we are in this together), tandem, 
-      - gatekeeper 
-      - wearebig (re: Mallory's story)
-        - wearehere, here, 
-      - should be inclusive or hinting to all these things, but still be vague enough
-      - e.g. like the Verge about tech and society, implying cutting edge
-      - "2050"? as in, ETA or countdown to year 2050 of antibiotic resistance?
-    - microbials
-    - microbiome
-    - antibiotic resistance
-    - phage therapy
-    - phage research / links
-    - pathogens
-    - treatments for bacteria-related diseases, infections
-    - clinical trial updates
-    - treatment-centric technology
-    - phage / phage-related tech (phages, lysins, pharmacology, etc.)
-    - insurance 
-    - pharma
-    - drugs
+  - Newsletter (capsid and tail)
   - Site Policies '/policies'
   - Directory '/' 
     - the entry points should be the main site; if that's impossible then
@@ -136,7 +101,8 @@ Strategy
 - policy page
 - Policy: - cancellation / change info
   - Join - cancellation / change info details
-
-
+- figured out IE11 — markdown-it-attrs and moment are not compliant
+  - moment switched out with dayjs
+  - updating markdown-it-attrs w/ new babel
 
 

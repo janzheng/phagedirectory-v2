@@ -98,6 +98,7 @@
   margin-top: $size-base;
   margin-bottom: $size-4;
 
+
   // border: $border-thin solid $color-tertiary;
   border-radius: $radius;
 
@@ -211,19 +212,28 @@
 
   .Periodical-updates {
     @extend .Periodical-card;
-
   }
 
-  .Periodical-updates-title {
-    display: inline-block;
-    &:after {
-      content: ' ';
-      display: block;
-      width: 40%;
-      padding-top: $size-half;
-      border-bottom: $border-thin $color-pink solid;
+    .Periodical-updates-title {
+      display: inline-block;
+      &:after {
+        content: ' ';
+        display: block;
+        width: 40%;
+        padding-top: $size-half;
+        border-bottom: $border-thin $color-pink solid;
+      }
     }
-  }
+
+
+    .Jobs-updates {
+      @extend .Periodical-card;
+      background-color: $color-teal-10;
+    }
+    .Jobs-updates-title {
+      @extend .Periodical-updates-title;
+    }
+
 
   // used to display short headlines on Capsid & Tail
   .PeriodicalStub {
@@ -238,6 +248,19 @@
         text-decoration: underline;
         text-decoration-color: $color-links;
       }
+      // emulate a link, but handled in js
+      // since might contain nested links
+      border: $border-thin solid $color-bg;
+      @extend %ease;
+      cursor: pointer;
+      &:hover {
+        @extend %ease;
+        border: $border-thin solid $color-tertiary;
+        h2 {
+          color: $color-tertiary;
+          @extend %ease;
+        }
+      };
     }
   }
 

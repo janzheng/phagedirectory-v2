@@ -9,14 +9,13 @@
 
   <section class="PeriodicalStub narrow copy _margin-center _padding-top-2">
 
-    <router-link :to="`/capsid/${issue.fields.Slug}`" class="PeriodicalStub-item _block _card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <div @click="openLink(`/capsid/${issue.fields.Slug}`)" class="PeriodicalStub-item _block _card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
       <div class="Periodical-header _grid-2">
         <div class="Periodical-title">{{ issue.fields['Name'] }}</div>
         <div class="Periodical-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
       <div class="Periodical-description _margin-bottom _md-p_fix" v-html="$md.render(issue.fields['Markdown'] || '')"></div>
-
-    </router-link>
+    </div>
 
   </section>
 
@@ -61,6 +60,11 @@ export default {
       // console.log('get updates:', updates)
       return updates || undefined
     },
+    openLink(link) {
+      this.$router.push({
+          path: link
+      })
+    }
   }
 
 }

@@ -14,8 +14,8 @@ export default {
     // future (multiple):  [{stateName: payloadobject}, {stateName: payloadobject})
     // console.log('mutate update')
 
-    if (typeof(payload) == 'array') {
-      for (n of payload) {
+    if ( !!payload && payload.length) {
+      for (let n of payload) {
         // type 2: array of key/val pairs
         const name = Object.keys(payload)[n][0]
         const value = Object.values(payload)[n][0]
@@ -33,11 +33,6 @@ export default {
       const value = Object.values(payload)[0]
 
       // type 2: name is "fruit.orange" we only want to edit the orange
-      /*
-        _this.$store.dispatch('update', {
-            "enums.OVERFLOW": value
-          }, true)
-      */
       if(name.indexOf('.') > 0) {
         let substate = state
         let nameList = name.split('.')
@@ -67,6 +62,7 @@ export default {
         console.error('Store.update', 'Failed: object doesn’t exist:', name, value, state)
     }
   },
+  
   // generalized mutator for creating or updating new value
   updateCreate (state, payload) {
     // like update, but creates the object at location if it doesn't exist

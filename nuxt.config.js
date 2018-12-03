@@ -1,5 +1,10 @@
+const pkg = require('./package')
 
 // note: nuxt requires Node 8+ to run properly 
+
+// dynamic imports for SSR
+import Cytosis from './other/cytosis'
+import { loadNews } from './other/loaders'
 
 
 // https://github.com/joshbuchea/HEAD  https://gethead.info/
@@ -28,13 +33,13 @@ const site_fb = '172737416727733'; // buildAtl fb id
 const airtable_api = 'keyAe6M1KoPfg25aO'; // cytosisreader@zeee.co handler
 const airtable_base = 'appSCAap8SWbFRtu0';
 
-
-
+const analyze = false; // analyzer (webpack; turn off for prod)
+const offline = false;
 let mode = 'universal' // loads airtable dynamically
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 if (process.env.NODE_ENV == 'spa') {
+  console.log('RUNNING IN SPA MODE')
   mode = 'spa'
-  // mode = 'universal'
 }
 
 module.exports = {
@@ -61,9 +66,7 @@ module.exports = {
     //   allowedSources: undefined,
     //   policies: undefined
     // }
-
   },
-
 
 
   /*
@@ -74,7 +77,6 @@ module.exports = {
     title: site_title,
     meta: [
 
-      
       { charset: 'utf-8' },
       // { name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1' }, // max-scale prevents auto-zoom on mobile, may prevent zoom
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -126,7 +128,6 @@ module.exports = {
       // <meta name="twitter:image" content="http://example.com/image.jpg">
       { hid: 'twitter-image', property: 'twitter:image', content: site_url + site_image },
 
-
     ],
     link: [
 
@@ -141,97 +142,14 @@ module.exports = {
     ],
   },
 
-
-
-
-
-
-
-      /* 
-          Esoterica
-          https://gethead.info/#recommended-minimum
-
-          <!-- Allows control over how referrer information is passed -->
-          { hid: 'referrer', name: 'referrer', content: 'no-referrer' },
-
-          <!-- Disable automatic detection and formatting of possible phone numbers -->
-          { hid: 'format-detection', name: 'format-detection', content: 'telephone=no' },
-
-          <!-- Specifies the document to appear in a specific frame -->
-          { hid: 'http-equiv', http-equiv: 'Window-Target', content: '_value' },
-
-          <!-- Geo tags https://en.wikipedia.org/wiki/ICBM_address#Modern_use -->
-          <meta name="ICBM" content="latitude, longitude">
-          <meta name="geo.position" content="latitude;longitude">
-          <meta name="geo.region" content="country[-state]"><!-- Country code (ISO 3166-1): mandatory, state code (ISO 3166-2): optional; eg. content="US" / content="US-NY" -->
-          <meta name="geo.placename" content="city/town"><!-- eg. content="New York City" -->
-    
-      */
-      // { hid: 'referrer', name: 'referrer', content: 'no-referrer' },
-      // { hid: 'format-detection', name: 'format-detection', content: 'telephone=no' },
-      // { hid: 'http-equiv', http-equiv: 'Window-Target', content: '_value' },
-
-      // { hid: 'icbm', name: 'ICBM', content: 'latitude, longitude' },
-      // { hid: 'geoposition', name: 'geo.position', content: 'latitude;longitude' },
-      // { hid: 'georegion', name: 'geo.region', content: 'US-NY' },
-      // { hid: 'geoplacename', name: 'geo.placename', content: 'New York City' },
-
-
-      // Link
-      // <!-- Links to an AMP HTML version of the current document -->
-      // <link rel="amphtml" href="http://example.com/path/to/amp-version.html">
-      // { hid: 'amphtml', rel: 'amphtml', href: 'http://example.com/path/to/amp-version.html' },
-
-      // <!-- Links to information about the author(s) of the document -->
-      // <link rel="author" href="humans.txt">
-
-      // <!-- Refers to a copyright statement that applies to the link's context -->
-      // <link rel="license" href="copyright.html">
-
-      // <!-- Gives a reference to a location in your document that may be in another language -->
-      // <link rel="alternate" href="https://es.example.com/" hreflang="es">
-
-      // <!-- Provides information about an author or another person -->
-      // <link rel="me" href="https://google.com/profiles/thenextweb" type="text/html">
-      // <link rel="me" href="mailto:name@example.com">
-      // <link rel="me" href="sms:+15035550125">
-
-      // <!-- The first, last, previous, and next documents in a series of documents, respectively -->
-      // <link rel="first" href="http://example.com/article/">
-      // <link rel="last" href="http://example.com/article/?page=42">
-      // <link rel="prev" href="http://example.com/article/?page=1">
-      // <link rel="next" href="http://example.com/article/?page=3">
-
-      // <!-- Feeds -->
-      // <link rel="alternate" href="https://feeds.feedburner.com/example" type="application/rss+xml" title="RSS">
-      // <link rel="alternate" href="http://example.com/feed.atom" type="application/atom+xml" title="Atom 0.3">
-
-      // <!-- Prefetching, preloading, prebrowsing -->
-      // <!-- More info: https://css-tricks.com/prefetching-preloading-prebrowsing/ -->
-      // <link rel="dns-prefetch" href="//example.com/">
-      // <link rel="preconnect" href="https://www.example.com/">
-      // <link rel="prefetch" href="https://www.example.com/">
-      // <link rel="prerender" href="http://example.com/">
-      // <link rel="preload" href="image.png" as="image">
-
-
-
-
-
-
-
-
-
-
-
   /*
   ** Customize the progress bar color
   */
   loading: { color: site_color },
+
   /*
   ** Build configuration
   */
-
 
   plugins: [
     // '~plugins/filters.js',nuxtjs/google-tag-manager
@@ -253,34 +171,20 @@ module.exports = {
     }],
     // ['@nuxtjs/markdownit', {
     //   html: true,
+    //   injected: true,
+    //   typographer: true,
+    //   linkify: true,
+    //   breaks: true,
+    //   use: [
+    //     'markdown-it-attrs',
+    //     // ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
+    //   ],
     // }],
     ['@nuxtjs/google-tag-manager', { 
       id: 'GTM-WCR3X43' 
     }],
     '@nuxtjs/pwa',
-    'nuxt-device-detect',
   ],
-  // this is buggy, using own plugin instead
-  // markdownit: {
-  //   // preset: 'default',
-  //   injected: false, // markdownit.js plugin takes over injection
-  //   // to use custom injection, remove  if (_options.injected === true) { block from @nuxtjs/markdownit/index.js
-  //   // use the custom plugin/markdownit to inject properly; the official thing is broken
-  //   // injected: true, // commented out to allow attrs in lang="md" blocks
-  //   // BUG: in @nuxtjs/markdownit/index.js: this needs to be set: 
-  //   //      options: Object.assign({}, options, this.options.markdownit)
-  //   //      this allows lang="md" to continue processing plugins like markdown-it-attrs, otherwise it doesn't do that anymore
-  //   // otherwise plugins will break
-  //   html: true,
-  //   typographer: true,
-  //   linkify: true,
-  //   breaks: true,
-  //   use: [
-  //     'markdown-it-attrs',
-  //     ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
-  //   ],
-  // },
-
 
   manifest: {
     name: 'Phage Directory',
@@ -301,10 +205,10 @@ module.exports = {
     },
     runtimeCaching: [
       {
-          urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
-          handler: 'cacheFirst',
-          method: 'GET',
-          strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+        urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
+        handler: 'cacheFirst',
+        method: 'GET',
+        strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
       },
       // {
       //     urlPattern: 'https://fonts.googleapis.com/.*',
@@ -322,50 +226,30 @@ module.exports = {
   },
 
   build: {
-    styleResources: {
-      options: {
-        // See https://github.com/yenshih/style-resources-loader#options
-        // Except `patterns` property
-      },
-      scss: [
-      // './assets/css/shared.scss' // shared files
-      ],
+    // https://willbrowning.me/reducing-the-vendor-bundle-size-in-nuxt-js/
+    analyze: analyze,
+    splitChunks: {
+      layouts: true
     },
 
     babel: {
-      presets: ['es2015', 'stage-2'],
-      plugins: ["transform-vue-jsx", "transform-runtime", "transform-object-rest-spread"],
+      sourceType: "unambiguous",
+      presets: [
+        ['@babel/preset-env', {
+          // debug: true,
+          useBuiltIns: 'usage',
+          targets: {
+            "browsers": ["> 1%", "ie >= 11", "not ie <= 8"]
+            // "browsers": ["> 1%", "last 2 versions", "ie >= 11", "not ie <= 8"]
+          }
+        }]
+      ],
+      plugins: ['@babel/plugin-transform-arrow-functions', '@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-typeof-symbol', '@babel/plugin-transform-runtime'],
     },
-    // vendor: ['cytosis'],
-    extend (config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push(
-        {
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        },{
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /(node_modules)/
-        })
-      }
-    },
-    // postcss: false,
-    // this enables cssvars
-    postcss: [
-      require('postcss-cssnext')({
-        features: {
-          map: false,
-          customProperties: false
-        }
-      })
-    ],
+    // explicitly transpile these
+    transpile: ['cytosis', 'vuex-cache', 'markdownit', 'markdown-it-attrs'],
+    // transpile: ['cytosis', 'vuex-cache', 'markdownit'],
 
-    extractCSS: {
-      allChunks: true
-    },
   },
 
 
@@ -482,11 +366,11 @@ module.exports = {
         //   path: '/updates',
         //   component: resolve(__dirname, 'pages/Blog.vue')
         // },
-        {
-          name: 'Updates.item',
-          path: '/updates/:slug',
-          component: resolve(__dirname, 'pages/updates.vue')
-        },
+        // {
+        //   name: 'Updates.item',
+        //   path: '/updates/:slug',
+        //   component: resolve(__dirname, 'pages/updates.vue')
+        // },
 
         // other resolvers
         {
@@ -501,27 +385,30 @@ module.exports = {
         },
       )
     },
-    // scrollBehavior(to, from, savedPosition) {
-    //   if (savedPosition) {
-    //     return savedPosition
-    //   } else {
-    //     let position = {}
-    //     if (to.matched.length < 2) {
-    //       position = { x: 0, y: 0 }
-    //     } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
-    //       position = { x: 0, y: 0 }
-    //     }
-    //     if (to.hash) {
-    //       position = { selector: to.hash }
-    //     }
-    //     return position
-    //   }
-    // }
 
   },
   generate: {
     interval: 150, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
-    fallback: true, // if you want to use '404.html'
+    // fallback: true, // if you want to use '404.html' — for surge, use false if you want to use 200 spa fallback
+    routes: async function (callback) {
+
+        const airKey = airtable_api
+        const airBase = airtable_base
+
+        let cytosis = await new Cytosis({
+          airKey, 
+          airBase, 
+          tableIndex: 'news',
+          caller: 'generator'
+        })
+
+        let routeList = []
+        for (let capsid of cytosis.tables['C&T']) {
+          routeList.push(`/capsid/${capsid.fields['Slug']}`)
+        }
+
+        callback(null, routeList)
+    }
   },
 
 }
