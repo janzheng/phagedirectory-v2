@@ -74,19 +74,20 @@ export default {
   head () {
 
     // NOTE: might or might not work SSR no idea
-    // console.log('og-image: ', this.headImageURL)
 
-    let meta
     let title = "Capsid & Tail"
     let description = "description"
+    let meta = [
+      { hid: 'og-title', property: 'og:title', content: `${this.headTitle}` },
+      { hid: 'twitter-title', property: 'twitter:title', content: `${this.headTitle}` },
 
-    if(this.headImageURL) {
-      meta = [
-        { hid: 'og-image', property: 'og:image', content: `${this.headImageURL}` },
-        { hid: 'og-title', property: 'og:title', content: title },
-        { hid: 'og-description', property: 'og:description', content: description },
-      ]
-    }
+      { hid: 'og-image', property: 'og:image', content: `${this.headImage}` },
+      { hid: 'twitter-image', property: 'twitter:image', content: `${this.headImage}` },
+
+      { hid: 'twitter-description', property: 'twitter:description', content: `${this.headDescription}` },
+      { hid: 'og-description', property: 'og:description', content: `${this.headDescription}` },
+      { hid: 'description', name: 'description', content: `${this.headDescription}` },
+    ]
 
     return {
       title,
@@ -99,7 +100,9 @@ export default {
 
   data: function () {
     return {
-      headImageURL: undefined,
+      headTitle: undefined,
+      headImage: undefined,
+      headDescription: undefined,
     }
   },
 
@@ -123,8 +126,10 @@ export default {
     },
 
     setHeader(issue) {
-      console.log('setHeader', issue.fields['HeadImageURL'])
-      this.headImageURL = issue.fields['HeadImageURL']
+      console.log('setHeader', issue.fields['HeadImage'])
+      this.headImage = issue.fields['HeadImage']
+      this.headDescription = issue.fields['HeadDescription']
+      this.headTitle = issue.fields['HeadTitle']
     },
 
     getUpdates(issue) {
