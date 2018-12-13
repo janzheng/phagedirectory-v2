@@ -7,10 +7,9 @@
       <div class=" _center-xs _align-vertically">
         <!-- <router-link to='/' class="_hidden-xs logo-link _border-none-i"><img class="logo" src="~/static/ico.png"/></router-link> -->
 
-
         <div class="Header-left _hidden-sm">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
-            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/ico.png"/></router-link>
+            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"/></router-link>
             <router-link to='/phages' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Phages</router-link>
             <!-- <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link> -->
             <router-link to='/alerts' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Alerts</router-link>
@@ -29,7 +28,7 @@
       <!-- Desktop menu -->
         <div class="Header-left _hidden-xs _padding-left-2 _padding-right-2">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
-            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/ico.png"/></router-link>
+            <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"/></router-link>
             <div class="Header-inset">
               <router-link to='/phages' class="_button --text --short _padding-none _margin-none --border-none">Phages</router-link>
               <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link>

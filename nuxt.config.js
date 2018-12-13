@@ -22,7 +22,8 @@ const site_color = '#374F6A';
 const site_title = 'Phage Directory';
 const site_description = 'Phage Directory curates a database of phage labs, phages, and host strains to advance research and phage therapy.';
 
-const site_ico = '/ico_dull.png';
+// const site_ico = '/ico_dull.png';
+const site_ico = '/_ico.png';
 const site_image = '/share_img.png';
 const site_search = 'index,follow';
 const site_author = 'Jan Zheng';
@@ -203,26 +204,27 @@ module.exports = {
     generate: {
       fallback: true
     },
-    runtimeCaching: [
-      {
-        urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
-        handler: 'cacheFirst',
-        method: 'GET',
-        strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
-      },
-      // {
-      //     urlPattern: 'https://fonts.googleapis.com/.*',
-      //     handler: 'cacheFirst',
-      //     method: 'GET',
-      //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
-      // },
-      // {
-      //     urlPattern: 'https://fonts.gstatic.com/.*',
-      //     handler: 'cacheFirst',
-      //     method: 'GET',
-      //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
-      // },
-    ]
+    // this breaks SPA mode, and is super aggressive, but makes offline mode work really well
+    // runtimeCaching: [
+    //   {
+    //     urlPattern: 'https://api.airtable.com/v0/appSCAap8SWbFRtu0/.*',
+    //     handler: 'cacheFirst',
+    //     method: 'GET',
+    //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+    //   },
+    //   // {
+    //   //     urlPattern: 'https://fonts.googleapis.com/.*',
+    //   //     handler: 'cacheFirst',
+    //   //     method: 'GET',
+    //   //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+    //   // },
+    //   // {
+    //   //     urlPattern: 'https://fonts.gstatic.com/.*',
+    //   //     handler: 'cacheFirst',
+    //   //     method: 'GET',
+    //   //     strategyOptions: {cacheableResponse: {statuses: [0, 200]}}
+    //   // },
+    // ]
   },
 
   build: {

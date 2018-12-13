@@ -1,7 +1,7 @@
 
 
 
-@import '/components/blog';
+@import '/components/periodical';
 @import '/components/sidenav';
 @import '/components/directory';
 @import '/components/mailchimp';
@@ -47,7 +47,10 @@
 
 
 
-
+// image profile
+.--profile {
+  border-radius: 100%;
+}
 
 
 

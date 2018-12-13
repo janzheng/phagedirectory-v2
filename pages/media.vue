@@ -1,26 +1,10 @@
 <template>
 
   <!-- <ContentFrame class="About"> -->
-  <div class="Shirt">
+  <div class="Media">
     <section class="narrow copy _margin-center">
-      <h1 class="Shirt-title title">
-        {{aboutTitle}}
-      </h1>
-
-      <div class="About-bg">
-        <div class="" v-html="$md.render(aboutBg || '')"></div>
-      </div>
-
-      <div class="About-us">
-        <div class="" v-html="$md.render(aboutUs || '')"></div>
-      </div>
-
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jess || '')"></div>
-      </div>
-
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jan || '')"></div>
+      <div class="Media-content">
+        <div class="" v-html="$md.render(media || '')"></div>
       </div>
 
     </section>
@@ -49,11 +33,7 @@ export default {
     //   return false
 
     return {
-      aboutTitle: app.$cytosis.find('Content.about-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      aboutBg: app.$cytosis.find('Content.about-bg', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      aboutUs: app.$cytosis.find('Content.about-us', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jess: app.$cytosis.find('Content.about-jess', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jan: app.$cytosis.find('Content.about-jan', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      media: app.$cytosis.find('Content.media-content', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

@@ -14,7 +14,9 @@
         <div class="Periodical-title">{{ issue.fields['Name'] }}</div>
         <div class="Periodical-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
-      <div class="Periodical-description _margin-bottom _md-p_fix" v-html="$md.render(issue.fields['Markdown'] || '')"></div>
+      <h2 class="Periodical-title" v-html="issue.fields['Title']"></h2>
+      <div class="Periodical-lede" v-html="issue.fields['Lede']"></div>
+      <!-- <div class="Periodical-description _margin-bottom _md-p_fix" v-if="issue.fields['Intro']" v-html="$md.render(issue.fields['Intro'] || '')"></div> -->
     </div>
 
   </section>

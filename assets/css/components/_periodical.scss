@@ -14,30 +14,30 @@
 
 
 // Article Post; a page with lots of text
-.Article {
-  .Article-frontmatter {
-    margin-bottom: $size-2;
-  }
+// .Article {
+//   .Article-frontmatter {
+//     margin-bottom: $size-2;
+//   }
 
-  .Article-back {
-    font-weight: $font-bold;
-  }
-  .Article-title {
-  }
-  .Article-lede {
-    margin-bottom: $size-base;
-    &, p {
-      font-size: $font-large;
-    }
-  }
-  .Article-image {
-    width: 100%;
-  }
+//   .Article-back {
+//     font-weight: $font-bold;
+//   }
+//   .Article-title {
+//   }
+//   .Article-lede {
+//     margin-bottom: $size-base;
+//     &, p {
+//       font-size: $font-large;
+//     }
+//   }
+//   .Article-image {
+//     width: 100%;
+//   }
   
-  .Article-tags {
-    margin-bottom: $size-base;
-  }
-}
+//   .Article-tags {
+//     margin-bottom: $size-base;
+//   }
+// }
 
 
 
@@ -48,12 +48,58 @@
 // note: don't use <article> tag as it's a formatting tag
 // some of these are specified in markdown, so the markup should be very simple
 
-.Periodical {
+.Periodical, .PeriodicalStub {
   // change the header sizes a bit 
   // they need to stay semantic in order to be copied into mailchimp
+  $p1: $font-h1;
+  $l1: $lineheight-h1;
+
+  $p2: 21px;
+  $l2: 28px;
+
+  $p3: 28px;
+  $l3: 32px;
+
+  $p4: 21px;
+  $l4: 32px;
+
+  h1 {
+    font-size: $p1;
+    line-height: $l1;
+    padding-bottom: 0;
+  }
+  h2 {
+    font-size: $p2;
+    line-height: $l2;
+  }
   h3 {
-    font-size: $font-h5;
-    line-height: $lineheight-h5;
+    font-size: $p3;
+    line-height: $l3;
+  }
+  h4 {
+    font-size: $p4;
+    line-height: $l4;
+  }
+
+  &.narrow {
+    @include screen-xs {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+
+  blockquote {
+    padding-left: $size;
+    padding-right: $size;
+    &,p { // md render fix
+      // overrides Coeur blockquotes as pull-quotes
+      @extend %font-serif;
+      font-size: $p4;
+      line-height: $l4;
+      border: 0;
+      color: $color-tertiary;
+    }
   }
 }
 
@@ -71,7 +117,7 @@
   }
 
   img {
-    // width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -81,15 +127,27 @@
   background-color: $color-ui-lighter;
   border-radius: $radius;
   margin-bottom: $size-2;
-  img {
-    width: 100%;
-  }
+  // img {
+  //   width: 100%;
+  // }
 
   &.--callout {
     background-color: $color-teal-50;
     // color: $color-bg;
   }
+
+  &.--light {
+    background-color: $color-teal-10;
+    // color: $color-bg;
+  }
+
+  &.--img {
+    img {
+      width: inherit;
+    }
+  }
 }
+
 
 .Periodical-item {
   display: block;
@@ -264,12 +322,30 @@
     }
   }
 
-  .Periodical-twitter {
+  .Periodical-author {
+    margin-top: $size;
+    // @extend .Periodical-card;
+    padding: $size;
+    background-color: $color-ui-lighter;
+    border-radius: $radius;
+  }
+
+  .Periodical-share {
+    // @extend .Periodical-card;
+    margin-top: $size-2;
+    margin-bottom: $size-2;
     img {
-      vertical-align: middle;
-      margin-right: $size/4;
+      width: auto;
     }
   }
+
+    .Periodical-twitter {
+      img {
+        vertical-align: middle;
+        margin-right: $size/4;
+      }
+      margin-top: $size;
+    }
 
 
   // for the C&T subtitle ('A weekly phage periodical')

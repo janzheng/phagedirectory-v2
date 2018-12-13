@@ -92,8 +92,8 @@ export default {
       if (!job.fields['isPublished'])
         return undefined 
 
-      if (job.fields['Status'] == 'Expired')
-        return undefined 
+      // if (job.fields['Status'] == 'Expired')
+      //   return undefined 
 
       if (Date(job.fields['ExpirationDate']) < Date.now())
         return undefined 

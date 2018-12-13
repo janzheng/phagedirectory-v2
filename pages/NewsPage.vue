@@ -20,7 +20,8 @@
 
     <Periodical :issues="issues" :showPreview="showPreview" />
 
-    <div class="Periodical-card _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')"></div>
+    <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')"></div>
+
   </div>
 </template>
 
@@ -47,8 +48,10 @@ export default {
   // these are dynamic, and aren't grabbed on generation
   async asyncData({app, env, route, store}) {
 
-    const staticData = await loadStatic(env, store, 'newspage')
+    // const staticData = await loadStatic(env, store, 'newspage')
     const newsData = await loadNews(env, store, 'newspage')
+
+    console.log('newspage:', newsData)
 
     const slug = unescape(route.params.slug)
     return {
@@ -77,10 +80,21 @@ export default {
 
     issues() {
 
-      const result = this.$cytosis.search(this.slug, this.$store.state['C&T'], ['Slug'])
-      console.log('issue slug: ', result)
+      let result = this.$cytosis.search(this.slug, this.$store.state['C&T'], ['Slug'])
 
-      return result
+      // result isn't a 100% match, so need to do manual EXACT matching (is this a cytosis bug?)
+      if (result.length > 1) {
+        for (let issue of result) {
+          // return exact slug match
+          if (issue.fields['Slug'] == this.slug) {
+            result = [issue]
+            break
+          }
+        }
+      }
+
+      // console.log('issue slug: ', result)
+      return result // array of issues
     }
 
   },

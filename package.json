@@ -10,11 +10,12 @@
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
+    "deploy": "cd dist; surge . -d https://phage.directory",
     "stagedeploy": "cd dist; surge . -d phagedirectory.surge.sh",
-    "stage": "NODE_ENV=spa npm run generate; npm run stagedeploy",
+    "stage": "NODE_ENV=spa npm run generate --spa; npm run stagedeploy",
     "stagebuild": "npm run generate; npm run stagedeploy",
-    "prod": "npm run generate; cd dist; surge . -d phage.directory",
-    "prodspa": "NODE_ENV=spa; npm run generate; cd dist; surge . -d phage.directory"
+    "prod": "npm run generate; npm run deploy",
+    "prodspa": "NODE_ENV=spa npm run generate --spa; npm run deploy"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",

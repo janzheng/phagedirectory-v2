@@ -18,7 +18,7 @@
     
     <MailchimpBanner class="_margin-center" />
 
-    <Periodical :issues="latest" />
+    <Periodical :issues="latest" :isLatest="true" />
 
     <PeriodicalStub :issues="notLatest" />
 
@@ -52,14 +52,19 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
+
   async asyncData({app, env, route, store}) {
 
+    // somehow this is getting cached?!
     const newsData = await store.dispatch('loadCytosis', {
       env,
       tableIndex: 'news',
+      caller: 'news',
     })
 
     const slug = unescape(route.params.slug)
+    // console.log('News loaded', newsData)
+
     return {
       title: app.$cytosis.find('Content.news-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       intro: app.$cytosis.find('Content.news-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],

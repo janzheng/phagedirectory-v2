@@ -22,8 +22,8 @@ async function loadDataOnServer(routeName, store, env) {
   // })
 
   // if universal mode, don't load data when not server
-  if(process.mode == 'universal' && !process.server)
-    return false;
+  // if(process.mode == 'universal' && !process.server)
+  //   return false;
 
   console.log('loading cytosis. Data:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
   // if(process.server) {
