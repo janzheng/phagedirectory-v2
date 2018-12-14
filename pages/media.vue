@@ -33,7 +33,7 @@ export default {
     //   return false
 
     return {
-      media: app.$cytosis.find('Content.media-content', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      media: app.$cytosis.find('Content.media-content', store.state.cytosis.tables)[0]['fields']['Markdown']
     }
   },
 
