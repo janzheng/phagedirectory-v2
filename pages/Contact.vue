@@ -9,6 +9,13 @@
 import FormContact from '~/forms/FormContact.vue'
 
 export default {
+  head () {
+    const title = "Contact Us"
+
+    return {
+      title,
+    }
+  },
 
   components: {
     FormContact

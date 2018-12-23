@@ -66,7 +66,7 @@
   h1 {
     font-size: $p1;
     line-height: $l1;
-    padding-bottom: 0;
+    padding-bottom: $size;
   }
   h2 {
     font-size: $p2;
@@ -105,7 +105,7 @@
 
 .Periodical-header {
   @extend %font-serif;
-  font-style: italic;
+  // font-style: italic;
   // font-size: $font-large;
   color: $color-gray-light;
 }
@@ -118,6 +118,17 @@
 
   img {
     max-width: 100%;
+  }
+}
+
+.Advert {
+  @extend ._card;
+  margin-bottom: $size;
+  padding: $size;
+
+  &.--tertiary {
+    background-color: $color-tertiary-50 !important;
+    // color: $color-white;
   }
 }
 
@@ -138,6 +149,7 @@
 
   &.--light {
     background-color: $color-teal-10;
+    font-weight: inherit;
     // color: $color-bg;
   }
 
@@ -295,16 +307,26 @@
 
   // used to display short headlines on Capsid & Tail
   .PeriodicalStub {
-    // each item links out w/ a <a> wrapper
+    
+    .PeriodicalStub-latest {
+      padding-bottom: 0;
+    }
     
     // don't highlight / underline some parts
     .PeriodicalStub-item {
       &,* {
         text-decoration: none;
       }
-      h2 {
+      h1 {
+        font-size: 34px;
+        line-height: 42px;
+      }
+      h1, h2 {
         text-decoration: underline;
         text-decoration-color: $color-links;
+      }
+      &.--featured {
+        border-color: $color-tertiary;
       }
       // emulate a link, but handled in js
       // since might contain nested links

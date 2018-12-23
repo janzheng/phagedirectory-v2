@@ -58,42 +58,67 @@
 
   .AlertSignup-form {
     padding: $size-base $size-base;
-    border: $color-main $border-thin solid;
+    // border: $color-main $border-thin solid;
+    // background: $color-tertiary;
     border-radius: $radius;
+    color: $color-black;
+    a {
+      color: $color-black;
+      font-weight: bold;
+      &:hover {
+        color: $color-blue;
+      }
+    }
 
     input {
-      border-color: $color-tertiary;
-    }
-  }
-  .AlertSignup-sub {
-    font-weight: bold;
-  }
-  .AlertSignup-input {
-    @include screen-xs {
-      margin-right: 0;
-    }
-  }
-  .AlertSignup-cta {
-    margin-bottom: 0;
-    @include screen-xs {
-      width: 100%;
-      display: block;
-      margin-top: $size-half;
-      // margin-top: $size-base;
-    }
-  }
+      // border-color: $color-tertiary;
+      color: $color-black;
+      &.Subscribe {
+        color: $color-black;
+      }
 
-  &.footer {
-    margin: 0;
-    text-align: center;
-    margin-left: $size-2;
-    margin-right: $size-2;
-
-    @include screen-xs {
-      margin-left: $size-base;
-      margin-right: $size-base;
+      border-color: $color-black;
+      border-radius: $radius;
+      &:hover, &:active, &:focus {
+        background-color: rgba($color-white, 0.8)
+      }
     }
   }
+    .AlertSignup-content {
+      @include screen-xs {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    .AlertSignup-sub {
+      font-weight: bold;
+    }
+    .AlertSignup-input {
+      @include screen-xs {
+        margin-right: 0;
+      }
+    }
+    .AlertSignup-cta {
+      margin-bottom: 0;
+      @include screen-xs {
+        width: 100%;
+        display: block;
+        margin-top: $size-half;
+        // margin-top: $size-base;
+      }
+    }
+
+    &.footer {
+      margin: 0;
+      text-align: center;
+      margin-left: $size-2;
+      margin-right: $size-2;
+
+      @include screen-xs {
+        margin-left: $size-base;
+        margin-right: $size-base;
+      }
+    }
 }
 .AlertSignup-container {
   background-color: $color-ui-lighter;

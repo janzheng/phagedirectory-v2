@@ -2,14 +2,14 @@
 
   <div class="Home">
 
-    <section class="Home-intro Home-container copy _padding-2" v-html="$md.render(intro || '')">
+    <section class="Home-intro Home-container copy " v-html="$md.render(intro || '')">
     </section>
 
-    <div class="_padding-left-2-sm">
+    <section class="">
       <MailchimpBanner />
-    </div>
+    </section>
     
-    <section class="Home-container copy _padding-2 _grid-3-1">
+    <section class="Home-container copy _grid-3-1">
       <div>
         <FormCapsidFeedback class=""/>
       </div>

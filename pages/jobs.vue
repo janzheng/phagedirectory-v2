@@ -55,6 +55,13 @@ import { mapState } from 'vuex'
 
 
 export default {
+  head () {
+    const title = "Phage Jobs"
+
+    return {
+      title,
+    }
+  },
 
   components: {
     Article,

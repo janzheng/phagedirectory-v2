@@ -32,6 +32,13 @@
 import { mapState } from 'vuex'
 
 export default {
+  head () {
+    const title = "About Phage Directory"
+
+    return {
+      title,
+    }
+  },
 
   components: {
   },

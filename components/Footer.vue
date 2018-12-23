@@ -5,10 +5,11 @@
       <div class="Footer-left _center-xs">
         <!-- <router-link class="" to="/"> -->
         <router-link to="/" >
-          <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/>
-          <span class="phagedirectory"><span>Phage</span> Directory, </span>
+          <!-- <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/> -->
+          <img class="Footer-logo" src="~/static/phagedirectory_negative.png"/>
+          <!-- <span class="phagedirectory"><span>Phage</span> Directory, </span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
-          <span class="_font-small">2017-{{thisYear}}</span>
+          <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
         </router-link>
         <!-- </router-link> -->
       </div>
@@ -17,11 +18,13 @@
       <div class="Footer-right _center-xs">
         <div class="_margin-bottom-half _right-sm _center-xs">
           <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
-          <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
-          <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
-          <span class="_margin-right "><router-link to="/updates">Updates</router-link></span>
+          <span class="_margin-right "><router-link to="/about">About</router-link></span>
+          <span class="_margin-right "><router-link to="/contact">Contact</router-link></span>
+          <span class="_margin-right "><router-link to="/classroom">Classroom</router-link></span>
+          <span class="_margin-right "><router-link to="/brand">Brand</router-link></span>
           <span class=" "><router-link to="/policies">Site Policy</router-link></span>
         </div>
+
         <div class="_right-sm _center-xs">
           <span class="_margin-right _block-xs _margin-bottom-half-xs">
             <!-- <i class="fa far fa-envelope _margin-right-half"></i> -->

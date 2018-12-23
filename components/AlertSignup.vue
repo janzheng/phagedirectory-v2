@@ -1,24 +1,24 @@
 
 <template>
 
-  <div class="AlertSignup" :class="classes">
+  <div class="AlertSignup _card --tertiary-80 _margin-none" :class="classes">
     <form 
-      class="AlertSignup-form _height-100" 
+      class="AlertSignup-form _height-100 " 
       action="https://tinyletter.com/phagedirectory" 
       method="post" target="popupwindow" 
       onsubmit="window.open('https://tinyletter.com/phagedirectory', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
     >
       <div >
         <label for="tlemail" class=" _v-middle _margin-right-half"> 
-          <div class="AlertSignup-sub" >Subscribe to phage alerts:</div>
+          <h5 class="AlertSignup-sub" >Receive our Phage Alerts</h5>
           <!-- <div  class="AlertSignup-note _font-small ">No spam. <a href="https://tinyletter.com" target="_blank">TinyLetter</a></div> -->
         </label> 
-        <div class="_flex-row _flex-wrap _width-content-input">
+        <div class="AlertSignup-content _flex-row _flex-wrap _width-content-input">
           <input type="text" name="email" id="tlemail" 
-                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full-xs"
+                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full"
                  placeholder="Your email" required/>
           <input type="hidden" value="1" name="embed"/>
-          <input class="_flex-1 AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />
+          <input class="Subscribe _flex-1 AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />
         </div>
       </div>
       <div class="AlertSignup-note _font-small _padding-top-half">Alerts are only sent when phages are requested to treat urgent infections. <a class="--nowrap" href="/policies#alerts">Please review our policies.</a></div>

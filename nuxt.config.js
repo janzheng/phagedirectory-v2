@@ -278,19 +278,19 @@ module.exports = {
         {
           name: 'capsid',
           path: '/capsid',
-          component: resolve(__dirname, 'pages/news.vue')
+          component: resolve(__dirname, 'pages/capsidlist.vue')
         },
         {
           // opens each issue separately, good for deeplinking, possibly comments
           name: 'capsidIssue',
           path: '/capsid/:slug',
-          component: resolve(__dirname, 'pages/newspage.vue')
+          component: resolve(__dirname, 'pages/capsidissue.vue')
         },
         {
           // email-generated issue to be pasted into mailchimp
           name: 'capsidEmail',
           path: '/capsidemail/:slug',
-          component: resolve(__dirname, 'pages/emailpage.vue')
+          component: resolve(__dirname, 'pages/capsidemail.vue')
         },
 
         {

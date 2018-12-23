@@ -14,12 +14,14 @@
       <nuxt/>
     </div>
 
-    <div class="Signup-container _width-content-max _grid-3-2 _margin-bottom">
-      <div class="Mailchimp-container">
-        <Mailchimp class="footer _height-100"/>
-      </div>
-      <div class="AlertSignup-container">
-        <AlertSignup class="_height-100" :description="true" />
+    <div class="Signup-container ">
+      <div class="Signup-content _grid-3-2 _width-content-max">
+        <div class="Mailchimp-container">
+          <Mailchimp class="footer _height-100"/>
+        </div>
+        <div class="AlertSignup-container">
+          <AlertSignup class="_height-100" :description="true" />
+        </div>
       </div>
     </div>
 

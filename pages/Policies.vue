@@ -30,6 +30,13 @@
 <script>
 
 export default {
+  head () {
+    const title = "Site Policy"
+
+    return {
+      title,
+    }
+  },
 
   components: {
   },

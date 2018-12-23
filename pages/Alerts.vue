@@ -37,6 +37,13 @@ import AlertSignup from '~/components/AlertSignup.vue'
 import { mapState } from 'vuex'
 
 export default {
+  head () {
+    const title = "Phage Alerts"
+
+    return {
+      title,
+    }
+  },
 
   components: {
     AlertSignup

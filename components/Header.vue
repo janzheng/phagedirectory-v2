@@ -18,7 +18,7 @@
             <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
           </div>
           <div>
-            <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline " type="text" name="searchbar" id="searchbar" placeholder="Search" @input="search"/>
+            <input ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input --width-full _inline " type="text" name="searchbar" id="searchbar" placeholder="Search for labs, professors, or bacterial hosts" @input="search"/>
           </div>
         </div>
 
@@ -26,7 +26,7 @@
 
 
       <!-- Desktop menu -->
-        <div class="Header-left _hidden-xs _padding-left-2 _padding-right-2">
+        <div class="Header-left _hidden-xs _padding-right-2">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
             <router-link to='/' class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"/></router-link>
             <div class="Header-inset">

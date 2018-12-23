@@ -10,14 +10,14 @@
 //  Colors
 
 $theme-sizes: (
-  size: 15px,
+  size: 16px,
   size-diff: 0,
   radius: 4px,
 ) !default;
 
 
 
-$size: 15px;
+$size: 16px;
 $font-lineheight: 22px;
 // $font-size-base: 18px;
 
@@ -35,12 +35,14 @@ $z-top: 90;
 
 $color-phdir: #71EFF5;
 $color-teal: $color-phdir;
+$color-teal-80: rgba($color-phdir,0.8);
 $color-teal-50: rgba($color-phdir,0.5);
 $color-teal-10: rgba($color-phdir,0.1);
 $color-dull: #90D9DD;             
 
 $color-yellow: #FCCB4C;           
-$color-pink: #FA5486;             
+$color-pink: #FA5486;  
+$color-pink-light: #FFD3D3; // good for backgrounds etc.           
 
 $color-gray: #374F6A;             
 // $color-gray-light: #F0F0F0; // specced out, but unusable bc of coeur   
@@ -50,6 +52,8 @@ $color-body: $color-phdir;
 $color-main: $color-phdir;        
 $color-secondary: $color-gray;    
 $color-tertiary: $color-pink;     
+$color-tertiary-80: rgba($color-tertiary,0.8);  
+$color-tertiary-50: rgba($color-tertiary,0.5);   
 $color-tertiary-10: rgba($color-tertiary,0.2);     
 
 $color-active: $color-pink;       

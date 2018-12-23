@@ -67,8 +67,9 @@ h3 {
 
 
 .title {
-  padding-bottom: $size-base;
+  padding-bottom: $size-3;
 }
+
 .subtitle {
   &, p {
     font-size: $size-1;
@@ -96,7 +97,7 @@ a {
 
 
 
-p {
+p, ul, li, {
   // font-size: $font-size-base;
   // line-height: $font-lineheight;
   @extend %md-sans_serif;

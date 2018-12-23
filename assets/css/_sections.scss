@@ -27,12 +27,14 @@ article,
 }
 
 section {
-  padding-left: $size-2;
-  padding-right: $size-2;
-  @include screen-xs {
-    padding-left: $size-base;
-    padding-right: $size-base;
-  }
+  // padding-left: $size-2;
+  // padding-right: $size-2;
+  // @include screen-xs {
+  //   padding-left: $size-base;
+  //   padding-right: $size-base;
+  // }
+  padding-top: $size-3;
+  padding-bottom: $size-3;
 }
 
 section.copy {
@@ -46,7 +48,8 @@ section.copy {
 }
 
 section.narrow {
-  @extend ._width-content-magic;
+  // @extend ._width-content-magic;
+  @extend ._width-content-paragraph;
   // @include screen-xs {
   //   padding-left: 0;
   //   padding-right: 0;
@@ -164,26 +167,40 @@ blockquote {
 // for alerts and mailchimp
 // custom breakpoint
 .Signup-container {
-  $width-signup: 996px;
+  padding-top: $size-2;
+  padding-bottom: $size-2;
+  background-color: $color-silver-light;
+
+  .Signup-content {
+    $width-signup: 996px;
     margin-left: auto;
     margin-right: auto;
 
-  @media (max-width: $width-signup) {
-    display: block;
+    @media (max-width: $width-signup) {
+      display: block;
 
-    .Mailchimp {
-      max-width: 100% !important;
-      margin-bottom: $size;
-    }
-    div {
-      // display: block;
+      .Mailchimp {
+        max-width: 100% !important;
+        margin-bottom: $size;
+      }
     }
   }
+
 }
 
 .Footer {
   background-color: $color-secondary;
   color: $color-bg;
+
+  @include screen-xs {
+    margin-bottom: $size-8;
+    // to make room for driftt
+  }
+
+  span {
+    white-space: nowrap;
+  }
+
   a {
     text-decoration: none;
     color: $color-bg;
@@ -201,11 +218,10 @@ blockquote {
   .Footer-top {
     margin-right: $size-8;
   }
-
-  @include screen-xs {
-    margin-bottom: $size-8;
-    // to make room for driftt
+  .Footer-logo {
+    max-width: 180px; 
   }
+
 }
 
 
