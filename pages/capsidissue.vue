@@ -10,7 +10,7 @@
     <section class="Periodical narrow copy _margin-center _padding-top-2">
 
       <div class="News-intro _margin-bottom _flex _flex-bottom">
-        <div class="" v-html="$md.render(title || '')"></div>
+        <router-link to="/capsid" class="" v-html="$md.render(title || '')"></router-link>
         <div class="" v-html="$md.render(intro || '')"></div>    
       </div>
 

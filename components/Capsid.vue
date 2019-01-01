@@ -3,7 +3,7 @@
 
   <section class="Periodical narrow copy _margin-center _padding-top-2">
     
-    <div class="CapsidnTail _card _padding-2-sm _padding-xs _padding-top-xs" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <div class="_padding-2-sm _padding-xs _padding-top-xs" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
       {{ setHeader(issue) }}
 
       <!-- <div class="Periodical-type _margin-bottom" v-if="issue.fields['IssueType']">
@@ -16,50 +16,63 @@
       </div>
 
       <router-link :to="`/capsid/${issue.fields['Slug']}`"><h1 class="Periodical-title" v-html="issue.fields['Title']"></h1></router-link>
-      <h2 class="Periodical-lede" v-html="issue.fields['Lede']"></h2>
-      <div class="Periodical-description _margin-bottom _md-p_fix" v-if="issue.fields['Intro']" v-html="$md.render(issue.fields['Intro'] || '')"></div>
 
-      <div class="Periodical-updates" v-if="getUpdates(issue).length>0">
-        <h4 class="Periodical-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h4>
-        <div class="Periodical-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-          <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-          <div class="_margin-top-half" v-if="update.fields['Tags']">
-            <span class="Periodical-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+      <div class="Article">
+        <h2 class="Periodical-lede" v-html="issue.fields['Lede']"></h2>
+        <div class="Periodical-description _margin-bottom _md-p_fix" v-if="issue.fields['Intro']" v-html="$md.render(issue.fields['Intro'] || '')"></div>
+
+        <div class="Periodical-sponsors" v-if="getSponsors(issue).length>0">
+          <h4 class="Periodical-sponsors-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h4>
+          <div class="Periodical-sponsor-item _margin-bottom" v-for="sponsor of getSponsors(issue)" :key="sponsor.fields['Name']" v-if="sponsor && sponsor.fields['isPublished']">
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="sponsor.fields['Tags']">
+              <span class="Periodical-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of sponsor.fields.Tags" :key="tag">{{ tag }}</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="Jobs-updates" v-if="getJobs(issue).length>0">
-        <h4 class="Jobs-updates-title">{{issue.fields['JobsTitle'] || 'Job Board'}}</h4>
-        <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-          <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-          <div class="_margin-top-half" v-if="update.fields['Tags']">
-            <span class="Jobs-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+        <div class="Periodical-updates" v-if="getUpdates(issue).length>0">
+          <h4 class="Periodical-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h4>
+          <div class="Periodical-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="update.fields['Tags']">
+              <span class="Periodical-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+            </div>
           </div>
         </div>
-      </div>
+
+        <div class="Jobs-updates" v-if="getJobs(issue).length>0">
+          <h4 class="Jobs-updates-title">{{issue.fields['JobsTitle'] || 'Job Board'}}</h4>
+          <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="update.fields['Tags']">
+              <span class="Jobs-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+            </div>
+          </div>
+        </div>
 
 
-      <!-- twitter share on top -->
-      <div class="Periodical-share _margin-bottom-2" >
-        <p class="Periodical-twitter">
-          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
-        </p>
-      </div>
+        <!-- twitter share on top -->
+        <div class="Periodical-share _margin-bottom-2" >
+          <p class="Periodical-twitter">
+            <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+            <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
+          </p>
+        </div>
 
 
-      <div class="Periodical-content" v-if="issue.fields['Article']" v-html="$md.render(issue.fields['Article'] || '')">
-      </div>
+        <div class="Periodical-content" v-if="issue.fields['Article']" v-html="$md.render(issue.fields['Article'] || '')">
+        </div>
 
-      <!-- list has been moved to PeriodicalList.vue -->
+        <!-- list has been moved to PeriodicalList.vue -->
 
-      <!-- twitter share on bottom -->
-      <div class="Periodical-share" >
-        <p class="Periodical-twitter">
-          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
-        </p>
+        <!-- twitter share on bottom -->
+        <div class="Periodical-share" >
+          <p class="Periodical-twitter">
+            <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+            <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
+          </p>
+        </div>
       </div>
 
       <div class="Periodical-author" v-html="issue.fields['Author']" v-if="issue.fields['Author']">
@@ -156,6 +169,13 @@ export default {
         this.headTitle = "Capsid & Tail"
       }
     },
+
+    getSponsors(issue) {
+      const updates = this.$cytosis.getLinkedRecords(issue.fields['Sponsors'], this['Updates'], true)
+      // console.log('get updates:', updates)
+      return updates || undefined
+    },
+
 
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)

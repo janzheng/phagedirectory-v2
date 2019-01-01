@@ -15,7 +15,7 @@
         </label> 
         <div class="AlertSignup-content _flex-row _flex-wrap _width-content-input">
           <input type="text" name="email" id="tlemail" 
-                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full"
+                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full _margin-none"
                  placeholder="Your email" required/>
           <input type="hidden" value="1" name="embed"/>
           <input class="Subscribe _flex-1 AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />

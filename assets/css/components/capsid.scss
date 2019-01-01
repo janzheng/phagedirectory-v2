@@ -41,12 +41,20 @@
 
 
 
-
+$article-width: 59ch;
 
 // for article sharing and rendering
 // refer to sidebar.io's format
 // note: don't use <article> tag as it's a formatting tag
 // some of these are specified in markdown, so the markup should be very simple
+
+.Article {
+  @include screen-sm {
+    max-width: $article-width;
+    // margin-left: auto;
+    // margin-right: auto;
+  }
+}
 
 .Periodical, .PeriodicalStub {
   // change the header sizes a bit 
@@ -138,6 +146,7 @@
   background-color: $color-ui-lighter;
   border-radius: $radius;
   margin-bottom: $size-2;
+  @extend ._card;
   // img {
   //   width: 100%;
   // }
@@ -350,6 +359,10 @@
     padding: $size;
     background-color: $color-ui-lighter;
     border-radius: $radius;
+
+    img {
+      max-width: 80px;
+    }
   }
 
   .Periodical-share {

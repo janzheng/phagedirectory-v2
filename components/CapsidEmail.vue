@@ -58,6 +58,25 @@
 
       <!-- hard-coded styles -->
       <style type="text/css">
+        h4 {
+          padding: 16px 0;
+        }
+        .Advert {
+          background-color: #FFD3D3 !important;
+          margin-bottom: 16px !important;
+          padding: 16px !important;
+          color: #333333 !important;
+          box-sizing: border-box !important;
+          width: 100% !important;
+          border-radius: 4px !important;
+        }
+
+        .footer-share {
+          padding: 16px !important;
+          background: #4C6882 !important;
+          font-size: 18px !important;
+        }
+
         .Email-card {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
@@ -66,30 +85,31 @@
           padding: 30px;
           margin-bottom: 15px;
         }
-          .Email-card--blue {
-            box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
-            color: #333333;
-            /*background-color: #FCFCFC;*/
-            border-radius: 4px;
-            padding: 30px;
-            margin-bottom: 15px;
-            background-color: #EEFAFB !important;
-          }
-          .Email-card--silver {
-            box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
-            color: #333333;
-            /*background-color: #FCFCFC;*/
-            border-radius: 4px;
-            padding: 30px;
-            margin-bottom: 15px;
-            background-color: #F7F7F7 !important;
-          }
+        .Email-card--blue {
+          box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
+          color: #333333;
+          /*background-color: #FCFCFC;*/
+          border-radius: 4px;
+          padding: 30px;
+          margin-bottom: 16px;
+          background-color: #EEFAFB !important;
+        }
+        .Email-card--silver {
+          box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
+          color: #333333;
+          /*background-color: #FCFCFC;*/
+          border-radius: 4px;
+          padding: 30px;
+          margin-bottom: 16px;
+          background-color: #F7F7F7 !important;
+        }
 
-        @media only screen and (max-width: 680px){
+        @media only screen and (max-width: 680px) {
           .Email-card {
             padding: 15px !important;
           }
         }
+
         .Email-tag {
           background-color: #eeeeee;
           border-radius: 4px;
@@ -100,28 +120,17 @@
           outline: none!important;
           padding: 1px 8px;
           text-decoration: none;
-          margin-bottom: 15px;
+          margin-bottom: 16px;
+        }
 
-          @media only screen and (max-width: 680px){
+        @media only screen and (max-width: 680px){
+          .Email-tag {
             font-size: 18px;
           }
         }
-        .Advert {
-          background-color: #FFD3D3 !important;
-          margin-bottom: 16px;
-          padding: 16px;
-          color: #333333;
-          box-sizing: border-box;
-          width: 100%;
-          border-radius: 4px;
-        }
-        .footer-share {
-          padding: 16px;
-          background: #4C6882;
-          font-size: 18px;
-        }
 
-        @media only screen and (max-width:680px){
+
+        @media only screen and (max-width:680px) {
           .footer-share {
             font-size: 13px !important;
           }
@@ -132,7 +141,8 @@
           font-family: georgia,times,times new roman,serif !important;
           font-size: 23px !important;
         }
-        @media only screen and (max-width:680px){
+
+        @media only screen and (max-width:680px) {
           blockquote, blockquote p {
             margin: 0 !important;
             font-size: 26px !important;
@@ -146,7 +156,7 @@
 
       <div>
         <div class="Email-date">{{ issue.fields['Date'] | niceDate }}</div>
-        <div class="Email-issue"><strong>{{ issue.fields['Name'] }}</strong>, </div>
+        <div class="Email-issue"><strong>{{ issue.fields['Name'] }}</strong> </div>
         <div class="Email-read"><a :href="`${issue.fields['URL']}`" target="_blank">Read on Phage Directory</a></div>
       </div>
 
@@ -200,7 +210,7 @@
 
       <br/>
 
-      <div class="Email-card Periodical-content" v-if="issue.fields['Article']" >
+      <div class=" Periodical-content" v-if="issue.fields['Article']" >
         <div v-html="$md.render(issue.fields['Article'] || '')" >
         </div>
 

@@ -90,15 +90,36 @@ export default {
     this.route = route
   },
 
+  mounted () {
+    // handle anchor links
+    const _this = this
+    let scrolled = false
+    this.$nextTick(function () {
+      if(_this.$route.hash && !scrolled) {
+        console.log('-- hash scroll')
+      } 
+      if(_this.$route.hash) {
+        const scroll = _.throttle(function (e) {
+          VueScrollTo.scrollTo(_this.$route.hash, 500, {
+           offset: -20
+         })
+        }, 300)
+        scroll()
+      }
+      scrolled = true
+    })
+  
+  },
+
   watch: {
     '$route' (to, from) {
       // react to route changes...
-      // console.log('ROUTE OBJECT', to, from)
+      console.log('ROUTE OBJECT', to, from)
       const _this = this
       let scrolled = false
       this.$nextTick(function () {
         if(_this.$route.hash && !scrolled) {
-          // console.log('-- hash scroll')
+          console.log('-- hash scroll')
         } 
         if(_this.$route.hash) {
           const scroll = _.throttle(function (e) {
@@ -110,7 +131,6 @@ export default {
         }
         scrolled = true
       })
-
     }
   },
 

@@ -100,10 +100,10 @@
     }
     .AlertSignup-cta {
       margin-bottom: 0;
+      margin-top: $size-half;
       @include screen-xs {
         width: 100%;
         display: block;
-        margin-top: $size-half;
         // margin-top: $size-base;
       }
     }
