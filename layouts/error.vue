@@ -6,9 +6,13 @@
   <!-- <ContentFrame class="About"> -->
   <div class="Error">
     <section class="narrow copy _margin-center">
+      <h6>404 Error</h6>
       <h1 class="Error-title title">
-        We couldn’t find what you were looking for
+        We apologize... we couldn’t find what you were looking for, or something went wrong.
       </h1>
+      <h3>
+        If you keep getting to this page but suspect you shouldn't be, please reach out to me (Jan) @ <a href="mailto:jan@phage.directory">jan@phage.directory</a>. Appreciate your help!
+      </h3>
     </section>
   </div>
 </template>

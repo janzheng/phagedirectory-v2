@@ -84,6 +84,17 @@
           border-radius: 4px;
           margin-bottom: 16px;
         }
+
+        .Section-table {
+          /* necessary for email */
+          width: 100%;
+        }
+          .Section-table td:last-child {
+            vertical-align: middle;
+            padding-left: 16px;
+            text-align: right;
+          }
+
         .Capsid-sponsor {
           padding: 16px;
         }
@@ -95,6 +106,10 @@
           padding: 16px;
           background-color: rgba(250, 84, 134, 0.05);
         }
+          .Capsid-request-item {
+            padding: 16px;
+            background: #ffffff;
+          }
         .Capsid-jobs {
           padding: 16px;
           background-color: rgba(113, 239, 245, 0.1);
@@ -132,12 +147,21 @@
           background-color: rgba(113, 239, 245, 0.5) !important;
         }
 
+        .line {
+          padding: 0;
+          line-height: 0 !important;
+          margin-bottom: 16px;
+        }
+
+        .Capsid-date {
+          font-size: 14px !important;
+        }
+
         @media only screen and (max-width: 680px){
           .Email-tag {
             font-size: 18px;
           }
         }
-
 
         @media only screen and (max-width:680px) {
           .footer-share {
@@ -214,21 +238,38 @@
         </div>
 
         <div class="Capsid-requests" v-if="getRequests(issue)">
-          <h3 class="Capsid-updates-title_">Phage Requests<br/>
-            <span style="color:#fa5486">&mdash;</span>
-          </h3>
-          <div class="Capsid-update-item _margin-bottom" v-for="update of getRequests(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-            <div class="_margin-top-half" v-if="update.fields['Tags']">
-              <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+          <table class="Section-table">
+            <tr>
+              <td class="" >
+                <h3 class="Capsid-request-title_">Community Board</h3>
+              </td>
+              <td>
+                <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
+              </td>
+            </tr>
+          </table>
+          <div class="Capsid-request-item _margin-bottom" v-for="request of getRequests(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
+            <div class="Capsid-date" v-if="request.fields['Date']">{{request.fields['Date']}}</div>
+            <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="request.fields['Tags']">
+              <span v-for="tag of request.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
         </div>
 
         <div class="Capsid-jobs" v-if="getJobs(issue).length>0" >
-        <h3 class="Capsid-jobs-title_">{{issue.fields['JobsTitle'] || 'Job Board'}}<br/>
-          <span style="color:#fa5486">&mdash;</span>
-        </h3>
+        <table class="Section-table">
+          <tr>
+            <td class="" >
+              <h3 class="Capsid-jobs-title_">Job Board</h3>
+            </td>
+            <td>
+              <div><a href="https://phage.directory/jobs">All jobs</a></div>
+              <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+            </td>
+          </tr>
+        </table>
+        <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
 
         <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
           <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>

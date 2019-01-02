@@ -7,14 +7,14 @@
 
 <template>
   <div>
-    <section class="Capsid narrow copy _margin-center _margin-top-2">
+    <section class="Capsid narrow copy _margin-center ">
 
       <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
         <div class="" v-html="$md.render(title)"></div>
         <div class="" v-html="$md.render(intro)"></div>    
       </div>
 
-      <div class="Capsid-content" v-html="$md.render(idea)">
+      <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)">
       </div>
       <CapsidBanner class="_margin-center" />
 
@@ -84,7 +84,7 @@ export default {
     return {
       title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      idea: app.$cytosis.find('Content.capsid-idea', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      highlight: app.$cytosis.find('Content.capsid-highlight', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }

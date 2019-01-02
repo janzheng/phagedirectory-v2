@@ -46,8 +46,14 @@
           </div>
 
           <div class="Capsid-requests" v-if="getRequests(issue).length>0">
-            <h4 class="Capsid-new-title">Phage Requests</h4>
-            <div class="Capsid-new-item " v-for="request of getRequests(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
+            <div class="_grid-3-2-xs">
+              <h4 class="Capsid-new-title">Community Board</h4>
+              <div class="Capsid-requests-cta _right">
+                <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
+              </div>
+            </div>
+            <div class="Capsid-requests-item" v-for="request of getRequests(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
+              <div class="_md-p_fix _font-small _margin-bottom-half" v-if="request.fields['Date']">{{request.fields['Date']}}</div>
               <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
               <div class="_margin-top-half" v-if="request.fields['Tags']">
                 <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of request.fields.Tags" :key="tag">{{ tag }}</span>
@@ -56,7 +62,13 @@
           </div>
 
           <div class="Capsid-jobs" v-if="getJobs(issue).length>0">
-            <h4 class="Capsid-new-title">{{'Job Board'}}</h4>
+            <div class="_grid-2-xs">
+              <h4 class="Capsid-new-title">{{'Job Board'}}</h4>
+              <div class="_right">
+                <div><a href="https://phage.directory/jobs">All jobs</a></div>
+                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+              </div>
+            </div>
             <div class="Capsid-new-item " v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
               <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
               <div class="_margin-top-half" v-if="update.fields['Tags']">

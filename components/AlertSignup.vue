@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="Signup-content _flex-row _flex-wrap _width-content-input">
+      <div class="Signup-content _flex-row _flex-wrap">
         <label for="tlemail">Email Address</label>
         <input type="text" name="email" id="tlemail" 
                class="Signup-input _flex-1 _form-input --width-full _margin-none"

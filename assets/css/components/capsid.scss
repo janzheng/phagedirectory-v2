@@ -311,7 +311,7 @@ $article-width: 59ch;
       &:after {
         content: ' ';
         display: block;
-        width: 40%;
+        width: 45px;
         padding-top: $size-half;
         border-bottom: $border-thin $color-pink solid;
       }
@@ -334,6 +334,14 @@ $article-width: 59ch;
     padding: $size;
     background-color: $color-tertiary-05;
   }
+    .Capsid-requests-cta {
+      padding-top: $size--1;
+    }
+    .Capsid-requests-item {
+      padding: $size;
+      background-color: $color-purewhite;
+      margin-bottom: $size;
+    }
 
     .Capsid-jobs {
       // @extend .Capsid-card;
