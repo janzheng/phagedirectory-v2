@@ -12,9 +12,9 @@
 
       <div class="Jobs-intro _margin-bottom-2" v-html="$md.render(intro)"></div>
 
-      <div class="Jobs-container">
+      <div class="Article _margin-center Jobs-container">
         <div class="Jobs-item _card _margin-bottom-2 _padding-2" 
-          :class="getStatus"
+          :class="getStatus(job)"
           v-for="job of Jobs" :key="job.id" v-if="showJob(job)">
           <div class="Job-meta">
             <div class="Job-status _margin-bottom" v-if="getStatus(job)">
@@ -50,7 +50,7 @@
 <script>
 
 import Article from '~/components/Article.vue'
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
+import CapsidBanner from '~/components/CapsidBanner.vue'
 import { mapState } from 'vuex'
 
 
@@ -65,7 +65,7 @@ export default {
 
   components: {
     Article,
-    MailchimpBanner,
+    CapsidBanner,
   },
 
   layout: 'contentframe',

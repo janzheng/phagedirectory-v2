@@ -400,7 +400,7 @@ module.exports = {
         let cytosis = await new Cytosis({
           airKey, 
           airBase, 
-          tableIndex: 'news',
+          tableIndex: 'capsid',
           caller: 'generator'
         })
 

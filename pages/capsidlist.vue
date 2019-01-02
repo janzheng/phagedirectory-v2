@@ -7,19 +7,21 @@
 
 <template>
   <div>
-    <section class="Periodical narrow copy _margin-center _margin-top-2">
+    <section class="Capsid narrow copy _margin-center _margin-top-2">
 
-      <div class="News-intro _margin-bottom _flex _flex-bottom">
+      <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
         <div class="" v-html="$md.render(title)"></div>
         <div class="" v-html="$md.render(intro)"></div>    
       </div>
 
+      <div class="Capsid-content" v-html="$md.render(idea)">
+      </div>
+      <CapsidBanner class="_margin-center" />
+
     </section>
     
-    <MailchimpBanner class="_margin-center" />
 
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
-
     <CapsidStub :issues="latest" :isFeatured="true" />
     <CapsidStub :issues="notLatest" class="_padding-bottom-2" />
 
@@ -29,7 +31,7 @@
 <script>
 
 import Article from '~/components/Article.vue'
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
+import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
 import CapsidStub from '~/components/CapsidStub.vue'
 import { mapState } from 'vuex'
@@ -58,7 +60,7 @@ export default {
 
   components: {
     Article,
-    MailchimpBanner,
+    CapsidBanner,
     Capsid,
     CapsidStub,
   },
@@ -72,16 +74,17 @@ export default {
     // somehow this is getting cached?!
     const newsData = await store.dispatch('loadCytosis', {
       env,
-      tableIndex: 'news',
-      caller: 'news',
+      tableIndex: 'capsid',
+      caller: 'capsidlist',
     })
 
     const slug = unescape(route.params.slug)
-    // console.log('News loaded', newsData)
+    console.log('News loaded:', newsData)
 
     return {
-      title: app.$cytosis.find('Content.news-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      intro: app.$cytosis.find('Content.news-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      idea: app.$cytosis.find('Content.capsid-idea', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }

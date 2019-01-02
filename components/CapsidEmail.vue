@@ -8,7 +8,7 @@
 
 <template>
 
-  <div class="Periodical Email">
+  <div class="Capsid Email">
 
 
     <div  v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
@@ -82,17 +82,22 @@
           color: #333333;
           background-color: #FCFCFC;
           border-radius: 4px;
-          padding: 30px;
-          margin-bottom: 15px;
-        }
-        .Email-card--blue {
-          box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
-          color: #333333;
-          /*background-color: #FCFCFC;*/
-          border-radius: 4px;
-          padding: 30px;
           margin-bottom: 16px;
-          background-color: #EEFAFB !important;
+        }
+        .Capsid-sponsor {
+          padding: 16px;
+        }
+        .Capsid-updates {
+          padding: 16px;
+          background-color: #FCFCFC;
+        }
+        .Capsid-requests {
+          padding: 16px;
+          background-color: rgba(250, 84, 134, 0.05);
+        }
+        .Capsid-jobs {
+          padding: 16px;
+          background-color: rgba(113, 239, 245, 0.1);
         }
         .Email-card--silver {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
@@ -104,11 +109,11 @@
           background-color: #F7F7F7 !important;
         }
 
-        @media only screen and (max-width: 680px) {
+        /*@media only screen and (max-width: 680px) {
           .Email-card {
-            padding: 15px !important;
+            padding: 16px !important;
           }
-        }
+        }*/
 
         .Email-tag {
           background-color: #eeeeee;
@@ -121,6 +126,10 @@
           padding: 1px 8px;
           text-decoration: none;
           margin-bottom: 16px;
+        }
+
+        .--sponsor {
+          background-color: rgba(113, 239, 245, 0.5) !important;
         }
 
         @media only screen and (max-width: 680px){
@@ -149,9 +158,14 @@
           }
         }
 
+        .Capsid-author img {
+          width: 80px !important;
+        }
+
         img {
           max-width: 100% !important;
         }
+
       </style>
 
       <div>
@@ -163,46 +177,74 @@
       <br />
 
       <div class="Email">
-        <h1 class="Periodical-title" v-html="issue.fields['Title']"></h1>
+        <h1 class="Capsid-title" v-html="issue.fields['Title']"></h1>
         <br/>
-        <h2 class="Periodical-lede" v-html="issue.fields['Lede']"></h2>
+        <h2 class="Capsid-lede" v-html="issue.fields['Lede']"></h2>
         <br/>
       </div>
 
-      <div class=" Periodical-description _md-p_fix" v-if="issue.fields['Intro']" >
+      <div class=" Capsid-description _md-p_fix" v-if="issue.fields['Intro']" >
         <div v-html="$md.render(issue.fields['Intro'] || '')"></div>
       </div>
 
       <br />
 
-      <div class="Email-card Periodical-updates" v-if="getUpdates(issue)">
-        <h4 class="Periodical-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}<br/>
-        <span style="color:#fa5486">&mdash;</span></h4>
-        <div class="Periodical-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-          <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-          <div class="_margin-top-half" v-if="update.fields['Tags']">
-            <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+      <div class="Capsid-sponsor Email-card" v-if="getSponsors(issue).length>0">
+        <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
+        <div class="Capsid-sponsor-item" v-for="sponsor of getSponsors(issue)" :key="sponsor.fields['Name']" v-if="sponsor && sponsor.fields['isPublished']">
+          <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')"></div>
+          <div class="_margin-top-half" v-if="sponsor.fields['Tags']">
+            <span class="Email-tag _tag --sponsor">Sponsor</span>
           </div>
         </div>
       </div>
 
-      <div class="Email-card--blue Jobs-updates" v-if="getJobs(issue).length>0" >
-        <h4 class="Jobs-updates-title_">{{issue.fields['JobsTitle'] || 'Job Board'}}<br/>
-        <span style="color:#fa5486">&mdash;</span></h4>
+      <div class="Email-card" v-if="hasNew(issue)">
+
+        <div class="Capsid-updates" v-if="getUpdates(issue)">
+          <h3 class="Capsid-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}<br/>
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div class="Capsid-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="update.fields['Tags']">
+              <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+            </div>
+          </div>
+        </div>
+
+        <div class="Capsid-requests" v-if="getRequests(issue)">
+          <h3 class="Capsid-updates-title_">Phage Requests<br/>
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div class="Capsid-update-item _margin-bottom" v-for="update of getRequests(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="update.fields['Tags']">
+              <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+            </div>
+          </div>
+        </div>
+
+        <div class="Capsid-jobs" v-if="getJobs(issue).length>0" >
+        <h3 class="Capsid-jobs-title_">{{issue.fields['JobsTitle'] || 'Job Board'}}<br/>
+          <span style="color:#fa5486">&mdash;</span>
+        </h3>
 
         <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
           <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
           <div class="_margin-top-half" v-if="update.fields['Tags']">
-            <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+            <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
           </div>
         </div>
+      </div>
+
       </div>
 
       <br/>
 
       <!-- twitter share on top -->
-      <div class="Periodical-share _margin-bottom-2">
-        <p class="Periodical-twitter">
+      <div class="Capsid-share _margin-bottom-2">
+        <p class="Capsid-twitter">
           <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
           <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
         </p>
@@ -210,14 +252,14 @@
 
       <br/>
 
-      <div class=" Periodical-content" v-if="issue.fields['Article']" >
+      <div class=" Capsid-content" v-if="issue.fields['Article']" >
         <div v-html="$md.render(issue.fields['Article'] || '')" >
         </div>
 
         <br/>
 
-        <div class="Periodical-share _margin-bottom-2" >
-          <p class="Periodical-twitter">
+        <div class="Capsid-share _margin-bottom-2" >
+          <p class="Capsid-twitter">
             <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
             <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
           </p>
@@ -225,7 +267,7 @@
 
         <br/>
 
-        <div class="Email-card--silver Periodical-author"
+        <div class="Email-card--silver Capsid-author"
           v-html="issue.fields['Author']" v-if="issue.fields['Author']"
         >
         </div>
@@ -273,18 +315,37 @@ export default {
       // console.log('tags:', issue.fields['Tags'])
       // return this.$cytosis.getLinkedRecords(issue.fields['Tags'], this['Tags'], true)
     },
+
+    getSponsors(issue) {
+      const sponsors = this.$cytosis.getLinkedRecords(issue.fields['Sponsors'], this['Updates'], true)
+      console.log('Sponsors:', sponsors)
+      return sponsors || undefined
+    },
+
+    getRequests(issue) {
+      const requests = this.$cytosis.getLinkedRecords(issue.fields['Requests'], this['Updates'], true)
+      // console.log('get updates:', updates)
+      return requests || undefined
+    },
+
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
-      // console.log('get updates:', updates)
+      console.log('Updates:', updates)
       return updates || undefined
     },
 
     getJobs(issue) {
       // jobs also pull from Updates tab
       const jobs = this.$cytosis.getLinkedRecords(issue.fields['Jobs'], this['Updates'], true)
-      // console.log('get updates:', updates)
+      console.log('Jobs:', jobs)
       return jobs || undefined
     },
+
+    hasNew(issue) {
+      // true if Requests, Updates, or Jobs exist
+      return this.getRequests.length > 0 || this.getUpdates.length > 0 || this.getJobs.length > 0
+    },
+
 
     getTwitterLink(issue) {
       /*

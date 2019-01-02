@@ -34,7 +34,7 @@ export function loadNews(env, store, routeName='') {
     console.log('load cytosis: news')
     data = store.cache.dispatch('loadCytosis', { // maybe don't want other things to wait?
       env,
-      tableIndex: 'news',
+      tableIndex: 'capsid',
       caller: routeName
     })
   }

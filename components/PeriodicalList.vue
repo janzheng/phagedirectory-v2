@@ -6,54 +6,54 @@
  -->
 <template>
 
-  <section class="Periodical narrow copy _margin-center _padding-top-2">
-
+  <section class="Capsid narrow copy _margin-center _padding-top-2">
+    
     <div class="_card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
-      <div class="Periodical-header _grid-2">
-        <div class="Periodical-title">{{ issue.fields['Name'] }}</div>
-        <div class="Periodical-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
+      <div class="Capsid-header _grid-2">
+        <div class="Capsid-title">{{ issue.fields['Name'] }}</div>
+        <div class="Capsid-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
-      <div class="Periodical-description _margin-bottom-2" v-html="$md.render(issue.fields['Markdown'])"></div>
+      <div class="Capsid-description _margin-bottom-2" v-html="$md.render(issue.fields['Markdown'])"></div>
   
 
-      <div class="Periodical-updates" v-if="getUpdates(issue)">
-        <h5 class="Periodical-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h5>
-        <div class="Periodical-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
+      <div class="Capsid-updates" v-if="getUpdates(issue)">
+        <h5 class="Capsid-updates-title">{{issue.fields['UpdatesTitle'] || 'What’s New'}}</h5>
+        <div class="Capsid-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
           <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown' || ''])"></div>
           <div v-if="update.fields['Tags']">
-            <span class="Periodical-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+            <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
           </div>
         </div>
         <!-- <hr class="_padding-top-2" /> -->
       </div>
 
 
-      <div class="Periodical-item" v-for="article of getArticles(issue)" :key="article.id"
+      <div class="Capsid-item" v-for="article of getArticles(issue)" :key="article.id"
         :class="{'--image': article.fields.Images}"
         v-if="article.fields['isPublished']">
 
         <!-- most articles will have standard content, unless custom -->
-        <div class="Periodical-item-content" v-if="!article.fields.isCustom">
-          <div class="Periodical-item-header">
+        <div class="Capsid-item-content" v-if="!article.fields.isCustom">
+          <div class="Capsid-item-header">
             <!-- <span class="BlogList-item-date" v-if="article.fields.PubDate">{{article.fields.PubDate}}</span> -->
-            <span class="Periodical-item-source" v-if="article.fields.Source">{{article.fields.Source}}</span>
+            <span class="Capsid-item-source" v-if="article.fields.Source">{{article.fields.Source}}</span>
           </div>
           <!-- MdTitle is the alternate Markdown title, necessary for organism names etc.
             it's in a separate field to keep the Name intact and searchable
            -->
-          <h4 class="Periodical-item-title" v-if="!article.fields['MdTitle']">
+          <h4 class="Capsid-item-title" v-if="!article.fields['MdTitle']">
             <!-- <router-link :to="{path: `/updates/${article.fields.Slug}`}" v-if="!article.fields.External">{{article.fields.Name}}</router-link> -->
             <a target="_blank" :href="article.fields.Link" v-if="article.fields.External" v-html="getArticleName(article)"></a>
-            <span class="Periodical-item-title" v-html="getArticleName(article)" v-else></span>
+            <span class="Capsid-item-title" v-html="getArticleName(article)" v-else></span>
           </h4>
-          <div class="Periodical-item-title Periodical-alttitle" v-html="getArticleName(article)" v-else></div>
+          <div class="Capsid-item-title Capsid-alttitle" v-html="getArticleName(article)" v-else></div>
 
           <!-- too much noise? -->
-          <div class="Periodical-item-author" v-if="article.fields.Author">{{article.fields.Author}}</div>
-          <div class="Periodical-item-lede" v-if="article.fields.Lede">{{article.fields.Lede}}</div>
-          <div class="Periodical-item-description _margin-bottom" v-if="article.fields.Markdown" v-html="$md.render(article.fields.Markdown)"></div>
-          <div class="Periodical-item-tags">
-            <span class="Periodical-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of article.fields.Tags" :key="tag">
+          <div class="Capsid-item-author" v-if="article.fields.Author">{{article.fields.Author}}</div>
+          <div class="Capsid-item-lede" v-if="article.fields.Lede">{{article.fields.Lede}}</div>
+          <div class="Capsid-item-description _margin-bottom" v-if="article.fields.Markdown" v-html="$md.render(article.fields.Markdown)"></div>
+          <div class="Capsid-item-tags">
+            <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' ? '--sponsor' : ''" v-for="tag of article.fields.Tags" :key="tag">
               {{tag}}
             </span>
           </div>
@@ -64,7 +64,7 @@
         </div>
 
 
-        <img class="Periodical-item-image" 
+        <img class="Capsid-item-image" 
           :class="article.fields.imgContain ? '--contain' : ''"
           :src="article.fields.Images[0].thumbnails.large.url" v-if="article.fields.Images && article.fields.Images[0].thumbnails"
         />

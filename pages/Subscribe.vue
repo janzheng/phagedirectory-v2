@@ -8,21 +8,21 @@
 <template>
   <div>
     
-    <MailchimpBanner class="_margin-center _margin-top-2 _margin-bottom-2" />
+    <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" />
     
   </div>
 </template>
 
 <script>
 
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
+import CapsidBanner from '~/components/CapsidBanner.vue'
 import { mapState } from 'vuex'
 
 
 export default {
 
   components: {
-    MailchimpBanner,
+    CapsidBanner,
   },
 
   layout: 'contentframe',

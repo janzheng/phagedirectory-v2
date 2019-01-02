@@ -13,6 +13,7 @@
             <router-link to='/phages' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Phages</router-link>
             <!-- <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link> -->
             <router-link to='/alerts' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Alerts</router-link>
+            <!-- <router-link to='/requests' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Requests</router-link> -->
             <router-link to='/jobs' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Jobs</router-link>
             <router-link to='/capsid' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">C&amp;T</router-link>
             <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>
@@ -34,6 +35,7 @@
               <router-link to='/labs' class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">Labs</router-link>
             </div>
             <router-link to='/alerts' class="_button --text --short _padding-none _margin-none --border-none">Alerts</router-link>
+            <!-- <router-link to='/requests' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Requests</router-link> -->
             <router-link to='/jobs' class="_button --text --short _padding-none _margin-none --border-none">Jobs</router-link>
             <router-link to='/capsid' class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">Capsid &amp; Tail</router-link>
             <router-link to='/join' class="Header-join _button --short _margin-none">Join</router-link>

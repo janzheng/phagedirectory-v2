@@ -1,28 +1,32 @@
 
 <template>
 
-  <div class="AlertSignup _card --tertiary-80 _margin-none" :class="classes">
+  <div class="Signup _card --tertiary-80 _margin-none" :class="classes">
     <form 
-      class="AlertSignup-form _height-100 " 
+      class="Signup-form _height-100 _flex-col" 
       action="https://tinyletter.com/phagedirectory" 
       method="post" target="popupwindow" 
       onsubmit="window.open('https://tinyletter.com/phagedirectory', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"
     >
-      <div >
-        <label for="tlemail" class=" _v-middle _margin-right-half"> 
-          <h5 class="AlertSignup-sub" >Receive our Phage Alerts</h5>
-          <!-- <div  class="AlertSignup-note _font-small ">No spam. <a href="https://tinyletter.com" target="_blank">TinyLetter</a></div> -->
+      <div class="_flex-2">
+        <label for="tlemail" class=" _v-middle _margin-right-half">
+          <div class="Signup-sub _md-p_fix" v-html="$md.render(intro || '')">Receive our Phage Alerts</div>
         </label> 
-        <div class="AlertSignup-content _flex-row _flex-wrap _width-content-input">
-          <input type="text" name="email" id="tlemail" 
-                 class="AlertSignup-input _flex-1 _form-input --short --phage --width-full _margin-none"
-                 placeholder="Your email" required/>
-          <input type="hidden" value="1" name="embed"/>
-          <input class="Subscribe _flex-1 AlertSignup-cta _button --phage --outline --short" type="submit" value="Subscribe" />
+
+        <div class="" v-html="$md.render(content || '')">
         </div>
       </div>
-      <div class="AlertSignup-note _font-small _padding-top-half">Alerts are only sent when phages are requested to treat urgent infections. <a class="--nowrap" href="/policies#alerts">Please review our policies.</a></div>
-      <!-- <div class="alerts-note _right _font-small _padding-top-half">Only to be used for phage requests, not spam. <a href="https://tinyletter.com" target="_blank">TinyLetter</a></div> -->
+
+      <div class="Signup-content _flex-row _flex-wrap _width-content-input">
+        <label for="tlemail">Email Address</label>
+        <input type="text" name="email" id="tlemail" 
+               class="Signup-input _flex-1 _form-input --width-full _margin-none"
+               placeholder="Your email" required/>
+        <input type="hidden" value="1" name="embed"/>
+        <input class="Subscribe _flex-1 Signup-cta --width-full _button --outline _margin-top-half " type="submit" value="Receive Phage Alerts" />
+      </div>
+
+      <!-- <div class="Signup-note _font-small _padding-top-half">Alerts are only sent when phages are requested to treat urgent infections. <a class="--nowrap" href="/policies#alerts">Please review our policies.</a></div> -->
     </form>
   </div>
 
@@ -39,15 +43,13 @@ export default {
 
   data: function () {
     return {
+      intro: this.$cytosis.find('Content.alertssignup-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      content: this.$cytosis.find('Content.alertssignup-content', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
   mounted: async function () {
   },
-
-  computed: {
-  },
-
 
   methods: {
   }

@@ -14,14 +14,18 @@
       <nuxt/>
     </div>
 
-    <div class="Signup-container ">
-      <div class="Signup-content _grid-3-2 _width-content-max">
+    <div class="Signup-container _margin-center ">
+      <!-- <div class=" _grid-3 _width-content-max _margin-center"> -->
+      <div class=" _grid-2 _width-content-max _margin-center">
         <div class="Mailchimp-container">
-          <Mailchimp class="footer _height-100"/>
+          <CapsidSignup class="_height-100"/>
         </div>
         <div class="AlertSignup-container">
           <AlertSignup class="_height-100" :description="true" />
         </div>
+        <!-- <div class="RequestSignup-container">
+          <RequestSignup class="_height-100" :description="true" />
+        </div> -->
       </div>
     </div>
 
@@ -49,7 +53,8 @@ import Policy from '~/components/Policy.vue'
 import Directory from '~/components/Directory.vue'
 
 import AlertSignup from '~/components/AlertSignup.vue'
-import Mailchimp from '~/components/Mailchimp.vue'
+import RequestSignup from '~/components/RequestSignup.vue'
+import CapsidSignup from '~/components/CapsidSignup.vue'
 
 
 export default {
@@ -59,7 +64,8 @@ export default {
     Footer,
     Policy,
     AlertSignup,
-    Mailchimp,
+    RequestSignup,
+    CapsidSignup,
     Directory,
   },
 

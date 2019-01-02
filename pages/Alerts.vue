@@ -2,12 +2,12 @@
 
   <section class="Alerts narrow copy _margin-center _padding-top-2">
 
-    <div class="Alerts-intro _margin-bottom-2">
+    <div class=" Alerts-intro _margin-bottom-2 ">
       <div class="_padding-bottom" v-html="$md.render(intro)"></div>
-      <AlertSignup class="_margin-top _margin-bottom" />
+      <AlertSignup class="Article _margin-center --banner _margin-top _margin-bottom" />
     </div>
 
-    <div class="Alerts-list">
+    <div class="Article Alerts-list _margin-center">
       <div class="Alerts-item _card _padding" v-for="alert of Alerts" :key="alert.fields.Name" v-if="alert.fields.isPublished" :class="alert.fields.Status">
         <div class="Alerts-status" >
           <div class="_grid-auto-1-xs _align-vertically">

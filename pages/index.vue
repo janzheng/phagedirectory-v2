@@ -6,7 +6,7 @@
     </section>
 
     <section class="">
-      <MailchimpBanner />
+      <CapsidBanner />
     </section>
     
     <section class="Home-container copy _grid-3-1">
@@ -34,8 +34,8 @@
 import Twitter from '~/components/Twitter.vue'
 import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
-import Mailchimp from '~/components/Mailchimp.vue'
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
+import CapsidSignup from '~/components/CapsidSignup.vue'
+import CapsidBanner from '~/components/CapsidBanner.vue'
 
 import { mapState } from 'vuex'
 // import Cytosis from 'cytosis'
@@ -46,8 +46,8 @@ export default {
     Twitter,
     // FormVomFeedback,
     FormCapsidFeedback,
-    Mailchimp,
-    MailchimpBanner,
+    CapsidSignup,
+    CapsidBanner,
   },
 
   layout: 'contentframe',

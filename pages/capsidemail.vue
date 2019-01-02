@@ -16,7 +16,6 @@
 <script>
 
 import Article from '~/components/Article.vue'
-import MailchimpBanner from '~/components/MailchimpBanner.vue'
 import CapsidEmail from '~/components/CapsidEmail.vue'
 import { mapState } from 'vuex'
 
@@ -26,7 +25,6 @@ export default {
 
   components: {
     Article,
-    MailchimpBanner,
     CapsidEmail
   },
 
@@ -41,9 +39,9 @@ export default {
 
     const slug = unescape(route.params.slug)
     return {
-      title: app.$cytosis.find('Content.news-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       fine: app.$cytosis.find('Content.capsid-fine', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      intro: app.$cytosis.find('Content.news-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }

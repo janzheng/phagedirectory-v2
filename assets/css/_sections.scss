@@ -2,6 +2,7 @@
 
 
 @import '/sections/alerts';
+@import '/sections/jobs';
 
 
 
@@ -173,19 +174,18 @@ blockquote {
 
   .Signup-content {
     $width-signup: 996px;
-    margin-left: auto;
+    // margin-left: auto;
     margin-right: auto;
 
-    @media (max-width: $width-signup) {
-      display: block;
+    // @media (max-width: $width-signup) {
+    //   display: block;
 
-      .Mailchimp {
-        max-width: 100% !important;
-        margin-bottom: $size;
-      }
-    }
+    //   .Mailchimp {
+    //     max-width: 100% !important;
+    //     margin-bottom: $size;
+    //   }
+    // }
   }
-
 }
 
 .Footer {

@@ -34,7 +34,7 @@ export default {
     return {
       postUrl: env.ext_handler,
       cytosis: store.state.cytosis,
-      signedup: app.$cytosis.find('Content.mailchimp-signedup', store.state.cytosis.tables)[0]['fields']['Markdown']
+      signedup: app.$cytosis.find('Content.capsid-signedup', store.state.cytosis.tables)[0]['fields']['Markdown']
     }
   },
 

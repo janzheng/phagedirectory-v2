@@ -11,7 +11,7 @@
     border-top: $border-thin solid $color-pink;
 
     &.Resolved { 
-      opacity: 0.7;
+      opacity: 0.5;
       background-color: $color-silver-lighter;
       border: 0;
     }
@@ -51,12 +51,15 @@
 
 // AlertSignup component can be found in a few places
 // will have a class specifying where itis
-.AlertSignup {
+.Signup {
 
   // margin-top: $size-base;
   // margin-bottom: $size-base;
+  .Subscribe {
+    font-weight: bold;
+  }
 
-  .AlertSignup-form {
+  .Signup-form {
     padding: $size-base $size-base;
     // border: $color-main $border-thin solid;
     // background: $color-tertiary;
@@ -84,50 +87,60 @@
       }
     }
   }
-    .AlertSignup-content {
+    .Signup-content {
       @include screen-xs {
         width: 100%;
         max-width: 100%;
       }
     }
-    .AlertSignup-sub {
-      font-weight: bold;
-    }
-    .AlertSignup-input {
+    // .Signup-sub {
+      // font-weight: bold;
+    // }
+    .Signup-input {
       @include screen-xs {
         margin-right: 0;
+        width: 100%;
       }
+      // @include screen-sm {
+      //   border-top-right-radius: 0 !important;
+      //   border-bottom-right-radius: 0 !important;
+      // }
     }
-    .AlertSignup-cta {
+    .Signup-cta {
       margin-bottom: 0;
-      margin-top: $size-half;
+      // margin-top: $size-half;
       @include screen-xs {
         width: 100%;
         display: block;
-        // margin-top: $size-base;
+        margin-top: $size-half;
+        margin-right: 0;
       }
+      // @include screen-sm {
+      //   border-top-left-radius: 0 !important;
+      //   border-bottom-left-radius: 0 !important;
+      // }
     }
 
-    &.footer {
-      margin: 0;
-      text-align: center;
-      margin-left: $size-2;
-      margin-right: $size-2;
+    // &.footer {
+    //   margin: 0;
+    //   text-align: center;
+    //   // margin-left: $size-2;
+    //   // margin-right: $size-2;
 
-      @include screen-xs {
-        margin-left: $size-base;
-        margin-right: $size-base;
-      }
-    }
+    //   @include screen-xs {
+    //     // margin-left: $size-base;
+    //     // margin-right: $size-base;
+    //   }
+    // }
 }
-.AlertSignup-container {
-  background-color: $color-ui-lighter;
-  // padding-top: $size-base;
-  // padding-bottom: $size-base;
-  .footer {
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-}
+// .Signup-container {
+//   background-color: $color-ui-lighter;
+//   // padding-top: $size-base;
+//   // padding-bottom: $size-base;
+//   .footer {
+//     margin-top: 0;
+//     margin-bottom: 0;
+//   }
+// }
 
 

@@ -7,20 +7,22 @@
         {{aboutTitle}}
       </h1>
 
-      <div class="About-bg">
-        <div class="" v-html="$md.render(aboutBg || '')"></div>
-      </div>
+      <div class="Article _margin-center">
+        <div class="About-bg">
+          <div class="" v-html="$md.render(aboutBg || '')"></div>
+        </div>
 
-      <div class="About-us">
-        <div class="" v-html="$md.render(aboutUs || '')"></div>
-      </div>
+        <div class="About-us">
+          <div class="" v-html="$md.render(aboutUs || '')"></div>
+        </div>
 
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jess || '')"></div>
-      </div>
+        <div class="About-profile _card _padding">
+          <div class="" v-html="$md.render(jess || '')"></div>
+        </div>
 
-      <div class="About-profile _card _padding">
-        <div class="" v-html="$md.render(jan || '')"></div>
+        <div class="About-profile _card _padding">
+          <div class="" v-html="$md.render(jan || '')"></div>
+        </div>
       </div>
 
     </section>

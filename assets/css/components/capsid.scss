@@ -49,6 +49,7 @@ $article-width: 59ch;
 // some of these are specified in markdown, so the markup should be very simple
 
 .Article {
+  // used for pages outside of just Capsid!! including Classroom Initiative
   @include screen-sm {
     max-width: $article-width;
     // margin-left: auto;
@@ -56,7 +57,13 @@ $article-width: 59ch;
   }
 }
 
-.Periodical, .PeriodicalStub {
+.CapsidBanner {
+  // used to sign up for Capsid all over the site 
+  // two versions: one wide (over articles) and one narrow (in footer);
+  box-shadow: 0px 4px 8px rgba(70, 70, 70, 0.1);
+}
+
+.Capsid, .CapsidStub {
   // change the header sizes a bit 
   // they need to stay semantic in order to be copied into mailchimp
   $p1: $font-h1;
@@ -111,7 +118,7 @@ $article-width: 59ch;
   }
 }
 
-.Periodical-header {
+.Capsid-header {
   @extend %font-serif;
   // font-style: italic;
   // font-size: $font-large;
@@ -119,7 +126,7 @@ $article-width: 59ch;
 }
 
 // in favor of plain text instead of lots of links like sidebar
-.Periodical-content {
+.Capsid-content {
   iframe {
     margin-bottom: $size-2;
   }
@@ -140,7 +147,7 @@ $article-width: 59ch;
   }
 }
 
-.Periodical-card {
+.Capsid-card {
 
   padding: $size;
   background-color: $color-ui-lighter;
@@ -170,7 +177,7 @@ $article-width: 59ch;
 }
 
 
-.Periodical-item {
+.Capsid-item {
   display: block;
   width: 100%;
 
@@ -200,7 +207,7 @@ $article-width: 59ch;
       height: auto;
     }
   }
-  .Periodical-item-date {
+  .Capsid-item-date {
     font-size: $font-small;
     margin-right: $size-half;
     @extend %font-500;
@@ -208,7 +215,7 @@ $article-width: 59ch;
     //   padding-top: 0;
     // }
   }
-  .Periodical-item-source {
+  .Capsid-item-source {
     // display: block;
     // font-size: $font-small;
     // @extend %font-600;
@@ -220,7 +227,7 @@ $article-width: 59ch;
     // @extend .--antialias;
     // padding-bottom: $size-half;
   }
-  .Periodical-item-title {
+  .Capsid-item-title {
     &, a {
       padding-top: 0;
       text-decoration: none;
@@ -237,20 +244,20 @@ $article-width: 59ch;
     
     }
   }
-  .Periodical-item-author {
+  .Capsid-item-author {
     margin-top: -$size-half;
     padding-bottom: $size;
     // opacity: 0.5;
     color: $color-ui-dark;
   }
-  .Periodical-item-lede {
+  .Capsid-item-lede {
     padding-bottom: $size;
   }
-  .Periodical-item-header {
+  .Capsid-item-header {
     // padding-bottom: $size-half;
     line-height: $font-larger * 1.66;
   }
-  .Periodical-item-content {
+  .Capsid-item-content {
     grid-area: content;
     .BlogList-title {
       // display: block;
@@ -261,12 +268,12 @@ $article-width: 59ch;
       padding-bottom: $size-half;
       text-decoration: none;
     }
-    .Periodical-item-desc {
+    .Capsid-item-desc {
       padding-bottom: $size-half;
       font-size: $font-small;
     }
   }
-  .Periodical-item-image {
+  .Capsid-item-image {
     display: block;
     grid-area: image;
     width: 150px;
@@ -281,7 +288,7 @@ $article-width: 59ch;
   }
 }
   
-  .Periodical-callout {
+  .Capsid-callout {
     padding: $size;
     background-color: $color-ui-lighter;
     border-radius: $radius;
@@ -289,11 +296,17 @@ $article-width: 59ch;
   }
     
 
-  .Periodical-updates {
-    @extend .Periodical-card;
+  .Capsid-sponsor {
+    @extend .Capsid-card;
+    background-color: $color-silver-lighter;
+    margin-bottom: $size-2; // add distance
   }
 
-    .Periodical-updates-title {
+  .Capsid-new {
+    @extend ._card;
+    border: 0;
+  }
+    .Capsid-new-title {
       display: inline-block;
       &:after {
         content: ' ';
@@ -303,26 +316,41 @@ $article-width: 59ch;
         border-bottom: $border-thin $color-pink solid;
       }
     }
-
-
-    .Jobs-updates {
-      @extend .Periodical-card;
-      background-color: $color-teal-10;
+    .Capsid-new-item {
+      margin-bottom: $size-2;
+      &:last-child {
+        margin-bottom: $size;
+      }
     }
-    .Jobs-updates-title {
-      @extend .Periodical-updates-title;
+
+
+  .Capsid-updates {
+    // @extend .Capsid-card;
+    padding: $size;
+    background-color: $color-ui-lighter;
+  }
+  .Capsid-requests {
+    // @extend .Capsid-card;
+    padding: $size;
+    background-color: $color-tertiary-05;
+  }
+
+    .Capsid-jobs {
+      // @extend .Capsid-card;
+      padding: $size;
+      background-color: $color-teal-10;
     }
 
 
   // used to display short headlines on Capsid & Tail
-  .PeriodicalStub {
+  .CapsidStub {
     
-    .PeriodicalStub-latest {
+    .CapsidStub-latest {
       padding-bottom: 0;
     }
     
     // don't highlight / underline some parts
-    .PeriodicalStub-item {
+    .CapsidStub-item {
       &,* {
         text-decoration: none;
       }
@@ -353,20 +381,21 @@ $article-width: 59ch;
     }
   }
 
-  .Periodical-author {
+  .Capsid-author {
     margin-top: $size;
-    // @extend .Periodical-card;
+    // @extend .Capsid-card;
     padding: $size;
     background-color: $color-ui-lighter;
     border-radius: $radius;
+    @extend .Capsid-card;
 
     img {
       max-width: 80px;
     }
   }
 
-  .Periodical-share {
-    // @extend .Periodical-card;
+  .Capsid-share {
+    // @extend .Capsid-card;
     margin-top: $size-2;
     margin-bottom: $size-2;
     img {
@@ -374,7 +403,7 @@ $article-width: 59ch;
     }
   }
 
-    .Periodical-twitter {
+    .Capsid-twitter {
       img {
         vertical-align: middle;
         margin-right: $size/4;

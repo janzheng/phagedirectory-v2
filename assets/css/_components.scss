@@ -295,3 +295,10 @@
   }
 }
 
+.Highlight {
+  // used on top of pages like Alerts, Jobs, and Capsid to highlight some stuff
+  @extend ._card;
+  padding: $size;
+  background-color: $color-silver-lighter;
+}
+
