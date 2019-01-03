@@ -29,7 +29,7 @@
 
 <script>
 
-import Article from '~/components/Article.vue'
+// import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
 import CapsidStub from '~/components/CapsidStub.vue'
@@ -58,7 +58,7 @@ export default {
   },
 
   components: {
-    Article,
+    // Article,
     CapsidBanner,
     Capsid,
     CapsidStub,

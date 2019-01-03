@@ -17,6 +17,16 @@ test*
 # used to generate hosts directly into airtable
 hostgen.vue
 
+# Mailchimp Generator. eslint doesn't understand <style> tags. Good to check once in a while
+CapsidEmail.vue
+
+
+
+
+
+
+
+
 # from .gitignore
 
 # Created by .ignore support plugin (hsz.mobi)

@@ -8,9 +8,9 @@
   <div class="Article" >
     <div class="Article-frontmatter">
       <div class="Article-back">
-        <router-link :to="`/${category}`" v-if="category">Back to {{category}}</router-link>
+        <router-link v-if="category" :to="`/${category}`" >Back to {{ category }}</router-link>
       </div>
-      <div class="Article-title"><h1>{{content.fields.Name}}</h1></div>
+      <div class="Article-title"><h1>{{ content.fields.Name }}</h1></div>
       <div class="Article-lede" v-html="$md.render(content.fields.Lede)"></div>
       <div class="Article-tags">
         <span class="Article-tag _tag" v-for="tag of content.fields.Tags" :key="tag">
@@ -33,7 +33,10 @@
 import { cytosis } from '~/assets/helpers.js'
 
 export default {
-  props: ['category', 'content'],
+  props: {
+    'category': String, 
+    'content': Object,
+  },
 
   components: {
   },

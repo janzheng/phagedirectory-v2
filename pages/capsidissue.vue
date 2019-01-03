@@ -25,7 +25,7 @@
 
 <script>
 
-import Article from '~/components/Article.vue'
+// import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
 import {loadNews} from '~/other/loaders'
@@ -33,7 +33,7 @@ import {loadNews} from '~/other/loaders'
 export default {
 
   components: {
-    Article,
+    // Article,
     CapsidBanner,
     Capsid
   },

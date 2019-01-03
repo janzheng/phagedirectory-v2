@@ -3,7 +3,9 @@
 
   <section class="Capsid narrow copy _margin-center _padding-top-2">
     
-    <div class="_padding-2-sm _padding-xs _padding-top-xs" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
+         :key="issue.id" 
+         class="_padding-2-sm _padding-xs _padding-top-xs" >
       {{ setHeader(issue) }}
 
       <!-- <div class="Capsid-type _margin-bottom" v-if="issue.fields['IssueType']">
@@ -15,32 +17,34 @@
         <div class="Capsid-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
 
-      <router-link :to="`/capsid/${issue.fields['Slug']}`"><h1 class="Capsid-title" v-html="issue.fields['Title']"></h1></router-link>
+      <router-link :to="`/capsid/${issue.fields['Slug']}`"><h1 class="Capsid-title" v-html="issue.fields['Title']" /></router-link>
 
       <div class="Article">
-        <h2 class="Capsid-lede" v-html="issue.fields['Lede']"></h2>
-        <div class="Capsid-description _margin-bottom _md-p_fix" v-if="issue.fields['Intro']" v-html="$md.render(issue.fields['Intro'] || '')"></div>
+        <h2 class="Capsid-lede" v-html="issue.fields['Lede']" />
+        <div v-if="issue.fields['Intro']" 
+             class="Capsid-description _margin-bottom _md-p_fix" 
+             v-html="$md.render(issue.fields['Intro'] || '')" />
 
         <!-- leave Sponsors ABOVE the whats new area to call it out -->
-        <div class="Capsid-sponsor" v-if="getSponsors(issue).length>0">
+        <div v-if="getSponsors(issue).length>0" class="Capsid-sponsor" >
           <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
-          <div class="Capsid-sponsor-item" v-for="sponsor of getSponsors(issue)" :key="sponsor.fields['Name']" v-if="sponsor && sponsor.fields['isPublished']">
-            <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')"></div>
-            <div class="_margin-top-half" v-if="sponsor.fields['Tags']">
+          <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-sponsor-item" >
+            <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')" />
+            <div v-if="sponsor.fields['Tags']" class="_margin-top-half" >
               <span class="Capsid-item-tag _tag --sponsor">Sponsor</span>
             </div>
           </div>
         </div>
 
 
-        <div class="Capsid-new" v-if="hasNew(issue)">
+        <div v-if="hasNew(issue)" class="Capsid-new" >
 
-          <div class="Capsid-updates" v-if="getUpdates(issue).length>0">
-            <h4 class="Capsid-new-title">{{issue.fields['UpdatesTitle'] || 'Updates'}}</h4>
-            <div class="Capsid-new-item" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-              <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-              <div class="_margin-top-half" v-if="update.fields['Tags']">
-                <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+          <div v-if="getUpdates(issue).length>0" class="Capsid-updates" >
+            <h4 class="Capsid-new-title">{{ issue.fields['UpdatesTitle'] || 'Updates' }}</h4>
+            <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-new-item" >
+              <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
+              <div v-if="update.fields['Tags']" class="_margin-top-half" >
+                <span v-for="tag of update.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
               </div>
             </div>
           </div>
@@ -52,35 +56,34 @@
                 <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
               </div>
             </div>
-            <div class="Capsid-community-item" v-for="request of getCommunity(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
-              <div class="Capsid-community-itemheader"v-if="request.fields['Date'] || request.fields['Category']"><span class="_md-p_fix _font-small _font-bold" v-if="request.fields['Category']">{{request.fields['Category']}}</span><span class="_md-p_fix _font-small _margin-bottom-half" v-if="request.fields['Date']">{{request.fields['Date']}}</span></div>
-              <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
-              <div class="_margin-top-half" v-if="request.fields['Tags']">
-                <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of request.fields.Tags" :key="tag">{{ tag }}</span>
+            <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item" >
+              <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader" ><span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold">{{ request.fields['Category'] }}</span><span v-if="request.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ request.fields['Date'] }}</span></div>
+              <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
+              <div v-if="request.fields['Tags']" class="_margin-top-half" >
+                <span v-for="tag of request.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
               </div>
             </div>
-            <div class="Capsid-community-empty" v-if="getCommunity(issue).length == 0" v-html="$md.render(emptyCommunity || '')">
+            <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')">
               This place is empty!
             </div>
           </div>
 
           <div class="Capsid-jobs">
             <div class="_grid-2-xs">
-              <h4 class="Capsid-new-title">{{'Job Board'}}</h4>
+              <h4 class="Capsid-new-title">{{ 'Job Board' }}</h4>
               <div class="_right">
                 <div><a href="https://phage.directory/jobs">All jobs</a></div>
                 <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
               </div>
             </div>
-            <div class="Capsid-jobs-item " v-for="job of getJobs(issue)" :key="job.fields['Name']" v-if="job && job.fields['isPublished']">
-              <div class="Capsid-jobs-itemheader"v-if="job.fields['Date'] || job.fields['Category']"><span class="_md-p_fix _font-small _margin-bottom-half" v-if="job.fields['Date']">{{job.fields['Date']}}</span><span class="_md-p_fix _font-small _font-bold" v-if="job.fields['Category']">{{job.fields['Category']}}</span></div>
-              <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')"></div>
-              <div class="_margin-top-half" v-if="job.fields['Tags']">
-                <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of job.fields.Tags" :key="tag">{{ tag }}</span>
+            <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
+              <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
+              <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
+              <div v-if="job.fields['Tags']" class="_margin-top-half" >
+                <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
               </div>
             </div>
-            <div class="Capsid-community-empty" v-if="getJobs(issue).length == 0" v-html="$md.render(emptyJobs || '')">
-            </div>
+            <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
           </div>
 
         </div>
@@ -94,8 +97,7 @@
         </div>
 
 
-        <div class="Capsid-content" v-if="issue.fields['Article']" v-html="$md.render(issue.fields['Article'] || '')">
-        </div>
+        <div v-if="issue.fields['Article']" class="Capsid-content" v-html="$md.render(issue.fields['Article'] || '')" />
 
         <!-- list has been moved to PeriodicalList.vue -->
 
@@ -108,9 +110,7 @@
         </div>
       </div>
 
-      <div class="Capsid-author" v-html="issue.fields['Author']" v-if="issue.fields['Author']">
-      </div>
-
+      <div v-if="issue.fields['Author']" class="Capsid-author" v-html="issue.fields['Author']" />
 
     </div>
 
@@ -124,7 +124,11 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['issues', 'showPreview', 'isFeatured'],
+  props: {
+    'issues': Array,
+    'showPreview': Boolean,
+    'isFeatured': Boolean,
+  },
   // isFeatured: means it shows up first on the News list
 
   head () {
@@ -141,7 +145,6 @@ export default {
       return {}
 
     let title = this.headTitle
-    let description = "description"
     let meta = [
       { hid: 'og-title', property: 'og:title', content: `${this.headTitle}` },
       { hid: 'twitter-title', property: 'twitter:title', content: `${this.headTitle}` },
@@ -160,9 +163,6 @@ export default {
     }
   },
 
-  components: {
-  },
-
   data: function () {
     return {
       headTitle: undefined,
@@ -172,9 +172,6 @@ export default {
       emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
-  },
-
-  mounted: async function () {
   },
 
   computed: {

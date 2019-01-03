@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="Signup _card --tertiary-80 _margin-none" :class="classes">
+  <div :class="classes" class="Signup _card --tertiary-80 _margin-none" >
     <form 
       class="Signup-form _height-100 _flex-col" 
       action="https://tinyletter.com/phagedirectory" 
@@ -13,17 +13,16 @@
           <div class="Signup-sub _md-p_fix" v-html="$md.render(intro || '')">Receive our Phage Alerts</div>
         </label> 
 
-        <div class="" v-html="$md.render(content || '')">
-        </div>
+        <div class="" v-html="$md.render(content || '')" />
       </div>
 
       <div class="Signup-content _flex-row _flex-wrap">
         <label for="tlemail">Email Address</label>
-        <input type="text" name="email" id="tlemail" 
+        <input id="tlemail" name="email" type="text" 
                class="Signup-input _flex-1 _form-input --width-full _margin-none"
-               placeholder="Your email" required/>
-        <input type="hidden" value="1" name="embed"/>
-        <input class="Subscribe _flex-1 Signup-cta --width-full _button --outline _margin-top-half " type="submit" value="Receive Phage Alerts" />
+               placeholder="Your email" required>
+        <input type="hidden" value="1" name="embed" >
+        <input class="Subscribe _flex-1 Signup-cta --width-full _button --outline _margin-top-half " type="submit" value="Receive Phage Alerts" >
       </div>
 
       <!-- <div class="Signup-note _font-small _padding-top-half">Alerts are only sent when phages are requested to treat urgent infections. <a class="--nowrap" href="/policies#alerts">Please review our policies.</a></div> -->
@@ -36,11 +35,11 @@
 <script>
 
 export default {
-  props: ['classes', 'description'],
-
-  components: {
+  props: {
+    'classes': String,
+    'description': String,
   },
-
+  
   data: function () {
     return {
       intro: this.$cytosis.find('Content.alertssignup-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],

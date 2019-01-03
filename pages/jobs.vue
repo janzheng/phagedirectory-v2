@@ -47,7 +47,7 @@
 
 <script>
 
-import Article from '~/components/Article.vue'
+// import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import { mapState } from 'vuex'
 
@@ -62,7 +62,7 @@ export default {
   },
 
   components: {
-    Article,
+    // Article,
     CapsidBanner,
   },
 

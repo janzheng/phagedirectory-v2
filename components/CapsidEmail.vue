@@ -4,7 +4,11 @@
   Mirrors Periodical.vue, but intended for mailchimp copy/pasting
   Some values are hard-coded, like colors etc. b/c email demabds it
 
+  This is required for CSS, since eslint doesn't know what to do with it
+
+
  -->
+
 
 <template>
 
@@ -17,42 +21,8 @@
         - !important is necessary to override inline styles
         - inline styles necessary b/c some doesn't support <style> tag
        -->
-      <style type="text/css" v-html="issue.fields['EmailCSS']" v-if="issue.fields['EmailCSS']">
-        /*._margin-bottom {
-          margin-bottom: 32px !important;
-        }
-        ._margin-top-half {
-          margin-top: 8px !important;
-        }
-        h3, h4 {
-          padding-top: 16px !important;
-        }
-        blockquote, blockquote p {
-          font-family: georgia,times,times new roman,serif !important;
-          color: #fa5486 !important;
-          font-size: 18px;
-          font-style: italic !important;
-        }
-
-        .Advert {
-          background-color: rgba(250, 84, 134, 0.5) !important; margin-bottom: 16px; 
-          padding: 16px; 
-          color: #333333; 
-          width: 80%; border-radius: 4px;
-        }
-
-        @media only screen and (max-width: 680px){
-          .Advert {
-           width: 80% !important;
-          }
-          .Advert img {
-           float: none !important;
-           display: block;
-          }
-          blockquote, blockquote p {
-            font-size: 28px !important;
-          }
-       }*/
+      <style v-if="issue.fields['EmailCSS']" type="text/css" v-html="issue.fields['EmailCSS']" >
+        /* nothing here */
       </style>
 
       <!-- hard-coded styles -->
@@ -60,7 +30,7 @@
         h4 {
           padding: 16px 0;
         }
-        .Advert {
+        .Advert { 
           background-color: #FFD3D3 !important;
           margin-bottom: 16px !important;
           padding: 16px !important;
@@ -212,46 +182,48 @@
         <div class="Email-read"><a :href="`${issue.fields['URL']}`" target="_blank">Read on Phage Directory</a></div>
       </div>
 
-      <br />
+      <br>
 
       <div class="Email">
-        <h1 class="Capsid-title" v-html="issue.fields['Title']"></h1>
-        <br/>
-        <h2 class="Capsid-lede" v-html="issue.fields['Lede']"></h2>
-        <br/>
+        <h1 class="Capsid-title" v-html="issue.fields['Title']" />
+        <br>
+        <h2 class="Capsid-lede" v-html="issue.fields['Lede']" />
+        <br>
       </div>
 
-      <div class=" Capsid-description _md-p_fix" v-if="issue.fields['Intro']" >
-        <div v-html="$md.render(issue.fields['Intro'] || '')"></div>
+      <div v-if="issue.fields['Intro']" class=" Capsid-description _md-p_fix" >
+        <div v-html="$md.render(issue.fields['Intro'] || '')" />
       </div>
 
-      <br />
+      <br>
 
-      <div class="Capsid-sponsor Email-card" v-if="getSponsors(issue).length>0">
+      <div v-if="getSponsors(issue).length>0" class="Capsid-sponsor Email-card" >
         <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
-        <div class="Capsid-sponsor-item" v-for="sponsor of getSponsors(issue)" :key="sponsor.fields['Name']" v-if="sponsor && sponsor.fields['isPublished']">
-          <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')"></div>
-          <div class="_margin-top-half" v-if="sponsor.fields['Tags']">
+        <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-sponsor-item" >
+          <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')" />
+          <div v-if="sponsor.fields['Tags']" class="_margin-top-half" >
             <span class="Email-tag _tag --sponsor">Sponsor</span>
           </div>
         </div>
       </div>
 
-      <div class="Email-card" v-if="hasNew(issue)">
+      <div v-if="hasNew(issue)" class="Email-card" >
 
-        <div class="Capsid-updates" v-if="getUpdates(issue)">
-          <h3 class="Capsid-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}
+        <div v-if="getUpdates(issue)" class="Capsid-updates" >
+          <h3 class="Capsid-updates-title_">{{ issue.fields['UpdatesTitle'] || 'What’s New' }}
           </h3>
-          <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
-          <div class="Capsid-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-            <div class="_margin-top-half" v-if="update.fields['Tags']">
-              <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+          <h3 class="line">
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-update-item _margin-bottom" >
+            <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
+            <div v-if="update.fields['Tags']" class="_margin-top-half" >
+              <span v-for="tag of update.fields.Tags" :key="tag" ><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
         </div>
 
-        <div class="Capsid-community" v-if="getCommunity(issue)">
+        <div v-if="getCommunity(issue)" class="Capsid-community" >
           <table class="Section-table">
             <tr>
               <td class="" >
@@ -262,41 +234,47 @@
               </td>
             </tr>
           </table>
-          <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
-          <div class="Capsid-community-item _margin-bottom" v-for="request of getCommunity(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
-            <div class="Capsid-community-itemheader"v-if="request.fields['Date'] || request.fields['Category']"><span class="_md-p_fix _font-small _font-bold" v-if="request.fields['Category']"><b>{{request.fields['Category']}}</b></span><span class="_md-p_fix _font-small" v-if="request.fields['Date']">{{request.fields['Date']}}</span></div>
-            <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
-            <div class="_margin-top-half" v-if="request.fields['Tags']">
-              <span v-for="tag of request.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+          <h3 class="line">
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item _margin-bottom" >
+            <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader">
+              <span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ request.fields['Category'] }}</b></span><span v-if="request.fields['Date']" class="_md-p_fix _font-small">{{ request.fields['Date'] }}</span>
+            </div>
+            <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
+            <div v-if="request.fields['Tags']" class="_margin-top-half" >
+              <span v-for="tag of request.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
         </div>
 
-        <div class="Capsid-jobs" v-if="getJobs(issue).length>0" >
-        <table class="Section-table">
-          <tr>
-            <td class="" >
-              <h3 class="Capsid-jobs-title_">Job Board</h3>
-            </td>
-            <td>
-              <div><a href="https://phage.directory/jobs">All jobs</a></div>
-              <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
-            </td>
-          </tr>
-        </table>
-        <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
-          <div class="Capsid-jobs-item " v-for="job of getJobs(issue)" :key="job.fields['Name']" v-if="job && job.fields['isPublished']">
-            <div class="Capsid-jobs-itemheader"v-if="job.fields['Date'] || job.fields['Category']"><span class="_md-p_fix _font-small" v-if="job.fields['Date']">{{job.fields['Date']}}</span><span class="_md-p_fix _font-small _font-bold" v-if="job.fields['Category']"><b>{{job.fields['Category']}}</b></span></div>
-            <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')"></div>
-            <div class="_margin-top-half" v-if="job.fields['Tags']">
-              <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of job.fields.Tags" :key="tag">{{ tag }}</span>
+        <div v-if="getJobs(issue).length>0" class="Capsid-jobs" >
+          <table class="Section-table">
+            <tr>
+              <td class="" >
+                <h3 class="Capsid-jobs-title_">Job Board</h3>
+              </td>
+              <td>
+                <div><a href="https://phage.directory/jobs">All jobs</a></div>
+                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+              </td>
+            </tr>
+          </table>
+          <h3 class="line">
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item " >
+            <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
+            </div>
+            <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
+            <div v-if="job.fields['Tags']" class="_margin-top-half" >
+              <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
             </div>
           </div>
+        </div>
       </div>
 
-      </div>
-
-      <br/>
+      <br>
 
       <!-- twitter share on top -->
       <div class="Capsid-share _margin-bottom-2">
@@ -306,13 +284,12 @@
         </p>
       </div>
 
-      <br/>
+      <br>
 
-      <div class=" Capsid-content" v-if="issue.fields['Article']" >
-        <div v-html="$md.render(issue.fields['Article'] || '')" >
-        </div>
+      <div v-if="issue.fields['Article']" class=" Capsid-content" >
+        <div v-html="$md.render(issue.fields['Article'] || '')" />
 
-        <br/>
+        <br>
 
         <div class="Capsid-share _margin-bottom-2" >
           <p class="Capsid-twitter">
@@ -321,11 +298,9 @@
           </p>
         </div>
 
-        <br/>
+        <br>
 
-        <div v-if="issue.fields['Author']" class="Email-card--silver Capsid-author"
-          v-html="issue.fields['Author']" />
-
+        <div v-if="issue.fields['Author']" class="Email-card--silver Capsid-author" v-html="issue.fields['Author']" />
       </div>
 
 
@@ -337,6 +312,8 @@
 
 
 <script>
+// eslint-disable vue/html-indent
+// eslint-disable vue/html-self-closing
 
 import { mapState } from 'vuex'
 
@@ -349,9 +326,6 @@ export default {
   data: function () {
     return {
     }
-  },
-
-  mounted: async function () {
   },
 
   computed: {

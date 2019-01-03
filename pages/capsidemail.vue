@@ -13,7 +13,7 @@
 
 <script>
 
-import Article from '~/components/Article.vue'
+// import Article from '~/components/Article.vue'
 import CapsidEmail from '~/components/CapsidEmail.vue'
 // import {loadStatic, loadNews} from '~/other/loaders'
 import {loadNews} from '~/other/loaders'
@@ -21,7 +21,7 @@ import {loadNews} from '~/other/loaders'
 export default {
 
   components: {
-    Article,
+    // Article,
     CapsidEmail
   },
 

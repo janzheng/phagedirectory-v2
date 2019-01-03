@@ -52,6 +52,9 @@ module.exports = {
     "no-empty-pattern": "off", // nuxt plugins require empty objects 
     // "prettier/prettier": ["error", { "semi": false }]
     "vue/require-default-prop": "off",
+    "vue/html-indent": ["error", 2, {
+        "ignores": ['style']
+      }],
   }
 }
 
