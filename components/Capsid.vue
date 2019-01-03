@@ -45,23 +45,26 @@
             </div>
           </div>
 
-          <div class="Capsid-requests" v-if="getRequests(issue).length>0">
+          <div class="Capsid-community">
             <div class="_grid-3-2-xs">
               <h4 class="Capsid-new-title">Community Board</h4>
-              <div class="Capsid-requests-cta _right">
+              <div class="Capsid-community-cta _right">
                 <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
               </div>
             </div>
-            <div class="Capsid-requests-item" v-for="request of getRequests(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
-              <div class="_md-p_fix _font-small _margin-bottom-half" v-if="request.fields['Date']">{{request.fields['Date']}}</div>
+            <div class="Capsid-community-item" v-for="request of getCommunity(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
+              <div class="Capsid-community-itemheader"v-if="request.fields['Date'] || request.fields['Category']"><span class="_md-p_fix _font-small _font-bold" v-if="request.fields['Category']">{{request.fields['Category']}}</span><span class="_md-p_fix _font-small _margin-bottom-half" v-if="request.fields['Date']">{{request.fields['Date']}}</span></div>
               <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
               <div class="_margin-top-half" v-if="request.fields['Tags']">
                 <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of request.fields.Tags" :key="tag">{{ tag }}</span>
               </div>
             </div>
+            <div class="Capsid-community-empty" v-if="getCommunity(issue).length == 0" v-html="$md.render(emptyCommunity || '')">
+              This place is empty!
+            </div>
           </div>
 
-          <div class="Capsid-jobs" v-if="getJobs(issue).length>0">
+          <div class="Capsid-jobs">
             <div class="_grid-2-xs">
               <h4 class="Capsid-new-title">{{'Job Board'}}</h4>
               <div class="_right">
@@ -69,11 +72,14 @@
                 <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
               </div>
             </div>
-            <div class="Capsid-new-item " v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-              <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-              <div class="_margin-top-half" v-if="update.fields['Tags']">
-                <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of update.fields.Tags" :key="tag">{{ tag }}</span>
+            <div class="Capsid-jobs-item " v-for="job of getJobs(issue)" :key="job.fields['Name']" v-if="job && job.fields['isPublished']">
+              <div class="Capsid-jobs-itemheader"v-if="job.fields['Date'] || job.fields['Category']"><span class="_md-p_fix _font-small _margin-bottom-half" v-if="job.fields['Date']">{{job.fields['Date']}}</span><span class="_md-p_fix _font-small _font-bold" v-if="job.fields['Category']">{{job.fields['Category']}}</span></div>
+              <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')"></div>
+              <div class="_margin-top-half" v-if="job.fields['Tags']">
+                <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of job.fields.Tags" :key="tag">{{ tag }}</span>
               </div>
+            </div>
+            <div class="Capsid-community-empty" v-if="getJobs(issue).length == 0" v-html="$md.render(emptyJobs || '')">
             </div>
           </div>
 
@@ -162,6 +168,9 @@ export default {
       headTitle: undefined,
       headImage: undefined,
       headDescription: undefined,
+
+      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
@@ -203,8 +212,8 @@ export default {
       return sponsors || undefined
     },
 
-    getRequests(issue) {
-      const requests = this.$cytosis.getLinkedRecords(issue.fields['Requests'], this['Updates'], true)
+    getCommunity(issue) {
+      const requests = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
       // console.log('get updates:', updates)
       return requests || undefined
     },
@@ -223,8 +232,8 @@ export default {
     },
 
     hasNew(issue) {
-      // true if Requests, Updates, or Jobs exist
-      return this.getRequests.length > 0 || this.getUpdates.length > 0 || this.getJobs.length > 0
+      // true if Community Requests, Updates, or Jobs exist
+      return this.getCommunity(issue).length > 0 || this.getUpdates(issue).length > 0 || this.getJobs(issue).length > 0
     },
 
     getTwitterLink(issue) {

@@ -102,18 +102,39 @@
           padding: 16px;
           background-color: #FCFCFC;
         }
-        .Capsid-requests {
+        .Capsid-community {
           padding: 16px;
           background-color: rgba(250, 84, 134, 0.05);
         }
-          .Capsid-request-item {
+          .Capsid-community-item {
             padding: 16px;
+            margin-bottom: 8px !important;
             background: #ffffff;
+          }
+          .Capsid-community-itemheader {
+            font-size: 14px !important;
+          }
+          .Capsid-community-itemheader span + span {
+            padding-left: 8px !important;
           }
         .Capsid-jobs {
           padding: 16px;
           background-color: rgba(113, 239, 245, 0.1);
         }
+          .Capsid-jobs-item {
+            padding: 16px !important;
+            background-color: #F5FDFF; // NEED TO ADD THIS
+            margin-bottom: 8px !important;
+          }
+            .Capsid-jobs-item:last-child {
+              margin-bottom: 16px !important;
+            }
+          .Capsid-jobs-itemheader {
+            font-size: 14px !important;
+          }
+          .Capsid-jobs-itemheader span + span:before {
+            content: ' — ';
+          }
         .Email-card--silver {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
@@ -123,13 +144,7 @@
           margin-bottom: 16px;
           background-color: #F7F7F7 !important;
         }
-
-        /*@media only screen and (max-width: 680px) {
-          .Email-card {
-            padding: 16px !important;
-          }
-        }*/
-
+        
         .Email-tag {
           background-color: #eeeeee;
           border-radius: 4px;
@@ -150,7 +165,7 @@
         .line {
           padding: 0;
           line-height: 0 !important;
-          margin-bottom: 16px;
+          margin-bottom: 16px !important;
         }
 
         .Capsid-date {
@@ -226,9 +241,9 @@
       <div class="Email-card" v-if="hasNew(issue)">
 
         <div class="Capsid-updates" v-if="getUpdates(issue)">
-          <h3 class="Capsid-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}<br/>
-            <span style="color:#fa5486">&mdash;</span>
+          <h3 class="Capsid-updates-title_">{{issue.fields['UpdatesTitle'] || 'What’s New'}}
           </h3>
+          <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
           <div class="Capsid-update-item _margin-bottom" v-for="update of getUpdates(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
             <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
             <div class="_margin-top-half" v-if="update.fields['Tags']">
@@ -237,19 +252,20 @@
           </div>
         </div>
 
-        <div class="Capsid-requests" v-if="getRequests(issue)">
+        <div class="Capsid-community" v-if="getCommunity(issue)">
           <table class="Section-table">
             <tr>
               <td class="" >
-                <h3 class="Capsid-request-title_">Community Board</h3>
+                <h3 class="Capsid-community-title_">Community Board</h3>
               </td>
               <td>
                 <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
               </td>
             </tr>
           </table>
-          <div class="Capsid-request-item _margin-bottom" v-for="request of getRequests(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
-            <div class="Capsid-date" v-if="request.fields['Date']">{{request.fields['Date']}}</div>
+          <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
+          <div class="Capsid-community-item _margin-bottom" v-for="request of getCommunity(issue)" :key="request.fields['Name']" v-if="request && request.fields['isPublished']">
+            <div class="Capsid-community-itemheader"v-if="request.fields['Date'] || request.fields['Category']"><span class="_md-p_fix _font-small _font-bold" v-if="request.fields['Category']"><b>{{request.fields['Category']}}</b></span><span class="_md-p_fix _font-small" v-if="request.fields['Date']">{{request.fields['Date']}}</span></div>
             <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')"></div>
             <div class="_margin-top-half" v-if="request.fields['Tags']">
               <span v-for="tag of request.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
@@ -270,13 +286,13 @@
           </tr>
         </table>
         <h3 class="line"><span style="color:#fa5486">&mdash;</span></h3>
-
-        <div class="Jobs-update-item _margin-bottom" v-for="update of getJobs(issue)" :key="update.fields['Name']" v-if="update && update.fields['isPublished']">
-          <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')"></div>
-          <div class="_margin-top-half" v-if="update.fields['Tags']">
-            <span v-for="tag of update.fields.Tags"><span class="Email-tag"  :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+          <div class="Capsid-jobs-item " v-for="job of getJobs(issue)" :key="job.fields['Name']" v-if="job && job.fields['isPublished']">
+            <div class="Capsid-jobs-itemheader"v-if="job.fields['Date'] || job.fields['Category']"><span class="_md-p_fix _font-small" v-if="job.fields['Date']">{{job.fields['Date']}}</span><span class="_md-p_fix _font-small _font-bold" v-if="job.fields['Category']"><b>{{job.fields['Category']}}</b></span></div>
+            <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')"></div>
+            <div class="_margin-top-half" v-if="job.fields['Tags']">
+              <span class="Capsid-item-tag _tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" v-for="tag of job.fields.Tags" :key="tag">{{ tag }}</span>
+            </div>
           </div>
-        </div>
       </div>
 
       </div>
@@ -363,8 +379,8 @@ export default {
       return sponsors || undefined
     },
 
-    getRequests(issue) {
-      const requests = this.$cytosis.getLinkedRecords(issue.fields['Requests'], this['Updates'], true)
+    getCommunity(issue) {
+      const requests = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
       // console.log('get updates:', updates)
       return requests || undefined
     },
@@ -384,7 +400,7 @@ export default {
 
     hasNew(issue) {
       // true if Requests, Updates, or Jobs exist
-      return this.getRequests.length > 0 || this.getUpdates.length > 0 || this.getJobs.length > 0
+      return this.getCommunity(issue).length > 0 || this.getUpdates(issue).length > 0 || this.getJobs(issue).length > 0
     },
 
 

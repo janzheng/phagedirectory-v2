@@ -4,7 +4,7 @@
 
 <script>
 
-import {loadStatic, loadDynamic} from '~/other/loaders'
+// import {loadStatic, loadDynamic} from '~/other/loaders'
 import Directory from '~/components/Directory.vue'
 
 export default {
@@ -16,10 +16,12 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, route, store}) {
 
-    const staticData = await loadStatic(env, store, route.name)
-    const dynamicData = await loadDynamic(env, store, route.name)
+    // loaded through contentframe
+    // const staticData = await loadStatic(env, store, route.name)
+    // const dynamicData = await loadDynamic(env, store, route.name)
 
     const slug = unescape(route.params.slug)
 
@@ -35,10 +37,10 @@ export default {
     }
   },
 
-  mounted: async function () {
+  computed: {
   },
 
-  computed: {
+  mounted: async function () {
   },
 
   methods: {

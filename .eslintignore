@@ -4,8 +4,18 @@ nuxt.config.js
 other/*
 
 
+# generated from workbox / PWA
+static/sw.js
 
+# plugins
+plugins/mixpanel.js
 
+# marked unused / old code or temporary code
+unused*
+test*
+
+# used to generate hosts directly into airtable
+hostgen.vue
 
 # from .gitignore
 

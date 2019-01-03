@@ -10,17 +10,15 @@
     <section class="Periodical narrow copy _margin-center _padding-top-2">
 
       <div class="News-intro _margin-bottom _flex _flex-bottom">
-        <router-link to="/capsid" class="" v-html="$md.render(title || '')"></router-link>
-        <div class="" v-html="$md.render(intro || '')"></div>    
+        <router-link to="/capsid" class="" v-html="$md.render(title || '')" />
+        <div class="" v-html="$md.render(intro || '')" />    
       </div>
 
     </section>
     
     <CapsidBanner class="_margin-center" />
-
-    <Capsid :issues="issues" :showPreview="showPreview" />
-
-    <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')"></div>
+    <Capsid :issues="issues" :show-preview="showPreview" />
+    <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')" />
 
   </div>
 </template>
@@ -30,9 +28,8 @@
 import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
-import { mapState } from 'vuex'
 
-import {loadStatic, loadNews} from '~/other/loaders'
+import {loadNews} from '~/other/loaders'
 
 export default {
 
@@ -68,9 +65,6 @@ export default {
     }
   },
 
-  mounted: async function () {
-  },
-
   computed: {
     // ...mapState([
     //   'Content',
@@ -97,6 +91,9 @@ export default {
       return result // array of issues
     }
 
+  },
+
+  mounted: async function () {
   },
 
   methods: {

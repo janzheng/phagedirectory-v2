@@ -43,14 +43,14 @@
 // })
 
 
-export default ({ app, env }, inject) => {
+// export default ({ app, env }, inject) => {
 
-  window.onNuxtReady(() => {
-    const browserPolicy = localStorage.getItem('pd-policy')
-    console.log('onNuxtReady', browserPolicy, env)
-    // console.log('Nuxt.js is ready and mounted', context.$store)
-  })
-}
+//   window.onNuxtReady(() => {
+//     const browserPolicy = localStorage.getItem('pd-policy')
+//     console.log('onNuxtReady', browserPolicy, env)
+//     // console.log('Nuxt.js is ready and mounted', context.$store)
+//   })
+// }
 
 
 

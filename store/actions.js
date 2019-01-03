@@ -5,7 +5,8 @@ import _ from 'lodash'
 
 
 export default {
-  async loadCytosis ({ commit, state }, {env, tableIndex, options, caller}) {
+  // async loadCytosis ({ commit, state }, {env, tableIndex, options, caller}) {
+  async loadCytosis ({ commit }, {env, tableIndex, options, caller}) {
     const airKey = env.airtable_api
     const airBase = env.airtable_base
 
@@ -50,9 +51,9 @@ export default {
 
 }
 
-const emit = function (evtName, data) { // replaces entire dance object
-  window.dispatchEvent( new CustomEvent(evtName, {detail: data}));
-}
+// const emit = function (evtName, data) { // replaces entire dance object
+//   window.dispatchEvent( new CustomEvent(evtName, {detail: data}))
+// }
 
 const debouncedUpdate = _.debounce(function(commit, object){
   // console.log('update debounced!')

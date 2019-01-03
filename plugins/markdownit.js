@@ -9,7 +9,8 @@ import MarkdownItAttrs from 'markdown-it-attrs'
 // let MarkdownItAttrs = require('markdown-it-attrs') // loaded thru webpack
 
 
-export default ({ app }, inject) => {
+// export default ({ app }, inject) => {
+export default ({ }, inject) => {
   let md = new MarkdownIt({
     html: true,
     typographer: true,

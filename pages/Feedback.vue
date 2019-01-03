@@ -8,7 +8,7 @@
 <script>
 
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
-import FormVomFeedback from '~/forms/FormVomFeedback.vue'
+// import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 
 export default {
 
@@ -20,18 +20,17 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({ app, store, env, params }) {
-    return {
-    }
-  },
-
-
-  created: function () {
-  },
-
   data: function () {
     return {
     }
+  },
+
+  // async asyncData({ app, store, env, params }) {
+  //   return {
+  //   }
+  // },
+
+  created: function () {
   },
 
   methods: {

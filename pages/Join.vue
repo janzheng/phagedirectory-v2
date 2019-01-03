@@ -2,30 +2,38 @@
 
   <div class="Join">
     <section class="narrow copy _width-content-max _margin-center " >
-      <div class="Join-intro" v-html="$md.render(intro || '')"></div>
+      <div class="Join-intro" v-html="$md.render(intro || '')" />
     </section>
 
 
-    <div class="Join-options _padding-2" v-if="mode=='select'" 
+    <div v-if="mode=='select'"  
          :class="JoinOptionsClasses"
+         class="Join-options _padding-2"
     >
-      <div class="Join-research Join-grid _card _padding" v-if="researchFormPublished">
-        <div class="_margin-bottom" v-html="$md.render(researchFormIntro || '')"></div>
-        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='research'"></div>
+      <div v-if="researchFormPublished" class="Join-research Join-grid _card _padding" >
+        <div class="_margin-bottom" v-html="$md.render(researchFormIntro || '')" />
+        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" 
+             @click="mode='research'"
+             v-html="$md.render(joinCta || '')" />
       </div>
 
-      <div class="Join-research Join-grid _card _padding" v-if="labFormPublished">
-        <div class="_margin-bottom" v-html="$md.render(labFormIntro || '')"></div>
-        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='lab'"></div>
+      <div v-if="labFormPublished" class="Join-research Join-grid _card _padding" >
+        <div class="_margin-bottom" v-html="$md.render(labFormIntro || '')" />
+        <div class="Join-cta _button Directory-btn _width-full _md-p_fix"
+             @click="mode='lab'"
+             v-html="$md.render(joinCta || '')" />
       </div>
 
-      <div class="Join-industry Join-grid _card _padding" v-if="industryFormPublished">
-        <div class="_margin-bottom" v-html="$md.render(industryFormIntro || '')"></div>
-        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" v-html="$md.render(joinCta || '')" @click="mode='industry'">CTA</div>
+      <div v-if="industryFormPublished" class="Join-industry Join-grid _card _padding" >
+        <div class="_margin-bottom" v-html="$md.render(industryFormIntro || '')" />
+        <div class="Join-cta _button Directory-btn _width-full _md-p_fix" 
+             @click="mode='industry'"
+             v-html="$md.render(joinCta || '')" >CTA</div>
       </div>
     </div>
 
-    <section class="narrow copy _card Join-form _width-content-max _margin-center _padding" v-if="mode!=='select'">
+    <section v-if="mode!=='select'"
+             class="narrow copy _card Join-form _width-content-max _margin-center _padding" >
       <div class="Join-back _button --short Directory-btn" @click="mode='select'">Back</div>
       <FormVomResearch v-if="mode=='research'"/>
       <FormVomLab v-if="mode=='lab'"/>
@@ -36,8 +44,6 @@
 </template>
 
 <script>
-
-import { mapState } from 'vuex'
 
 import FormVomIndustry from '~/forms/FormVomIndustry.vue'
 import FormVomLab from '~/forms/FormVomLab.vue'
@@ -54,7 +60,8 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, env, store}) {
 
     const cytosis = store.state.cytosis
     return {
@@ -78,17 +85,10 @@ export default {
     }
   },
 
-
-  created: function () {
-  },
-
   data: function () {
     return {
       mode: 'select'
     }
-  },
-
-  mounted: function () {
   },
 
   computed: {
@@ -103,6 +103,14 @@ export default {
       if(count == 1) return '--one'
     }
   },
+
+  mounted: function () {
+    this.$mixpanel.track("Join page loaded")
+  },
+
+  created: function () {
+  },
+
   methods: {
   }
 

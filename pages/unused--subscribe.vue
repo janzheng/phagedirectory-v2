@@ -16,7 +16,6 @@
 <script>
 
 import CapsidBanner from '~/components/CapsidBanner.vue'
-import { mapState } from 'vuex'
 
 
 export default {
@@ -28,24 +27,24 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
 
-  },
+  // },
 
-  data: function () {
-    return {
-    }
-  },
+  // data: function () {
+  //   return {
+  //   }
+  // },
 
-  mounted: async function () {
-  },
+  // mounted: async function () {
+  // },
 
-  computed: {
+  // computed: {
 
-  },
+  // },
 
-  methods: {
-  }
+  // methods: {
+  // }
 
 }
 </script>

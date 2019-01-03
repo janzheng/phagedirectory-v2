@@ -24,21 +24,21 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
   
-  async asyncData({ app, store, env, params }) {
-    return {
-    }
-  },
+  // async asyncData({ app, store, env, params }) {
+  //   return {
+  //   }
+  // },
 
-  created: function () {
-  },
+  // data: function () {
+  //   return {
+  //   }
+  // },
 
-  data: function () {
-    return {
-    }
-  },
+  // created: function () {
+  // },
 
-  methods: {
-  }
+  // methods: {
+  // }
 
 }
 </script>

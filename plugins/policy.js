@@ -3,7 +3,8 @@
 
 import Vue from 'vue'
 
-export default ({ app, env, store, route }, inject) => {
+// export default ({ app, env, store, route }, inject) => {
+export default ({ env, store }) => {
 
   // window.onNuxtReady(() => {
   if(!process.server) {

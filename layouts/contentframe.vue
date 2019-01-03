@@ -120,12 +120,12 @@ export default {
   watch: {
     '$route' (to, from) {
       // react to route changes...
-      console.log('ROUTE OBJECT', to, from)
+      // console.log('ROUTE OBJECT', to, from)
       const _this = this
       let scrolled = false
       this.$nextTick(function () {
         if(_this.$route.hash && !scrolled) {
-          console.log('-- hash scroll')
+          // console.log('-- hash scroll')
         } 
         if(_this.$route.hash) {
           const scroll = _.throttle(function (e) {

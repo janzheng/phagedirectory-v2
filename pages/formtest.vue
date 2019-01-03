@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 
   <div class="Home">
 
@@ -90,3 +90,4 @@ export default {
 <style>
 </style>
 
+ -->

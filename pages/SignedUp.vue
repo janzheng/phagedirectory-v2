@@ -7,7 +7,7 @@
 <template>
 
   <section class="SignedUp container narrow copy _margin-center">
-    <div v-html="$md.render(signedup || '')"></div>
+    <div v-html="$md.render(signedup || '')" />
   </section>
 </template>
 
@@ -21,11 +21,8 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  created: function () {
-  },
-
-
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, env, store}) {
     // console.log('asyncdata store: ', store.state.cytosis)
     // const cytosis = await store.dispatch('loadCytosis', {
     //   env,
@@ -46,6 +43,9 @@ export default {
   computed: {
   },
 
+  created: function () {
+  },
+  
   methods: {
   }
 

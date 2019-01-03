@@ -73,7 +73,7 @@ export default {
     // console.log('UPDATECREATE', payload)
 
     // iterator 
-    Object.keys(payload).map((name, i) => {
+    Object.keys(payload).map((name) => {
       // const value = Object.values(payload)[0]
       // preserve things like functions, not just data w/ object.create
       state[name] = payload[name]
@@ -86,7 +86,7 @@ export default {
   },
   // clear (or reset) an object (esp. used on update)
   clear (state, {name}) {
-    debug('Store.clear', 'Clearing:', name)
+    // debug('Store.clear', 'Clearing:', name)
     if(state[name] !== undefined) {
       state[name] = undefined
     }

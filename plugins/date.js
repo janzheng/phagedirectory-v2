@@ -6,4 +6,4 @@ Vue.filter('niceDate', function(value) {
   if (value) {
     return dayjs(String(value)).format('MMMM D, YYYY')
   }
-});
+})

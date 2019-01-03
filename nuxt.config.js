@@ -157,7 +157,8 @@ module.exports = {
     // '~plugins/vue-highlightjs.js',
     // { src: '~/plugins/plugintest.js', ssr: false }
     { src: '~/plugins/policy.js', ssr: false },
-    // { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
+    { src: '~/plugins/hotjar.js', ssr: false }, // need to link this to policy
+    { src: '~/plugins/mixpanel.js', ssr: false },
     { src: '~/plugins/markdownit.js' },
     { src: '~/plugins/cytosis.js' },
     { src: '~/plugins/date.js' },
@@ -170,17 +171,6 @@ module.exports = {
       id: site_ga,
       // disabled: true // gdpr, policy.js enables it: https://medium.com/dailyjs/google-analytics-gdpr-and-vuejs-e1bd6affd2b4
     }],
-    // ['@nuxtjs/markdownit', {
-    //   html: true,
-    //   injected: true,
-    //   typographer: true,
-    //   linkify: true,
-    //   breaks: true,
-    //   use: [
-    //     'markdown-it-attrs',
-    //     // ['markdown-it-attrs', {'leftDelimiter': '[', 'rightDelimiter': ']'}]
-    //   ],
-    // }],
     ['@nuxtjs/google-tag-manager', { 
       id: 'GTM-WCR3X43' 
     }],
@@ -252,6 +242,17 @@ module.exports = {
     transpile: ['cytosis', 'vuex-cache', 'markdownit', 'markdown-it-attrs'],
     // transpile: ['cytosis', 'vuex-cache', 'markdownit'],
 
+    // extend(config, ctx) {
+    //   // Run ESLint on save
+    //   if (ctx.isDev && ctx.isClient) {
+    //     config.module.rules.push({
+    //       enforce: "pre",
+    //       test: /\.(js|vue)$/,
+    //       loader: "eslint-loader",
+    //       exclude: /(node_modules)/
+    //     })
+    //   }
+    // }
   },
 
 

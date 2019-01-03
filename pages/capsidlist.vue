@@ -10,19 +10,18 @@
     <section class="Capsid narrow copy _margin-center ">
 
       <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
-        <div class="" v-html="$md.render(title)"></div>
-        <div class="" v-html="$md.render(intro)"></div>    
+        <div class="" v-html="$md.render(title)" />
+        <div class="" v-html="$md.render(intro)" />    
       </div>
 
-      <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)">
-      </div>
+      <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)" />
       <CapsidBanner class="_margin-center" />
 
     </section>
     
 
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
-    <CapsidStub :issues="latest" :isFeatured="true" />
+    <CapsidStub :issues="latest" :is-featured="true" />
     <CapsidStub :issues="notLatest" class="_padding-bottom-2" />
 
   </div>
@@ -95,9 +94,6 @@ export default {
     }
   },
 
-  mounted: async function () {
-  },
-
   computed: {
     ...mapState([
       'Content',
@@ -118,6 +114,9 @@ export default {
       return this['C&T']
     }
 
+  },
+
+  mounted: async function () {
   },
 
   methods: {

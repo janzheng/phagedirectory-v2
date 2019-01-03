@@ -329,18 +329,23 @@ $article-width: 59ch;
     padding: $size;
     background-color: $color-ui-lighter;
   }
-  .Capsid-requests {
+  .Capsid-community {
     // @extend .Capsid-card;
     padding: $size;
     background-color: $color-tertiary-05;
   }
-    .Capsid-requests-cta {
+    .Capsid-community-cta {
       padding-top: $size--1;
     }
-    .Capsid-requests-item {
+    .Capsid-community-item {
       padding: $size;
       background-color: $color-purewhite;
-      margin-bottom: $size;
+      margin-bottom: $size-half;
+    }
+    .Capsid-community-itemheader {
+      span + span {
+        padding-left: $size-half;
+      }
     }
 
     .Capsid-jobs {
@@ -348,6 +353,21 @@ $article-width: 59ch;
       padding: $size;
       background-color: $color-teal-10;
     }
+      .Capsid-jobs-item {
+        padding: $size;
+        background-color: #F5FDFF; // NEED TO ADD THIS
+        margin-bottom: $size-half;
+        &:last-child {
+          margin-bottom: $size;
+        }
+      }
+      .Capsid-jobs-itemheader {
+        span + span {
+          &:before {
+            content: ' — ';
+          }
+        }
+      }
 
 
   // used to display short headlines on Capsid & Tail

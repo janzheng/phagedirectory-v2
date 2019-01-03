@@ -3,8 +3,8 @@
   <div class="Policies container">
     <!-- header -->
     <div class="_grid-1-5">
-      <div></div>
-      <article class="narrow" v-html="$md.render(intro || '')"></article>
+      <div />
+      <article class="narrow" v-html="$md.render(intro || '')" />
     </div>
 
     <!-- body -->
@@ -20,7 +20,7 @@
       </div>
 
       <article class="Policies-content narrow">
-        <div class="" v-html="$md.render(policies || '')"></div>
+        <div class="" v-html="$md.render(policies || '')" />
       </article>
     </div>
 
@@ -44,8 +44,9 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
   
-  async asyncData({app, env, route, store}) {
-    const cytosis = store.state.cytosis
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, store}) {
+    // const cytosis = store.state.cytosis
     return {
       intro: app.$cytosis.find('Content.policies-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       policies: app.$cytosis.find('Content.site-policy', store.state.cytosis.tables)[0]['fields']['Markdown'],
@@ -57,12 +58,11 @@ export default {
     }
   },
 
-  mounted: function () {
-  },
-
   computed: {
   },
 
+  mounted: function () {
+  },
 
   methods: {
   }

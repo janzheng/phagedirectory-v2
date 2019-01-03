@@ -10,32 +10,30 @@
   <div>
     <section class="Jobs narrow copy _margin-center _padding-top-2">
 
-      <div class="Jobs-intro _margin-bottom-2" v-html="$md.render(intro)"></div>
+      <div class="Jobs-intro _margin-bottom-2" v-html="$md.render(intro)" />
 
       <div class="Article _margin-center Jobs-container">
-        <div class="Jobs-item _card _margin-bottom-2 _padding-2" 
-          :class="getStatus(job)"
-          v-for="job of Jobs" :key="job.id" v-if="showJob(job)">
+        <div v-for="job of Jobs" v-if="showJob(job)" :key="job.id"
+             :class="getStatus(job)"
+             class="Jobs-item _card _margin-bottom-2 _padding-2">
           <div class="Job-meta">
-            <div class="Job-status _margin-bottom" v-if="getStatus(job)">
+            <div v-if="getStatus(job)" class="Job-status _margin-bottom">
               <span class="_tag">{{ getStatus(job) }}</span>
             </div>
             <div class="Job-posted _font-small">
               {{ job.fields['PostedDate'] | niceDate }}
             </div>
           </div>
-          <a class="Job-link" :href="job.fields['URL']">
+          <a :href="job.fields['URL']" class="Job-link">
             <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
           </a>
           <div>
             <div class="Job-org _font-bold" >{{ job.fields['Org'] }}</div>
-            <p class="Job-org" v-if="job.fields['Supervisor']">{{ job.fields['Supervisor'] }}</p>
+            <p v-if="job.fields['Supervisor']" class="Job-org">{{ job.fields['Supervisor'] }}</p>
           </div>
-          <div class="Job-description" 
-            v-html="$md.render(job.fields['Markdown'] || '')">    
-          </div>
+          <div class="Job-description" v-html="$md.render(job.fields['Markdown'] || '')" />
           <div class="Job-tags">
-            <span class="_tag" v-for="tag of job.fields['Tags']" :key="tag">{{ tag }}</span>
+            <span v-for="tag of job.fields['Tags']" :key="tag" class="_tag">{{ tag }}</span>
           </div>
           
         </div>
@@ -71,9 +69,11 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
 
-  async asyncData({app, env, route, store}) {
 
-    const slug = unescape(route.params.slug)
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, store}) {
+
+    // const slug = unescape(route.params.slug)
     return {
       intro: app.$cytosis.find('Content.jobs-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
@@ -84,14 +84,14 @@ export default {
     }
   },
 
-  mounted: async function () {
-  },
-
   computed: {
     ...mapState([
       'Content',
       'Jobs',
       ]),
+  },
+
+  mounted: async function () {
   },
 
   methods: {

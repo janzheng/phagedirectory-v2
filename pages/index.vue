@@ -1,25 +1,19 @@
 <template>
-
   <div class="Home">
 
-    <section class="Home-intro Home-container copy " v-html="$md.render(intro || '')">
-    </section>
-
+    <section class="Home-intro Home-container copy " v-html="$md.render(intro || '')" />
     <section class="">
       <CapsidBanner />
     </section>
-    
     <section class="Home-container copy _grid-3-1">
       <div>
         <FormCapsidFeedback class=""/>
       </div>
 
-      <div>
-        <div class="Home-media">
-          <no-ssr>
-            <Twitter />
-          </no-ssr>
-        </div>
+      <div class="Home-media">
+        <no-ssr>
+          <Twitter />
+        </no-ssr>
       </div>
     </section>
  
@@ -32,7 +26,7 @@
 <script>
 
 import Twitter from '~/components/Twitter.vue'
-import FormVomFeedback from '~/forms/FormVomFeedback.vue'
+// import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 import CapsidSignup from '~/components/CapsidSignup.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
@@ -53,7 +47,8 @@ export default {
   layout: 'contentframe',
   // middleware: 'pageload',
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, env, store}) {
     // console.log('asyncdata store: ', store.state.cytosis)
     // const cytosis = await store.dispatch('loadCytosis', {
     //   env,
@@ -73,14 +68,14 @@ export default {
     }
   },
   
-  mounted: function () {
-  },
-
   computed: {
     ...mapState([
       'Content',
       ]),
 
+  },
+
+  mounted: function () {
   },
 
   methods: {

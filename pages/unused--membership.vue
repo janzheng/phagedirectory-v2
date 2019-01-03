@@ -3,6 +3,8 @@
 
   <!-- 
 
+    NOT LIVE
+
     Notes
     - some of you have asked how to support us, 
     - patron / paypal?

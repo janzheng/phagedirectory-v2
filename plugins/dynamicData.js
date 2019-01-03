@@ -9,7 +9,7 @@
 */
 
 
-export default ({ app, env, store }, inject) => {
+// export default ({ app, env, store }, inject) => {
 
   // window.onNuxtReady(() => {
   // if(!process.server) {
@@ -34,5 +34,5 @@ export default ({ app, env, store }, inject) => {
     // }
   // }
   // })
-}
+// }
 

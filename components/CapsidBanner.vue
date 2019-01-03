@@ -29,7 +29,7 @@
           <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_a95319e0a6f57b754b11012a8_98ef5d6bca" tabindex="-1" value=""></div>
           <div class="mc-field-group">
             <input type="email" :placeholder="placeholder" name="EMAIL" class="required email _form-input _radius --phage  --width-full _margin-right-half" id="mce-EMAIL">
-            <input class=" _button --phage --outline _v-top _margin-bottom-none --width-full _margin-top-half" type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe">
+            <input class=" _button _font-bold --outline _v-top _margin-bottom-none --width-full _margin-top-half" type="submit" value="Get Capsid &amp; Tail" name="subscribe" id="mc-embedded-subscribe">
           </div>
         </div>
       </form>
