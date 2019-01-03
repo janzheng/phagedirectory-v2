@@ -1,7 +1,7 @@
 
 
 <template>
-  <div class="Policy _grid-1-auto-xs _align-vertically" v-if="!policy">
+  <div v-if="!policy" class="Policy _grid-1-auto-xs _align-vertically">
 
     <div class="">
       <!-- We use cookies for site analytics and customer service, but we don’t track your personal data.  -->
@@ -24,26 +24,12 @@
 
 
 import Vue from 'vue'
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
 
   data: function () {
     return {
-    }
-  },
-
-  mounted: function () {
-  },
-
-  methods: {
-    acceptPolicy: function() {
-      localStorage.setItem('pd-policy', this.$store.state.currentPolicy)
-      this.$store.commit('updatePolicy')
-      this.policy = this.$store.state.currentPolicy
-      
-      console.log('enable ga (policy.js)', Vue.$ga)
-      Vue.$ga.enable()
     }
   },
 
@@ -57,7 +43,21 @@ export default {
     // ...mapState([
     //   'policy',
     //   ]),
-  }
+  },
+  
+  mounted: function () {
+  },
+
+  methods: {
+    acceptPolicy: function() {
+      localStorage.setItem('pd-policy', this.$store.state.currentPolicy)
+      this.$store.commit('updatePolicy')
+      this.policy = this.$store.state.currentPolicy
+      
+      console.log('enable ga (policy.js)', Vue.$ga)
+      Vue.$ga.enable()
+    }
+  },
 
 }
 </script>

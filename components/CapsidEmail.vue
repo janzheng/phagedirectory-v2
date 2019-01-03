@@ -10,8 +10,7 @@
 
   <div class="Capsid Email">
 
-
-    <div  v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished" :key="issue.id" >
 
       <!-- 
         MailChimp will inline these
@@ -324,10 +323,8 @@
 
         <br/>
 
-        <div class="Email-card--silver Capsid-author"
-          v-html="issue.fields['Author']" v-if="issue.fields['Author']"
-        >
-        </div>
+        <div v-if="issue.fields['Author']" class="Email-card--silver Capsid-author"
+          v-html="issue.fields['Author']" />
 
       </div>
 
@@ -344,9 +341,9 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['issues', 'showPreview'],
-
-  components: {
+  props: {
+    'issues': Array,
+    'showPreview': Boolean,
   },
 
   data: function () {

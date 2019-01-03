@@ -10,15 +10,13 @@
  -->
 
   <div class="Form"> 
-    <div class="Form-intro " v-html="$md.render(intro)" v-if="intro">
-    </div>
+    <div class="Form-intro " v-html="$md.render(intro)" v-if="intro" />
 
     {{ output }}
 
     <div class="Form-body">
       <div class="" v-if="!success && !error">
-        <FormletSimple :inputs="getForm(source)" @handler="formHandler" ref="form"
-        ></FormletSimple>
+        <FormletSimple :inputs="getForm(source)" @handler="formHandler" ref="form" />
         <div class=" _grid-2-1 _align-vertically" >
           <div>
             <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)"></span>

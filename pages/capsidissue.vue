@@ -28,7 +28,6 @@
 import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
-
 import {loadNews} from '~/other/loaders'
 
 export default {
@@ -47,7 +46,6 @@ export default {
 
     // const staticData = await loadStatic(env, store, 'newspage')
     const newsData = await loadNews(env, store, 'capsid')
-
     console.log('newspage:', newsData)
 
     const slug = unescape(route.params.slug)

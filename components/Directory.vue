@@ -6,11 +6,11 @@
     <!-- Directory search: {{search}} / view: {{view}} -->
 
     <!-- <section class="Directory-intro narrow"> -->
-    <section class="Directory-intro narrow --left" v-if="!search">
+    <section v-if="!search" class="Directory-intro narrow --left" >
       <!-- <h1 class="Directory-name">Phage Directory</h1> -->
-      <h1 class="Directory-name">{{viewName}} Directory</h1>
-      <div class="Directory-desc block" v-html="$md.render(phagesText)" v-if="view == 'phages'"></div>
-      <div class="Directory-desc block" v-html="$md.render(labText)" v-if="view == 'labs'"></div>
+      <h1 class="Directory-name">{{ viewName }} Directory</h1>
+      <div v-if="view == 'phages'" class="Directory-desc block" v-html="$md.render(phagesText)" />
+      <div v-if="view == 'labs'" class="Directory-desc block" v-html="$md.render(labText)" />
       <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
       <!-- <h6 class="Directory-name">Phage Directory</h6> -->
       <!-- The following individuals and organizations work with phages of bacterial hosts of the phages.
@@ -25,46 +25,46 @@
       <div class="Directory-nav-container">
         <div class="Directory-nav _grid-auto-1">
           <div>
-            <router-link to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none" :class="{'--active': view == 'phages'}">Phage Hosts</router-link>
+            <router-link :class="{'--active': view == 'phages'}" to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none">Phage Hosts</router-link>
             <router-link to="/labs" class="Directory-btn _button Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
           </div>
-          <input ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" id="searchbar" placeholder="Search" />
+          <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" placeholder="Search" >
         </div>
       </div>
 
       <DirectoryView :search="search" :view="view" />
 
-<!-- 
-      <div class="DirectoryView phages" v-if="view == 'phages' ">
-        <h4 class="DirectoryView-title">{{ view }}</h4>
+      <!-- 
+          <div class="DirectoryView phages" v-if="view == 'phages' ">
+            <h4 class="DirectoryView-title">{{ view }}</h4>
 
-        <div class="DirectoryView-list">
-          <div class="DirectoryView-head phage">
-            <div class="DirectoryView-title">Escherichia coli</div>
-            <div class="DirectoryView-main-info">
-              Additional info here
-            </div>
-          </div>
+            <div class="DirectoryView-list">
+              <div class="DirectoryView-head phage">
+                <div class="DirectoryView-title">Escherichia coli</div>
+                <div class="DirectoryView-main-info">
+                  Additional info here
+                </div>
+              </div>
 
-          <div class="DirectoryView-body">
-            <div class="DirectoryView-items">
-              <div class="DirectoryView-item">
-                Org Name {
-                  Lab name / PI / # phages
-                } 
+              <div class="DirectoryView-body">
+                <div class="DirectoryView-items">
+                  <div class="DirectoryView-item">
+                    Org Name {
+                      Lab name / PI / # phages
+                    } 
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
- -->
- <!-- 
-      <div class="DirectoryView" v-if="view == 'labs' ">
-        <h2 class="Directory-view">{{ view }}</h2>
-        Directory search: {{search}} / view: {{view}}
-        LABS VIEW
-      </div>
- -->
+      -->
+      <!-- 
+          <div class="DirectoryView" v-if="view == 'labs' ">
+            <h2 class="Directory-view">{{ view }}</h2>
+            Directory search: {{search}} / view: {{view}}
+            LABS VIEW
+          </div>
+      -->
     </div>
 
 
@@ -89,14 +89,6 @@ export default {
       phagesText: this.$cytosis.find('Content.directory-phages', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       labText: this.$cytosis.find('Content.directory-labs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
-  },
-
-  mounted: async function () {
-    // console.log('mounted')
-    this.setFocus()
-  },
-  updated: async function () {
-    this.setFocus()
   },
 
   computed: {
@@ -138,6 +130,15 @@ export default {
         this.$store.dispatch('update', {searchString: str})
       }
     }
+  },
+
+  mounted: async function () {
+    // console.log('mounted')
+    this.setFocus()
+  },
+  
+  updated: async function () {
+    this.setFocus()
   },
 
 

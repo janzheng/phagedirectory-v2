@@ -1,17 +1,13 @@
 <template>
-  <section class="Head container">
-  </section>
+  <section class="Head container" />
 </template>
 
 
 <script>
 
-import {fetchCytosis} from '~/assets/helpers.js'
-
+// import {fetchCytosis} from '~/assets/helpers.js'
 
 export default {
-
-  props: [],
 
   components: {
   },

@@ -53,14 +53,14 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
+// import ContentFrame from '~/components/ContentFrame.vue'
 
 import { cytosis } from '~/assets/helpers.js'
 
 export default {
 
   components: {
-    ContentFrame
+    // ContentFrame
   },
 
   middleware: 'pageload',

@@ -4,24 +4,24 @@
   <div class="About">
     <section class="narrow copy _margin-center">
       <h1 class="About-title title">
-        {{aboutTitle}}
+        {{ aboutTitle }}
       </h1>
 
       <div class="Article _margin-center">
         <div class="About-bg">
-          <div class="" v-html="$md.render(aboutBg || '')"></div>
+          <div class="" v-html="$md.render(aboutBg || '')" />
         </div>
 
         <div class="About-us">
-          <div class="" v-html="$md.render(aboutUs || '')"></div>
+          <div class="" v-html="$md.render(aboutUs || '')" />
         </div>
 
         <div class="About-profile _card _padding">
-          <div class="" v-html="$md.render(jess || '')"></div>
+          <div class="" v-html="$md.render(jess || '')" />
         </div>
 
         <div class="About-profile _card _padding">
-          <div class="" v-html="$md.render(jan || '')"></div>
+          <div class="" v-html="$md.render(jan || '')" />
         </div>
       </div>
 
@@ -31,7 +31,7 @@
 
 <script>
 
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
   head () {
@@ -51,7 +51,8 @@ export default {
   fetch() {
   },
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, store}) {
     // const cytosis = store.state.cytosis.tables
     
     // if(!store.state.cytosis.tables)
@@ -66,18 +67,18 @@ export default {
     }
   },
 
-  computed: {
-    // ...mapState([
-    //   'cytosis',
-    //   // 'test'
-    //   ]),
-  },
-
   data: function () {
     // console.log('data:', this.$store.state)
     return {
       // content: this.$store.state.Content,
     }
+  },
+
+  computed: {
+    // ...mapState([
+    //   'cytosis',
+    //   // 'test'
+    //   ]),
   },
 
   mounted: function () {

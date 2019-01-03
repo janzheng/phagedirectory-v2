@@ -1,20 +1,18 @@
 <template>
   <div class="FormContact _card _padding">
 
-    <Form class=""
-          :intro="intro"
+    <Form :intro="intro"
           :source="source"
           :cta="cta"
           :thanks="thanks"
 
           :privacy="privacy"
           :errorMsg="error"
-          table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
-    >
-    </Form>
-
+          class=""
+          table="Dynamic"
+    />
   </div>
 </template>
 

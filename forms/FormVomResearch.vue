@@ -1,22 +1,18 @@
 <template>
   <div class="VomJoin Research">
-    <Form class=""
-          :intro="intro"
+    <Form :intro="intro"
           :source="source"
           :cta="cta"
           :thanks="thanks"
 
           :privacy="privacy"
           :errorMsg="error"
-          table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
           :json="true"
+          table="Dynamic"
           notes="FormVomResearch submission"
-    >
-    </Form>
-
-
+    />
   </div>
 </template>
 

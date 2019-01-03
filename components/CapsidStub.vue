@@ -10,40 +10,41 @@
   <div class="Capsid CapsidStub narrow copy _margin-center _margin-top-2">
 
     <!-- <div @click="openLink(`/capsid/${issue.fields.Slug}`)" class="CapsidStub-item _block _card _padding-2" :class="isFeatured ? '--featured' :''" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"> -->
-    <router-link :to="`/capsid/${issue.fields.Slug}`" class="CapsidStub-item _block _card _padding-2" :class="isFeatured ? '--featured' :''" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
+    <router-link v-for="issue of issues" 
+                 v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
+                 :key="issue.id"
+                 :to="`/capsid/${issue.fields.Slug}`"
+                 :class="isFeatured ? '--featured' :''"
+                 class="CapsidStub-item _block _card _padding-2">
       <h6 v-if="isFeatured" class="CapsidStub-latest">Latest Issue</h6>
 
       <div class="Capsid-header _grid-3-2">
         <div class="Capsid-title">{{ issue.fields['Name'] }}</div>
         <div class="Capsid-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
-      <h1 class="Capsid-title" v-html="issue.fields['Title']"></h1>
+      <h1 class="Capsid-title" v-html="issue.fields['Title']" />
       <!-- <h2 v-if="!isFeatured" class="Capsid-title" v-html="issue.fields['Title']"></h2> -->
-      <div class="Capsid-lede" v-html="issue.fields['Lede']"></div>
+      <div class="Capsid-lede" v-html="issue.fields['Lede']" />
       <!-- <div class="Capsid-description _margin-bottom _md-p_fix" v-if="issue.fields['Intro']" v-html="$md.render(issue.fields['Intro'] || '')"></div> -->
     </router-link>
-
   </div>
-
 </template>
-
 
 <script>
 
 import { mapState } from 'vuex'
 
 export default {
-  props: ['issues', 'showPreview', 'closed', 'isFeatured'],
-
-  components: {
+  props: {
+    'issues': Array,
+    'showPreview': String,
+    'closed': String,
+    'isFeatured': Boolean,
   },
 
   data: function () {
     return {
     }
-  },
-
-  mounted: async function () {
   },
 
   computed: {

@@ -6,7 +6,7 @@
         <!-- <router-link class="" to="/"> -->
         <router-link to="/" >
           <!-- <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/> -->
-          <img class="Footer-logo" src="~/static/phagedirectory_negative.png"/>
+          <img class="Footer-logo" src="~/static/phagedirectory_negative.png" >
           <!-- <span class="phagedirectory"><span>Phage</span> Directory, </span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
@@ -57,7 +57,6 @@ export default {
 
   components: {
   },
-  props: [],
 
   computed: {
     thisYear() {

@@ -1,22 +1,19 @@
 <template>
   <div class="VomJoin Industry">
-    <Form class=""
-          :intro="intro"
+    <Form :intro="intro"
           :source="source"
           :cta="cta"
           :thanks="thanks"
 
           :privacy="privacy"
           :errorMsg="error"
-          table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
           :json="true"
+          class=""
           notes="FormVomIndustry submission"
-    >
-    </Form>
-
-
+          table="Dynamic"
+    />
   </div>
 </template>
 

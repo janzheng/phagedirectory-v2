@@ -2,28 +2,25 @@
   <div class="FormCapsidFeedback _card _padding-2">
 
     <!-- <div v-html="$md.render(intro)"></div> -->
-    <Form class=""
-          :intro="intro"
+    <Form :intro="intro"
           :source="source"
           :cta="cta"
           :thanks="thanks"
 
           :privacy="privacy"
           :errorMsg="error"
-          table="Dynamic"
           :postUrl="postUrl"
           :alert="true"
           :notes="notes"
-    >
-    </Form>
-
+          class=""
+          table="Dynamic"
+    />
   </div>
 </template>
 
 <script>
 
 import Form from '~/components/Form.vue'
-
 import { mapState } from 'vuex'
 
 export default {

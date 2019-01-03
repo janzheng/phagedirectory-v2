@@ -7,9 +7,7 @@
 
 <template>
   <div>
-
-    <CapsidEmail :issues="issues" :showPreview="showPreview" />
-
+    <CapsidEmail :issues="issues" :show-preview="showPreview" />
   </div>
 </template>
 
@@ -17,9 +15,8 @@
 
 import Article from '~/components/Article.vue'
 import CapsidEmail from '~/components/CapsidEmail.vue'
-import { mapState } from 'vuex'
-
-import {loadStatic, loadNews} from '~/other/loaders'
+// import {loadStatic, loadNews} from '~/other/loaders'
+import {loadNews} from '~/other/loaders'
 
 export default {
 
@@ -32,10 +29,12 @@ export default {
   middleware: 'pageload',
 
   // these are dynamic, and aren't grabbed on generation
+  // async asyncData({app, env, route, store}) {
   async asyncData({app, env, route, store}) {
 
-    const staticData = await loadStatic(env, store, 'newspage')
+    // const staticData = await loadStatic(env, store, 'newspage')
     const newsData = await loadNews(env, store, 'newspage')
+    console.log('newspage:', newsData)
 
     const slug = unescape(route.params.slug)
     return {
@@ -50,9 +49,6 @@ export default {
   data: function () {
     return {
     }
-  },
-
-  mounted: async function () {
   },
 
   computed: {
@@ -78,10 +74,13 @@ export default {
         }
       }
 
-      // console.log('issue slug: ', result)
+      console.log('issue slug: ', result)
       return result // array of issues
     }
 
+  },
+
+  mounted: async function () {
   },
 
   methods: {

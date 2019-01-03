@@ -4,16 +4,15 @@
   <div class="Media">
     <section class="narrow copy _margin-center">
       <div class="Media-content">
-        <div class="" v-html="$md.render(media || '')"></div>
+        <div class="" v-html="$md.render(media || '')" />
       </div>
-
     </section>
   </div>
 </template>
 
 <script>
 
-import { mapState } from 'vuex'
+// import { mapState } from 'vuex'
 
 export default {
   head () {
@@ -33,7 +32,8 @@ export default {
   fetch() {
   },
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, store}) {
     // const cytosis = store.state.cytosis.tables
     
     // if(!store.state.cytosis.tables)
@@ -44,18 +44,18 @@ export default {
     }
   },
 
-  computed: {
-    // ...mapState([
-    //   'cytosis',
-    //   // 'test'
-    //   ]),
-  },
-
   data: function () {
     // console.log('data:', this.$store.state)
     return {
       // content: this.$store.state.Content,
     }
+  },
+
+  computed: {
+    // ...mapState([
+    //   'cytosis',
+    //   // 'test'
+    //   ]),
   },
 
   mounted: function () {

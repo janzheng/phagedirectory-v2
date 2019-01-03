@@ -1,56 +1,90 @@
 
 <template>
 
-  <div class="Formlet item--fields" v-if="inputs">
-    <div class="item--field" v-for="input in inputs" :class="input.required ? '--required' : '' " :key="input.name">
+  <div v-if="inputs" class="Formlet item--fields" >
+    <div v-for="input in inputs" :class="input.required ? '--required' : '' " :key="input.name" class="item--field" >
       <!-- <div>INPUT: {{ input }}</div> -->
-      <div class="_form-control" v-if="input.type==INPUT_TYPES.TEXT">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="text" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
+      <div v-if="input.type==INPUT_TYPES.TEXT" class="_form-control" >
+        <label :for="input.name" class="_form-label" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <input v-model.trim="fieldData[input.name]" 
+               :class="inputClasses" 
+               :name="input.name"
+               :id="input.name"
+               :placeholder="input.placeholder"
+               :required="input.required"
+               class="_form-input --width-full" type="text"
+               @input="delayValidation($v.fieldData[input.name])" >
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
       </div>
 
-      <div class="_form-control" v-if="input.type==INPUT_TYPES.EMAIL">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="email" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
+      <div v-if="input.type==INPUT_TYPES.EMAIL" class="_form-control" >
+        <label :for="input.name" class="_form-label" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <input v-model.trim="fieldData[input.name]"
+               :class="inputClasses"
+               :name="input.name"
+               :id="input.name"
+               :placeholder="input.placeholder"
+               :required="input.required"
+               class="_form-input --width-full" type="email"
+               @input="delayValidation($v.fieldData[input.name])">
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
       </div>
 
-      <div class="_form-control" v-if="input.type==INPUT_TYPES.NUMBER">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <input v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" class="_form-input --width-full" :class="inputClasses" type="number" :name="input.name" :id="input.name" :placeholder="input.placeholder" :required="input.required"/>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
+      <div v-if="input.type==INPUT_TYPES.NUMBER" class="_form-control" >
+        <label :for="input.name" class="_form-label" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <input v-model.trim="fieldData[input.name]"
+               :class="inputClasses"
+               :name="input.name"
+               :id="input.name"
+               :placeholder="input.placeholder"
+               :required="input.required"
+               class="_form-input --width-full" type="number" 
+               @input="delayValidation($v.fieldData[input.name])" >
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
       </div>
 
-      <div class="_form-control" v-if="input.type==INPUT_TYPES.TEXTAREA">
-        <label :for="input.name" class="_form-label" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <textarea v-model.trim="fieldData[input.name]" @input="delayValidation($v.fieldData[input.name])" rows="4" :id="input.name" class="_form-input" type="text" :name="input.name" :placeholder="input.placeholder" :required="input.required"></textarea>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
+      <div v-if="input.type==INPUT_TYPES.TEXTAREA" class="_form-control" >
+        <label :for="input.name" class="_form-label" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <textarea v-model.trim="fieldData[input.name]"
+                  :id="input.name"
+                  :name="input.name"
+                  :placeholder="input.placeholder"
+                  :required="input.required" 
+                  class="_form-input" type="text" rows="4"
+                  @input="delayValidation($v.fieldData[input.name])" />
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
       </div>
 
-      <div class="_form-control _form-radiogroup" v-if="input.type==INPUT_TYPES.RADIO">
-        <label class="_form-radiogroup-title" :for="input.name" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
-        <div class="_form-radio --inline" v-for="option in input.options" :key="option.value">
+      <div v-if="input.type==INPUT_TYPES.RADIO" class="_form-control _form-radiogroup" >
+        <label :for="input.name" class="_form-radiogroup-title" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
+        <div v-for="option in input.options" :key="option.value" class="_form-radio --inline" >
           <label :for="option.value" class="_form-radio-label"> 
-            <input v-model.trim="fieldData[input.name]" :value="option.value" type="radio" :id="option.value" :name="input.name" />
+            <input v-model.trim="fieldData[input.name]"
+                   :value="option.value"
+                   :id="option.value"
+                   :name="input.name" 
+                   type="radio" >
             <span :for="option.value">{{ option.label }}</span>
           </label>
         </div>
       </div>
 
-      <div class="_form-control" v-if="input.type==INPUT_TYPES.CHECKBOX">
-        <label class="_form-group-title" :for="input.name" v-html="markdown(input.label)"></label>
-        <label :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" v-if="markdown(input.description)"></label>
-        <label class="_error" v-if="isFieldInvalid(input)">{{ errorMessage(input) }}</label>
-        <div class="_form-checkbox --inline" v-for="option in input.options" :key="option.value">
+      <div v-if="input.type==INPUT_TYPES.CHECKBOX" class="_form-control" >
+        <label :for="input.name" class="_form-group-title" v-html="markdown(input.label)" />
+        <label v-if="markdown(input.description)" :for="input.name" class="_form-label _form-desc" v-html="markdown(input.description)" />
+        <label v-if="isFieldInvalid(input)" class="_error" >{{ errorMessage(input) }}</label>
+        <div v-for="option in input.options" :key="option.value" class="_form-checkbox --inline" >
           <label :for="option.value">
-            <input v-model.trim="fieldData[input.name+'.'+option.value]" :id="option.value" type="checkbox" :name="option.value" />
+            <input v-model.trim="fieldData[input.name+'.'+option.value]"
+                   :id="option.value"
+                   :name="option.value"
+                   type="checkbox" >
             <span :for="option.value">{{ option.label }}</span>
           </label>
         </div>
@@ -80,8 +114,11 @@ const touchMap = new WeakMap()
 
 export default {
 
-  props: ['inputs','inputClasses'],
   mixins: [validationMixin],
+  props: {
+    inputs: Array,
+    inputClasses: String
+  },
 
   data: function () {
     return {

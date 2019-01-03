@@ -24,7 +24,7 @@
 
 <script>
 
-import ContentFrame from '~/components/ContentFrame.vue'
+// import ContentFrame from '~/components/ContentFrame.vue'
 import Twitter from '~/components/Twitter.vue'
 import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 
@@ -39,7 +39,7 @@ import Cytosis from '~/other/cytosis'
 export default {
 
   components: {
-    ContentFrame,
+    // ContentFrame,
   },
 
   middleware: ['pageload'],

@@ -8,17 +8,17 @@
  -->
 <template>
 
-  <div class="DirectoryView _margin-top" :class="view" >
+  <div :class="view" class="DirectoryView _margin-top" >
     <!-- <div class="DirectoryView-contact">
       Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
     </div> -->
     <!-- DirectoryView view: {{view}} search: {{search}} -->
 
-    <div class="DirectoryView phages" v-if="view == 'phages' ">
+    <div v-if="view == 'phages' " class="DirectoryView phages" >
       <div class="DirectoryView-view">
         <div>
           <!-- <h3 >Phage Hosts<span class="DirectoryView-search" v-if="search">: <span>{{search}}</span></span></h3> -->
-          <h3 v-if="search">Host Search<span class="DirectoryView-search">: <span>{{search}}</span></span></h3>
+          <h3 v-if="search">Host Search<span class="DirectoryView-search">: <span>{{ search }}</span></span></h3>
         </div>
         <!-- <div class="DirectoryView-contact">
           Found an error? Please email <a href="mailto:staff@phage.directory">staff@phage.directory</a>
@@ -28,35 +28,35 @@
 
 
 
-      <div class="DirectoryView-items" v-for="genus of getGenus" :key="genus.fields.Name">
-        <div class="DirectoryView-item" v-for="host of getHosts(genus)" :key="host.fields.Name" v-if="filterHost(search, host)">
+      <div v-for="genus of getGenus" :key="genus.fields.Name" class="DirectoryView-items" >
+        <div v-for="host of getHosts(genus)" v-if="filterHost(search, host)" :key="host.fields.Name" class="DirectoryView-item" >
           <div class="DirectoryView-head phage-head">
             <div class="DirectoryView-title phage-name _OrganismName">{{ hostDisplayName(host) }}</div>
           </div>
           <div class="DirectoryView-body phage-body">
-            <div class="DirectoryView-subitem phage-lab" v-for="lab of getLabs(host)" :key="lab.fields.Name" v-if="lab.fields['isPublished']">
+            <div v-for="lab of getLabs(host)" v-if="lab.fields['isPublished']" :key="lab.fields.Name" class="DirectoryView-subitem phage-lab">
               <div class="DirectoryView-meta phage-lab-meta">
                 <div class="DirectoryView-meta-title phage-lab-org">{{ getLinkedOrgNames(lab) }}</div>
               </div>
               <div class="phage-lab-content">
                 <div class="phage-lab-header">
-                  <div class="DirectoryView-subtitle phage-lab-name" v-if="!lab.isPerson">{{ lab.fields.Name }}</div>
+                  <div v-if="!lab.isPerson" class="DirectoryView-subtitle phage-lab-name" >{{ lab.fields.Name }}</div>
                 </div>
                 <div class="phage-lab-body">
-                  <div class="DirectoryView-subcontent lab-person person-info" v-for="person of getPerson(lab)" :key="person.fields.Name" v-if="person.fields['isPublished']">
+                  <div v-for="person of getPerson(lab)" v-if="person.fields['isPublished']" :key="person.fields.Name" class="DirectoryView-subcontent lab-person person-info" >
                     <div class="person-name">{{ person.fields.Name }}</div>
                     <div class="person-miniprofile">
-                      <span class="_tag --light person-pi" v-if="person.fields.PI">PI</span>
-                      <span class="person-meta" v-if="person.fields.Role">{{person.fields.Role}}</span>
+                      <span v-if="person.fields.PI" class="_tag --light person-pi" >PI</span>
+                      <span v-if="person.fields.Role" class="person-meta" >{{ person.fields.Role }}</span>
                       <span class="person-social">
-                        <a :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" v-if="person.fields.Twitter">@{{person.fields.Twitter}}</a>
-                        <a :href="`${person.fields.GoogleScholar}`" target="_blank" class="person-gscholar" v-if="person.fields.GoogleScholar">GS</a>
-                        <a :href="`https://orcid.org/${person.fields.ORCID}`" target="_blank" class="person-orcid" v-if="person.fields.ORCID">ORCID</a>
-                        <a :href="`${person.fields.ResearchGate}`" target="_blank" class="person-rgate" v-if="person.fields.ResearchGate">RG</a>
+                        <a v-if="person.fields.Twitter" :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" >@{{ person.fields.Twitter }}</a>
+                        <a v-if="person.fields.GoogleScholar" :href="`${person.fields.GoogleScholar}`" target="_blank" class="person-gscholar" >GS</a>
+                        <a v-if="person.fields.ORCID" :href="`https://orcid.org/${person.fields.ORCID}`" target="_blank" class="person-orcid" >ORCID</a>
+                        <a v-if="person.fields.ResearchGate" :href="`${person.fields.ResearchGate}`" target="_blank" class="person-rgate" >RG</a>
                       </span>
                     </div>
-                    <div class="person-phages" v-if="person.fields.Phages">
-                      <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields && phage.fields['isPublished']" >{{phage.fields['Name']}}</span>
+                    <div v-if="person.fields.Phages" class="person-phages" >
+                      <span v-for="phage of getHostPersonPhages(host, person)" v-if="phage.fields && phage.fields['isPublished']" :key="phage.id" class="person-phagename _tag --light" >{{ phage.fields['Name'] }}</span>
                     </div>
                   </div>
                 </div>
@@ -68,43 +68,43 @@
     </div>
 
 
-    <div class="DirectoryView labs" v-if="view == 'labs' ">
+    <div v-if="view == 'labs' " class="DirectoryView labs" >
       <div class="DirectoryView-view">
-        <h3 v-if="search">Lab Search<span class="DirectoryView-search">: <span>{{search}}</span></span></h3>
+        <h3 v-if="search">Lab Search<span class="DirectoryView-search">: <span>{{ search }}</span></span></h3>
       </div>
 
       <div class="DirectoryView-items" >
 
-        <div class="DirectoryView-item" v-for="org of getOrgs" :key="org.fields.Name" v-if="filterOrg(search, org) && org.fields['isPublished']">
+        <div v-for="org of getOrgs" v-if="filterOrg(search, org) && org.fields['isPublished']" :key="org.fields.Name" class="DirectoryView-item" >
           <div class="DirectoryView-head lab-org">
-            <div class="DirectoryView-title lab-orgname">{{org.fields.Name}}</div>
-            <div class="DirectoryView-title-desc lab-longname" v-if="org.fields.LongName">{{org.fields.LongName}}</div>
-            <div class="DirectoryView-info">{{org.fields.Markdown}}</div>
+            <div class="DirectoryView-title lab-orgname">{{ org.fields.Name }}</div>
+            <div v-if="org.fields.LongName" class="DirectoryView-title-desc lab-longname" >{{ org.fields.LongName }}</div>
+            <div class="DirectoryView-info">{{ org.fields.Markdown }}</div>
           </div>
           <div class="DirectoryView-body lab-body">
-            <div class="DirectoryView-subitem" v-for="lab of getLabs(org)" :key="lab.fields.Name" v-if="lab.fields.isPublished">
+            <div v-for="lab of getLabs(org)" v-if="lab.fields.isPublished" :key="lab.fields.Name" class="DirectoryView-subitem">
               <div class="DirectoryView-subtitle lab-name">{{ lab.fields.Name }}</div>
               <div class="DirectoryView-subcontent lab-people">
-                <div class="DirectoryView-subcontent lab-person " v-for="person of getPerson(org)" :key="person.fields.Name" v-if="person.fields['isPublished']">
+                <div v-for="person of getPerson(org)" v-if="person.fields['isPublished']" :key="person.fields.Name" class="DirectoryView-subcontent lab-person ">
                   <div class="person-info">
                     <div class="person-name">{{ person.fields.Name }}</div>
                     <div>
-                      <span class="_tag --light person-pi" v-if="person.fields.PI">PI</span>
-                      <span class="person-meta" v-if="person.fields.Role">{{person.fields.Role}}</span>
+                      <span v-if="person.fields.PI" class="_tag --light person-pi" >PI</span>
+                      <span v-if="person.fields.Role" class="person-meta" >{{ person.fields.Role }}</span>
                       <span class="person-social">
-                        <a :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" v-if="person.fields.Twitter">@{{person.fields.Twitter}}</a>
-                        <a :href="`${person.fields.GoogleScholar}`" target="_blank" class="person-gscholar" v-if="person.fields.GoogleScholar">GS</a>
-                        <a :href="`https://orcid.org/${person.fields.ORCID}`" target="_blank" class="person-orcid" v-if="person.fields.ORCID">ORCID</a>
-                        <a :href="`${person.fields.ResearchGate}`" target="_blank" class="person-rgate" v-if="person.fields.ResearchGate">RG</a>
+                        <a v-if="person.fields.Twitter" :href="`https://twitter.com/${person.fields.Twitter}`" target="_blank" class="person-twitter" >@{{ person.fields.Twitter }}</a>
+                        <a v-if="person.fields.GoogleScholar" :href="`${person.fields.GoogleScholar}`" target="_blank" class="person-gscholar" >GS</a>
+                        <a v-if="person.fields.ORCID" :href="`https://orcid.org/${person.fields.ORCID}`" target="_blank" class="person-orcid" >ORCID</a>
+                        <a v-if="person.fields.ResearchGate" :href="`${person.fields.ResearchGate}`" target="_blank" class="person-rgate" >RG</a>
                       </span>
                     </div>
                   </div>
                   <div class="person-phagehosts">
-                    <div class="DirectoryView-subcontent-item person-hosts " v-for="host of getHosts(person)" :key="host.fields.Name">
+                    <div v-for="host of getHosts(person)" :key="host.fields.Name" class="DirectoryView-subcontent-item person-hosts ">
                       <div class="_OrganismName">{{ hostDisplayName(host) }}</div>
 
-                      <div class="person-phages" v-if="person.fields.Phages">
-                        <span class="person-phagename _tag --light" v-for="phage of getHostPersonPhages(host, person)" :key="phage.id" v-if="phage.fields && phage.fields['isPublished']">{{phage.fields['Name']}}</span>
+                      <div v-if="person.fields.Phages" class="person-phages" >
+                        <span v-for="phage of getHostPersonPhages(host, person)" v-if="phage.fields && phage.fields['isPublished']" :key="phage.id" class="person-phagename _tag --light" >{{ phage.fields['Name'] }}</span>
                       </div>
                     </div>
                   </div>
@@ -139,18 +139,15 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: ['search','view'],
-
-  components: {
+  props: {
+    'search': String,
+    'view': String,
   },
 
   data: function () {
     return {
       ... this.$store.state.cytosis.tables,
     }
-  },
-
-  mounted: async function () {
   },
 
   computed: {
@@ -191,7 +188,7 @@ export default {
         if(p.fields.Labs)
           labArr = [...labArr, ...p.fields.Labs]
         else {
-          p['isPerson'] = true;
+          p['isPerson'] = true
           // console.log('isPerson:', p)
           ppl.push(p)
         }

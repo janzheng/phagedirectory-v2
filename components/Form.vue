@@ -1,36 +1,33 @@
 <template>
 
-<!-- 
+  <!-- 
 
-  JSON mode means JSON-ONLY!! all content will be saved into the JSON column
-  - normally form data is saved into Airtable columns. Sometimes there's a mismatch, and airtable won't save correctly
-  - this also means that your forms will quietly drop user form data
-  - with JSON-mode, all data is purely saved into the JSON column, meaning you'll get all your data, but it'll be fugly 
+    JSON mode means JSON-ONLY!! all content will be saved into the JSON column
+    - normally form data is saved into Airtable columns. Sometimes there's a mismatch, and airtable won't save correctly
+    - this also means that your forms will quietly drop user form data
+    - with JSON-mode, all data is purely saved into the JSON column, meaning you'll get all your data, but it'll be fugly 
 
- -->
+   -->
 
   <div class="Form"> 
-    <div class="Form-intro " v-html="$md.render(intro)" v-if="intro">
-    </div>
-
+    <div v-if="intro" class="Form-intro " v-html="$md.render(intro)" />
     <div class="Form-body">
-      <div class="" v-if="!success && !error">
-        <Formlet :inputs="getForm(source)" @handler="formHandler" ref="form"
-        ></Formlet>
+      <div v-if="!success && !error">
+        <Formlet ref="form" :inputs="getForm(source)" @handler="formHandler" />
         <div class=" _grid-2-1 _align-vertically" >
           <div>
-            <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)"></span>
+            <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)" />
           </div>
-          <button class="Form-btn _button _margin-none _center" @click="submit" v-if="!sending">{{cta}}</button>
-          <button class="Form-btn _button --outline _margin-none _center" v-if="sending">Sending...</button>
+          <button v-if="!sending" class="Form-btn _button _margin-none _center" @click="submit" >{{ cta }}</button>
+          <button v-if="sending" class="Form-btn _button --outline _margin-none _center" >Sending...</button>
         </div>
       </div>
 
-      <div class="" v-if="success" v-html="$md.render(thanks)">
+      <div v-if="success" class="" v-html="$md.render(thanks)">
         <h4>Thank you for sending us feedback!</h4>
       </div>
 
-      <div class="" v-if="error" v-html="$md.render(errorMsg)">
+      <div v-if="error" class="" v-html="$md.render(errorMsg)">
         Something went wrong, please try again
       </div>
     </div>
@@ -52,7 +49,20 @@ export default {
   // source is the form's json source
   // set :json='true' to dump the payload into a table named JSON, to prevent throwing errors
   // alert: sends us an email alert (this is through the server)
-  props: ['intro', 'source', 'privacy', 'cta', 'thanks', 'errorMsg', 'payload', 'table', 'json', 'postUrl', 'alert', 'notes'],
+  props: {
+    'intro': String,
+    'source': String,
+    'privacy': String,
+    'cta': String,
+    'thanks': String,
+    'errorMsg': String,
+    'payload': String,
+    'table': String,
+    'json': String,
+    'postUrl': String,
+    'alert': Boolean,
+    'notes': String,
+  },
 
   data: function () {
     return {
@@ -69,7 +79,6 @@ export default {
 
   computed: {
   },
-
 
   methods: {
 
@@ -109,17 +118,17 @@ export default {
         // console.log('Submitting test data: ', data)
         axios.post(this.postUrl, data)
         .then(function (response) {
-          console.log('Message sent! Status:', response.status);
+          console.log('Message sent! Status:', response.status)
           // if(status.status == 200) {
             _this.success = true
             _this.sending = false
           // }
         })
         .catch(function (error) {
-          console.log('error', error);
+          console.log('error', error)
           _this.error = error
           _this.sending = false
-        });
+        })
       }
     }
   }

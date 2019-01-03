@@ -1,15 +1,15 @@
 <template>
-  <div class="ContentFrame container" id="top" >
+  <div id="top" class="ContentFrame container" >
     <Header/>
-<!-- 
-    <div class="_margin-bottom" v-if="searchString">
-      <Directory />
-    </div>
+    <!-- 
+      <div class="_margin-bottom" v-if="searchString">
+        <Directory />
+      </div>
 
-    <div class="_margin-bottom" v-if="!searchString">
-      <nuxt/>
-    </div>
- -->
+      <div class="_margin-bottom" v-if="!searchString">
+        <nuxt/>
+      </div>
+     -->
     <div class="_width-content-max _margin-center _margin-bottom" >
       <nuxt/>
     </div>
@@ -21,7 +21,7 @@
           <CapsidSignup class="_height-100"/>
         </div>
         <div class="AlertSignup-container">
-          <AlertSignup class="_height-100" :description="true" />
+          <AlertSignup :description="true" class="_height-100" />
         </div>
         <!-- <div class="RequestSignup-container">
           <RequestSignup class="_height-100" :description="true" />
@@ -43,6 +43,8 @@
 
 
 <script>
+
+import _ from 'lodash'
 
 import { mapState } from 'vuex'
 import VueScrollTo from 'vue-scrollto'
@@ -87,6 +89,70 @@ export default {
     }
   },
 
+
+  computed: {
+    ...mapState([
+      'searchString'
+      ]),
+
+    initDrift() {
+      // console.log('[Checking drift...]')
+      // drift for drift@phage.directory
+      if(this.$store.state.policy && !this.$store.state.drift && !process.server) {
+        console.log('[Starting drift...]')
+        this.$store.dispatch('updateCreate', {drift: true})
+        !function() {
+          var t = window.driftt = window.drift = window.driftt || []
+          if (!t.init) {
+            if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."))
+            t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+            t.factory = function(e) {
+              return function() {
+                var n = Array.prototype.slice.call(arguments)
+                return n.unshift(e), t.push(n), t
+              }
+            }, t.methods.forEach(function(e) {
+              t[e] = t.factory(e)
+            }), t.load = function(t) {
+              var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script")
+              o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js"
+              var i = document.getElementsByTagName("script")[0]
+              i.parentNode.insertBefore(o, i)
+            }
+          }
+          t.SNIPPET_VERSION = '0.3.1'
+          t.load('ks35ggadwzyw')
+        }()
+      }
+      return undefined
+    }
+  },
+
+  watch: {
+    // '$route' (to, from) {
+    // '$route' (to) {
+    '$route' () {
+      // react to route changes...
+      // console.log('ROUTE OBJECT', to, from)
+      const _this = this
+      let scrolled = false
+      this.$nextTick(function () {
+        if(_this.$route.hash && !scrolled) {
+          // console.log('-- hash scroll')
+        } 
+        if(_this.$route.hash) {
+          const scroll = _.throttle(function () {
+            VueScrollTo.scrollTo(_this.$route.hash, 500, {
+             offset: -20
+           })
+          }, 300)
+          scroll()
+        }
+        scrolled = true
+      })
+    }
+  },
+
   beforeUpdate () {
     const route = this.$router.options.routes.find((route) => {
       return route.path === this.$route.path
@@ -102,10 +168,10 @@ export default {
     let scrolled = false
     this.$nextTick(function () {
       if(_this.$route.hash && !scrolled) {
-        console.log('-- hash scroll')
+        // console.log('-- hash scroll')
       } 
       if(_this.$route.hash) {
-        const scroll = _.throttle(function (e) {
+        const scroll = _.throttle(function () {
           VueScrollTo.scrollTo(_this.$route.hash, 500, {
            offset: -20
          })
@@ -117,41 +183,27 @@ export default {
   
   },
 
-  watch: {
-    '$route' (to, from) {
-      // react to route changes...
-      // console.log('ROUTE OBJECT', to, from)
-      const _this = this
-      let scrolled = false
-      this.$nextTick(function () {
-        if(_this.$route.hash && !scrolled) {
-          // console.log('-- hash scroll')
-        } 
-        if(_this.$route.hash) {
-          const scroll = _.throttle(function (e) {
-            VueScrollTo.scrollTo(_this.$route.hash, 500, {
-             offset: -20
-           })
-          }, 300)
-          scroll()
-        }
-        scrolled = true
-      })
-    }
-  },
-
-
   // link intercept idea from: https://github.com/nuxt/nuxtjs.org/blob/master/components/HtmlParser.vue
   
+  created () {
+    if(process.browser)
+      window.addEventListener('scroll', this.handleScroll)
+  },
+
+  destroyed () {
+    if(process.browser)
+      window.removeEventListener('scroll', this.handleScroll)
+  },
+
   methods: {
     // handleScroll: _.throttle(function (e) {
     //   // console.log(e)
     //   this.scrollY = window.scrollY
     // }, 200),
-    handleScroll(e) {
+    handleScroll() {
       if(process.browser) {
         const _this = this
-        _.throttle(function (e) {
+        _.throttle(function () {
           _this.scrollY = window.scrollY
         }, 200)()
       }
@@ -179,54 +231,6 @@ export default {
     //   }
     // }
   },
-
-  computed: {
-    ...mapState([
-      'searchString'
-      ]),
-
-    initDrift() {
-      // console.log('[Checking drift...]')
-      // drift for drift@phage.directory
-      if(this.$store.state.policy && !this.$store.state.drift && !process.server) {
-        console.log('[Starting drift...]')
-        this.$store.dispatch('updateCreate', {drift: true}
-          )
-        !function() {
-          var t = window.driftt = window.drift = window.driftt || [];
-          if (!t.init) {
-            if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-            t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
-            t.factory = function(e) {
-              return function() {
-                var n = Array.prototype.slice.call(arguments);
-                return n.unshift(e), t.push(n), t;
-              };
-            }, t.methods.forEach(function(e) {
-              t[e] = t.factory(e);
-            }), t.load = function(t) {
-              var e = 3e5, n = Math.ceil(new Date() / e) * e, o = document.createElement("script");
-              o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + n + "/" + t + ".js";
-              var i = document.getElementsByTagName("script")[0];
-              i.parentNode.insertBefore(o, i);
-            };
-          }
-        }();
-        drift.SNIPPET_VERSION = '0.3.1';
-        drift.load('ks35ggadwzyw');
-      }
-      return undefined
-    }
-  },
-
-  created () {
-    if(process.browser)
-      window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed () {
-    if(process.browser)
-      window.removeEventListener('scroll', this.handleScroll);
-  }
 }
 
 
