@@ -6,19 +6,23 @@
  -->
 
 <template>
-  <div>
-    <section class="Periodical narrow copy _margin-center _padding-top-2">
+  <div class="CapsidIssue Section-Page">
 
-      <div class="News-intro _margin-bottom _flex _flex-bottom">
+    <div class="Section-Content _margin-center">
+      <div class="_flex _flex-bottom">
         <router-link to="/capsid" class="" v-html="$md.render(title || '')" />
         <div class="" v-html="$md.render(intro || '')" />    
       </div>
-
-    </section>
+    </div>
     
-    <CapsidBanner class="_margin-center" />
-    <Capsid :issues="issues" :show-preview="showPreview" />
-    <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')" />
+    <div class="Section-Content _margin-center">
+      <CapsidBanner class="_margin-center" />
+      <Capsid :issues="issues" :show-preview="showPreview" />
+    </div>
+
+    <div class="Section-Content _margin-center">
+      <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')" />
+    </div>
 
   </div>
 </template>

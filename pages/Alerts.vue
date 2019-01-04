@@ -1,14 +1,17 @@
 <template>
 
-  <section class="Alerts Section-Page _margin-center">
+  <div class="Alerts Section-Page _margin-center">
 
     <div class="Section-Content _margin-center">
       <div class="_padding-bottom" v-html="$md.render(intro)" />
-      <SignupAlert class="Article _margin-center --banner _margin-top _margin-bottom" />
+    </div>
+
+    <div class="Section-Content _margin-center">
+      <SignupAlert class="Section-Article _margin-center" />
     </div>
 
     <div class="Alerts-container Section-Content _margin-center">
-      <div v-for="alert of Alerts" v-if="alert.fields.isPublished" :key="alert.fields.Name" :class="alert.fields.Status" class="Alerts-item Section-Article _margin-center _card _padding" >
+      <div v-for="alert of Alerts" v-if="alert.fields.isPublished" :key="alert.fields.Name" :class="alert.fields.Status" class="Alerts-item Section-Article _margin-center _card _padding-2" >
         <div class="Alerts-status" >
           <div class="_grid-auto-1-xs _align-vertically">
             <span :class="alert.fields.Status" class="Alerts-status-tag" >{{ alert.fields.Status }}</span>
@@ -25,8 +28,7 @@
       </div>
     </div>
 
-
-  </section>
+  </div>
 
 </template>
 

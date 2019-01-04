@@ -25,7 +25,7 @@
       </div>
 
       <!-- Desktop menu -->
-      <div class="Header-left _hidden-xs _padding-right-2">
+      <div class="Header-left _hidden-xs">
         <div class="_flex _left-xs _align-vertically _margin-bottom">
           <router-link to="/" class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"></router-link>
           <div class="Header-inset">

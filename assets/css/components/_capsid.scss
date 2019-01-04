@@ -439,3 +439,18 @@
   }
 
 
+
+
+// mailchimp signup banner for capsid
+.CapsidBanner {
+  background-color: $color-teal-50;
+  border-radius: $radius;
+  padding: $size;
+  // margin-bottom: $size;
+
+  input[type='email'] {
+    &:focus, &:hover {
+      background-color: $color-bg;
+    }
+  }
+}

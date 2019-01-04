@@ -8,11 +8,11 @@
 
 <template>
   <div>
-    <section class="Jobs narrow copy _margin-center _padding-top-2">
+    <div class="Jobs Section-Page _margin-center ">
 
-      <div class="Jobs-intro _margin-bottom-2" v-html="$md.render(intro)" />
+      <div class="Jobs-intro Section-Content _margin-center" v-html="$md.render(intro)" />
 
-      <div class="Article _margin-center Jobs-container">
+      <div class="Section-Article _margin-center Jobs-container">
         <div v-for="job of Jobs" v-if="showJob(job)" :key="job.id"
              :class="getStatus(job)"
              class="Jobs-item _card _margin-bottom-2 _padding-2">
@@ -28,8 +28,8 @@
             <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
           </a>
           <div>
-            <div class="Job-org _font-bold" >{{ job.fields['Org'] }}</div>
-            <p v-if="job.fields['Supervisor']" class="Job-org">{{ job.fields['Supervisor'] }}</p>
+            <div class="Job-org _font-bold _padding-bottom" >{{ job.fields['Org'] }}</div>
+            <p v-if="job.fields['Supervisor']" class="Job-supervisor">{{ job.fields['Supervisor'] }}</p>
           </div>
           <div class="Job-description" v-html="$md.render(job.fields['Markdown'] || '')" />
           <div class="Job-tags">
@@ -39,8 +39,7 @@
         </div>
       </div>    
 
-
-    </section>
+    </div>
 
   </div>
 </template>

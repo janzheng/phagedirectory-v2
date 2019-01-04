@@ -1,7 +1,7 @@
 
 <template>
 
-  <section class="Capsid narrow copy _margin-center _padding-top-2">
+  <div class="Capsid Section-Article _margin-center">
     
     <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
          :key="issue.id" 
@@ -114,7 +114,7 @@
 
     </div>
 
-  </section>
+  </div>
 
 </template>
 

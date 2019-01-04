@@ -1,12 +1,13 @@
 
 <template>
 
-  <section class="Directory" >
+  <!-- this component acts like its own page -->
+  <div class="Directory Section-Page _margin-center" >
     <!-- src: {{ searchSource }} / {{ search }} -->
     <!-- Directory search: {{search}} / view: {{view}} -->
 
     <!-- <section class="Directory-intro narrow"> -->
-    <section v-if="!search" class="Directory-intro narrow --left" >
+    <div v-if="!search" class="Directory-intro Section-Content" >
       <!-- <h1 class="Directory-name">Phage Directory</h1> -->
       <h1 class="Directory-name">{{ viewName }} Directory</h1>
       <div v-if="view == 'phages'" class="Directory-desc block" v-html="$md.render(phagesText)" />
@@ -18,7 +19,7 @@
       Their emails are hidden for privacy reasons. If you need to contact them, please email your request [staff@phage.directory](staff@phage.directory) or tweet us and the researcher of interest.
 
       Join the fight, [join the list](/join). -->
-    </section>
+    </div>
     <!-- </section> -->
 
     <div class="Directory-list">
@@ -67,8 +68,7 @@
       -->
     </div>
 
-
-  </section>
+  </div>
 
 </template>
 

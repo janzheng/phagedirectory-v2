@@ -6,8 +6,8 @@
  -->
 
 <template>
-  <div>
-    <section class="Capsid narrow copy _margin-center ">
+  <div class="Capsid Section-Page _margin-center">
+    <div class="Capsid Section-Content _margin-center ">
 
       <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
         <div class="" v-html="$md.render(title)" />
@@ -17,9 +17,8 @@
       <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)" />
       <CapsidBanner class="_margin-center" />
 
-    </section>
+    </div>
     
-
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
     <CapsidStub :issues="latest" :is-featured="true" />
     <CapsidStub :issues="notLatest" class="_padding-bottom-2" />

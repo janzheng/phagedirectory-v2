@@ -8,7 +8,7 @@
  -->
 <template>
 
-  <div class="Mailchimp Capsid CapsidBanner _grid-3-2 _align-vertically _width-content-paragraph">
+  <div class="CapsidBanner _grid-3-2 _align-vertically">
 
     <div class="" v-html="$md.render(banner || '')" />
 
