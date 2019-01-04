@@ -1,5 +1,5 @@
 <template>
-  <div class="FormCapsidFeedback _card _padding-2">
+  <div class="FormCapsidFeedback FormCard">
 
     <!-- <div v-html="$md.render(intro)"></div> -->
     <Form :intro="intro"

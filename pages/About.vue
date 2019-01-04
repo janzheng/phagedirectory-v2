@@ -1,13 +1,14 @@
 <template>
 
-  <!-- <ContentFrame class="About"> -->
-  <div class="About">
-    <section class="narrow copy _margin-center">
-      <h1 class="About-title title">
-        {{ aboutTitle }}
-      </h1>
+  <div class="About Section-Page _margin-center">
 
-      <div class="Article _margin-center">
+    <div class="Section-Content _margin-center">
+
+      <div class="Section-Article _margin-center">
+        <h1 class="About-title Section-Article">
+          {{ aboutTitle }}
+        </h1>
+
         <div class="About-bg">
           <div class="" v-html="$md.render(aboutBg || '')" />
         </div>
@@ -25,7 +26,7 @@
         </div>
       </div>
 
-    </section>
+    </div>
   </div>
 </template>
 

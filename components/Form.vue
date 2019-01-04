@@ -14,7 +14,7 @@
     <div class="Form-body">
       <div v-if="!success && !error">
         <Formlet ref="form" :inputs="getForm(source)" @handler="formHandler" />
-        <div class=" _grid-2-1 _align-vertically" >
+        <div class=" _grid-3-2 _align-vertically" >
           <div>
             <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)" />
           </div>

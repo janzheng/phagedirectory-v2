@@ -18,7 +18,7 @@
 
       <div class="Signup-content _flex-row _flex-wrap">
         <label for="tlemail">Email Address</label>
-        <input id="tlemail" name="email" type="text" 
+        <input id="tlemail" name="email" type="email" 
                class="Signup-input _flex-1 _form-input --width-full _margin-none"
                placeholder="Your email" required>
         <input type="hidden" value="1" name="embed" >
@@ -36,10 +36,9 @@
 
 export default {
   props: {
-    'classes': String,
-    'description': String,
+    'classes': String
   },
-  
+
   data: function () {
     return {
       intro: this.$cytosis.find('Content.alertssignup-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],

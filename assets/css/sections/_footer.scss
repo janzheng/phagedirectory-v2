@@ -1,0 +1,36 @@
+
+.Footer {
+  background-color: $color-secondary;
+  color: $color-bg;
+
+  @include screen-xs {
+    margin-bottom: $size-8;
+    // to make room for driftt
+  }
+
+  span {
+    white-space: nowrap;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-bg;
+    border: 0;
+    &:hover {
+      color: $color-phdir;
+    }
+  }
+  .nuxt-link-exact-active, 
+  .nuxt-link-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+  .Footer-right,
+  .Footer-top {
+    margin-right: $size-8;
+  }
+  .Footer-logo {
+    max-width: 180px; 
+  }
+
+}

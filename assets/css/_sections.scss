@@ -3,30 +3,10 @@
 
 @import '/sections/alerts';
 @import '/sections/jobs';
+@import '/sections/header';
+@import '/sections/footer';
 
-
-
-
-// can't believe these actually work
-// .😍 {
-//   background-color: pink !important;
-// }
-// .♥ {
-//   background-color: green;
-// }
-
-// article wraps all the content
-article,
-.container {
-  background-color: $color-bg;
-  position: relative;
-
-  // @include screen-xs {
-  //   padding-left: $size-base;
-  //   padding-right: $size-base;
-  // }
-}
-
+// Section is used to break up content vertically
 section {
   // padding-left: $size-2;
   // padding-right: $size-2;
@@ -37,8 +17,58 @@ section {
   padding-top: $size-3;
   padding-bottom: $size-3;
 }
+  section.narrow {
+    // @extend ._width-content-magic;
+    @extend ._width-content-paragraph;
+    // @include screen-xs {
+    //   padding-left: 0;
+    //   padding-right: 0;
+    // }
+    &.--left {
+      margin-left: 0;
+      padding-left: 0;
+    }
+  }
 
-section.copy {
+// Creates margins for the page 
+.Section-Page {
+  @extend ._width-content-max;
+}
+
+// Creates margins for content within a page
+.Section-Content {
+  @extend %width-content-paragraph;
+  margin-top: $size-3;
+  margin-bottom: $size-3;
+}
+
+
+// Creates margins for articles within content of a page
+// for readable articles, readable content-width
+// refer to sidebar.io's format
+// note: don't use <article> tag as it's a formatting tag
+// some of these are specified in markdown, so the markup should be very simple
+$article-width: 59ch;
+.Section-Article {
+  // used for pages outside of just Capsid!! including Classroom Initiative
+  @include screen-sm {
+    max-width: $article-width;
+    // margin-left: auto;
+    // margin-right: auto;
+  }
+}
+
+
+
+
+/* 
+
+  Semantic Sections
+
+ */
+
+// Sections w/ copy
+.Copy {
   a {
     text-decoration: underline;
     text-decoration-color: $color-links;
@@ -48,27 +78,17 @@ section.copy {
   }
 }
 
-section.narrow {
-  // @extend ._width-content-magic;
-  @extend ._width-content-paragraph;
-  // @include screen-xs {
-  //   padding-left: 0;
-  //   padding-right: 0;
-  // }
-  &.--left {
-    margin-left: 0;
-    padding-left: 0;
-  }
-}
-section.max {
-  @extend %width-content-max;
-}
 
-article.narrow {
-  @extend ._width-content-magic;
-  margin-left: 0;
-  padding-left: 0;
-}
+
+
+
+
+
+/* 
+
+  Other semantic sections
+
+ */
 
 // narrow, text-friendly widths
 // this doesn't have the padding constraints
@@ -76,11 +96,19 @@ article.narrow {
   max-width: $width-magic;
 }
 
+// article.narrow {
+//   @extend ._width-content-magic;
+//   margin-left: 0;
+//   padding-left: 0;
+// }
+
+
 // block of contextually separate content
 .block {
   margin-top: $size-base;
   margin-bottom: $size-2;
 }
+
 
 
 blockquote {
@@ -101,75 +129,13 @@ blockquote {
 
 
 
-.Header {
-
-  .Header-content {
-    @include screen-sm {
-      // @include gridAutoCols(2);
-    }
-  }
-
-  a {
-    @include screen-sm {
-      font-size: $font-large;
-    }
-    // font-size: $size-larger;
-    text-decoration: none;
-  }
-  .nuxt-link-exact-active {
-    @extend %links-bg;
-    @extend %font-bold;
-  }
-  .Header-orgs.nuxt-link-active {
-    @extend %links-bg;
-    @extend %font-bold;
-  }
-  .Header-search {
-    border: $border-thin solid $color-ui-light;
-    border-radius: $radius;
-    @extend %ease;
-    &:hover {
-      border-color: $color-tertiary;
-    }
-    &:focus {
-      border: $border-thin solid $color-tertiary;
-      padding: $size-half $size-base;
-      @extend %ease;
-    }
-  }
-  .Header-join {
-    background-color: $color-tertiary;
-    color: $color-bg;
-    // color: $color-black;
-    font-weight: bold;
-    &:hover {
-      // border-color: $color-tertiary;
-      border-color: $color-main;
-      background-color: $color-main;
-    }
-
-    @include screen-xs {
-      padding-right: $size-half;
-      padding-left: $size-half;
-    }
-  }
-
-  .Header-inset {
-    background-color: $color-silver-light;
-    margin-left: $size;
-    margin-right: $size;
-    border-radius: $radius;
-    padding-top: $size-half;
-    padding-bottom: $size-half;
-  }
-}
 
 
 // for alerts and mailchimp
 // custom breakpoint
 .Signup-container {
-  padding-top: $size-2;
-  padding-bottom: $size-2;
+  // padding-top: $size-2;
+  // padding-bottom: $size-2;
   background-color: $color-silver-light;
 
   .Signup-content {
@@ -186,42 +152,6 @@ blockquote {
     //   }
     // }
   }
-}
-
-.Footer {
-  background-color: $color-secondary;
-  color: $color-bg;
-
-  @include screen-xs {
-    margin-bottom: $size-8;
-    // to make room for driftt
-  }
-
-  span {
-    white-space: nowrap;
-  }
-
-  a {
-    text-decoration: none;
-    color: $color-bg;
-    border: 0;
-    &:hover {
-      color: $color-phdir;
-    }
-  }
-  .nuxt-link-exact-active, 
-  .nuxt-link-active {
-    @extend %links-bg;
-    @extend %font-bold;
-  }
-  .Footer-right,
-  .Footer-top {
-    margin-right: $size-8;
-  }
-  .Footer-logo {
-    max-width: 180px; 
-  }
-
 }
 
 

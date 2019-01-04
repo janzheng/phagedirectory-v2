@@ -41,22 +41,6 @@
 
 
 
-$article-width: 59ch;
-
-// for article sharing and rendering
-// refer to sidebar.io's format
-// note: don't use <article> tag as it's a formatting tag
-// some of these are specified in markdown, so the markup should be very simple
-
-.Article {
-  // used for pages outside of just Capsid!! including Classroom Initiative
-  @include screen-sm {
-    max-width: $article-width;
-    // margin-left: auto;
-    // margin-right: auto;
-  }
-}
-
 .CapsidBanner {
   // used to sign up for Capsid all over the site 
   // two versions: one wide (over articles) and one narrow (in footer);
@@ -328,6 +312,11 @@ $article-width: 59ch;
     // @extend .Capsid-card;
     padding: $size;
     background-color: $color-ui-lighter;
+  }
+  .Capsid-update-item {
+    padding: $size;
+    background-color: $color-purewhite;
+    margin-bottom: $size-half;
   }
   .Capsid-community {
     // @extend .Capsid-card;

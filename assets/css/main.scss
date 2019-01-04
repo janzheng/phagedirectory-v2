@@ -66,17 +66,17 @@ h3 {
 
 
 
-.title {
-  padding-bottom: $size-3;
-}
+// .title {
+//   padding-bottom: $size-3;
+// }
 
-.subtitle {
-  &, p {
-    font-size: $size-1;
-    line-height: $size-2;
-    @extend %font-serif;
-  }
-}
+// .subtitle {
+//   &, p {
+//     font-size: $size-1;
+//     line-height: $size-2;
+//     @extend %font-serif;
+//   }
+// }
 
 
 
@@ -124,6 +124,7 @@ p, ul, li, {
 
 
 
+@import 'layout';
 @import 'components';
 @import 'sections';
 

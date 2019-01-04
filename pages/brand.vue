@@ -1,9 +1,9 @@
 <template>
 
   <!-- <ContentFrame class="About"> -->
-  <div class="Media">
-    <section class="narrow copy _margin-center">
-      <div class="Media-content">
+  <div class="Brand Section-Page">
+    <section class="Section-Content _margin-center">
+      <div class="Section-Article">
         <div class="" v-html="$md.render(media || '')" />
       </div>
     </section>

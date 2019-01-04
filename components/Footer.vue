@@ -1,14 +1,12 @@
 <template>
-  <div class="Footer container --antialiased">
-    <section class="_grid-1-2 _align-vertically _padding-top _padding-bottom  _width-content-max _margin-center">
+  <div class="Footer --antialiased">
+    <section class="Content _grid-1-2 _padding-left _padding-right _margin-center">
 
       <div class="Footer-left _center-xs">
-        <!-- <router-link class="" to="/"> -->
         <router-link to="/" >
           <!-- <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/> -->
           <img class="Footer-logo" src="~/static/phagedirectory_negative.png" >
           <!-- <span class="phagedirectory"><span>Phage</span> Directory, </span> -->
-          <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
         </router-link>
         <!-- </router-link> -->
@@ -16,8 +14,7 @@
 
       <!-- margin-right is for avoiding the drift box -->
       <div class="Footer-right _center-xs">
-        <div class="_margin-bottom-half _right-sm _center-xs">
-          <!-- <span class="_margin-right "><router-link to="/mission">Our Mission</router-link></span> -->
+        <div class="_margin-bottom _right-sm _center-xs">
           <span class="_margin-right "><router-link to="/about">About</router-link></span>
           <span class="_margin-right "><router-link to="/contact">Contact</router-link></span>
           <span class="_margin-right "><router-link to="/classroom">Classroom</router-link></span>
@@ -27,22 +24,11 @@
 
         <div class="_right-sm _center-xs">
           <span class="_margin-right _block-xs _margin-bottom-half-xs">
-            <!-- <i class="fa far fa-envelope _margin-right-half"></i> -->
             <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
           </span>
           <span class=" _block-xs ">
-            <!-- <i class="fa far fa-twitter _margin-right-half"></i> -->
             <a target="_blank" href="https://twitter.com/phagedirectory">@phagedirectory</a>
           </span>
-          <!-- <span class="_margin-right-half _hidden-xs">
-            <a target="_blank" href="https://twitter.com/phagedirectory"><i class="fa fa-fw far fa-twitter"></i></a>
-          </span>
-          <span class="_hidden-xs">
-            <a target="_blank" href="https://www.facebook.com/phagedirectory"><i class="fa fa-fw far fa-facebook"></i></a>
-          </span> -->
-          <!-- <span>
-            <router-link to="/design#forms">design</router-link>
-          </span> -->
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 
 <template>
-  <section class="Header _padding-top _padding-bottom --antialiased _width-content-max _margin-center">
+  <header class="Header Section-Page _padding-top _padding-bottom _width-content-max _margin-center">
     <div class="Header-content">
 
       <!-- Mobile Menu -->
@@ -49,7 +49,7 @@
         <router-link to="/join" class="Header-join _button --short _margin-none">Join</router-link>
       </div> -->
     </div>
-  </section>
+  </header>
 </template>
 
 

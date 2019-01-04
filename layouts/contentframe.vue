@@ -1,31 +1,25 @@
 <template>
-  <div id="top" class="ContentFrame container" >
+  <div id="top" class="ContentFrame Layout" >
     <Header/>
-    <!-- 
-      <div class="_margin-bottom" v-if="searchString">
-        <Directory />
-      </div>
-
-      <div class="_margin-bottom" v-if="!searchString">
-        <nuxt/>
-      </div>
-     -->
-    <div class="_width-content-max _margin-center _margin-bottom" >
+    
+    <div class="" >
       <nuxt/>
     </div>
 
     <div class="Signup-container _margin-center ">
       <!-- <div class=" _grid-3 _width-content-max _margin-center"> -->
-      <div class=" _grid-2 _width-content-max _margin-center">
-        <div class="Mailchimp-container">
-          <CapsidSignup class="_height-100"/>
+      <div class="Section-Page _margin-center _padding-2">
+        <div class="_grid-2">
+          <div class="SignupCapsid-container">
+            <SignupCapsid class="_height-100"/>
+          </div>
+          <div class="SignupAlert-container">
+            <SignupAlert class="_height-100" />
+          </div>
+          <!-- <div class="SignupRequest-container">
+            <SignupRequest class="_height-100" :description="true" />
+          </div> -->
         </div>
-        <div class="AlertSignup-container">
-          <AlertSignup :description="true" class="_height-100" />
-        </div>
-        <!-- <div class="RequestSignup-container">
-          <RequestSignup class="_height-100" :description="true" />
-        </div> -->
       </div>
     </div>
 
@@ -54,9 +48,9 @@ import Footer from '~/components/Footer.vue'
 import Policy from '~/components/Policy.vue'
 import Directory from '~/components/Directory.vue'
 
-import AlertSignup from '~/components/AlertSignup.vue'
-import RequestSignup from '~/components/RequestSignup.vue'
-import CapsidSignup from '~/components/CapsidSignup.vue'
+import SignupAlert from '~/components/SignupAlert.vue'
+// import SignupRequest from '~/components/SignupRequest.vue'
+import SignupCapsid from '~/components/SignupCapsid.vue'
 
 
 export default {
@@ -65,9 +59,9 @@ export default {
     Header,
     Footer,
     Policy,
-    AlertSignup,
-    RequestSignup,
-    CapsidSignup,
+    SignupAlert,
+    // SignupRequest,
+    SignupCapsid,
     Directory,
   },
 
@@ -232,9 +226,6 @@ export default {
     // }
   },
 }
-
-
-
 
 </script>
 

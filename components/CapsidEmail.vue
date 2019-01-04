@@ -67,9 +67,22 @@
         .Capsid-sponsor {
           padding: 16px;
         }
+
+        .Capsid-item {
+          margin-bottom: 8px !important;
+        }
+        .Capsid-item:last-child {
+          margin-bottom: 4px !important;
+        }
+
         .Capsid-updates {
           padding: 16px;
           background-color: #FCFCFC;
+        }
+        .Capsid-update-item {
+          padding: 16px;
+          background-color: #FFFFFF;
+          margin-bottom: 16px;
         }
         .Capsid-community {
           padding: 16px;
@@ -91,23 +104,19 @@
           background-color: rgba(113, 239, 245, 0.1);
         }
           .Capsid-jobs-item {
-            padding: 16px !important;
-            background-color: #F5FDFF; // NEED TO ADD THIS
+            padding: 16px;
             margin-bottom: 8px !important;
+            background-color: #F5FDFF;
           }
-            .Capsid-jobs-item:last-child {
-              margin-bottom: 16px !important;
-            }
           .Capsid-jobs-itemheader {
             font-size: 14px !important;
           }
-          .Capsid-jobs-itemheader span + span:before {
-            content: ' — ';
+          .Capsid-jobs-itemheader span + span {
+            padding-left: 16px !important;
           }
         .Email-card--silver {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
-          /*background-color: #FCFCFC;*/
           border-radius: 4px;
           padding: 30px;
           margin-bottom: 16px;
@@ -124,7 +133,8 @@
           outline: none!important;
           padding: 1px 8px;
           text-decoration: none;
-          margin-bottom: 16px;
+          margin-bottom: 8px !important;
+          margin-right: 4px !important;
         }
 
         .--sponsor {
@@ -134,7 +144,7 @@
         .line {
           padding: 0;
           line-height: 0 !important;
-          margin-bottom: 16px !important;
+          margin-bottom: 32px !important;
         }
 
         .Capsid-date {
@@ -199,10 +209,10 @@
 
       <div v-if="getSponsors(issue).length>0" class="Capsid-sponsor Email-card" >
         <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
-        <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-sponsor-item" >
+        <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-item Capsid-sponsor-item" >
           <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')" />
           <div v-if="sponsor.fields['Tags']" class="_margin-top-half" >
-            <span class="Email-tag _tag --sponsor">Sponsor</span>
+            <span class="Email-tag --sponsor">Sponsor</span>
           </div>
         </div>
       </div>
@@ -215,7 +225,7 @@
           <h3 class="line">
             <span style="color:#fa5486">&mdash;</span>
           </h3>
-          <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-update-item _margin-bottom" >
+          <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-item Capsid-update-item _margin-bottom" >
             <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
             <div v-if="update.fields['Tags']" class="_margin-top-half" >
               <span v-for="tag of update.fields.Tags" :key="tag" ><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
@@ -237,7 +247,7 @@
           <h3 class="line">
             <span style="color:#fa5486">&mdash;</span>
           </h3>
-          <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item _margin-bottom" >
+          <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-item Capsid-community-item _margin-bottom" >
             <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader">
               <span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ request.fields['Category'] }}</b></span><span v-if="request.fields['Date']" class="_md-p_fix _font-small">{{ request.fields['Date'] }}</span>
             </div>
@@ -263,12 +273,12 @@
           <h3 class="line">
             <span style="color:#fa5486">&mdash;</span>
           </h3>
-          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item " >
+          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-item Capsid-jobs-item " >
             <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
             </div>
             <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
             <div v-if="job.fields['Tags']" class="_margin-top-half" >
-              <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+              <span v-for="tag of job.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
         </div>

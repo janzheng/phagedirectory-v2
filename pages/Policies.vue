@@ -1,13 +1,11 @@
 <template>
 
-  <div class="Policies container">
-    <!-- header -->
-    <div class="_grid-1-5">
+  <div class="Policies Section-Page _margin-center">
+    <div class="Section-Content _margin-center">
       <div />
-      <article class="narrow" v-html="$md.render(intro || '')" />
+      <div class="narrow" v-html="$md.render(intro || '')" />
     </div>
 
-    <!-- body -->
     <div class="_grid-1-5 _grid-gap-large">
 
       <div class="SideNav _sidebar">
@@ -19,9 +17,9 @@
         </div>
       </div>
 
-      <article class="Policies-content narrow">
+      <div class="Policies-content narrow">
         <div class="" v-html="$md.render(policies || '')" />
-      </article>
+      </div>
     </div>
 
   </div>

@@ -1,0 +1,7 @@
+
+
+// cards in forms, as quick questions (e.g. contact page)
+.FormCard {
+	@extend ._card;
+	padding: $size-2;
+}

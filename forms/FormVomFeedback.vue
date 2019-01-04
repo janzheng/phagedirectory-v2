@@ -1,5 +1,5 @@
 <template>
-  <div class="VomFeedback _card _padding-2">
+  <div class="VomFeedback FormCard">
 
     <!-- <div v-html="$md.render(intro)"></div> -->
     <Form :intro="intro"

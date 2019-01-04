@@ -1,7 +1,15 @@
 <template>
-  <section class="Contact container narrow copy _margin-center">
-    <FormContact />
-  </section>
+  
+  <div class="Contact Section-Page _margin-center">
+    <div class="Section-Content _margin-center">
+      <div class="Section-Article" v-html="$md.render(content || '')" />
+    </div>
+    <div class="Section-Content _margin-center">
+      <div class="Section-Article">
+        <FormContact />
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -24,21 +32,13 @@ export default {
   layout: 'contentframe',
   middleware: 'pageload',
   
-  // async asyncData({ app, store, env, params }) {
-  //   return {
-  //   }
-  // },
-
-  // data: function () {
-  //   return {
-  //   }
-  // },
-
-  // created: function () {
-  // },
-
-  // methods: {
-  // }
+  // async asyncData({app, env, route, store}) {
+  async asyncData({app, store}) {
+    // const cytosis = store.state.cytosis
+    return {
+      content: app.$cytosis.find('Content.about-contact', store.state.cytosis.tables)[0]['fields']['Markdown'],
+    }
+  },
 
 }
 </script>

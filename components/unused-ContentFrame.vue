@@ -18,8 +18,8 @@
       <slot></slot>
     </div>
 
-    <div class="AlertSignup-container">
-      <AlertSignup classes="footer" :description="true" />
+    <div class="SignupAlert-container">
+      <SignupAlert classes="footer" :description="true" />
     </div>
 
     <no-ssr>
@@ -45,7 +45,7 @@ import Footer from '~/components/Footer.vue'
 import Policy from '~/components/Policy.vue'
 import Directory from '~/components/Directory.vue'
 
-import AlertSignup from '~/components/AlertSignup.vue'
+import SignupAlert from '~/components/SignupAlert.vue'
 
 export default {
 
@@ -55,7 +55,7 @@ export default {
     Header,
     Footer,
     Policy,
-    AlertSignup,
+    SignupAlert,
     Directory
   },
 

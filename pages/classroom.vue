@@ -1,10 +1,9 @@
 <template>
 
-  <div class="Classroom">
-    <section class="narrow copy _margin-center">
-      
+  <div class="Classroom Section-Page _margin-center">
+    <div class="Section-Content _margin-center">
 
-      <div class="Classroom-title title _flex-row _flex-vertically">
+      <div class="Section-Article _margin-center _flex-row _flex-vertically">
         <div>
           <img class="_flex-auto _v-bottom _margin-right _padding-bottom" src="/classroom.png" title="Phage Directory Classroom" width="55">
         </div>
@@ -14,12 +13,13 @@
         </div>
       </div>
 
-      <div class="Article _margin-center">
+      <div class="Section-Article _margin-center">
         <div class="Classroom-bg">
           <div class="" v-html="$md.render(classroomBg || '')" />
         </div>
 
-        <div id="pledge" class="Classroom-form _card --tertiary-10 _padding-2" >
+
+        <div id="pledge" class="Classroom-form FormCard --tertiary-10" >
           <div class="" v-html="$md.render(classroomForm || '')" />
           <form id="mc-embedded-subscribe-form"
                 action="https://directory.us19.list-manage.com/subscribe/post?u=a95319e0a6f57b754b11012a8&amp;id=f7c4e1695f"
@@ -36,12 +36,12 @@
               <div class="mc-field-group ">
                 <div class="_form-control">
                   <label for="mce-NAME" class="_form-label _font-bold">Name </label>
-                  <input id="mce-NAME" type="text" value="" name="NAME" class="_width-full _block required email _form-input _radius --phage  --width-full _margin-right-half" >
+                  <input id="mce-NAME" placeholder="Your name" type="text" value="" name="NAME" class="_width-full _block required email _form-input _radius --phage  --width-full _margin-right-half" >
                 </div>
 
                 <div class="_form-control">
                   <label for="ex1-name" class="_form-label _font-bold">Email</label>
-                  <input id="mce-EMAIL" :placeholder="placeholder" type="email" name="EMAIL" class="_width-full _block required email _form-input _radius --phage  --width-full _margin-right-half" >
+                  <input id="mce-EMAIL" placeholder="Your email" type="email" name="EMAIL" class="_width-full _block required email _form-input _radius --phage  --width-full _margin-right-half" >
                 </div>
 
                 <div class="">
@@ -52,9 +52,12 @@
           </form>
           <div class="_margin-top" v-html="$md.render(classroomPostForm || '')" />
         </div>
+
+
+
       </div>
 
-    </section>
+    </div>
   </div>
 </template>
 

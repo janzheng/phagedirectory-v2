@@ -1,16 +1,18 @@
 <template>
   <div class="Home">
 
-    <section class="Home-intro Home-container copy " v-html="$md.render(intro || '')" />
+    <section class="" v-html="$md.render(intro || '')" />
+
     <section class="">
       <CapsidBanner />
     </section>
-    <section class="Home-container copy _grid-3-1">
+
+    <section class="_grid-3-1">
       <div>
         <FormCapsidFeedback class=""/>
       </div>
 
-      <div class="Home-media">
+      <div class="">
         <no-ssr>
           <Twitter />
         </no-ssr>
@@ -28,7 +30,7 @@
 import Twitter from '~/components/Twitter.vue'
 // import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
-import CapsidSignup from '~/components/CapsidSignup.vue'
+import SignupCapsid from '~/components/SignupCapsid.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 
 import { mapState } from 'vuex'
@@ -40,7 +42,7 @@ export default {
     Twitter,
     // FormVomFeedback,
     FormCapsidFeedback,
-    CapsidSignup,
+    SignupCapsid,
     CapsidBanner,
   },
 

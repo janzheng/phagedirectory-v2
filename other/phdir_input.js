@@ -1,6 +1,6 @@
 /*
 
-  Webtask module
+  Webtask module — just a sample here
 
   This writes phage directory content to the airtable base PhDir Input
   Eventually it'll be moved to firebase or prisma, but it's easy for now

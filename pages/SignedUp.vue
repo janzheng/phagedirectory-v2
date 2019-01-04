@@ -6,9 +6,10 @@
  -->
 <template>
 
-  <section class="SignedUp container narrow copy _margin-center">
+  <section class="SignedUp Copy">
     <div v-html="$md.render(signedup || '')" />
   </section>
+
 </template>
 
 <script>

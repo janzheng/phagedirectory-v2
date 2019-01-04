@@ -1,5 +1,5 @@
 <template>
-  <div class="FormContact _card _padding">
+  <div class="FormContact FormCard">
 
     <Form :intro="intro"
           :source="source"

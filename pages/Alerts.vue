@@ -1,14 +1,14 @@
 <template>
 
-  <section class="Alerts narrow copy _margin-center _padding-top-2">
+  <section class="Alerts Section-Page _margin-center">
 
-    <div class=" Alerts-intro _margin-bottom-2 ">
+    <div class="Section-Content _margin-center">
       <div class="_padding-bottom" v-html="$md.render(intro)" />
-      <AlertSignup class="Article _margin-center --banner _margin-top _margin-bottom" />
+      <SignupAlert class="Article _margin-center --banner _margin-top _margin-bottom" />
     </div>
 
-    <div class="Article Alerts-list _margin-center">
-      <div v-for="alert of Alerts" v-if="alert.fields.isPublished" :key="alert.fields.Name" :class="alert.fields.Status" class="Alerts-item _card _padding" >
+    <div class="Alerts-container Section-Content _margin-center">
+      <div v-for="alert of Alerts" v-if="alert.fields.isPublished" :key="alert.fields.Name" :class="alert.fields.Status" class="Alerts-item Section-Article _margin-center _card _padding" >
         <div class="Alerts-status" >
           <div class="_grid-auto-1-xs _align-vertically">
             <span :class="alert.fields.Status" class="Alerts-status-tag" >{{ alert.fields.Status }}</span>
@@ -21,7 +21,7 @@
             {{ tag }}
           </span>
         </div>
-        <div class="Alerts-content" v-html="$md.render(alert.fields.Markdown || '')" />
+        <div class="Alerts-content " v-html="$md.render(alert.fields.Markdown || '')" />
       </div>
     </div>
 
@@ -32,7 +32,7 @@
 
 <script>
 
-import AlertSignup from '~/components/AlertSignup.vue'
+import SignupAlert from '~/components/SignupAlert.vue'
 import { mapState } from 'vuex'
 
 export default {
@@ -45,7 +45,7 @@ export default {
   },
 
   components: {
-    AlertSignup
+    SignupAlert
   },
   
   layout: 'contentframe',

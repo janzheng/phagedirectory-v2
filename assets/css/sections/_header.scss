@@ -1,0 +1,63 @@
+
+.Header {
+
+  .Header-content {
+    @include screen-sm {
+      // @include gridAutoCols(2);
+    }
+  }
+
+  a {
+    @include screen-sm {
+      font-size: $font-large;
+    }
+    // font-size: $size-larger;
+    text-decoration: none;
+  }
+  .nuxt-link-exact-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+  .Header-orgs.nuxt-link-active {
+    @extend %links-bg;
+    @extend %font-bold;
+  }
+  .Header-search {
+    border: $border-thin solid $color-ui-light;
+    border-radius: $radius;
+    @extend %ease;
+    &:hover {
+      border-color: $color-tertiary;
+    }
+    &:focus {
+      border: $border-thin solid $color-tertiary;
+      padding: $size-half $size-base;
+      @extend %ease;
+    }
+  }
+  .Header-join {
+    background-color: $color-tertiary;
+    color: $color-bg;
+    // color: $color-black;
+    font-weight: bold;
+    &:hover {
+      // border-color: $color-tertiary;
+      border-color: $color-main;
+      background-color: $color-main;
+    }
+
+    @include screen-xs {
+      padding-right: $size-half;
+      padding-left: $size-half;
+    }
+  }
+
+  .Header-inset {
+    background-color: $color-silver-light;
+    margin-left: $size;
+    margin-right: $size;
+    border-radius: $radius;
+    padding-top: $size-half;
+    padding-bottom: $size-half;
+  }
+}
