@@ -22,7 +22,7 @@
 
 
         <div class="Design-content">
-          <div id="typography" class="Design-Typography _content">
+          <div id="typography" class="Design-Typography ">
             <h6>typography</h6>
 
             <h1 class="">h1. Headline</h1>
@@ -34,7 +34,7 @@
           </div>
 
 
-          <div id="forms" class="Design-Forms _content">
+          <div id="forms" class="Design-Forms">
             <h6>forms</h6>
 
             <h1 class="">h1. Headline</h1>

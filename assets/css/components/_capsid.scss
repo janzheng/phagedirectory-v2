@@ -80,13 +80,12 @@
     line-height: $l4;
   }
 
-  &.narrow {
-    @include screen-xs {
-      padding-left: 0;
-      padding-right: 0;
-    }
-  }
-
+  // &.narrow {
+  //   @include screen-xs {
+  //     padding-left: 0;
+  //     padding-right: 0;
+  //   }
+  // }
 
   blockquote {
     padding-left: $size;
@@ -117,17 +116,6 @@
 
   img {
     max-width: 100%;
-  }
-}
-
-.Advert {
-  @extend ._card;
-  margin-bottom: $size;
-  padding: $size;
-
-  &.--tertiary {
-    background-color: $color-tertiary-50 !important;
-    // color: $color-white;
   }
 }
 
@@ -167,7 +155,6 @@
 
   margin-top: $size-base;
   margin-bottom: $size-4;
-
 
   // border: $border-thin solid $color-tertiary;
   border-radius: $radius;
@@ -230,9 +217,9 @@
   }
   .Capsid-item-author {
     margin-top: -$size-half;
-    padding-bottom: $size;
-    // opacity: 0.5;
     color: $color-ui-dark;
+    // padding-bottom: $size;
+    // opacity: 0.5;
   }
   .Capsid-item-lede {
     padding-bottom: $size;
@@ -272,174 +259,171 @@
   }
 }
   
-  .Capsid-callout {
-    padding: $size;
-    background-color: $color-ui-lighter;
-    border-radius: $radius;
+.Capsid-callout {
+  padding: $size;
+  background-color: $color-ui-lighter;
+  border-radius: $radius;
+  margin-bottom: $size-2;
+}
+
+.Capsid-sponsor {
+  @extend .Capsid-card;
+  background-color: $color-silver-lighter;
+  margin-bottom: $size-2; // add distance
+}
+
+.Capsid-new {
+  @extend ._card;
+  border: 0;
+}
+  .Capsid-new-title {
+    display: inline-block;
+    &:after {
+      content: ' ';
+      display: block;
+      width: 45px;
+      padding-top: $size-half;
+      border-bottom: $border-thin $color-pink solid;
+    }
+  }
+  .Capsid-new-item {
     margin-bottom: $size-2;
-  }
-    
-
-  .Capsid-sponsor {
-    @extend .Capsid-card;
-    background-color: $color-silver-lighter;
-    margin-bottom: $size-2; // add distance
-  }
-
-  .Capsid-new {
-    @extend ._card;
-    border: 0;
-  }
-    .Capsid-new-title {
-      display: inline-block;
-      &:after {
-        content: ' ';
-        display: block;
-        width: 45px;
-        padding-top: $size-half;
-        border-bottom: $border-thin $color-pink solid;
-      }
+    &:last-child {
+      margin-bottom: $size;
     }
-    .Capsid-new-item {
-      margin-bottom: $size-2;
-      &:last-child {
-        margin-bottom: $size;
-      }
-    }
-
-
-  .Capsid-updates {
-    // @extend .Capsid-card;
-    padding: $size;
-    background-color: $color-ui-lighter;
   }
-  .Capsid-update-item {
+
+
+.Capsid-updates {
+  // @extend .Capsid-card;
+  padding: $size;
+  background-color: $color-ui-lighter;
+}
+.Capsid-update-item {
+  padding: $size;
+  background-color: $color-purewhite;
+  margin-bottom: $size-half;
+}
+
+.Capsid-community {
+  // @extend .Capsid-card;
+  padding: $size;
+  background-color: $color-tertiary-05;
+}
+  .Capsid-community-cta {
+    padding-top: $size--1;
+  }
+  .Capsid-community-item {
     padding: $size;
     background-color: $color-purewhite;
     margin-bottom: $size-half;
   }
-  .Capsid-community {
-    // @extend .Capsid-card;
-    padding: $size;
-    background-color: $color-tertiary-05;
+  .Capsid-community-itemheader {
+    span + span {
+      padding-left: $size-half;
+    }
   }
-    .Capsid-community-cta {
-      padding-top: $size--1;
-    }
-    .Capsid-community-item {
-      padding: $size;
-      background-color: $color-purewhite;
-      margin-bottom: $size-half;
-    }
-    .Capsid-community-itemheader {
-      span + span {
-        padding-left: $size-half;
-      }
-    }
 
-    .Capsid-jobs {
-      // @extend .Capsid-card;
-      padding: $size;
-      background-color: $color-teal-10;
+.Capsid-jobs {
+  // @extend .Capsid-card;
+  padding: $size;
+  background-color: $color-teal-10;
+}
+  .Capsid-jobs-item {
+    padding: $size;
+    background-color: #F5FDFF; // NEED TO ADD THIS
+    margin-bottom: $size-half;
+    &:last-child {
+      margin-bottom: $size;
     }
-      .Capsid-jobs-item {
-        padding: $size;
-        background-color: #F5FDFF; // NEED TO ADD THIS
-        margin-bottom: $size-half;
-        &:last-child {
-          margin-bottom: $size;
-        }
+  }
+  .Capsid-jobs-itemheader {
+    span + span {
+      &:before {
+        content: ' — ';
       }
-      .Capsid-jobs-itemheader {
-        span + span {
-          &:before {
-            content: ' — ';
-          }
-        }
-      }
-
-
-  // used to display short headlines on Capsid & Tail
-  .CapsidStub {
-    
-    .CapsidStub-latest {
-      padding-bottom: 0;
     }
-    
-    // don't highlight / underline some parts
-    .CapsidStub-item {
-      &,* {
-        text-decoration: none;
-      }
-      h1 {
-        font-size: 34px;
-        line-height: 42px;
-      }
-      h1, h2 {
-        text-decoration: underline;
-        text-decoration-color: $color-links;
-      }
-      &.--featured {
-        border-color: $color-tertiary;
-      }
-      // emulate a link, but handled in js
-      // since might contain nested links
-      border: $border-thin solid $color-bg;
+  }
+
+// used to display short headlines on Capsid & Tail
+.CapsidStub {
+  
+  .CapsidStub-latest {
+    padding-bottom: 0;
+  }
+  
+  // don't highlight / underline some parts
+  .CapsidStub-item {
+    &,* {
+      text-decoration: none;
+    }
+    h1 {
+      font-size: 34px;
+      line-height: 42px;
+    }
+    h1, h2 {
+      text-decoration: underline;
+      text-decoration-color: $color-links;
+    }
+    &.--featured {
+      border-color: $color-tertiary;
+    }
+    // emulate a link, but handled in js
+    // since might contain nested links
+    border: $border-thin solid $color-bg;
+    @extend %ease;
+    cursor: pointer;
+    &:hover {
       @extend %ease;
-      cursor: pointer;
-      &:hover {
+      border: $border-thin solid $color-tertiary;
+      h2 {
+        color: $color-tertiary;
         @extend %ease;
-        border: $border-thin solid $color-tertiary;
-        h2 {
-          color: $color-tertiary;
-          @extend %ease;
-        }
-      };
-    }
-  }
-
-  .Capsid-author {
-    margin-top: $size;
-    // @extend .Capsid-card;
-    padding: $size;
-    background-color: $color-ui-lighter;
-    border-radius: $radius;
-    @extend .Capsid-card;
-
-    img {
-      max-width: 80px;
-    }
-  }
-
-  .Capsid-share {
-    // @extend .Capsid-card;
-    margin-top: $size-2;
-    margin-bottom: $size-2;
-    img {
-      width: auto;
-    }
-  }
-
-    .Capsid-twitter {
-      img {
-        vertical-align: middle;
-        margin-right: $size/4;
       }
-      margin-top: $size;
-    }
+    };
+  }
+}
 
+.Capsid-author {
+  @extend .Capsid-card;
+  margin-top: $size;
+  margin-bottom: 0;
+  padding: $size;
+  background-color: $color-ui-lighter;
+  border-radius: $radius;
 
-  // for the C&T subtitle ('A weekly phage periodical')
-  .cnt-subtitle {
-    @extend ._font-large;
-    @include screen-sm {
-      // typographical alignment
-      padding-bottom: 16px;
+  img {
+    max-width: 80px;
+  }
+}
+
+.Capsid-share {
+  // @extend .Capsid-card;
+  margin-top: $size-2;
+  margin-bottom: $size-2;
+  img {
+    width: auto;
+  }
+}
+
+  .Capsid-twitter {
+    img {
+      vertical-align: middle;
+      margin-right: $size/4;
     }
+    margin-top: $size;
   }
 
 
-
+// for the C&T subtitle ('A weekly phage periodical')
+// Airtable content
+.cnt-subtitle {
+  @extend ._font-large;
+  @include screen-sm {
+    // typographical alignment
+    padding-bottom: 16px;
+  }
+}
 
 // mailchimp signup banner for capsid
 .CapsidBanner {

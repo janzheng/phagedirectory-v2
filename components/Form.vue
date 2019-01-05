@@ -16,7 +16,7 @@
         <Formlet ref="form" :inputs="getForm(source)" @handler="formHandler" />
         <div class=" _grid-3-2 _align-vertically" >
           <div>
-            <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)" />
+            <span class="Form-privacy _md-p_fix" v-html="$md.render(privacy)" />
           </div>
           <button v-if="!sending" class="Form-btn _button _margin-none _center" @click="submit" >{{ cta }}</button>
           <button v-if="sending" class="Form-btn _button --outline _margin-none _center" >Sending...</button>

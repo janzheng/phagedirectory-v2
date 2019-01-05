@@ -45,7 +45,8 @@ $color-yellow: #FCCB4C;
 $color-pink: #FA5486;  
 $color-pink-light: #FFD3D3; // good for backgrounds etc.           
 
-$color-gray: #374F6A;             
+$color-dark: #374F6A;     
+$color-gray: $color-dark;            
 // $color-gray-light: #F0F0F0; // specced out, but unusable bc of coeur   
 
       

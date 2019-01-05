@@ -35,27 +35,9 @@
       @extend %ease;
     }
   }
-  .Header-join {
-    background-color: $color-tertiary;
-    color: $color-bg;
-    // color: $color-black;
-    font-weight: bold;
-    &:hover {
-      // border-color: $color-tertiary;
-      border-color: $color-main;
-      background-color: $color-main;
-    }
-
-    @include screen-xs {
-      padding-right: $size-half;
-      padding-left: $size-half;
-    }
-  }
 
   .Header-inset {
     background-color: $color-silver-light;
-    margin-left: $size;
-    margin-right: $size;
     border-radius: $radius;
     padding-top: $size-half;
     padding-bottom: $size-half;

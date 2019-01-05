@@ -29,7 +29,7 @@
 
     <!-- <no-ssr placeholder="Loading..."> -->
     <no-ssr>
-      <Policy/>
+      <PolicyBanner/>
     </no-ssr>
     <Footer/>
   </div>
@@ -45,7 +45,7 @@ import VueScrollTo from 'vue-scrollto'
 
 import Header from '~/components/Header.vue'
 import Footer from '~/components/Footer.vue'
-import Policy from '~/components/Policy.vue'
+import PolicyBanner from '~/components/PolicyBanner.vue'
 import Directory from '~/components/Directory.vue'
 
 import SignupAlert from '~/components/SignupAlert.vue'
@@ -58,7 +58,7 @@ export default {
   components: {
     Header,
     Footer,
-    Policy,
+    PolicyBanner,
     SignupAlert,
     // SignupRequest,
     SignupCapsid,

@@ -1,0 +1,65 @@
+
+// Button Components
+// (reusable)
+
+.CTA { // actionable button; inherits from _button
+  font-weight: bold;
+  text-decoration: none; // <a>s might have underlines
+  
+  @extend ._button;
+  @extend %ease;
+
+  &:hover {
+    background-color: $color-links;
+    border-color: $color-links;
+    color: $color-bg;
+    @extend %ease;
+  }
+
+  &.--outline {
+    &:hover {
+      background-color: inherit;
+      border-color: $color-links;
+      color: $color-links;
+      @extend %ease;
+    }
+  }
+
+  &.--active,
+  &.nuxt-link-exact-active,
+  .nuxt-link-active {
+    &, &:hover {
+      background-color: inherit;
+      border-color: $color-links;
+      color: $color-links;
+    }
+  }
+  
+  &.--loud {
+    background-color: $color-tertiary;
+    color: $color-bg;
+    // font-weight: bold;
+    &:hover {
+      // border-color: $color-tertiary;
+      border-color: $color-dark;
+      // background-color: $color-main;
+      background-color: $color-dark;
+    }
+
+    // @include screen-xs {
+    //   padding-right: $size-half;
+    //   padding-left: $size-half;
+    // }
+  }
+}
+
+
+// ._button.--yellow {
+//   background-color: $color-main;
+//   color: $color-secondary;
+//   font-weight: bold;
+//   &:hover {
+//     background-color: darken($color-main, 0.3);
+//     color: $color-secondary;
+//   }
+// }

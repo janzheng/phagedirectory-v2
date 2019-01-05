@@ -1,0 +1,23 @@
+
+
+/* 
+
+	Typography
+
+ */
+
+blockquote {
+  &, p {
+    border-color: $color-tertiary;
+    font-size: $font-large;
+    line-height: $font-large-lineheight;
+    @extend %font-serif;
+    font-style: italic;
+    @extend .--antialias;
+  }
+  .source {
+    @extend %font-serif;
+    color: $color-gray;
+    font-size: $font-small;
+  }
+}

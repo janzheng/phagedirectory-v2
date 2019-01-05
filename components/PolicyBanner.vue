@@ -1,7 +1,7 @@
 
 
 <template>
-  <div v-if="!policy" class="Policy _grid-1-auto-xs _align-vertically">
+  <div v-if="!policy" class="PolicyBanner _grid-1-auto-xs _align-vertically">
 
     <div class="">
       <!-- We use cookies for site analytics and customer service, but we don’t track your personal data.  -->
@@ -11,7 +11,7 @@
     </div>
 
     <div class="_right">
-      <div class="Policy-btn _button --short _margin-none" @click="acceptPolicy" >
+      <div class="PolicyBanner-btn _button --short _margin-none" @click="acceptPolicy" >
         I accept
       </div>
     </div>

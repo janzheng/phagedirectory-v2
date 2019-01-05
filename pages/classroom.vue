@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="">
-                  <input id="mc-embedded-subscribe" class="Directory-btn _button Subscribe _margin-top-half _width-full _block _button --outline _v-top _margin-bottom-none _font-bold" type="submit" value="Take the Pledge!" name="subscribe" >
+                  <input id="mc-embedded-subscribe" class="CTA _button Subscribe _margin-top-half _width-full _block _button --outline _v-top _margin-bottom-none _font-bold" type="submit" value="Take the Pledge!" name="subscribe" >
                 </div>
               </div>
             </div>

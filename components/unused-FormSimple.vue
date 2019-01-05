@@ -19,7 +19,7 @@
         <FormletSimple :inputs="getForm(source)" @handler="formHandler" ref="form" />
         <div class=" _grid-2-1 _align-vertically" >
           <div>
-            <span class="Form-privacy _md--margin-none" v-html="$md.render(privacy)"></span>
+            <span class="Form-privacy _md-p_fix" v-html="$md.render(privacy)"></span>
           </div>
 
           ?!?!!?!?!?!?

@@ -1,0 +1,13 @@
+
+// this appears in airtable components!! 
+// mostly used in Capsid as advertisements
+.Advert {
+  @extend ._card;
+  margin-bottom: $size;
+  padding: $size;
+
+  &.--tertiary {
+    background-color: $color-tertiary-50 !important;
+    // color: $color-white;
+  }
+}

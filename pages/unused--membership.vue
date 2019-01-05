@@ -14,7 +14,7 @@
    -->
 
   <div class="Shirt">
-    <section class="narrow copy _margin-center">
+    <section class="_margin-center">
       <h1 class="Shirt-title title">
         {{aboutTitle}}
       </h1>

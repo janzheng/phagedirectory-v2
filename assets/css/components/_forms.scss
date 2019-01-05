@@ -1,7 +1,68 @@
 
 
+
+// dynamic form
+.Form {
+  .Form-btn {
+    &:hover {
+      background-color: $color-links;
+      color: $color-bg;
+      border-color: $color-links;
+    }
+    &:active, &:focus {
+      background-color: $color-links;
+      color: $color-bg;
+      border-color: $color-gray;
+    }
+  }
+
+  // broken in coeur
+  ._form-checkbox {
+    input:focus {
+      & + span {
+        // border-color: $color-links;
+
+        border-bottom: $border-thin solid $color-links;
+      }
+    }
+  }
+}
+
+
+
 // cards in forms, as quick questions (e.g. contact page)
 .FormCard {
 	@extend ._card;
 	padding: $size-2;
+
+  @include screen-xs {
+    padding: $size;
+  }
+}
+
+
+// standardized form template
+.Formlet {
+  h1, h2, h3, h4, h5, h6 {
+    padding-bottom: 0;
+  }
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  ._form-control {
+    margin-bottom: $size-2;
+  }
+  ._form-label {
+    &, p {
+      font-size: $font-large;
+    }
+  }
+  ._form-desc {
+    &, p {
+      font-size: $font-small;
+    }
+  }
 }

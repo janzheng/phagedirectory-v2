@@ -1,8 +1,7 @@
 
 
 @import 'settings.scss';
-
-
+@import 'design.scss';
 
 
 %md-sans_serif {
@@ -80,59 +79,28 @@ h3 {
 
 
 
-// links
-a {
-  text-decoration: underline;
-  text-decoration-color: $color-links;
-  border: 0;
-  position: relative;
-  // color: $color-green;
-  // @extend ._pointer-no_events;
-  // @extend %ease-fast;
-  &:hover {
-    color: $color-links;
-  }
-}
-
-
-
-
-p, ul, li, {
-  // font-size: $font-size-base;
-  // line-height: $font-lineheight;
-  @extend %md-sans_serif;
-
-  padding-left: 0;
-  // @extend %font-serif;
-
-  a {
-    font-weight: 700;
-    &+a {
-    }
-  }
-}
-
-
-._md--margin-none {
-  p {
-    margin: 0;
-  }
-}
 
 
 
 
 
 
-@import 'layout';
+
+@import 'layout'; // typography, basic design & whitespace
 @import 'components';
 @import 'sections';
 
 
 
+/* 
+
+  CSS graveyard
+
+ */
+ 
 /*  VOM JOIN FORM */
 
-.Join-options {
+// .Join-options {
 
   // &.--one {
   //   @extend ._width-content-magic;
@@ -144,7 +112,14 @@ p, ul, li, {
   // &.--three {
   //   @extend ._grid-3;
   // }
-}
+// }
+
+
+// ._md--margin-none {
+//   p {
+//     margin: 0;
+//   }
+// }
 
 
 

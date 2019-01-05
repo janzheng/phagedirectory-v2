@@ -6,7 +6,7 @@
  -->
 <template>
 
-  <section class="Capsid narrow copy _margin-center _padding-top-2">
+  <section class="Capsid _margin-center _padding-top-2">
     
     <div class="_card _padding-2" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished">
       <div class="Capsid-header _grid-2">

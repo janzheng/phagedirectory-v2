@@ -2,9 +2,9 @@
   <div class="Footer --antialiased">
     <section class="Content _grid-1-2 _padding-left _padding-right _margin-center">
 
-      <div class="Footer-left _center-xs">
+      <div class="Footer-left _center-xs _align-vertically">
         <router-link to="/" >
-          <!-- <img class="phagedirectory-logo--sm" src="~/static/ico_rings.png"/> -->
+          <!-- <img class="Footer-logo-sm" src="~/static/ico_rings.png"/> -->
           <img class="Footer-logo" src="~/static/phagedirectory_negative.png" >
           <!-- <span class="phagedirectory"><span>Phage</span> Directory, </span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
@@ -14,7 +14,7 @@
 
       <!-- margin-right is for avoiding the drift box -->
       <div class="Footer-right _center-xs">
-        <div class="_margin-bottom _right-sm _center-xs">
+        <div class="_right-sm _center-xs">
           <span class="_margin-right "><router-link to="/about">About</router-link></span>
           <span class="_margin-right "><router-link to="/contact">Contact</router-link></span>
           <span class="_margin-right "><router-link to="/classroom">Classroom</router-link></span>

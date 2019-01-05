@@ -6,10 +6,10 @@ $dir-gray: $color-gray-lighter;
   .Directory-intro {
     padding-left: 0;
   }
-  .Directory-name {
-    padding-bottom: 0;
+  // .Directory-name {
+    // padding-bottom: 0;
     // color: $color-ui-dark;
-  }
+  // }
   .Directory-search {
     border-radius: $radius;
     &:hover, &:focus, &:active {
@@ -29,10 +29,17 @@ $dir-gray: $color-gray-lighter;
     z-index: $z-top;
   }
 }
+  // gray search words
+  .Directory-search {
+    span {
+      color: $dir-gray;
+      text-transform: none;
+    }
+  }
 
 
+// The big kahuna.
 
-// 
 .DirectoryView {
 
   .DirectoryView-item {
@@ -61,12 +68,6 @@ $dir-gray: $color-gray-lighter;
     // @include screen-sm {
     //   text-align: right;
     // }
-  }
-  .DirectoryView-search {
-    span {
-      color: $dir-gray;
-      text-transform: none;
-    }
   }
 
 
@@ -113,18 +114,19 @@ $dir-gray: $color-gray-lighter;
     // @extend ._grid-2-1-xs;
   }
     ._tag {
-      display: inline-block;
+      // display: inline-block;
+      background-color: $color-silver;
     }
-    ._tag.--light {
-      background-color: $color-bg;
-      // border: $color-gray solid $border-line;
-      padding-top: 0;
-      padding-bottom: 0;
-      color: $color-gray;
-      position: relative;
-      bottom: 0px;
-      // float: left;
-    }
+    // ._tag.--light {
+    //   background-color: $color-bg;
+    //   // border: $color-gray solid $border-line;
+    //   padding-top: 0;
+    //   padding-bottom: 0;
+    //   color: $color-gray;
+    //   position: relative;
+    //   bottom: 0px;
+    //   // float: left;
+    // }
     .person-meta {
       font-size: $font-small;
       margin-right: $size-base;
@@ -245,7 +247,14 @@ $dir-gray: $color-gray-lighter;
       }
   }
 
+}
 
 
+
+// Special Classes / 'Objects'
+// can be found / reused throughout, as special components
+// e.g. e. coli - has to be italicized - apply to spans
+._organismName { // formatting of an organism name e.g. Escherichia coli or E. coli
+  font-style: italic !important;
 }
 

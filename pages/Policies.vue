@@ -3,7 +3,7 @@
   <div class="Policies Section-Page _margin-center">
     <div class="Section-Content _margin-center">
       <div />
-      <div class="narrow" v-html="$md.render(intro || '')" />
+      <div class="" v-html="$md.render(intro || '')" />
     </div>
 
     <div class="_grid-1-5 _grid-gap-large">
@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <div class="Policies-content narrow">
+      <div class="Policies-content">
         <div class="" v-html="$md.render(policies || '')" />
       </div>
     </div>

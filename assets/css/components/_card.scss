@@ -1,0 +1,31 @@
+
+._card {
+  // adds slightly more visibility
+  border: 1px solid $color-silver-lighter;
+  overflow: auto;
+
+  &.--teal-50 {
+    background-color: $color-teal-50;
+    border-color: $color-teal-50;
+  }
+  &.--teal-10 {
+    background-color: $color-teal-10;
+    border-color: $color-teal-10;
+  }
+  &.--tertiary {
+    background-color: $color-tertiary;
+    border-color: $color-tertiary;
+  }
+  &.--tertiary-80 {
+    background-color: $color-tertiary-80;
+    border-color: $color-tertiary-80;
+  }
+  &.--tertiary-50 {
+    background-color: $color-tertiary-50;
+    border-color: $color-tertiary-50;
+  }
+  &.--tertiary-10 {
+    background-color: $color-tertiary-10;
+    border-color: $color-tertiary-10;
+  }
+}

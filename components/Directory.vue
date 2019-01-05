@@ -3,36 +3,30 @@
 
   <!-- this component acts like its own page -->
   <div class="Directory Section-Page _margin-center" >
-    <!-- src: {{ searchSource }} / {{ search }} -->
-    <!-- Directory search: {{search}} / view: {{view}} -->
+    <!-- <div v-if="!search" class="Directory-intro Section-Content" > -->
+    <!-- <div class="Directory-intro Section-Content" > -->
+    <!-- need Directory-nav-container to position: sticky all the way down the document -->
+    <div class="Directory-intro _margin-top-3">
+      <h1 v-if="!search" class="Directory-name">{{ viewName }} Directory</h1>
+      <h1 v-if="search" class="Directory-name">Search: <span class="DirectoryView-search">{{ search }}</span></h1>
+    </div>
+    <div class="Directory-nav-container _margin-bottom">
+      <div class="Directory-nav _grid-auto-1">
+        <div>
+          <router-link :class="{'--active': view == 'phages'}" to="/phages" class="CTA --short --outline _margin-right _margin-bottom-none">Phage Hosts</router-link>
+          <router-link to="/labs" class="CTA Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
+        </div>
+        <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" placeholder="Search" >
+      </div>
+    </div>
 
-    <!-- <section class="Directory-intro narrow"> -->
-    <div v-if="!search" class="Directory-intro Section-Content" >
-      <!-- <h1 class="Directory-name">Phage Directory</h1> -->
-      <h1 class="Directory-name">{{ viewName }} Directory</h1>
+    <div v-if="!search" class="Directory-description Section-Content" >
       <div v-if="view == 'phages'" class="Directory-desc block" v-html="$md.render(phagesText)" />
       <div v-if="view == 'labs'" class="Directory-desc block" v-html="$md.render(labText)" />
-      <!-- <h4 class="Directory-name" v-if="fromSearch">{{viewName}} Directory</h4> -->
-      <!-- <h6 class="Directory-name">Phage Directory</h6> -->
-      <!-- The following individuals and organizations work with phages of bacterial hosts of the phages.
-
-      Their emails are hidden for privacy reasons. If you need to contact them, please email your request [staff@phage.directory](staff@phage.directory) or tweet us and the researcher of interest.
-
-      Join the fight, [join the list](/join). -->
     </div>
-    <!-- </section> -->
+    <!-- </div> -->
 
     <div class="Directory-list">
-      <div class="Directory-nav-container">
-        <div class="Directory-nav _grid-auto-1">
-          <div>
-            <router-link :class="{'--active': view == 'phages'}" to="/phages" class="Directory-btn _button --short --outline _margin-right _margin-bottom-none">Phage Hosts</router-link>
-            <router-link to="/labs" class="Directory-btn _button Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
-          </div>
-          <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" placeholder="Search" >
-        </div>
-      </div>
-
       <DirectoryView :search="search" :view="view" />
 
       <!-- 

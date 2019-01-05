@@ -297,42 +297,47 @@ module.exports = {
         {
           name: 'search',
           path: '/search/:searchstr',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         {
           name: 'phages',
           path: '/phages',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         {
           name: 'hosts',
           path: '/hosts',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
+        },
+        {
+          name: 'organisms',
+          path: '/organisms',
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         {
           name: 'diseases',
           path: '/diseases',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         {
           name: 'antibiotics',
           path: '/antibiotics',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         // {
         //   name: 'orgs',
         //   path: '/orgs',
-        //   component: resolve(__dirname, 'pages/dir.vue')
+        //   component: resolve(__dirname, 'pages/directory.vue')
         // },
         {
           name: 'labs',
           path: '/labs',
-          component: resolve(__dirname, 'pages/dir.vue')
+          component: resolve(__dirname, 'pages/directory.vue')
         },
         // {
         //   name: 'people',
         //   path: '/people',
-        //   component: resolve(__dirname, 'pages/Dir.vue')
+        //   component: resolve(__dirname, 'pages/directory.vue')
         // },
         // {
         //   name: 'apply',

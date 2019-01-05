@@ -17,11 +17,11 @@
           <div class="" v-html="$md.render(aboutUs || '')" />
         </div>
 
-        <div class="About-profile _card _padding">
+        <div class="ProfileCard _padding">
           <div class="" v-html="$md.render(jess || '')" />
         </div>
 
-        <div class="About-profile _card _padding">
+        <div class="ProfileCard _padding">
           <div class="" v-html="$md.render(jan || '')" />
         </div>
       </div>

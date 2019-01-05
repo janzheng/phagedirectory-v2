@@ -10,7 +10,7 @@
  -->
 
 <template>
-  <section class="Updates narrow copy _margin-center _padding-top-2">
+  <section class="Updates _margin-center _padding-top-2">
 
     <!-- <Article :content="article" v-if="slug && article"/> -->
 

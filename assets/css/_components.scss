@@ -1,92 +1,62 @@
 
 
 
+@import '/components/buttons';
+@import '/components/card';
+@import '/components/signup';
 @import '/components/forms';
 @import '/components/capsid';
 @import '/components/sidenav';
 @import '/components/highlight';
 @import '/components/directory';
 @import '/components/mailchimp';
+@import '/components/profile';
+@import '/components/twitter';
+@import '/components/tag';
+@import '/components/policyBanner';
+@import '/components/advert';
 
 
 
+/* 
 
-._card {
-  // adds slightly more visibility
-  border: 1px solid $color-silver-lighter;
-  overflow: auto;
+  CSS Graveyard
 
-  &.--teal-50 {
-    background-color: $color-teal-50;
-    border-color: $color-teal-50;
-  }
-  &.--teal-10 {
-    background-color: $color-teal-10;
-    border-color: $color-teal-10;
-  }
-  &.--tertiary {
-    background-color: $color-tertiary;
-    border-color: $color-tertiary;
-  }
-  &.--tertiary-80 {
-    background-color: $color-tertiary-80;
-    border-color: $color-tertiary-80;
-  }
-  &.--tertiary-50 {
-    background-color: $color-tertiary-50;
-    border-color: $color-tertiary-50;
-  }
-  &.--tertiary-10 {
-    background-color: $color-tertiary-10;
-    border-color: $color-tertiary-10;
-  }
-}
+ */
 
+// input {
+//   &:focus {
+//     @extend %focus-pink;
+//     background-color: transparent; // $color-white !important;
+//   }
+// }
 
+// embedded links to artices, videos, etc.
+// used for article/image combos. Might still be useful
+// .Outlink {
+//   padding: $size;
+//   margin-bottom: $size;
+//   background-color: $color-ui-light;
+//   border-radius: $radius;
 
-.Policy {
-  background: $color-phdir;
-  color: $color-gray;
-  border-radius: $radius;
+//   &.--article {
+//     @extend ._grid-2-1;
 
-  padding: $size-base;
-  margin-bottom: $size-base;
-
-  // position: fixed;
-  position: sticky;
-  left: $size-base;
-  z-index: $z-popup;
-  bottom: $size-half;
-  width: calc(100% - #{$size-2});
-
-  .Policy-btn {
-    &:hover {
-      background-color: $color-links;
-    }
-  }
-}
-
-.Note {
-  background: $color-main;
-  padding: $size-base;
-}
-
-
-
-
-
-// image profile
-.--profile {
-  border-radius: 100%;
-}
-
-
-
-._content {
-  padding: 0;
-  margin-top: $size-2;
-}
-
+//     .Outlink-title {
+//       @extend h5;
+//     }
+//     .Outlink-desc {
+//       margin-bottom: $size-half;
+//     }
+//     .Outlink-source {
+//       // @extend ._tag;
+//       font-size: $font-small;
+//     }
+//     .Outlink-image {
+//       width: 100%;
+//     }
+//   }
+// }
 
 
 // ._tag {
@@ -97,202 +67,17 @@
 //   margin-right: $size-half;
 // }
 
-// logo deets
-.logo-sm {
-  // padding-right: $size-half;
-  width: 80px;
-  // height: 100%;
-  vertical-align: middle;
-  padding-bottom: $size-half;
-}
+
+// .Note {
+//   background: $color-main;
+//   padding: $size-base;
+// }
 
 
-._button.--yellow {
-  background-color: $color-main;
-  color: $color-secondary;
-  font-weight: bold;
-  &:hover {
-    background-color: darken($color-main, 0.3);
-    color: $color-secondary;
-  }
-}
-
-
-
-.phagedirectory-logo--sm {
-  width: 45px;
-  // height: 100%;
-  vertical-align: middle;
-  padding-bottom: 4px;
-  padding-right: $size-half;
-}
-.phagedirectory {
-  span {
-    font-weight: 700;
-  }
-}
-
-// input {
-//   &:focus {
-//     @extend %focus-pink;
-//     background-color: transparent; // $color-white !important;
-//   }
+// ._content {
+//   padding: 0;
+//   margin-top: $size-2;
 // }
 
 
 
-
-// Button Components
-// (reusable)
-
-.Directory-btn {
-  font-weight: 600;
-  text-decoration: none; // <a>s might have underlines
-  &._button {
-    &:hover {
-      background-color: $color-links;
-      border-color: $color-links;
-      color: $color-bg;
-    }
-  }
-
-  &._button.--outline {
-    &:hover {
-      background-color: inherit;
-      border-color: $color-links;
-      color: $color-links;
-    }
-  }
-
-  &._button.--active,
-  &._button.nuxt-link-exact-active,
-  ._button.nuxt-link-active {
-    &, &:hover {
-      background-color: inherit;
-      border-color: $color-links;
-      color: $color-links;
-    }
-  }
-}
-
-
-
-
-// Special Classes / 'Objects'
-// can be found / reused throughout, as special components
-
-._OrganismName { // formatting of an organism name e.g. Escherichia coli or E. coli
-  font-style: italic !important;
-}
-
-
-// dynamic form
-.Form {
-  .Form-btn {
-    &:hover {
-      background-color: $color-links;
-      color: $color-bg;
-      border-color: $color-links;
-    }
-    &:active, &:focus {
-      background-color: $color-links;
-      color: $color-bg;
-      border-color: $color-gray;
-    }
-  }
-
-  // broken in coeur
-  ._form-checkbox {
-    input:focus {
-      & + span {
-        // border-color: $color-links;
-
-        border-bottom: $border-thin solid $color-links;
-      }
-    }
-  }
-}
-
-
-
-.Twitter {
-  width: 100%;
-  max-width: 100%;
-  // overflow: scroll;
-  .Twitter-timeline,
-  #twitter-widget-0 {
-    // max-width: $width-xs-max !important;
-    // width: 100% !important;
-  }
-}
-
-
-
-
-
-.Formlet {
-  h1, h2, h3, h4, h5, h6 {
-    padding-bottom: 0;
-  }
-  p {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-
-  ._form-control {
-    margin-bottom: $size-2;
-  }
-  ._form-label {
-    &, p {
-      font-size: $font-large;
-    }
-  }
-  ._form-desc {
-    &, p {
-      font-size: $font-small;
-    }
-  }
-}
-
-
-
-// embedded links to artices, videos, etc.
-
-.Outlink {
-  padding: $size;
-  margin-bottom: $size;
-  background-color: $color-ui-light;
-  border-radius: $radius;
-
-  &.--article {
-    @extend ._grid-2-1;
-
-    .Outlink-title {
-      @extend h5;
-    }
-    .Outlink-desc {
-      margin-bottom: $size-half;
-    }
-    .Outlink-source {
-      // @extend ._tag;
-      font-size: $font-small;
-    }
-    .Outlink-image {
-      width: 100%;
-    }
-
-
-  }
-}
-
-
-._tag {
-  margin-bottom: $size-half;
-  // white-space: nowrap;
-  line-height: $size-2;
-  
-  &.--sponsor {
-    background-color: $color-teal-50;
-  }
-}

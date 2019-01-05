@@ -1,4 +1,12 @@
 
+/* 
+
+  A section is roughly defined as either:
+  - pages on the site
+  - parts of the site, like header, footer, signup area, etc.
+  - but are not reusable (those are components)
+
+ */
 
 
 @import '/sections/alerts';
@@ -17,18 +25,18 @@ section {
   padding-top: $size-3;
   padding-bottom: $size-3;
 }
-  section.narrow {
-    // @extend ._width-content-magic;
-    @extend ._width-content-paragraph;
-    // @include screen-xs {
-    //   padding-left: 0;
-    //   padding-right: 0;
-    // }
-    &.--left {
-      margin-left: 0;
-      padding-left: 0;
-    }
-  }
+  // section.narrow {
+  //   // @extend ._width-content-magic;
+  //   @extend ._width-content-paragraph;
+  //   // @include screen-xs {
+  //   //   padding-left: 0;
+  //   //   padding-right: 0;
+  //   // }
+  //   &.--left {
+  //     margin-left: 0;
+  //     padding-left: 0;
+  //   }
+  // }
 
 // Creates margins for the page 
 .Section-Page {
@@ -40,6 +48,11 @@ section {
   @extend %width-content-paragraph;
   margin-top: $size-3;
   margin-bottom: $size-3;
+
+  @include screen-xs {
+    margin-top: $size;
+    margin-bottom: $size;
+  }
 }
 
 
@@ -68,15 +81,15 @@ $article-width: 59ch;
  */
 
 // Sections w/ copy
-.Copy {
-  a {
-    text-decoration: underline;
-    text-decoration-color: $color-links;
-    &:hover {
-      color: $color-links;
-    }
-  }
-}
+// .Copy {
+//   a {
+//     text-decoration: underline;
+//     text-decoration-color: $color-links;
+//     &:hover {
+//       color: $color-links;
+//     }
+//   }
+// }
 
 
 
@@ -86,15 +99,15 @@ $article-width: 59ch;
 
 /* 
 
-  Other semantic sections
+  Unused — leave them here for a while, if not missed, delete
 
  */
 
 // narrow, text-friendly widths
 // this doesn't have the padding constraints
-.narrow {
-  max-width: $width-magic;
-}
+// .narrow {
+//   max-width: $width-magic;
+// }
 
 // article.narrow {
 //   @extend ._width-content-magic;
@@ -104,97 +117,35 @@ $article-width: 59ch;
 
 
 // block of contextually separate content
-.block {
-  margin-top: $size-base;
-  margin-bottom: $size-2;
-}
-
-
-
-blockquote {
-  &, p {
-    border-color: $color-tertiary;
-    font-size: $font-large;
-    line-height: $font-large-lineheight;
-    @extend %font-serif;
-    font-style: italic;
-    @extend .--antialias;
-  }
-  .source {
-    @extend %font-serif;
-    color: $color-gray;
-    font-size: $font-small;
-  }
-}
-
-
-
-
-
-// for alerts and mailchimp
-// custom breakpoint
-.Signup-container {
-  // padding-top: $size-2;
-  // padding-bottom: $size-2;
-  background-color: $color-silver-light;
-
-  .Signup-content {
-    $width-signup: 996px;
-    // margin-left: auto;
-    margin-right: auto;
-
-    // @media (max-width: $width-signup) {
-    //   display: block;
-
-    //   .Mailchimp {
-    //     max-width: 100% !important;
-    //     margin-bottom: $size;
-    //   }
-    // }
-  }
-}
-
-
+// .block {
+//   margin-top: $size-base;
+//   margin-bottom: $size-2;
+// }
 
 // Outline and framework for all Pages
 // Not all pages have these
-.Page-header {
-  margin-bottom: $size-2;
-}
+// .Page-header {
+//   margin-bottom: $size-2;
+// }
 
 
 
 
-.About-profile {
-  &._card {
-    &:hover {
-      background-color: inherit;
-    }
-    .profile-name {
-      font-size: $font-large;
-      line-height: $font-larger + 4px;
-      padding-bottom: $size-half;
-    }
-    .profile-image img {
-      border-radius: $radius;
-    }
-  }
-}
 
 
 
 
-.Join {
-  .Join-grid {
-    position: relative;
-  }
-  .Join-cta {
-    // position: absolute;
-    bottom: 0;
-    text-align: center;
-    margin-bottom: 0;
-  }
-}
+// .Join {
+//   .Join-grid {
+//     position: relative;
+//   }
+//   .Join-cta {
+//     // position: absolute;
+//     bottom: 0;
+//     text-align: center;
+//     margin-bottom: 0;
+//   }
+// }
 
 
 

@@ -1,24 +1,30 @@
 <template>
-  <div class="Home">
+  <div class="Home Section-Page _margin-center">
 
-    <section class="" v-html="$md.render(intro || '')" />
+    <div class="Section-Content">
+      <div class="Section-Article" v-html="$md.render(intro || '')" />
+    </div>
 
-    <section class="">
-      <CapsidBanner />
-    </section>
-
-    <section class="_grid-3-1">
-      <div>
-        <FormCapsidFeedback class=""/>
+    <div class="Section-Content">
+      <div class="Section-Article">
+        <CapsidBanner />
       </div>
-
-      <div class="">
-        <no-ssr>
-          <Twitter />
-        </no-ssr>
-      </div>
-    </section>
+    </div>
  
+    <div class="">
+      <div class="_grid-3-1">
+        <div>
+          <FormCapsidFeedback class=""/>
+        </div>
+
+        <div class="">
+          <no-ssr>
+            <Twitter />
+          </no-ssr>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 

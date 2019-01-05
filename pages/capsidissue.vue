@@ -21,7 +21,7 @@
     </div>
 
     <div class="Section-Content _margin-center">
-      <div class="_padding _width-content-paragraph _margin-center _font-small" v-html="$md.render(fine || '')" />
+      <div class="Section-Article _margin-center _font-small" v-html="$md.render(fineprint || '')" />
     </div>
 
   </div>
@@ -55,7 +55,7 @@ export default {
     const slug = unescape(route.params.slug)
     return {
       title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      fine: app.$cytosis.find('Content.capsid-fine', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      fineprint: app.$cytosis.find('Content.capsid-fine', store.state.cytosis.tables)[0]['fields']['Markdown'],
       intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing

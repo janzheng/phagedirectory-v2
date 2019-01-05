@@ -1,0 +1,22 @@
+
+.PolicyBanner {
+  background: $color-phdir;
+  color: $color-gray;
+  border-radius: $radius;
+
+  padding: $size-base;
+  margin-bottom: $size-base;
+
+  // position: fixed;
+  position: sticky;
+  left: $size-base;
+  z-index: $z-popup;
+  bottom: $size-half;
+  width: calc(100% - #{$size-2});
+
+  .PolicyBanner-btn {
+    &:hover {
+      background-color: $color-links;
+    }
+  }
+}

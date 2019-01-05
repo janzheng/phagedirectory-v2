@@ -1,0 +1,10 @@
+
+._tag {
+  margin-bottom: $size-half;
+  // white-space: nowrap;
+  // line-height: $size-2;
+  
+  &.--sponsor {
+    background-color: $color-teal-50;
+  }
+}

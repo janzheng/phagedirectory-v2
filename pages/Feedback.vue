@@ -1,7 +1,9 @@
 <template>
 
-  <section class="AnonFeedback container narrow copy _margin-center">
-    <FormCapsidFeedback />
+  <section class="AnonFeedback Section-Page _margin-center">
+    <div class="Section-Content _margin-center">
+      <FormCapsidFeedback />
+    </div>
   </section>
 </template>
 
