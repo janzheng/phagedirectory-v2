@@ -6,22 +6,22 @@
  -->
 
 <template>
-  <div class="CapsidIssue Section-Page">
+  <div class="CapsidIssue _section-page _margin-top _margin-center">
 
-    <div class="Section-Content _margin-center">
+    <div class="_section-content _margin-center">
       <div class="_flex _flex-bottom">
         <router-link to="/capsid" class="" v-html="$md.render(title || '')" />
         <div class="" v-html="$md.render(intro || '')" />    
       </div>
     </div>
     
-    <div class="Section-Content _margin-center">
+    <div class="_section-content _margin-center">
       <CapsidBanner class="_margin-center" />
       <Capsid :issues="issues" :show-preview="showPreview" />
     </div>
 
-    <div class="Section-Content _margin-center">
-      <div class="Section-Article _margin-center _font-small" v-html="$md.render(fineprint || '')" />
+    <div class="_section-content _margin-center">
+      <div class="_section-article _margin-center _font-small" v-html="$md.render(fineprint || '')" />
     </div>
 
   </div>

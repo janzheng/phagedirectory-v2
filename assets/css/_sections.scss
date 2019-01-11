@@ -39,12 +39,12 @@ section {
   // }
 
 // Creates margins for the page 
-.Section-Page {
+._section-page {
   @extend ._width-content-max;
 }
 
 // Creates margins for content within a page
-.Section-Content {
+._section-content {
   @extend %width-content-paragraph;
   margin-top: $size-3;
   margin-bottom: $size-3;
@@ -61,8 +61,8 @@ section {
 // refer to sidebar.io's format
 // note: don't use <article> tag as it's a formatting tag
 // some of these are specified in markdown, so the markup should be very simple
-$article-width: 59ch;
-.Section-Article {
+$article-width: 60ch;
+._section-article {
   // used for pages outside of just Capsid!! including Classroom Initiative
   @include screen-sm {
     max-width: $article-width;

@@ -8,8 +8,9 @@
           :privacy="privacy"
           :errorMsg="error"
           :postUrl="postUrl"
-          :alert="true"
-          :json="true"
+          :isAlert="true"
+          :isJson="true"
+          
           table="Dynamic"
           notes="FormVomResearch submission"
     />

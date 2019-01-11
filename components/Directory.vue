@@ -2,25 +2,25 @@
 <template>
 
   <!-- this component acts like its own page -->
-  <div class="Directory Section-Page _margin-center" >
-    <!-- <div v-if="!search" class="Directory-intro Section-Content" > -->
-    <!-- <div class="Directory-intro Section-Content" > -->
+  <div class="Directory _section-page _margin-center" >
+    <!-- <div v-if="!search" class="Directory-intro _section-content" > -->
+    <!-- <div class="Directory-intro _section-content" > -->
     <!-- need Directory-nav-container to position: sticky all the way down the document -->
     <div class="Directory-intro _margin-top-3">
       <h1 v-if="!search" class="Directory-name">{{ viewName }} Directory</h1>
       <h1 v-if="search" class="Directory-name">Search: <span class="DirectoryView-search">{{ search }}</span></h1>
     </div>
-    <div class="Directory-nav-container _margin-bottom">
+    <div class="Directory-nav-container ">
       <div class="Directory-nav _grid-auto-1">
         <div>
-          <router-link :class="{'--active': view == 'phages'}" to="/phages" class="CTA --short --outline _margin-right _margin-bottom-none">Phage Hosts</router-link>
-          <router-link to="/labs" class="CTA Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
+          <router-link :class="{'--active': view == 'phages'}" to="/phages" class="_button CTA --short --outline _margin-right _margin-bottom-none">Phage Hosts</router-link>
+          <router-link to="/labs" class="_button CTA Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
         </div>
         <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline" type="text" name="searchbar" placeholder="Search" >
       </div>
     </div>
 
-    <div v-if="!search" class="Directory-description Section-Content" >
+    <div v-if="!search" class="Directory-description _section-content" >
       <div v-if="view == 'phages'" class="Directory-desc block" v-html="$md.render(phagesText)" />
       <div v-if="view == 'labs'" class="Directory-desc block" v-html="$md.render(labText)" />
     </div>

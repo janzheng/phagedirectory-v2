@@ -6,10 +6,10 @@
  -->
 
 <template>
-  <div class="Capsid Section-Page _margin-center">
-    <div class="Capsid Section-Content _margin-center ">
+  <div class="Capsid _section-page _margin-center">
+    <div class="Capsid _section-content _margin-center ">
 
-      <div class="Capsid Section-Content _margin-center ">
+      <div class="Capsid _section-content _margin-center ">
         <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
           <div class="" v-html="$md.render(title)" />
           <div class="" v-html="$md.render(intro)" />    
@@ -22,8 +22,8 @@
     </div>
     
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
-    <CapsidStub :issues="latest" :is-featured="true" class="Section-Article _margin-center" />
-    <CapsidStub :issues="notLatest" class="Section-Article _margin-center _padding-bottom-2" />
+    <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
+    <CapsidStub :issues="notLatest" class="_section-article _margin-center _padding-bottom-2" />
 
   </div>
 </template>

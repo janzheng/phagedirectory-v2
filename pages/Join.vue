@@ -1,41 +1,41 @@
 <template>
 
-  <div class="Join Section-Page _margin-center">
-    <div class="Section-Content _margin-center " >
-      <div class="Join-intro Section-Article _margin-center" v-html="$md.render(intro || '')" />
+  <div class="Join _section-page _margin-center">
+    <div class="_section-content _margin-center " >
+      <div class="Join-intro _section-article _margin-center" v-html="$md.render(intro || '')" />
     </div>
 
 
-    <div class="Section-Content _margin-center">
+    <div class="_section-content _margin-center">
       <div v-if="mode=='select'"  
            :class="JoinOptionsClasses"
-           class="Join-options Section-Article _margin-center"
+           class="Join-options _section-article _margin-center"
       >
         <div v-if="researchFormPublished" class="Join-research Join-grid FormCard" >
           <div class="_margin-bottom" v-html="$md.render(researchFormIntro || '')" />
-          <div class="CTA _center _margin-bottom  _width-full _md-p_fix" 
+          <div class="_button CTA _center _margin-bottom  _width-full _md-p_fix" 
                @click="mode='research'"
                v-html="$md.render(joinCta || '')" />
         </div>
 
         <div v-if="labFormPublished" class="Join-research Join-grid FormCard" >
           <div class="_margin-bottom" v-html="$md.render(labFormIntro || '')" />
-          <div class="CTA _center _margin-bottom _width-full _md-p_fix"
+          <div class="_button CTA _center _margin-bottom _width-full _md-p_fix"
                @click="mode='lab'"
                v-html="$md.render(joinCta || '')" />
         </div>
 
         <div v-if="industryFormPublished" class="Join-industry Join-grid FormCard" >
           <div class="_margin-bottom" v-html="$md.render(industryFormIntro || '')" />
-          <div class="CTA _center _margin-bottom  _width-full _md-p_fix" 
+          <div class="_button CTA _center _margin-bottom  _width-full _md-p_fix" 
                @click="mode='industry'"
                v-html="$md.render(joinCta || '')" >CTA</div>
         </div>
 
       </div>
       <div v-if="mode!=='select'"
-           class="Section-Article FormCard Join-form _margin-center" >
-        <div class="CTA Join-back --short " @click="mode='select'">Back</div>
+           class="_section-article FormCard Join-form _margin-center" >
+        <div class="_button CTA Join-back _margin-none-i --short " @click="mode='select'">Back</div>
         <FormVomResearch v-if="mode=='research'"/>
         <FormVomLab v-if="mode=='lab'"/>
         <FormVomIndustry v-if="mode=='industry'"/>

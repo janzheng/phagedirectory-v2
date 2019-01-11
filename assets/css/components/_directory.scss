@@ -27,6 +27,10 @@ $dir-gray: $color-gray-lighter;
     padding-bottom: $size-half;
     background-color: rgba($color-bg, 0.9);
     z-index: $z-top;
+
+    ._button.CTA {
+      margin-bottom: 0;
+    }
   }
 }
   // gray search words

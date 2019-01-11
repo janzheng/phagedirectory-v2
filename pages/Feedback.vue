@@ -1,7 +1,7 @@
 <template>
 
-  <section class="AnonFeedback Section-Page _margin-center">
-    <div class="Section-Content _margin-center">
+  <section class="AnonFeedback _section-page _margin-center">
+    <div class="_section-content _margin-center">
       <FormCapsidFeedback />
     </div>
   </section>

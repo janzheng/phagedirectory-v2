@@ -219,6 +219,13 @@
 
       <div v-if="hasNew(issue)" class="Email-card" >
 
+
+          <!-- 
+
+              WHATS NEW / UPDATES
+
+           -->
+
         <div v-if="getUpdates(issue)" class="Capsid-updates" >
           <h3 class="Capsid-updates-title_">{{ issue.fields['UpdatesTitle'] || 'What’s New' }}
           </h3>
@@ -232,6 +239,45 @@
             </div>
           </div>
         </div>
+
+
+          <!-- 
+
+              JOBS 
+
+           -->
+
+        <div v-if="getJobs(issue).length>0" class="Capsid-jobs" >
+          <table class="Section-table">
+            <tr>
+              <td class="" >
+                <h3 class="Capsid-jobs-title_">Latest Jobs</h3>
+              </td>
+              <td>
+                <div><a href="https://phage.directory/jobs">All jobs</a></div>
+                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+              </td>
+            </tr>
+          </table>
+          <h3 class="line">
+            <span style="color:#fa5486">&mdash;</span>
+          </h3>
+          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-item Capsid-jobs-item " >
+            <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
+            </div>
+            <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
+            <div v-if="job.fields['Tags']" class="_margin-top-half" >
+              <span v-for="tag of job.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+          <!-- 
+
+              COMMUNITY 
+
+           -->
 
         <div v-if="getCommunity(issue)" class="Capsid-community" >
           <table class="Section-table">
@@ -257,32 +303,6 @@
             </div>
           </div>
         </div>
-
-        <div v-if="getJobs(issue).length>0" class="Capsid-jobs" >
-          <table class="Section-table">
-            <tr>
-              <td class="" >
-                <h3 class="Capsid-jobs-title_">Job Board</h3>
-              </td>
-              <td>
-                <div><a href="https://phage.directory/jobs">All jobs</a></div>
-                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
-              </td>
-            </tr>
-          </table>
-          <h3 class="line">
-            <span style="color:#fa5486">&mdash;</span>
-          </h3>
-          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-item Capsid-jobs-item " >
-            <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
-            </div>
-            <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
-            <div v-if="job.fields['Tags']" class="_margin-top-half" >
-              <span v-for="tag of job.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
-            </div>
-          </div>
-        </div>
-      </div>
 
       <br>
 

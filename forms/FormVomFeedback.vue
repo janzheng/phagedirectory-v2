@@ -10,8 +10,9 @@
           :privacy="privacy"
           :errorMsg="error"
           :postUrl="postUrl"
-          :alert="true"
-          :notes="notes"
+          :isAlert="true"
+          notes="VOM Form Feedback"
+          
           class=""
           table="Dynamic"
     />

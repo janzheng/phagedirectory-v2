@@ -1,11 +1,11 @@
 <template>
 
-  <div class="About Section-Page _margin-center">
+  <div class="About _section-page _margin-center">
 
-    <div class="Section-Content _margin-center">
+    <div class="_section-content _margin-center">
 
-      <div class="Section-Article _margin-center">
-        <h1 class="About-title Section-Article">
+      <div class="_section-article _margin-center">
+        <h1 class="About-title _section-article">
           {{ aboutTitle }}
         </h1>
 

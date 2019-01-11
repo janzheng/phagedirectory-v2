@@ -8,11 +8,11 @@
 
 <template>
   <div>
-    <div class="Jobs Section-Page _margin-center ">
+    <div class="Jobs _section-page _margin-center ">
 
-      <div class="Jobs-intro Section-Content _margin-center" v-html="$md.render(intro)" />
+      <div class="Jobs-intro _section-content _margin-center" v-html="$md.render(intro)" />
 
-      <div class="Section-Article _margin-center Jobs-container">
+      <div class="_section-article _margin-center Jobs-container">
         <div v-for="job of Jobs" v-if="showJob(job)" :key="job.id"
              :class="getStatus(job)"
              class="Jobs-item _card _margin-bottom-2 _padding-2">

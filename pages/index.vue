@@ -1,12 +1,12 @@
 <template>
-  <div class="Home Section-Page _margin-center">
+  <div class="Home _section-page _margin-center">
 
-    <div class="Section-Content">
-      <div class="Section-Article" v-html="$md.render(intro || '')" />
+    <div class="_section-content">
+      <div class="_section-article" v-html="$md.render(intro || '')" />
     </div>
 
-    <div class="Section-Content">
-      <div class="Section-Article">
+    <div class="_section-content">
+      <div class="_section-article">
         <CapsidBanner />
       </div>
     </div>

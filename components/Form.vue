@@ -58,9 +58,9 @@ export default {
     'errorMsg': String,
     'payload': String,
     'table': String,
-    'json': String,
     'postUrl': String,
-    'alert': Boolean,
+    'isAlert': Boolean,
+    'isJson': Boolean,
     'notes': String,
   },
 

@@ -27,8 +27,12 @@
       <!-- </div> -->
 
       <!-- Empty search state -->
-      <div v-if="getCounts.peopleCount == 0 && search" class="Section-Content Directory-view-emptySearch">
+      <div v-if="getCounts.peopleCount == 0 && search" class="_section-content Directory-view-emptySearch">
         <h3>No results found for <span>{{ search }}</span> </h3>
+      </div>
+
+      <div class="DirectoryView-meta">
+        <h4>Phage Hosts: {{ getHostCount(filterHost) }}, Labs: {{ getOrgCount(filterOrg) }}</h4>
       </div>
 
       <div v-for="genus of getGenuses" :key="genus.fields.Name" class="DirectoryView-items" >
@@ -40,7 +44,7 @@
           <div class="DirectoryView-body phage-body">
             <div v-for="lab of getLabs(host)" v-if="lab.fields['isPublished'] && filterOrg(lab)" :key="lab.fields.Name" class="DirectoryView-subitem phage-lab">
               <div class="DirectoryView-meta phage-lab-meta">
-                <div class="DirectoryView-meta-title phage-lab-org">{{ getLinkedOrgNames(lab) }}</div>
+                <div class="DirectoryView-meta-title phage-lab-org">{{ getLinkedOrgNames(lab).name }}<span v-if="getLinkedOrgNames(lab).longName" class="DirectoryView-meta-longname phage-lab-org" > — {{ getLinkedOrgNames(lab).longName }}</span></div>
               </div>
               <div class="phage-lab-content">
                 <div class="phage-lab-header">
@@ -78,8 +82,17 @@
         <h3 v-if="search">Lab Search<span class="DirectoryView-search">: <span>{{ search }}</span></span></h3>
       </div> -->
 
+      <!-- Empty search state -->
+      <div v-if="getCounts.peopleCount == 0 && search" class="_section-content Directory-view-emptySearch">
+        <h3>No results found for <span>{{ search }}</span> </h3>
+      </div>
+
       <div class="DirectoryView-items" >
 
+        <div class="DirectoryView-meta">
+          <h4>Phage Hosts: {{ getHostCount(filterHost) }}, Labs: {{ getOrgCount(filterOrg) }}</h4>
+        </div>
+      
         <div v-for="org of getOrgs" v-if="filterOrg(org) && org.fields['isPublished']" :key="org.fields.Name" class="DirectoryView-item" >
           <div class="DirectoryView-head lab-org">
             <div class="DirectoryView-title lab-orgname">{{ org.fields.Name }}</div>
@@ -154,6 +167,7 @@ export default {
     return {
       ... this.$store.state.cytosis.tables,
       countResults: 0,
+      labCount: 0,
     }
   },
 
@@ -193,6 +207,27 @@ export default {
   },
 
   methods: {
+    getHostCount(filterFn) { // pass filter through, either for hosts or orgs
+      let count = 0
+      for (let genus of this.getGenuses) {
+        for (let org of this.getHosts(genus)) {
+          if(filterFn(org)) {
+            count++
+          }
+        }
+      }
+      return count
+    },
+
+    getOrgCount(filterFn) { // pass filter through, either for hosts or orgs
+      let count = 0
+      for (let org of this.getOrgs) {
+        if(filterFn(org)) {
+          count++
+        }
+      }
+      return count
+    },
 
     getFields(recordArray, fieldName) {
       let results = []
@@ -222,6 +257,8 @@ export default {
       labArr = this.$cytosis.deduplicate(labArr) // dedup
       const labs = this.$cytosis.sort(this.$cytosis.getLinkedRecords(labArr, this.Labs, true))
       // sort labs first, then tack on the stragglers who don't have labs (if any)
+
+      // console.log('getLabs; org, labs, ppl', org.fields.Name, labs, ppl)
       return [...labs, ...ppl]
     },
     getPerson(lab) {
@@ -237,15 +274,21 @@ export default {
       // sort hosts by A>Z
       const orgs = this.$cytosis.sort(this.$cytosis.getLinkedRecords(obj.fields.Organization, this.Organizations, true))
 
-      let result = []
+      let name = [], longName = []
       for (let org of orgs ) {
-        result.push(org.fields['Name'])
+        name.push(org.fields['Name'])
+
+        if(org.fields['LongName'])
+          longName.push(org.fields['LongName'])
       }
-      return result.join(', ')
+
+      // console.log('getLinkedOrgNames name, from:', name, obj.fields['Name'])
+      return {'name': name.join(', '), 'longName': longName.join(', ')}
     },
     hostDisplayName(host) {
       // remove the * from display name (so it's Campylobacter instead of Campylobacter *)
       // but the * version still needs to show before its other hosts b/c it's encompassing
+      // console.log('hostDisplayName host: ', host.fields.Name, host)
       if (host.fields.Name.indexOf('*') > 0)
         return host.fields.Name.substring(0, host.fields.Name.indexOf('*') - 1)
       return host.fields.Name
@@ -323,6 +366,13 @@ export default {
           return true
         }
 
+        // match against Long Name
+        // const longName = hostOrgs.fields['LongName'] ? hostOrgs.fields['LongName'].toLowerCase() : ''
+        if(this.$cytosis.search(str, hostOrgs, ['LongName'], this.cytosis ).length > 0) {
+          // console.log('filterHost match 3:', str, host)
+          return true
+        }
+
         // match against phage names (a host's people's phages)
         for (const person of people) {
           const curatorPhages = this.getHostPersonPhages(host, person)
@@ -385,7 +435,7 @@ export default {
           // match against phage names (a host's people's phages)
           for (const host of hosts) {
             const curatorPhages = this.getHostPersonPhages(host, person)
-            console.log('host phage person name match:', curatorPhages)
+            // console.log('host phage person name match:', curatorPhages)
             if(this.$cytosis.search(str, curatorPhages, ['Name'], this.cytosis ).length > 0)
               return true
           }

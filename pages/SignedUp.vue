@@ -6,7 +6,7 @@
  -->
 <template>
 
-  <section class="SignedUp Section-Page">
+  <section class="SignedUp _section-page">
     <div v-html="$md.render(signedup || '')" />
   </section>
 

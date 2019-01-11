@@ -2,12 +2,25 @@
 // Button Components
 // (reusable)
 
-.CTA { // actionable button; inherits from _button
-  font-weight: bold;
-  text-decoration: none; // <a>s might have underlines
+button, ._button {
+
+  // declared using overriding default variables in settings
+  &.--outline {
+    &:hover {
+      // background-color: inherit;
+      // border-color: $color-active;
+      // color: $color-active;
+      @extend %ease;
+    }
+  }
+}
+
+button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrides _button
   
   @extend ._button;
-  @extend %ease;
+
+  font-weight: bold;
+  text-decoration: none; // <a>s might have underlines
 
   &:hover {
     background-color: $color-links;
@@ -15,6 +28,8 @@
     color: $color-bg;
     @extend %ease;
   }
+
+  @extend %ease;
 
   &.--outline {
     &:hover {
@@ -44,6 +59,7 @@
       border-color: $color-dark;
       // background-color: $color-main;
       background-color: $color-dark;
+      color: $color-bg;
     }
 
     // @include screen-xs {

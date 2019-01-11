@@ -1,6 +1,6 @@
 
 <template>
-  <header class="Header Section-Page _padding-top _padding-bottom _margin-center">
+  <header class="Header _section-page _padding-top _padding-bottom _margin-center">
     <div class="Header-content">
 
       <!-- Mobile Menu -->
@@ -9,7 +9,7 @@
 
         <div class="Header-left _hidden-sm">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
-            <router-link to="/" class="logo-link _border-none-i _margin-right"><img class="logo-xs" src="~/static/snow.png"></router-link>
+            <router-link to="/" class="Header-logo-link _border-none-i _margin-right"><img class="logo-xs" src="~/static/snow.png"></router-link>
             <div class="Header-inset _flex-2">
               <div class=" _flex-row _flex-vertically _flex-wrap _padding-right">
                 <div class="_margin-bottom-half">
@@ -19,10 +19,13 @@
                   <router-link to="/labs" class="_button --text --short _padding-none _margin-none _margin-right-half --border-none">
                     Labs
                   </router-link>
-                  <router-link to="/join" class="CTA --loud --short _margin-none _margin-right-half">
+                  <router-link to="/join" class="_button CTA --loud --short _margin-none-i _margin-right-half-i">
                     Join
                   </router-link>
                 </div>
+                <router-link to="/phagetherapy" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
+                  Phage Therapy
+                </router-link>
                 <router-link to="/alerts" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
                   Alerts
                 </router-link>
@@ -53,7 +56,7 @@
             <router-link to="/capsid" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
               C&amp;T
             </router-link>
-            <router-link to="/join" class="CTA --loud --short _margin-none">
+            <router-link to="/join" class="_button CTA --loud --short _margin-none">
               Join
             </router-link>
           </div>
@@ -66,7 +69,7 @@
       <!-- Desktop menu -->
       <div class="Header-left _hidden-xs">
         <div class="_flex _left-xs _align-vertically _margin-bottom">
-          <router-link to="/" class=" logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"></router-link>
+          <router-link to="/" class=" Header-logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"></router-link>
           <div class="Header-inset _flex-row _flex-2 _flex-vertically _padding-right _margin-left _margin-right">
             <router-link to="/phages" class="_button --text --short _padding-none _margin-none --border-none">
               Phages
@@ -75,11 +78,14 @@
               Labs
             </router-link>
             <input id="searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline _flex-2" type="text" name="searchbar" placeholder="🔍 Labs, PIs, organisms" @input="search">
-            <router-link to="/join" class="CTA --loud --short _margin-none ">
+            <router-link to="/join" class="_button CTA --loud --short _margin-none-i ">
               Join
             </router-link>
           </div>
           <div class="Header-links">
+            <router-link to="/phagetherapy" class="_button --text --short _padding-none _margin-none --border-none">
+              Phage Therapy
+            </router-link>
             <router-link to="/alerts" class="_button --text --short _padding-none _margin-none --border-none">
               Alerts
             </router-link>

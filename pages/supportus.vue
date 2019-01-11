@@ -4,7 +4,11 @@
   <div class="Brand _section-page">
     <section class="_section-content _margin-center">
       <div class="_section-article">
-        <div class="" v-html="$md.render(media || '')" />
+        - We started out as a side project for the phage therapy community
+        - It's become a time-intensive project, and something we're very passionate about
+        - Ads + Jobs are a good way to support us
+        - SUPPORT US / Supporter button
+        - fake patreon / let us know how you'd support us
       </div>
     </section>
   </div>
@@ -16,7 +20,7 @@
 
 export default {
   head () {
-    const title = "Media"
+    const title = "Support Us"
 
     return {
       title,
@@ -40,7 +44,8 @@ export default {
     //   return false
 
     return {
-      media: app.$cytosis.find('Content.media-content', store.state.cytosis.tables)[0]['fields']['Markdown']
+      intro: app.$cytosis.find('Content.supportus-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      content: app.$cytosis.find('Content.supportus-content', store.state.cytosis.tables)[0]['fields']['Markdown']
     }
   },
 

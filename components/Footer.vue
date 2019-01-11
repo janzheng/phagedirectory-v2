@@ -1,6 +1,6 @@
 <template>
   <div class="Footer --antialiased">
-    <section class="Content _grid-1-2 _padding-left _padding-right _margin-center">
+    <section class="Content _grid-1-3 _padding-left _padding-right _margin-center">
 
       <div class="Footer-left _center-xs _align-vertically">
         <router-link to="/" >
@@ -15,14 +15,20 @@
       <!-- margin-right is for avoiding the drift box -->
       <div class="Footer-right _center-xs">
         <div class="_right-sm _center-xs">
-          <span class="_margin-right "><router-link to="/about">About</router-link></span>
-          <span class="_margin-right "><router-link to="/contact">Contact</router-link></span>
-          <span class="_margin-right "><router-link to="/classroom">Classroom</router-link></span>
-          <span class="_margin-right "><router-link to="/brand">Brand</router-link></span>
-          <span class=" "><router-link to="/policies">Site Policy</router-link></span>
+          <span class=" ">
+            <!-- <span class="_margin-right "><router-link to="/phagetherapy">What is Phage Therapy?</router-link></span> -->
+            <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
+            <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
+            <span><router-link to="/classroom">Classroom Initiative</router-link></span>
+          </span>
+          <span class="_block-xs">
+            <span class="_margin-left-sm _margin-right "><router-link to="/support-us">Support Us</router-link></span>
+            <span class="_margin-right "><router-link to="/brand">Brand</router-link></span>
+            <span class=" "><router-link to="/policies">Site Policy</router-link></span>
+          </span>
         </div>
 
-        <div class="_right-sm _center-xs">
+        <div class="_right-sm _center-xs _margin-top-2-xs">
           <span class="_margin-right _block-xs _margin-bottom-half-xs">
             <a target="_blank" href="mailto:hello@phage.directory">hello@phage.directory</a>
           </span>

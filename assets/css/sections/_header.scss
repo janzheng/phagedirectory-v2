@@ -42,4 +42,12 @@
     padding-top: $size-half;
     padding-bottom: $size-half;
   }
+
+  // header link
+  .Header-logo-link {
+    &:after {
+      content: none !important;
+    }
+  }
+
 }

@@ -10,8 +10,9 @@
           :privacy="privacy"
           :errorMsg="error"
           :postUrl="postUrl"
-          :alert="true"
-          :notes="notes"
+          :isAlert="true"
+          notes="Capsid Form Feedback"
+          
           class=""
           table="Dynamic"
     />

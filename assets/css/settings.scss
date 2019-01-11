@@ -75,7 +75,6 @@ $color-focus: $color-tertiary;
 
 
 
-
 // @include colorate('phdir', $color-phdir);
 // @include colorate('teal', $color-teal);
 // @include colorate('dull', $color-dull);
@@ -89,11 +88,11 @@ $color-focus: $color-tertiary;
 // @include colorate('active', $color-phdir);
 
 
-%focus-pink {
-  // border: solid rgba($color-tertiary, 1) ;
-  // outline: none;
-  // box-shadow: 0px 0px 2px 0px rgba($color-tertiary, 1);
-}
+// %focus-pink {
+//   // border: solid rgba($color-tertiary, 1) ;
+//   // outline: none;
+//   // box-shadow: 0px 0px 2px 0px rgba($color-tertiary, 1);
+// }
 
 %font-mono,
 ._font-mono {
@@ -112,7 +111,33 @@ $use-cssvars: false;
 // $font-serif: "PT Serif", "Georgia", serif;
 // $font-display: "PT Serif", "Georgia", serif;
 
+
+
+
+/* 
+
+  Default variable overrides
+  - for buttons, etc.
+
+ */
+
+// buttons
+$button-outline-color-main-hover: $color-active;
+$button-outline-color-border-hover: $color-active;
+$button-outline-color-bg-hover: inherit;
+
+
+/* 
+
+  IMPORT COEUR HERE
+  - don't use nuxt, it messes w/ default variables & cascading
+
+ */
+
+
 @import '../../node_modules/coeur/styles/index.scss';
+
+
 
 
 %font-display,

@@ -1,7 +1,7 @@
 <template>
 
-  <div class="Policies Section-Page _margin-center">
-    <div class="Section-Content _margin-center">
+  <div class="Policies _section-page _margin-center">
+    <div class="_section-content _margin-center">
       <div />
       <div class="" v-html="$md.render(intro || '')" />
     </div>

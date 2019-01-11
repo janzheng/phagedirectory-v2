@@ -1,11 +1,11 @@
 <template>
   
-  <div class="Contact Section-Page _margin-center">
-    <div class="Section-Content _margin-center">
-      <div class="Section-Article" v-html="$md.render(content || '')" />
+  <div class="Contact _section-page _margin-center">
+    <div class="_section-content _margin-center">
+      <div class="_section-article" v-html="$md.render(content || '')" />
     </div>
-    <div class="Section-Content _margin-center">
-      <div class="Section-Article">
+    <div class="_section-content _margin-center">
+      <div class="_section-article">
         <FormContact />
       </div>
     </div>

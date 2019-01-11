@@ -1,9 +1,9 @@
 <template>
 
-  <div class="Classroom Section-Page _margin-center">
-    <div class="Section-Content _margin-center">
+  <div class="Classroom _section-page _margin-center">
+    <div class="_section-content _margin-center">
 
-      <div class="Section-Article _margin-center _flex-row _flex-vertically">
+      <div class="_section-article _margin-center _flex-row _flex-vertically">
         <div>
           <img class="_flex-auto _v-bottom _margin-right _padding-bottom" src="/classroom.png" title="Phage Directory Classroom" width="55">
         </div>
@@ -13,7 +13,7 @@
         </div>
       </div>
 
-      <div class="Section-Article _margin-center">
+      <div class="_section-article _margin-center">
         <div class="Classroom-bg">
           <div class="" v-html="$md.render(classroomBg || '')" />
         </div>

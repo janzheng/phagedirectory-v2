@@ -4,8 +4,8 @@
 <template>
 
   <!-- <ContentFrame class="About"> -->
-  <div class="Error Section-Page _margin-center">
-    <div class="Section-Content _margin-center">
+  <div class="Error _section-page _margin-center">
+    <div class="_section-content _margin-center">
       <h6>404 Error</h6>
       <h1 class="Error-title title">
         We apologize... we couldn’t find what you were looking for, or something went wrong.

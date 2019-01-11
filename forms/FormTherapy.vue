@@ -1,6 +1,7 @@
 <template>
-  <div class="FormContact FormCard">
+  <div class="FormCapsidFeedback FormCard">
 
+    <!-- <div v-html="$md.render(intro)"></div> -->
     <Form :intro="intro"
           :source="source"
           :cta="cta"
@@ -10,6 +11,7 @@
           :errorMsg="error"
           :postUrl="postUrl"
           :isAlert="true"
+          notes="Capsid Form Feedback"
           
           class=""
           table="Dynamic"
@@ -24,22 +26,22 @@ import { mapState } from 'vuex'
 
 export default {
 
+  // props: ['postUrl'],
   components: {
     Form,
   },
 
   data: function () {
     const cytosis = this.$store.state.cytosis
-    
     return {
       postUrl: this.$store.state.ext_handler,
-      intro: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['Markdown'],
-      source: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['JSON'],
-      isPublished: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['isPublished'],
+      intro: this.$cytosis.find('Content.therapy-form', cytosis.tables)[0]['fields']['Markdown'],
+      source: this.$cytosis.find('Content.therapy-form', cytosis.tables)[0]['fields']['JSON'],
+      isPublished: this.$cytosis.find('Content.therapy-form', cytosis.tables)[0]['fields']['isPublished'],
       
       error: this.$cytosis.find('Content.error-form', cytosis.tables)[0]['fields']['Markdown'],
-      thanks: this.$cytosis.find('Content.contact-thanks', cytosis.tables)[0]['fields']['Markdown'],
-      cta: this.$cytosis.find('Content.contact-cta', cytosis.tables)[0]['fields']['Markdown'],
+      thanks: this.$cytosis.find('Content.capsid-thanks', cytosis.tables)[0]['fields']['Markdown'],
+      cta: this.$cytosis.find('Content.capsid-cta', cytosis.tables)[0]['fields']['Markdown'],
       privacy: this.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
     }
   },
@@ -49,6 +51,10 @@ export default {
       'Content',
       ]),
 
+    notes() {
+      return "Phage Therapy FAQ Form"
+      // return `Form Feedback; prompt: ${this.intro}`
+    },
   },
 
 
