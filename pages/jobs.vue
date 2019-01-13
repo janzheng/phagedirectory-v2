@@ -13,23 +13,69 @@
       <div class="Jobs-intro _section-content _margin-center" v-html="$md.render(intro)" />
 
       <div class="_section-article _margin-center Jobs-container">
+
+        <!-- 
+
+          Paid, Active Jobs
+
+        -->
+
+
+        <!-- 
+
+          Jobs Stream // all jobs including expired
+
+        -->
         <div v-for="job of Jobs" v-if="showJob(job)" :key="job.id"
              :class="getStatus(job)"
-             class="Jobs-item _card _margin-bottom-2 _padding-2">
+             class="Jobs-item _card _margin-bottom-2 _padding">
+
           <div class="Job-meta">
-            <div v-if="getStatus(job)" class="Job-status _margin-bottom">
-              <span class="_tag">{{ getStatus(job) }}</span>
-            </div>
-            <div class="Job-posted _font-small">
-              {{ job.fields['PostedDate'] | niceDate }}
+            <div class="_grid-2-1 _margin-bottom-half">
+              <!-- <div class="Job-org " >{{ job.fields['Org'] }}</div> -->
+              <div>
+                <div v-if="getStatus(job)" class="Job-status _margin-bottom">
+                  <span class="_tag">{{ getStatus(job) }}</span>
+                </div>
+                <div v-if="getAttachment(job)" class="Job-org-logo _margin-bottom-half" >
+                  <img :src="getAttachment(job)" alt="Job logo">
+                </div>
+              </div>
+              <div class="Job-date _right-sm">
+                {{ job.fields['PostedDate'] | niceDate }}
+              </div>
             </div>
           </div>
+
+
+          <!-- <div class="Job-meta">
+            <div class="_grid-2 _margin-bottom-half">
+              <div class="Job-org " >{{ job.fields['Org'] }}</div>
+              <div class="Job-date _right-sm">
+                {{ job.fields['PostedDate'] | niceDate }}
+              </div>
+            </div>
+          </div> -->
+          <!-- <div>
+            <div class="Job-org _font-bold" >{{ job.fields['Org'] }}</div>
+          </div> -->
           <a :href="job.fields['URL']" class="Job-link">
             <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
           </a>
-          <div>
-            <div class="Job-org _font-bold _padding-bottom" >{{ job.fields['Org'] }}</div>
-            <p v-if="job.fields['Supervisor']" class="Job-supervisor">{{ job.fields['Supervisor'] }}</p>
+          <!-- <div class="Job-org _margin-bottom" >{{ job.fields['Org'] }}</div> -->
+
+          <!-- <div class="Job-meta">
+            <div class="_grid-2 _margin-bottom-half">
+              <div class="Job-org " >{{ job.fields['Org'] }}</div>
+              <div class="Job-date _right-sm">
+                {{ job.fields['PostedDate'] | niceDate }}
+              </div>
+            </div>
+          </div> -->
+          <div class="Job-org" >{{ job.fields['Org'] }}</div>
+
+          <div v-if="job.fields['Supervisor']" >
+            <p class="Job-supervisor">{{ job.fields['Supervisor'] }}</p>
           </div>
           <div class="Job-description" v-html="$md.render(job.fields['Markdown'] || '')" />
           <div class="Job-tags">
@@ -94,6 +140,14 @@ export default {
   },
 
   methods: {
+    getAttachment(job) {
+      // currently only works for the first attachment
+      if(job.fields['Attachments']) {
+        console.log('attachments', job.fields['Attachments'][0]['url'])
+        return job.fields['Attachments'][0]['url']
+      }
+    },
+
     showJob(job) {
       if (!job.fields['isPublished'])
         return undefined 

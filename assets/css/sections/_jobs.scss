@@ -6,3 +6,22 @@
     border: 0;
   }
 }
+
+.Jobs-item {
+	img {
+		max-width: 100%;
+	}
+
+
+.Job-org {
+	@extend h5;
+	padding-top: 0;
+	padding-bottom: $size-half;
+	font-weight: normal;
+}
+
+	.Job-org-logo {
+		max-width: 300px;
+		max-height: 120px;
+	}
+}

@@ -19,11 +19,20 @@ $theme-sizes: (
 
 $size: 16px;
 $font-lineheight: 24px;
-// $font-size-base: 18px;
+$font-size-base: 18px;
 
 $font-small: $size - 2px;
 $font-large: $size + 2px;
 
+
+// looks better on large screens / high DPI:
+// $size: 18px;
+// $font-lineheight: 28px;
+
+// $width-content-max: 95ch;
+// $width-content-paragraph: 85ch;
+// $width-content-paragraph-narrow: 62ch !default; // deprecated in favor of content-article
+// $width-content-article: 68ch !default;
 
 
 //   Measurements
@@ -136,6 +145,20 @@ $button-outline-color-bg-hover: inherit;
 
 
 @import '../../node_modules/coeur/styles/index.scss';
+
+
+// selective import for space saving
+// @import '../../node_modules/coeur/styles/_heart.scss';
+// @import '../../node_modules/coeur/styles/_head.scss';
+// // @import '../../node_modules/coeur/styles/_neck.scss';
+// // @import '../../node_modules/coeur/styles/_body.scss';
+// @import '../../node_modules/coeur/styles/_neck-buttons.scss';
+// @import '../../node_modules/coeur/styles/_neck-layout.scss';
+// @import '../../node_modules/coeur/styles/_neck-design.scss';
+// @import '../../node_modules/coeur/styles/_neck-links.scss';
+// @import '../../node_modules/coeur/styles/_body-card.scss';
+// @import '../../node_modules/coeur/styles/_body-forms';  
+
 
 
 

@@ -263,6 +263,9 @@
             <span style="color:#fa5486">&mdash;</span>
           </h3>
           <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-item Capsid-jobs-item " >
+            <div v-if="getAttachment(job)">
+              <img :src="getAttachment(job)" alt="Job logo"/>
+            </div>
             <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
             </div>
             <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
@@ -372,6 +375,13 @@ export default {
       return issue.fields['Tags'] // currently these are just a multi select list (array of strings)
       // console.log('tags:', issue.fields['Tags'])
       // return this.$cytosis.getLinkedRecords(issue.fields['Tags'], this['Tags'], true)
+    },
+
+    getAttachment(job) {
+      // currently only works for the first attachment
+      // console.log('attachment', job.fields['Attachment'][0]['url'])
+      if(job.fields['Attachments'])
+        return job.fields['Attachments'][0]['url']
     },
 
     getSponsors(issue) {

@@ -23,7 +23,7 @@
   }
   .nuxt-link-exact-active, 
   .nuxt-link-active {
-    @extend %links-bg;
+    // @extend %links-bg;
     @extend %font-bold;
   }
   .Footer-right,

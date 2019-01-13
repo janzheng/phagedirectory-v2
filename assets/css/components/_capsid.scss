@@ -119,7 +119,8 @@
   }
 }
 
-.Capsid-card {
+.Capsid-card, .Periodical-card {
+  // .Periodical-card is legacy to the BiomX C&T
 
   padding: $size;
   background-color: $color-ui-lighter;
@@ -335,6 +336,14 @@
     margin-bottom: $size-half;
     &:last-child {
       margin-bottom: $size;
+    }
+    h5 {
+      padding: 0;
+      padding-bottom: $size-half;
+      // line-height: $size-2;
+    }
+    img {
+      max-width: 250px;
     }
   }
   .Capsid-jobs-itemheader {

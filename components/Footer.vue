@@ -19,10 +19,10 @@
             <!-- <span class="_margin-right "><router-link to="/phagetherapy">What is Phage Therapy?</router-link></span> -->
             <span class="_margin-right "><router-link to="/about">About Us</router-link></span>
             <span class="_margin-right "><router-link to="/contact">Contact Us</router-link></span>
-            <span><router-link to="/classroom">Classroom Initiative</router-link></span>
+            <span class="_block-xs"><router-link to="/classroom">Classroom Initiative</router-link></span>
           </span>
-          <span class="_block-xs">
-            <span class="_margin-left-sm _margin-right "><router-link to="/support-us">Support Us</router-link></span>
+          <span class="_block-xs _margin-top-2-xs">
+            <span class="_margin-left-sm _margin-right "><router-link to="/services">Services</router-link></span>
             <span class="_margin-right "><router-link to="/brand">Brand</router-link></span>
             <span class=" "><router-link to="/policies">Site Policy</router-link></span>
           </span>

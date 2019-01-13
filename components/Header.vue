@@ -10,19 +10,22 @@
         <div class="Header-left _hidden-sm">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
             <router-link to="/" class="Header-logo-link _border-none-i _margin-right"><img class="logo-xs" src="~/static/snow.png"></router-link>
-            <div class="Header-inset _flex-2">
-              <div class=" _flex-row _flex-vertically _flex-wrap _padding-right">
-                <div class="_margin-bottom-half">
+            <div class=" _flex-2">
+              <div class="Header-inset _flex-row _flex-vertically _flex-wrap _padding-right">
+                <div class="_margin-bottom-half _flex-row">
                   <router-link to="/phages" class="_button --text --short _padding-none _margin-none --border-none">
                     Phages
                   </router-link>
                   <router-link to="/labs" class="_button --text --short _padding-none _margin-none _margin-right-half --border-none">
                     Labs
                   </router-link>
-                  <router-link to="/join" class="_button CTA --loud --short _margin-none-i _margin-right-half-i">
+                  <!-- <router-link to="/join" class="_button CTA --loud --short _margin-none-i _margin-right-half-i"> -->
+                  <router-link to="/join" class="_flex-1 _center _button CTA --loud --short _margin-none-i">
                     Join
                   </router-link>
                 </div>
+              </div>
+              <div>
                 <router-link to="/phagetherapy" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
                   Phage Therapy
                 </router-link>
@@ -36,10 +39,10 @@
                   Capsid &amp; Tail
                 </router-link>
               </div>
-              <!-- takes up a ton of space -->
-              <div class="_margin-top-half _padding-left-half _padding-right-half">
+              <!-- takes up a ton of space, try excluding it in mobile -->
+              <!-- <div class="_margin-top-half _padding-left-half _padding-right-half">
                 <input id="searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline --width-full" type="text" name="searchbar" placeholder="🔍 Labs, PIs, organisms" @input="search">
-              </div>
+              </div> -->
             </div>
           </div>
           <!-- <div class="_flex _left-xs _align-vertically _margin-bottom">

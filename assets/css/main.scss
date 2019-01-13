@@ -58,5 +58,25 @@
 // }
 
 
+/* 
+
+  Experiments
+
+ */
+
+._table-em-first {
+  // emphasize the first column as header
+  td:first-child {
+    @extend ._font-bold;
+  } 
+}
+
+
+._flex-wrap-xs {
+  @include screen-xs {
+    flex-wrap: wrap;
+  }
+}
+
 
 

@@ -75,3 +75,10 @@ blockquote {
     // clip-path: polygon(0% 20%, 80% 0%, 100% 0, 100% 100%, 0 100%);
   }
 }
+
+
+// some pages have an intro section / overview w/ larger text 
+.Intro {
+  @extend ._font-larger;
+
+}

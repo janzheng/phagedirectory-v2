@@ -70,7 +70,10 @@
               </div>
             </div>
             <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
-              <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
+              <div v-if="getAttachment(job)">
+                <img :src="getAttachment(job)" alt="Job logo">
+              </div>
+              <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
               <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
               <div v-if="job.fields['Tags']" class="_margin-top-half" >
                 <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
@@ -220,6 +223,13 @@ export default {
         this.headDescription = "Capsid & Tail is a micro-publication about all things phages"
         this.headTitle = "Capsid & Tail"
       }
+    },
+
+    getAttachment(job) {
+      // currently only works for the first attachment
+      // console.log('attachment', job.fields['Attachment'][0]['url'])
+      if(job.fields['Attachments'])
+        return job.fields['Attachments'][0]['url']
     },
 
     getSponsors(issue) {

@@ -16,7 +16,9 @@ $dir-gray: $color-gray-lighter;
       border-color: $color-active;
     }
     @include screen-xs {
-      display: none; // removes redundancy on small screen
+      // display: none; // removes redundancy on small screen
+      // header search removed, use this instead
+      height: $size-4;
     }
   }
   
