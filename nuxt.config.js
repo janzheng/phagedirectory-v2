@@ -218,11 +218,23 @@ module.exports = {
   },
 
   build: {
-    // https://willbrowning.me/reducing-the-vendor-bundle-size-in-nuxt-js/
-    analyze: analyze,
-    splitChunks: {
-      layouts: true
+    // helps cache busting
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
+      // chunk: ({ isDev }) => isDev ? '[name].js' : '[chunkhash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[contenthash].css'
     },
+
+    // https://willbrowning.me/reducing-the-vendor-bundle-size-in-nuxt-js/
+    // analyze: analyze, use --analyze instead for visualizer
+    // minimize: true,
+    // cache: true,
+    // extractCSS: true,
+    // optimizeCSS: true,
+
+    // splitChunks: {
+    //   layouts: true
+    // },
 
     babel: {
       sourceType: "unambiguous",

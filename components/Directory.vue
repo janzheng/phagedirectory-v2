@@ -14,7 +14,7 @@
       <div class="Directory-nav _flex-row _flex-wrap-xs ">
         <router-link :class="{'--active': view == 'phages'}" to="/phages" class="_button CTA --short --outline _margin-right _margin-bottom-none --nowrap">Phage Hosts</router-link>
         <router-link to="/labs" class="_button CTA Btn-outline --short --outline _margin-right _margin-bottom-none">Labs</router-link>
-        <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline _margin-top" type="text" name="searchbar" placeholder="Search" >
+        <input id="searchbar" ref="pageSearch" v-model.trim="search" class="Directory-search _form-input --width-full --short _inline _margin-top-xs" type="text" name="searchbar" placeholder="Search" >
       </div>
     </div>
 

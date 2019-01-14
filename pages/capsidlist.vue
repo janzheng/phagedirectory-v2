@@ -9,20 +9,24 @@
   <div class="Capsid _section-page _margin-center">
     <div class="Capsid _section-content _margin-center ">
 
-      <div class="Capsid _section-content _margin-center ">
-        <div class="Capsid-intro _margin-bottom _flex _flex-bottom">
-          <div class="" v-html="$md.render(title)" />
-          <div class="" v-html="$md.render(intro)" />    
-        </div>
+      <div class="Capsid _section-content _margin-center _center ">
+        <!-- <div class="Capsid-intro _margin-bottom _flex _flex-vertically"> -->
+        <!-- <div class="Capsid-intro _margin-bottom _grid-2-3 _align-vertically"> -->
+        <div class="" v-html="$md.render(title)" />
+        <!-- <div class="" v-html="$md.render(intro)" />     -->
+        <!-- </div> -->
       </div>
 
+      <!-- <CapsidBanner /> -->
       <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)" />
-      <CapsidBanner />
 
     </div>
     
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
     <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
+
+    <CapsidBanner class="_section-content _margin-center _margin-top-2 _margin-bottom-2" />
+
     <CapsidStub :issues="notLatest" class="_section-article _margin-center _padding-bottom-2" />
 
   </div>

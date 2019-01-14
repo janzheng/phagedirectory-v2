@@ -34,7 +34,7 @@ export default {
 
     // const staticData = await loadStatic(env, store, 'newspage')
     const newsData = await loadNews(env, store, 'newspage')
-    console.log('newspage:', newsData)
+    // console.log('newspage:', newsData)
 
     const slug = unescape(route.params.slug)
     return {

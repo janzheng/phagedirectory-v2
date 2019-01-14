@@ -4,6 +4,12 @@
   border: 1px solid $color-silver-lighter;
   overflow: auto;
 
+  &.--img {
+    img {
+      max-width: 100%;
+    }
+  }
+
   &.--teal-50 {
     background-color: $color-teal-50;
     border-color: $color-teal-50;

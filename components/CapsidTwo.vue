@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="Capsid _section-article _margin-center">
+  <div class="Capsid _margin-center">
     
     <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
          :key="issue.id" 
@@ -19,117 +19,129 @@
 
       <router-link :to="`/capsid/${issue.fields['Slug']}`"><h1 class="Capsid-title" v-html="issue.fields['Title']" /></router-link>
 
-      <div class="Capsid-article">
-        <h2 class="Capsid-lede" v-html="issue.fields['Lede']" />
-        <div v-if="issue.fields['Intro']" 
-             class="Capsid-description _margin-bottom _md-p_fix" 
-             v-html="$md.render(issue.fields['Intro'] || '')" />
+      <h2 class="Capsid-lede" v-html="issue.fields['Lede']" />
 
-        <!-- leave Sponsors ABOVE the whats new area to call it out -->
-        <div v-if="getSponsors(issue).length>0" class="Capsid-sponsor" >
-          <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
-          <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-sponsor-item" >
-            <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')" />
-            <div v-if="sponsor.fields['Tags']" class="_margin-top-half" >
-              <span class="Capsid-item-tag _tag --sponsor">Sponsor</span>
-            </div>
+
+      <div class="Capsid-grid _grid-2-1 _grid-gap-large">
+
+        <div class="Capsid-main">
+          <div v-if="issue.fields['Intro']" 
+               class="Capsid-description _margin-bottom _md-p_fix" 
+               v-html="$md.render(issue.fields['Intro'] || '')" />
+          <div class="Capsid-article">
+            <div v-if="issue.fields['Intro']" 
+                 class="Capsid-description _margin-bottom _md-p_fix" 
+                 v-html="$md.render(issue.fields['Intro'] || '')" />
+            <div v-if="issue.fields['Article']" class="Capsid-content" v-html="$md.render(issue.fields['Article'] || '')" />
           </div>
         </div>
 
+        <div class="Capsid-sidebar">
 
-        <div class="Capsid-new" >
-
-          <!-- 
-
-              WHATS NEW / UPDATES
-
-           -->
-
-          <div v-if="getUpdates(issue).length>0" class="Capsid-updates" >
-            <h4 class="Capsid-new-title">{{ issue.fields['UpdatesTitle'] || 'Updates' }}</h4>
-            <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-new-item" >
-              <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
-              <div v-if="update.fields['Tags']" class="_margin-top-half" >
-                <span v-for="tag of update.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+          <!-- twitter share on top -->
+          <div class="Capsid-share _margin-bottom-2" >
+            <p class="Capsid-twitter">
+              <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+              <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
+            </p>
+          </div>
+          
+          <!-- leave Sponsors ABOVE the whats new area to call it out -->
+          <div v-if="getSponsors(issue).length>0" class="Capsid-sponsor" >
+            <!-- Don't show Sponsor title, just keep the tag<h4 class="Capsid-sponsors-title">{{'Sponsors'}}</h4> -->
+            <div v-for="sponsor of getSponsors(issue)" v-if="sponsor && sponsor.fields['isPublished']" :key="sponsor.fields['Name']" class="Capsid-sponsor-item" >
+              <div class="_md-p_fix" v-html="$md.render(sponsor.fields['Markdown'] || '')" />
+              <div v-if="sponsor.fields['Tags']" class="_margin-top-half" >
+                <span class="Capsid-item-tag _tag --sponsor">Sponsor</span>
               </div>
             </div>
           </div>
 
-          <!-- 
 
-              JOBS 
+          <div v-if="hasNew(issue)" class="Capsid-new" >
 
-           -->
+            <!-- 
 
-          <div class="Capsid-jobs">
-            <div class="_grid-2-xs">
-              <h4 class="Capsid-new-title">{{ 'Latest Jobs' }}</h4>
-              <div class="_right">
-                <div><a href="https://phage.directory/jobs">All jobs</a></div>
-                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+                WHATS NEW / UPDATES
+
+             -->
+
+            <div v-if="getUpdates(issue).length>0" class="Capsid-updates" >
+              <h4 class="Capsid-new-title">{{ issue.fields['UpdatesTitle'] || 'Updates' }}</h4>
+              <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-new-item" >
+                <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
+                <div v-if="update.fields['Tags']" class="_margin-top-half" >
+                  <span v-for="tag of update.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+                </div>
               </div>
             </div>
-            <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
-              <div v-if="getAttachment(job)">
-                <img :src="getAttachment(job)" alt="Job logo">
+
+            <!-- 
+
+                JOBS 
+
+             -->
+
+            <div class="Capsid-jobs">
+              <div class="_grid-2-xs">
+                <h4 class="Capsid-new-title">{{ 'Latest Jobs' }}</h4>
+                <div class="_right">
+                  <div><a href="https://phage.directory/jobs">All jobs</a></div>
+                  <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+                </div>
               </div>
-              <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
-              <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
-              <div v-if="job.fields['Tags']" class="_margin-top-half" >
-                <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+              <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
+                <div v-if="getAttachment(job)">
+                  <img :src="getAttachment(job)" alt="Job logo">
+                </div>
+                <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
+                <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
+                <div v-if="job.fields['Tags']" class="_margin-top-half" >
+                  <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+                </div>
+              </div>
+              <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
+            </div>
+
+            <!-- 
+
+                COMMUNITY 
+
+             -->
+
+            <div class="Capsid-community">
+              <div class="_grid-3-2-xs">
+                <h4 class="Capsid-new-title">Community Board</h4>
+                <div class="Capsid-community-cta _right">
+                  <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
+                </div>
+              </div>
+              <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item" >
+                <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader" ><span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold">{{ request.fields['Category'] }}</span><span v-if="request.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ request.fields['Date'] }}</span></div>
+                <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
+                <div v-if="request.fields['Tags']" class="_margin-top-half" >
+                  <span v-for="tag of request.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+                </div>
+              </div>
+              <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')">
+                This place is empty!
               </div>
             </div>
-            <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
+
           </div>
 
-          <!-- 
 
-              COMMUNITY 
-
-           -->
-
-          <div class="Capsid-community">
-            <div class="_grid-3-2-xs">
-              <h4 class="Capsid-new-title">Community Board</h4>
-              <div class="Capsid-community-cta _right">
-                <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
-              </div>
-            </div>
-            <div class="Capsid-community-description" v-html="$md.render(communityDescription || '')"/>
-            <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item" >
-              <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader" ><span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold">{{ request.fields['Category'] }}</span><span v-if="request.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ request.fields['Date'] }}</span></div>
-              <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
-              <div v-if="request.fields['Tags']" class="_margin-top-half" >
-                <span v-for="tag of request.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
-              </div>
-            </div>
-            <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')" />
-          </div>
-
-        </div>
-
-        <!-- twitter share on top -->
-        <div class="Capsid-share _margin-bottom-2" >
-          <p class="Capsid-twitter">
-            <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-            <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
-          </p>
-        </div>
-
-
-        <div v-if="issue.fields['Article']" class="Capsid-content" v-html="$md.render(issue.fields['Article'] || '')" />
-
-        <!-- list has been moved to PeriodicalList.vue -->
-
-        <!-- twitter share on bottom -->
-        <div class="Capsid-share" >
-          <p class="Capsid-twitter">
-            <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-            <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
-          </p>
         </div>
       </div>
+      
 
+      <!-- twitter share on bottom -->
+      <div class="Capsid-share" >
+        <p class="Capsid-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
+        </p>
+      </div>
       <div v-if="issue.fields['Author']" class="Capsid-author" v-html="issue.fields['Author']" />
 
     </div>
@@ -258,7 +270,6 @@ export default {
 
     hasNew(issue) {
       // true if Community Requests, Updates, or Jobs exist
-      // update: don't use this; always display empty state w/ CTA
       return this.getCommunity(issue).length > 0 || this.getUpdates(issue).length > 0 || this.getJobs(issue).length > 0
     },
 

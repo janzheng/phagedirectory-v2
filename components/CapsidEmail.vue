@@ -217,7 +217,7 @@
         </div>
       </div>
 
-      <div v-if="hasNew(issue)" class="Email-card" >
+      <div class="Email-card" >
 
 
           <!-- 
@@ -247,7 +247,7 @@
 
            -->
 
-        <div v-if="getJobs(issue).length>0" class="Capsid-jobs" >
+        <div class="Capsid-jobs" >
           <table class="Section-table">
             <tr>
               <td class="" >
@@ -273,14 +273,14 @@
               <span v-for="tag of job.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
+          <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
         </div>
-      </div>
 
-          <!-- 
+        <!-- 
 
-              COMMUNITY 
+            COMMUNITY 
 
-           -->
+         -->
 
         <div v-if="getCommunity(issue)" class="Capsid-community" >
           <table class="Section-table">
@@ -296,6 +296,7 @@
           <h3 class="line">
             <span style="color:#fa5486">&mdash;</span>
           </h3>
+          <div class="Capsid-community-description" v-html="$md.render(communityDescription || '')"/>
           <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-item Capsid-community-item _margin-bottom" >
             <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader">
               <span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ request.fields['Category'] }}</b></span><span v-if="request.fields['Date']" class="_md-p_fix _font-small">{{ request.fields['Date'] }}</span>
@@ -305,7 +306,11 @@
               <span v-for="tag of request.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
             </div>
           </div>
+          <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')">
+          </div>
         </div>
+      </div>
+
 
       <br>
 
@@ -358,6 +363,9 @@ export default {
 
   data: function () {
     return {
+      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

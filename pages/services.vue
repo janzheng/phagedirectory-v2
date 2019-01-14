@@ -12,9 +12,7 @@
 
   <!-- <ContentFrame class="About"> -->
   <div class="Services _section-page _margin-center">
-    <section class=" _margin-center">
-      <div class="_padding-bottom" v-html="$md.render(intro || '')" />
-    </section>
+    <div class="_padding-bottom" v-html="$md.render(intro || '')" />
 
     <section id="overview" class="_section-content _margin-center">
       <div class="_section-article _margin-center">
