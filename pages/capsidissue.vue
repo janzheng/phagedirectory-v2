@@ -10,7 +10,8 @@
 
     <div class="_section-content _margin-center">
       <!-- <div class="_flex _flex-bottom"> -->
-      <router-link to="/capsid" class="" v-html="$md.render(title || '')" />
+      <!-- <router-link to="/capsid" class="" v-html="$md.render(title || '')" /> -->
+      <div class="" v-html="$md.render(title || '')" />
       <!-- <div class="" v-html="$md.render(intro || '')" />     -->
       <!-- </div> -->
     </div>
@@ -19,7 +20,7 @@
       <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" />
 
       <div class="Capsid-content _margin-bottom-2" v-html="$md.render(highlight)" />
-      
+
       <Capsid :issues="issues" :show-preview="showPreview" />
     </div>
     <!-- <CapsidTwo:issues="issues" :show-preview="showPreview"  class="_margin-center" /> -->
