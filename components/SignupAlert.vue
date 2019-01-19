@@ -1,7 +1,12 @@
 
+<!-- 
+
+  Signup for Alerts for footer and alerts page
+
+ -->
 <template>
 
-  <div :class="classes" class="Signup _card --tertiary-80 _margin-none" >
+  <div class="Signup Signup-Alert _card --shadow _margin-none" >
     <form 
       class="Signup-form _height-100 _flex-col" 
       action="https://tinyletter.com/phagedirectory" 
@@ -35,9 +40,6 @@
 <script>
 
 export default {
-  props: {
-    'classes': String
-  },
 
   data: function () {
     return {

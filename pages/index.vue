@@ -1,20 +1,71 @@
 <template>
-  <div class="Home _section-page _margin-center">
+  <div class="Home _section-page _margin-center _padding-left-2 _padding-right-2">
 
     <div class="_section-content">
       <div class="_section-article" v-html="$md.render(intro || '')" />
     </div>
 
-    <div class="_section-content">
-      <div class="_section-article">
-        <CapsidBanner />
-      </div>
+    <!-- 
+    <div class="TestOne">
+      This is yet a test. LIGHT
     </div>
+    <div class="Test">
+      This is yet a test
+    </div>
+    <div class="TestTwo">
+      This also is yet a test
+    </div>
+     -->
+
  
+    <!-- <div class="">
+          <div class="_section-content">
+            <div class="_section-article">
+              <CapsidBanner />
+            </div>
+          </div>
+          <div class="_grid-3-1">
+            <div>
+              <FormCapsidFeedback class=""/>
+            </div>
+
+            <div class="">
+              <no-ssr>
+                <Twitter />
+              </no-ssr>
+            </div>
+          </div>
+        </div>
+    -->
+
+
+
     <div class="">
       <div class="_grid-3-1">
-        <div>
-          <FormCapsidFeedback class=""/>
+        <!-- 
+        <div class="StreamCard _grid-1-6">
+          <div class="StreamCard-sidebar">
+            <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" />
+          </div>
+          <div class="StreamCard-main _margin-bottom">
+            <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
+            <CapsidMicroBanner class="CapsidBanner" />
+            <FormCapsidFeedback class=""/>
+          </div>
+        </div> -->
+        
+        <div class="Stream">
+          <StreamCard>
+            <div slot="sidebar">
+              <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
+            </div>
+            <div slot="main">
+              <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
+              <!-- <CapsidBanner /> -->
+              <CapsidMicroBanner class="CapsidBanner" />
+              <FormCapsidFeedback class=""/>
+            </div>
+          </StreamCard>
         </div>
 
         <div class="">
@@ -22,6 +73,7 @@
             <Twitter />
           </no-ssr>
         </div>
+
       </div>
     </div>
 
@@ -38,6 +90,9 @@ import Twitter from '~/components/Twitter.vue'
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 import SignupCapsid from '~/components/SignupCapsid.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
+import CapsidMicroBanner from '~/components/CapsidMicroBanner.vue'
+import CapsidStub from '~/components/CapsidStub.vue'
+import StreamCard from '~/components/StreamCard.vue'
 
 import { mapState } from 'vuex'
 // import Cytosis from 'cytosis'
@@ -49,11 +104,14 @@ export default {
     // FormVomFeedback,
     FormCapsidFeedback,
     SignupCapsid,
+    CapsidStub,
+    CapsidMicroBanner,
     CapsidBanner,
+    StreamCard
   },
 
   layout: 'contentframe',
-  // middleware: 'pageload',
+  middleware: 'pageload',
 
   // async asyncData({app, env, route, store}) {
   async asyncData({app, env, store}) {
@@ -62,10 +120,27 @@ export default {
     //   env,
     //   tableIndex: 'static',
     // })
+
+
+    // let newsData
+    if(store.state && !store.state['C&T']) {
+      console.log('load cytosis: news')
+      await store.cache.dispatch('loadCytosis', { // maybe don't want other things to wait?
+        env,
+        tableIndex: 'capsid',
+        caller: 'homepage',
+        options: {
+          maxRecords: 1,
+          sort: [{field: "Issue", direction: "desc"}],
+        }
+      })
+    }
+
     return {
       postUrl: env.ext_handler,
       cytosis: store.state.cytosis,
-      intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown']
+      intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      capsidTitle: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
@@ -79,7 +154,12 @@ export default {
   computed: {
     ...mapState([
       'Content',
+      'C&T',
       ]),
+    latest() {
+      // NOTE: this always pulls the TOP item from airtable. Make sure it's the right one!
+      return [this['C&T'][0]] // return an array of the first issue only
+    },
 
   },
 

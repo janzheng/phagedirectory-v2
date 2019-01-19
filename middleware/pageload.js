@@ -10,6 +10,7 @@
 // import _ from 'lodash'
 
 import {loadStatic, loadDynamic} from '~/other/loaders'
+// import {loadStatic, loadDynamic, loadNews} from '~/other/loaders'
 
 async function loadDataOnServer(routeName, store, env) {
   // Load static data
@@ -47,8 +48,10 @@ async function loadDataOnServer(routeName, store, env) {
   //   console.log('loaded:', !!staticD, !!dynamicD)
   //   return Promise.resolve(results)
   // })
+  // newsData = loadNews(env, store, routeName)
 
   return Promise.all([staticData, dynamicData])
+  // return Promise.all([staticData, dynamicData, newsData])
   // }
 }
 

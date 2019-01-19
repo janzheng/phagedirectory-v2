@@ -1,6 +1,5 @@
 
-
-$dir-gray: $color-gray-lighter;
+$dir-gray: usetheme(copy-gray); // $color-gray-lighter;
 
 .Directory {
   .Directory-intro {
@@ -13,7 +12,7 @@ $dir-gray: $color-gray-lighter;
   .Directory-search {
     border-radius: $radius;
     &:hover, &:focus, &:active {
-      border-color: $color-active;
+      border-color: usetheme(active); // $color-active;
     }
     @include screen-xs {
       // display: none; // removes redundancy on small screen

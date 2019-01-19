@@ -304,7 +304,7 @@ class Cytosis {
         resolve(_this)
 
 
-      // if no tables names are provided,
+      // if no table names are provided,
       // '_cytosis' is required table to initialize
       Cytosis.getTables({options: {}, cytosis: _this, tables: ['_cytosis']}).then( (_config) => {
         if(_config) {
@@ -437,7 +437,7 @@ class Cytosis {
 
     // need to follow these defaults for airtable:
     // view='', fields=undefined, sort=undefined, filter='', 
-    let {view, fields, sort, filter} = options
+    let {view, fields, sort, filter, maxRecords, pageSize} = options
     if (!view)
       view = ''
     if (!filter)
@@ -456,13 +456,23 @@ class Cytosis {
             filterByFormula: filter,
             view
           }
+
           if(sort) {
             filterObj['sort'] = sort // need to add this after-the-fact
+          }
+
+          if(maxRecords) {
+            filterObj['maxRecords'] = maxRecords // limit # of records
+          }
+
+          if(pageSize) {
+            filterObj['pageSize'] = pageSize // limit # of records
           }
 
           if(fields && fields[table]) { // if a field for this table exists, add it
             filterObj['fields'] = fields[table]
           }
+
 
           let promise = new Promise(function(resolve, reject) {
             base(table).select(

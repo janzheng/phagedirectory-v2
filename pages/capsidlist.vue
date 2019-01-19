@@ -29,6 +29,8 @@
 
     <CapsidStub :issues="notLatest" class="_section-article _margin-center _padding-bottom-2" />
 
+    <FormCapsidFeedback class="_section-article _margin-center _margin-bottom-2"/>
+
   </div>
 </template>
 
@@ -38,6 +40,7 @@
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import Capsid from '~/components/Capsid.vue'
 import CapsidStub from '~/components/CapsidStub.vue'
+import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 import { mapState } from 'vuex'
 
 
@@ -67,6 +70,7 @@ export default {
     CapsidBanner,
     Capsid,
     CapsidStub,
+    FormCapsidFeedback,
   },
 
   layout: 'contentframe',

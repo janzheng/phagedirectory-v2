@@ -2,37 +2,7 @@
 .Layout {
 	// applied to /layouts/contentframe etc.
 	// basically it wraps every page
-  background-color: $color-bg;
+  background-color: usetheme(bg); // $color-bg;
   position: relative;
 }
 
-
-
-p, ul, li, {
-  // font-size: $font-size-base;
-  // line-height: $font-lineheight;
-  @extend %md-sans_serif;
-
-  padding-left: 0;
-  // @extend %font-serif;
-
-  a { // in-paragraph links
-    font-weight: 700;
-    &+a {
-    }
-  }
-}
-
-// links
-a {
-  text-decoration: underline;
-  text-decoration-color: $color-links;
-  border: 0;
-  position: relative;
-  // color: $color-green;
-  // @extend ._pointer-no_events;
-  // @extend %ease-fast;
-  &:hover {
-    color: $color-links;
-  }
-}

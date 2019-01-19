@@ -1,6 +1,12 @@
 
 .Header {
 
+  // give a lot more space to links
+  max-width: $width-lg-min;
+  padding-left: $size-2;
+  padding-right: $size-2;
+
+
   .Header-content {
     @include screen-sm {
       // @include gridAutoCols(2);
@@ -9,35 +15,39 @@
 
   a {
     @include screen-sm {
-      font-size: $font-large;
+      // font-size: usetheme(font-large), // $font-large;
+      font-size: usetheme(size), // $font-large;
     }
     // font-size: $size-larger;
     text-decoration: none;
   }
   .nuxt-link-exact-active {
-    @extend %links-bg;
+    // @extend %links-bg;
     @extend %font-bold;
   }
   .Header-orgs.nuxt-link-active {
-    @extend %links-bg;
+    // @extend %links-bg;
     @extend %font-bold;
   }
   .Header-search {
-    border: $border-thin solid $color-ui-light;
+    border: $border-thin solid usetheme(bg-lighter); //;$color-ui-light;
     border-radius: $radius;
+
+    // max-width: 150px; // gives the links to the right more space
+
     @extend %ease;
     &:hover {
-      border-color: $color-tertiary;
+      border-color: usetheme(active); //$color-tertiary;
     }
     &:focus {
-      border: $border-thin solid $color-tertiary;
+      border: $border-thin solid usetheme(active); //$color-tertiary;
       padding: $size-half $size-base;
       @extend %ease;
     }
   }
 
   .Header-inset {
-    background-color: $color-silver-light;
+    background-color: usetheme(bg-silver); //$color-silver-light;
     border-radius: $radius;
     padding-top: $size-half;
     padding-bottom: $size-half;
@@ -51,3 +61,4 @@
   }
 
 }
+

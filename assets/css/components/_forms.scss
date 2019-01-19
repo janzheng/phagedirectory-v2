@@ -5,14 +5,14 @@
 .Form {
   .Form-btn {
     &:hover {
-      background-color: $color-links;
-      color: $color-bg;
-      border-color: $color-links;
+      background-color: usetheme(active); //$color-links;
+      color: usetheme(white); //$color-bg;
+      border-color: usetheme(active); //$color-links;
     }
     &:active, &:focus {
-      background-color: $color-links;
-      color: $color-bg;
-      border-color: $color-gray;
+      background-color: usetheme(active); //$color-links;
+      color: usetheme(white); //$color-bg;
+      border-color: usetheme(active); //$color-gray;
     }
   }
 
@@ -21,8 +21,7 @@
     input:focus {
       & + span {
         // border-color: $color-links;
-
-        border-bottom: $border-thin solid $color-links;
+        border-bottom: $border-thin solid usetheme(links);
       }
     }
   }
@@ -34,6 +33,7 @@
 .FormCard {
 	@extend ._card;
 	padding: $size-2;
+  color: usetheme(copy);
 
   @include screen-xs {
     padding: $size;
@@ -66,3 +66,5 @@
     }
   }
 }
+
+

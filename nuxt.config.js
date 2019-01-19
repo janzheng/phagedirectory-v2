@@ -346,6 +346,20 @@ module.exports = {
           path: '/labs',
           component: resolve(__dirname, 'pages/directory.vue')
         },
+
+        {
+          // opens each issue separately, good for deeplinking, possibly comments
+          name: 'jobs',
+          path: '/jobs',
+          component: resolve(__dirname, 'pages/joblist.vue')
+        },
+        {
+          // opens each issue separately, good for deeplinking, possibly comments
+          name: 'job',
+          path: '/jobs/:slug',
+          component: resolve(__dirname, 'pages/jobpage.vue')
+        },
+
         // {
         //   name: 'people',
         //   path: '/people',

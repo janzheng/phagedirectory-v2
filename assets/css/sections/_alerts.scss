@@ -8,11 +8,11 @@
     margin-top: $size-base;
     padding-top: $size-base;
 
-    border-top: $border-thin solid $color-pink;
+    border-top: $border-thin solid usetheme(active); // $color-pink;
 
     &.Resolved { 
       opacity: 0.5;
-      background-color: $color-silver-lighter;
+      background-color: usetheme(bg-silver-lighter); // $color-silver-lighter;
       border: 0;
     }
   }
@@ -21,19 +21,20 @@
     margin-bottom: $size-base;
     .Alerts-status-tag {
       padding: $size-half $size-base;
-      background-color: $color-ui-light;
+      background-color: usetheme(bg-silver-lighter); // $color-ui-light;
       border-radius: $radius;
     }
     .Resolved {
       // avoid using green; default to gray
+      background-color: usetheme(bg-silver);
     }
     .Urgent {
-      background-color: $color-danger;
-      color: $color-bg;
+      background-color: usetheme(danger); // $color-danger;
+      color: usetheme(bg); //$color-bg;
     }
     .Low {
       background-color: transparent;
-      border: $border-thin solid $color-ui-light;
+      border: $border-thin solid usetheme(bg-silver); // $color-ui-light;
     }
   }
   .Alerts-title { // rendered in Md
@@ -49,87 +50,3 @@
 }
 
 
-// SignupAlert component can be found in a few places
-// will have a class specifying where itis
-.Signup {
-
-  // margin-top: $size-base;
-  // margin-bottom: $size-base;
-  .Subscribe {
-    font-weight: bold;
-  }
-
-  .Signup-form {
-    padding: $size-base $size-base;
-    // border: $color-main $border-thin solid;
-    // background: $color-tertiary;
-    border-radius: $radius;
-    color: $color-black;
-    a {
-      color: $color-black;
-      font-weight: bold;
-      &:hover {
-        color: $color-blue;
-      }
-    }
-
-    input {
-      // border-color: $color-tertiary;
-      color: $color-black;
-      &.Subscribe {
-        color: $color-black;
-      }
-
-      border-color: $color-black;
-      border-radius: $radius;
-      &:hover, &:active, &:focus {
-        background-color: rgba($color-white, 0.8)
-      }
-    }
-  }
-    .Signup-content {
-      @include screen-xs {
-        width: 100%;
-        max-width: 100%;
-      }
-    }
-    // .Signup-sub {
-      // font-weight: bold;
-    // }
-    .Signup-input {
-      @include screen-xs {
-        margin-right: 0;
-        width: 100%;
-      }
-      // @include screen-sm {
-      //   border-top-right-radius: 0 !important;
-      //   border-bottom-right-radius: 0 !important;
-      // }
-    }
-    .Signup-cta {
-      margin-bottom: 0;
-      // margin-top: $size-half;
-      @include screen-xs {
-        width: 100%;
-        display: block;
-        margin-top: $size-half;
-        margin-right: 0;
-      }
-      // @include screen-sm {
-      //   border-top-left-radius: 0 !important;
-      //   border-bottom-left-radius: 0 !important;
-      // }
-    }
-
-    // &.footer {
-    //   margin: 0;
-    //   text-align: center;
-    //   // margin-left: $size-2;
-    //   // margin-right: $size-2;
-
-    //   @include screen-xs {
-    //     // margin-left: $size-base;
-    //     // margin-right: $size-base;
-    //   }
-    // }
-}

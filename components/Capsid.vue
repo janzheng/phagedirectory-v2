@@ -5,7 +5,7 @@
     
     <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
          :key="issue.id" 
-         class="_padding-2-sm _padding-xs _padding-top-xs" >
+         class=" _padding-top-xs" >
       {{ setHeader(issue) }}
 
       <!-- <div class="Capsid-type _margin-bottom" v-if="issue.fields['IssueType']">
@@ -66,7 +66,11 @@
               <h4 class="Capsid-new-title">{{ 'Latest Jobs' }}</h4>
               <div class="_right">
                 <div><a href="https://phage.directory/jobs">All jobs</a></div>
-                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+                <div>
+                  <a :href="jobsMailto">
+                    Post a job
+                  </a>
+                </div>
               </div>
             </div>
             <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
@@ -192,6 +196,7 @@ export default {
       emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

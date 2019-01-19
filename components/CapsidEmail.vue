@@ -28,7 +28,9 @@
       <!-- hard-coded styles -->
       <style type="text/css">
         h4 {
-          padding: 16px 0;
+          /*padding: 16px 0;*/
+          padding: 0;
+          padding-top: 16px;
         }
         .Advert { 
           background-color: #FFD3D3 !important;
@@ -46,12 +48,13 @@
           font-size: 18px !important;
         }
 
-        .Email-card {
+        .Email-card, .Periodical-card {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
           background-color: #FCFCFC;
           border-radius: 4px;
           margin-bottom: 16px;
+          padding: 15px;
         }
 
         .Section-table {
@@ -163,10 +166,20 @@
           }
         }
 
-        blockquote, blockquote p {
-          color: #FA5486  !important;
+        blockquote p {
+          /*color: #FA5486  !important;*/
           font-family: georgia,times,times new roman,serif !important;
-          font-size: 23px !important;
+          font-size: 19px !important;
+          margin-bottom: 0px !important;
+          margin-top: 0px !important;
+        }
+        blockquote {
+          padding: 7px 30px;
+          margin-top: 15px;
+          margin-bottom: 15px;
+          margin-left: 0;
+          margin-right: 0;
+          border-left: solid 3px #FA5486;
         }
 
         @media only screen and (max-width:680px) {
@@ -182,6 +195,14 @@
 
         img {
           max-width: 100% !important;
+        }
+
+        .Capsid-content p {
+          margin-top: 21px;
+          margin-bottom: 21px;
+        }
+        .Capsid-content li {
+          padding-bottom: 21px;
         }
 
       </style>
@@ -255,7 +276,7 @@
               </td>
               <td>
                 <div><a href="https://phage.directory/jobs">All jobs</a></div>
-                <div><a href="mailto:jobs@phage.directory?subject=Phage Directory Job Posting&body=Hi Phage Directory, I'd like to add a phage job to your job board ...">Post a job</a></div>
+                <div><a :href="jobsMailto">Post a job</a></div>
               </td>
             </tr>
           </table>
@@ -366,6 +387,7 @@ export default {
       emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

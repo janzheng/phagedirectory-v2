@@ -7,7 +7,7 @@
   padding: $size;
 
   &.--tertiary {
-    background-color: $color-tertiary-50 !important;
+    background-color: usetheme(advert); //$color-tertiary-50 !important;
     // color: $color-white;
   }
 }

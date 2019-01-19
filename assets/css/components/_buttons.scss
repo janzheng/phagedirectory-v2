@@ -23,9 +23,9 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
   text-decoration: none; // <a>s might have underlines
 
   &:hover {
-    background-color: $color-links;
-    border-color: $color-links;
-    color: $color-bg;
+    background-color: usetheme(links); //$color-links;
+    border-color: usetheme(links); //$color-links;
+    color: usetheme(bg); //$color-bg;
     @extend %ease;
   }
 
@@ -34,8 +34,8 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
   &.--outline {
     &:hover {
       background-color: inherit;
-      border-color: $color-links;
-      color: $color-links;
+      border-color: usetheme(links); //$color-links;
+      color: usetheme(links); //$color-links;
       @extend %ease;
     }
   }
@@ -45,21 +45,21 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
   .nuxt-link-active {
     &, &:hover {
       background-color: inherit;
-      border-color: $color-links;
-      color: $color-links;
+      border-color: usetheme(links); //$color-links;
+      color: usetheme(links); //$color-links;
     }
   }
   
   &.--loud {
-    background-color: $color-tertiary;
-    color: $color-bg;
+    background-color: usetheme(active); //$color-tertiary;
+    color: usetheme(bg); //$color-bg;
     // font-weight: bold;
     &:hover {
       // border-color: $color-tertiary;
-      border-color: $color-dark;
+      border-color: usetheme(copy); //$color-dark;
       // background-color: $color-main;
-      background-color: $color-dark;
-      color: $color-bg;
+      background-color: usetheme(copy); //$color-dark;
+      color: usetheme(bg); //$color-bg;
     }
 
     // @include screen-xs {

@@ -41,12 +41,6 @@
 
 
 
-.CapsidBanner {
-  // used to sign up for Capsid all over the site 
-  // two versions: one wide (over articles) and one narrow (in footer);
-  box-shadow: 0px 4px 8px rgba(70, 70, 70, 0.1);
-}
-
 .Capsid, .CapsidStub {
   // change the header sizes a bit 
   // they need to stay semantic in order to be copied into mailchimp
@@ -88,16 +82,23 @@
   // }
 
   blockquote {
-    padding-left: $size;
-    padding-right: $size;
-    &,p { // md render fix
+    padding: $size $size-2;
+    border-left: $border-thin solid usetheme(tertiary);
+    margin-top: $size;
+    margin-bottom: $size;
+    p { // md render fix
       // overrides Coeur blockquotes as pull-quotes
       @extend %font-serif;
       font-size: $p4;
       line-height: $l4;
-      border: 0;
-      color: $color-tertiary;
+      margin-bottom: 0;
+      // border: 0;
+      // color: usetheme(tertiary); // $color-tertiary;
     }
+  }
+
+  a {
+    @extend ._wordbreak; // make sure long links get broken up, esp. for mobile
   }
 }
 
@@ -105,7 +106,7 @@
   @extend %font-serif;
   // font-style: italic;
   // font-size: $font-large;
-  color: $color-gray-light;
+  color: usetheme(copy-light); //$color-gray-light;
 }
 
 // in favor of plain text instead of lots of links like sidebar
@@ -123,7 +124,7 @@
   // .Periodical-card is legacy to the BiomX C&T
 
   padding: $size;
-  background-color: $color-ui-lighter;
+  background-color: usetheme(card); //$color-ui-lighter;
   border-radius: $radius;
   margin-bottom: $size-2;
   @extend ._card;
@@ -132,12 +133,12 @@
   // }
 
   &.--callout {
-    background-color: $color-teal-50;
+    background-color: usetheme(copy-light); //$color-teal-50;
     // color: $color-bg;
   }
 
   &.--light {
-    background-color: $color-teal-10;
+    background-color: setheme(highlight); //$color-teal-10;
     font-weight: inherit;
     // color: $color-bg;
   }
@@ -179,97 +180,97 @@
       height: auto;
     }
   }
-  .Capsid-item-date {
-    font-size: $font-small;
-    margin-right: $size-half;
-    @extend %font-500;
-    // & + .BlogList-title {
-    //   padding-top: 0;
-    // }
-  }
-  .Capsid-item-source {
-    // display: block;
-    // font-size: $font-small;
-    // @extend %font-600;
-    // color: $color-gray;
-    @extend %font-serif;
-    font-style: italic;
-    text-decoration: none;
-    color: $color-gray;
-    // @extend .--antialias;
-    // padding-bottom: $size-half;
-  }
-  .Capsid-item-title {
-    &, a {
-      padding-top: 0;
-      text-decoration: none;
-      @extend %font-serif;
-      // font-size: $font-larger * 1.19;
-      // line-height: $font-larger * 1.66;
-      // letter-spacing: -0.24px;
+  // .Capsid-item-date {
+  //   font-size: $font-small;
+  //   margin-right: $size-half;
+  //   @extend %font-500;
+  //   // & + .BlogList-title {
+  //   //   padding-top: 0;
+  //   // }
+  // }
+  // .Capsid-item-source { // UNUSED
+  //   // display: block;
+  //   // font-size: $font-small;
+  //   // @extend %font-600;
+  //   // color: $color-gray;
+  //   @extend %font-serif;
+  //   font-style: italic;
+  //   text-decoration: none;
+  //   color: $color-gray;
+  //   // @extend .--antialias;
+  //   // padding-bottom: $size-half;
+  // }
+  // .Capsid-item-title {
+  //   &, a {
+  //     padding-top: 0;
+  //     text-decoration: none;
+  //     @extend %font-serif;
+  //     // font-size: $font-larger * 1.19;
+  //     // line-height: $font-larger * 1.66;
+  //     // letter-spacing: -0.24px;
 
-      // typeface testing
-      font-size: 28px;
-      line-height: 34px;
-      letter-spacing: -0.4px;
-      // padding-bottom: 0; // to get author closer
+  //     // typeface testing
+  //     font-size: 28px;
+  //     line-height: 34px;
+  //     letter-spacing: -0.4px;
+  //     // padding-bottom: 0; // to get author closer
     
-    }
-  }
-  .Capsid-item-author {
-    margin-top: -$size-half;
-    color: $color-ui-dark;
-    // padding-bottom: $size;
-    // opacity: 0.5;
-  }
-  .Capsid-item-lede {
-    padding-bottom: $size;
-  }
-  .Capsid-item-header {
-    // padding-bottom: $size-half;
-    line-height: $font-larger * 1.66;
-  }
-  .Capsid-item-content {
-    grid-area: content;
-    .BlogList-title {
-      // display: block;
-      // font-size: $font-larger;
-      // line-height: $font-larger + 8px;
-      // font-style: italic;
-      // @extend %font-serif;
-      padding-bottom: $size-half;
-      text-decoration: none;
-    }
-    .Capsid-item-desc {
-      padding-bottom: $size-half;
-      font-size: $font-small;
-    }
-  }
-  .Capsid-item-image {
-    display: block;
-    grid-area: image;
-    width: 150px;
-    height: auto;
+  //   }
+  // }
+  // .Capsid-item-author {
+  //   margin-top: -$size-half;
+  //   color: $color-ui-dark;
+  //   // padding-bottom: $size;
+  //   // opacity: 0.5;
+  // }
+  // .Capsid-item-lede {
+  //   padding-bottom: $size;
+  // }
+  // .Capsid-item-header {
+  //   // padding-bottom: $size-half;
+  //   line-height: $font-larger * 1.66;
+  // }
+  // .Capsid-item-content {
+  //   grid-area: content;
+  //   .BlogList-title {
+  //     // display: block;
+  //     // font-size: $font-larger;
+  //     // line-height: $font-larger + 8px;
+  //     // font-style: italic;
+  //     // @extend %font-serif;
+  //     padding-bottom: $size-half;
+  //     text-decoration: none;
+  //   }
+  //   .Capsid-item-desc {
+  //     padding-bottom: $size-half;
+  //     font-size: $font-small;
+  //   }
+  // }
+  // .Capsid-item-image {
+  //   display: block;
+  //   grid-area: image;
+  //   width: 150px;
+  //   height: auto;
 
-    height: 100%;
-    object-fit: cover;
+  //   height: 100%;
+  //   object-fit: cover;
 
-    &.--contain {
-    object-fit: contain;
-    }
-  }
+  //   &.--contain {
+  //   object-fit: contain;
+  //   }
+  // }
 }
   
 .Capsid-callout {
   padding: $size;
-  background-color: $color-ui-lighter;
+  background-color: usetheme(bg-lighter); //$color-ui-lighter;
   border-radius: $radius;
   margin-bottom: $size-2;
 }
 
 .Capsid-sponsor {
   @extend .Capsid-card;
-  background-color: $color-silver-lighter;
+  background-color: usetheme(bg-lighter); //$color-silver-lighter;
   margin-bottom: $size-2; // add distance
 }
 
@@ -284,7 +285,7 @@
       display: block;
       width: 45px;
       padding-top: $size-half;
-      border-bottom: $border-thin $color-pink solid;
+      border-bottom: $border-thin solid usetheme(active); //;
     }
   }
   .Capsid-new-item {
@@ -298,25 +299,25 @@
 .Capsid-updates {
   // @extend .Capsid-card;
   padding: $size;
-  background-color: $color-ui-lighter;
+  background-color: usetheme(bg-lighter); //;$color-ui-lighter;
 }
 .Capsid-update-item {
   padding: $size;
-  background-color: $color-purewhite;
+  background-color: usetheme(purewhite); //$color-purewhite;
   margin-bottom: $size-half;
 }
 
 .Capsid-community {
   // @extend .Capsid-card;
   padding: $size;
-  background-color: $color-tertiary-05;
+  background-color: usetheme(community); //$color-tertiary-05;
 }
   .Capsid-community-cta {
     padding-top: $size--1;
   }
   .Capsid-community-item {
     padding: $size;
-    background-color: $color-purewhite;
+    background-color: usetheme(bg); //$color-purewhite;
     margin-bottom: $size-half;
   }
   .Capsid-community-itemheader {
@@ -328,7 +329,7 @@
 .Capsid-jobs {
   // @extend .Capsid-card;
   padding: $size;
-  background-color: $color-teal-10;
+  background-color: usetheme(jobs); //$color-teal-10;
 }
   .Capsid-jobs-item {
     padding: $size;
@@ -358,7 +359,7 @@
 .CapsidStub {
   
   .CapsidStub-latest {
-    padding-bottom: 0;
+    padding-bottom: $size-half;
   }
   
   // don't highlight / underline some parts
@@ -372,21 +373,21 @@
     }
     h1, h2 {
       text-decoration: underline;
-      text-decoration-color: $color-links;
+      text-decoration-color: usetheme(active); //$color-links;
     }
     &.--featured {
-      border-color: $color-tertiary;
+      border-color: usetheme(active); //$color-tertiary;
     }
     // emulate a link, but handled in js
     // since might contain nested links
-    border: $border-thin solid $color-bg;
+    border: $border-thin solid usetheme(bg); //$color-bg;
     @extend %ease;
     cursor: pointer;
     &:hover {
       @extend %ease;
-      border: $border-thin solid $color-tertiary;
+      border: $border-thin solid usetheme(active); //$color-tertiary;
       h2 {
-        color: $color-tertiary;
+        color: usetheme(capsid-color); // $color-tertiary;
         @extend %ease;
       }
     };
@@ -398,7 +399,7 @@
   margin-top: $size;
   margin-bottom: 0;
   padding: $size;
-  background-color: $color-ui-lighter;
+  background-color: usetheme(bg-lighter); // $color-ui-lighter;
   border-radius: $radius;
 
   img {
@@ -435,15 +436,23 @@
 }
 
 // mailchimp signup banner for capsid
+
 .CapsidBanner {
-  background-color: $color-teal-50;
+  // used to sign up for Capsid all over the site 
+  // two versions: one wide (over articles) and one narrow (in footer);
+  
+  // box-shadow: 0px 4px 8px rgba(70, 70, 70, 0.1);
+  @extend ._card;
+  background-color: usetheme(capsid-color); //$color-teal-50;
+  border-color: usetheme(capsid-color); //$color-teal-50;
+
   border-radius: $radius;
   padding: $size;
   // margin-bottom: $size;
 
   input[type='email'] {
     &:focus, &:hover {
-      background-color: $color-bg;
+      background-color: usetheme(bg); //$color-bg;
     }
   }
 }

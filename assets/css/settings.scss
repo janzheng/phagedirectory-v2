@@ -3,42 +3,167 @@
 
   This needs to be overhauled...
 
+
+  // looks better on large screens / high DPI:
+  // $size: 18px;
+  // $font-lineheight: 28px;
+
+  // $width-content-max: 95ch;
+  // $width-content-paragraph: 85ch;
+  // $width-content-paragraph-narrow: 62ch !default; // deprecated in favor of content-article
+  // $width-content-article: 68ch !default;
+
  */
 
 
 
-//  Colors
+/* 
 
-$theme-sizes: (
-  size: 16px,
+    COEUR PRESETS / OVERRIDES
+
+ */
+
+
+%font-mono,
+._font-mono {
+  font-family: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace;
+} ._font-mono, ._font-code { @extend %font-mono; }
+
+%font-display,
+._font-display {
+  // font-family: 'Playfair Display', 'Georgia', serif;
+  @extend %font-sans;
+}
+
+
+$use-cssvars: false;
+$use-colorate: false;
+
+
+
+
+
+
+
+/* 
+
+  IMPORT COEUR HERE
+  - don't use nuxt, it messes w/ default variables & cascading
+
+ */
+
+
+// @import '../../node_modules/coeur/styles/index.scss';
+
+// selective import for space saving
+@import '../../node_modules/coeur/styles/_utils.scss';
+@import '../../node_modules/coeur/styles/_heart.scss';
+
+
+
+
+
+/* 
+
+  Default variable overrides
+  - for buttons, etc.
+
+ */
+
+
+
+//  Phage Directory Measurements
+
+$phdir-sizes: (
   size-diff: 0,
-  radius: 4px,
+  lineheight: 24px,
+  font-small: 13px,
+  size: 15px,
+  font-large: 17px,
+
+  z-top: 90,
+  z-popup: 100,
+ 
 ) !default;
 
+@include addtheme($phdir-sizes)
 
 
-$size: 16px;
-$font-lineheight: 24px;
-$font-size-base: 18px;
-
-$font-small: $size - 2px;
-$font-large: $size + 2px;
-
-
-// looks better on large screens / high DPI:
-// $size: 18px;
-// $font-lineheight: 28px;
-
-// $width-content-max: 95ch;
-// $width-content-paragraph: 85ch;
-// $width-content-paragraph-narrow: 62ch !default; // deprecated in favor of content-article
-// $width-content-article: 68ch !default;
-
-
-//   Measurements
-$offset: 5px;
+$size: usetheme(size); // 16px;
+$font-lineheight: usetheme(lineheight); // 24px;
+// $font-size-base: 18px;
+$font-small: usetheme(font-small); // $size - 2px;
+$font-large: usetheme(font-large); // $size + 2px;
+// $offset: 5px;
 $z-popup: 100; // 
 $z-top: 90;
+
+$size-diff: usetheme(size-diff) !default;      // default: 0; in case we’re not using base16, used for some edge cases / alignment
+$size: usetheme(size) - $size-diff !default;   // 16px default; // based on 4*4
+$sizeline: usetheme(lineheight); // $size * 1.5 !default;               // baseline; base lineheight; line-heights follow 1.5 rule
+$baseline: $sizeline;
+
+
+
+
+/* 
+
+  COLOR MANAGEMENT
+
+ */
+
+
+$colors: (
+  phdir: #71EFF5,
+  teal: #71EFF5,
+  teal_dull: #90D9DD,
+  yellow: #FCCB4C,
+  pink: #FA5486,
+  blue-dark: #374F6A,
+);
+
+@include addtheme($colors)
+$colorMap: colorTintMap($colors);
+
+$context_: (
+  main: usetheme(phdir, $colors),
+  secondary: usetheme(blue-dark, $colors),
+  tertiary: usetheme(pink, $colors),
+
+  active: usetheme(pink, $colors),
+  links: usetheme(blue-dark, $colors),
+  links-decoration: usetheme(pink, $colors),
+  highlight: map-get($colorMap, teal-300), //usetheme(phdir, $colors),
+  // highlight-light: map-get($colorMap, teal-300), //usetheme(phdir, $colors),
+  advert: map-get($colorMap, pink-300), //usetheme(phdir, $colors),
+  
+  updates: usetheme(silver-lighter, $colors_),
+  jobs: map-get($colorMap, teal-300),
+  community: map-get($colorMap, pink-300),
+
+  body: usetheme(blue-dark, $colors),
+  copy: usetheme(blue-dark, $colors),
+  copy-gray: usetheme(color-gray, $colors_),
+  copy-light: usetheme(color-gray-lighter, $colors_),
+
+  bg: usetheme(white, $colors_),
+  bg-white: usetheme(white, $colors_),
+  bg-silver: usetheme(silver-light, $colors_),
+  bg-lighter: usetheme(silver-lighter, $colors_),
+  bg-blue: usetheme(blue-dark, $colors_),
+  // tbd refactor later
+  // blue: usetheme(blue, $colors_), // useful for alert-signup, when a blue color needed (prb needs fix later)
+  // white: usetheme(white, $colors_), // contextually useful for text on dark backgrounds
+
+  card: usetheme(silver-light, $colors_),
+
+  capsid-color: map-get($colorMap, teal_dull-400),
+  alert-color: map-get($colorMap, pink-300),
+  alert-color-cta: usetheme(teal_dull, $colors),
+);
+
+@include addtheme($context_)
+// @include colorate($context_);
 
 
 
@@ -68,67 +193,17 @@ $color-tertiary-50: rgba($color-tertiary,0.5);
 $color-tertiary-10: rgba($color-tertiary,0.2);   
 $color-tertiary-05: rgba($color-tertiary,0.05);      
 
-$color-active: $color-pink;       
-$color-links: $color-pink;         
-$color-body: $color-secondary;    
+$color-active: usetheme(active); // $color-pink;       
+$color-links: usetheme(links); // $color-pink;         
+// $color-body: $color-secondary;   
+$color-body: usetheme(copy, $context_); // $color-black !default;
+$color-copy: usetheme(copy, $context_); // $color-body !default;
+
+
 // $color-hover: $color-main;
 // $color-active: $color-main;
-
-
 $sidebar-color-link: $color-links;
-
-
 $color-focus: $color-tertiary;
-
-
-
-
-
-// @include colorate('phdir', $color-phdir);
-// @include colorate('teal', $color-teal);
-// @include colorate('dull', $color-dull);
-// @include colorate('yellow', $color-yellow);
-// @include colorate('pink', $color-pink);
-// @include colorate('gray', $color-gray);
-// @include colorate('gray-light', $color-gray-light);
-// @include colorate('main', $color-main);
-// @include colorate('secondary', $color-secondary);
-// @include colorate('tertiary', $color-tertiary);
-// @include colorate('active', $color-phdir);
-
-
-// %focus-pink {
-//   // border: solid rgba($color-tertiary, 1) ;
-//   // outline: none;
-//   // box-shadow: 0px 0px 2px 0px rgba($color-tertiary, 1);
-// }
-
-%font-mono,
-._font-mono {
-  font-family: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace;
-} ._font-mono, ._font-code { @extend %font-mono; }
-
-%font-display,
-._font-display {
-  // font-family: 'Playfair Display', 'Georgia', serif;
-  @extend %font-sans;
-}
-
-
-$use-cssvars: false;
-
-// $font-serif: "PT Serif", "Georgia", serif;
-// $font-display: "PT Serif", "Georgia", serif;
-
-
-
-
-/* 
-
-  Default variable overrides
-  - for buttons, etc.
-
- */
 
 // buttons
 $button-outline-color-main-hover: $color-active;
@@ -136,71 +211,68 @@ $button-outline-color-border-hover: $color-active;
 $button-outline-color-bg-hover: inherit;
 
 
-/* 
-
-  IMPORT COEUR HERE
-  - don't use nuxt, it messes w/ default variables & cascading
-
- */
-
-
-@import '../../node_modules/coeur/styles/index.scss';
-
-
-// selective import for space saving
-// @import '../../node_modules/coeur/styles/_heart.scss';
-// @import '../../node_modules/coeur/styles/_head.scss';
-// // @import '../../node_modules/coeur/styles/_neck.scss';
-// // @import '../../node_modules/coeur/styles/_body.scss';
-// @import '../../node_modules/coeur/styles/_neck-buttons.scss';
-// @import '../../node_modules/coeur/styles/_neck-layout.scss';
-// @import '../../node_modules/coeur/styles/_neck-design.scss';
-// @import '../../node_modules/coeur/styles/_neck-links.scss';
-// @import '../../node_modules/coeur/styles/_body-card.scss';
-// @import '../../node_modules/coeur/styles/_body-forms';  
+// coeur contexual color definitions
+$link-color-copy: usetheme(links);
+$link-color-hover: usetheme(active);
 
 
 
 
 
-%font-display,
-._font-display {
-  // nothing here for stylecoeur
-  // @extend %font-sans;
-  // font-family: $font-display;
-}
-
-
-
-@include addtheme($theme-sizes)
-
-
-$phdir_: (
-  phdir: #71EFF5,
-  teal: #71EFF5,
-  dull: #90D9DD,
-  yellow: #FCCB4C,
-  pink: #FA5486,
-  gray: #374F6A,
-);
-@include colorate($phdir_);
-
-
-$context_: (
-  main: usetheme(phdir, $colors_),
-  secondary: usetheme(gray, $colors_),
-  tertiary: usetheme(pink, $colors_),
-
-  active: usetheme(pink, $colors_),
-  links: usetheme(pink, $colors_),
-  body: usetheme(secondary, $colors_),
-
-);
-@include colorate($context_);
 
 
 
 
+// 
+//    CONTEXTUAL COLORS
+// 
 
+// $context_: (
+//   main: usetheme(blue, $colors_),
+//   secondary: usetheme(yellow, $colors_),
+//   tertiary: usetheme(orange, $colors_),
+
+//   bg: usetheme(white, $colors_),
+//   hover: usetheme(blue, $colors_),
+//   active: usetheme(orange, $colors_),
+//   inactive: usetheme(gray-light, $colors_),
+
+//   success: usetheme(green, $colors_),
+//   warning: usetheme(yellow, $colors_),
+//   info: usetheme(blue-dark, $colors_),
+//   danger: usetheme(red, $colors_),
+//   disabled: usetheme(gray-light, $colors_),
+//   transparent: usetheme(transparent, $colors_),
+
+//   body: usetheme(black, $colors_),
+//   copy: usetheme(black, $colors_),
+
+//   ui-lighter: usetheme(silver-lighter, $colors_),
+//   ui-light: usetheme(silver-light, $colors_),
+//   ui: usetheme(silver, $colors_),
+//   ui-dark: usetheme(gray-lightest, $colors_),
+//   ui-hover: usetheme(silver-dark, $colors_),
+// ) !default;
+
+// @include colorate($context_);
+// @include addtheme($context_)
+
+
+@import '../../node_modules/coeur/styles/_head.scss';
+
+// @import '../../node_modules/coeur/styles/_neck.scss';
+@import '../../node_modules/coeur/styles/_neck-buttons.scss';
+@import '../../node_modules/coeur/styles/_neck-layout.scss';
+@import '../../node_modules/coeur/styles/_neck-design.scss';
+@import '../../node_modules/coeur/styles/_neck-links.scss';
+
+// @import '../../node_modules/coeur/styles/_body.scss';
+@import '../../node_modules/coeur/styles/_body-card.scss';
+@import '../../node_modules/coeur/styles/_body-forms';  
+@import '../../node_modules/coeur/styles/_body-tag';  
+@import '../../node_modules/coeur/styles/_body-table';  
+
+// re-cascade
+@import '../../node_modules/coeur/styles/_head-helpers.scss';
 
 

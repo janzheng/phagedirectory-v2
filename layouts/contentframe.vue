@@ -8,7 +8,7 @@
 
     <div class="Signup-container _margin-center ">
       <!-- <div class=" _grid-3 _width-content-max _margin-center"> -->
-      <div class="_section-page _margin-center _padding-2">
+      <div class="_section-page _margin-center _padding-top-2 _padding-bottom-2">
         <div class="_grid-2">
           <div class="SignupCapsid-container">
             <SignupCapsid class="_height-100"/>

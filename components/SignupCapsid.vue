@@ -1,25 +1,27 @@
 
 <!-- 
 
-  This is your standard vanilla footer signup; create a separate one for one-time promos
+  Capsid & Tail Signup Card for footer
 
  -->
 <template>
 
   <!-- <div class="Mailchimp Capsid CapsidBanner _grid-2-1 _width-content-paragraph _align-top"> -->
-  <div class="Signup Mailchimp Capsid CapsidBanner _width-content-paragraph _flex-col">
+  <div class="Signup Signup-Capsid _card --shadow _width-content-paragraph ">
 
-    <div class="_flex-2" v-html="$md.render(intro || '')" />
 
     <!-- Begin Mailchimp Signup Form -->
-    <div id="mc_embed_signup" class="">
+    <div id="mc_embed_signup" class="_height-100">
       <!-- use this on the form for the regular mailchimp page
         action="https://directory.us19.list-manage.com/subscribe/post?u=a95319e0a6f57b754b11012a8&amp;id=98ef5d6bca"  -->
       <!-- use this for a custom thing: @submit.prevent="handleSubmit" -->
       <form id="mc-embedded-subscribe-form"
             action="https://directory.us19.list-manage.com/subscribe/post?u=a95319e0a6f57b754b11012a8&amp;id=98ef5d6bca"
-            method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-        <div id="mc_embed_signup_scroll ">
+            method="post" name="mc-embedded-subscribe-form" class="Signup-form _flex-col _height-100 validate" target="_blank">
+
+        <div class="_flex-2" v-html="$md.render(intro || '')" />
+
+        <div id="mc_embed_signup_scroll " class="">
           <!-- <div class="" v-html="$md.render(intro || '')"></div> -->
           <div id="mce-responses" class="clear hhoney">
             <div id="mce-error-response" style="display:none" class="response" />

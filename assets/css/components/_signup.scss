@@ -2,7 +2,7 @@
 // for alerts and mailchimp
 // custom breakpoint
 .Signup-container {
-  background-color: $color-silver-light;
+  background-color: usetheme(bg-silver); // $color-silver-light;
   // padding-top: $size-2;
   // padding-bottom: $size-2;
 
@@ -22,3 +22,112 @@
   // }
 }
 
+
+.Signup-Capsid {
+  background: usetheme(capsid-color);
+  border-color: usetheme(capsid-color);
+  // ._button {
+  //   &:hover {
+  //     border-color: usetheme(blue) !important;
+  //     color: usetheme(blue) !important;
+  //   }
+  // }
+}
+
+.Signup-Alert {
+  background: usetheme(alert-color);
+  border-color: usetheme(alert-color);
+  ._button {
+    &:hover {
+      // border-color: usetheme(alert-color-cta) !important;
+      // color: usetheme(alert-color-cta) !important;
+    }
+  }
+}
+
+
+// SignupAlert component can be found in a few places
+// will have a class specifying where itis
+.Signup {
+
+  // margin-top: $size-base;
+  // margin-bottom: $size-base;
+  .Subscribe {
+    font-weight: bold;
+  }
+
+  .Signup-form {
+    padding: $size-base $size-base;
+    // border: $color-main $border-thin solid;
+    // background: $color-tertiary;
+    border-radius: $radius;
+    color: usetheme(copy); // $color-black;
+    a {
+      color: usetheme(copy); // $color-black;
+      font-weight: bold;
+      &:hover {
+        color: usetheme(active); // $color-blue;
+      }
+    }
+
+    input {
+      // border-color: $color-tertiary;
+      color: usetheme(copy); //$color-black;
+      &.Subscribe {
+        color: usetheme(copy); //$color-black;
+      }
+
+      border-color: usetheme(copy); //$color-black;
+      border-radius: $radius;
+      &:hover, &:active, &:focus {
+        // background-color: rgba($color-white, 0.8)
+        background-color: usetheme(bg-white);
+      }
+    }
+  }
+    .Signup-content {
+      @include screen-xs {
+        width: 100%;
+        max-width: 100%;
+      }
+    }
+    // .Signup-sub {
+      // font-weight: bold;
+    // }
+    .Signup-input {
+      @include screen-xs {
+        margin-right: 0;
+        width: 100%;
+      }
+      // @include screen-sm {
+      //   border-top-right-radius: 0 !important;
+      //   border-bottom-right-radius: 0 !important;
+      // }
+    }
+    .Signup-cta {
+      margin-bottom: 0;
+      // margin-top: $size-half;
+      @include screen-xs {
+        width: 100%;
+        display: block;
+        margin-top: $size-half;
+        margin-right: 0;
+      }
+      // @include screen-sm {
+      //   border-top-left-radius: 0 !important;
+      //   border-bottom-left-radius: 0 !important;
+      // }
+    }
+
+    // &.footer {
+    //   margin: 0;
+    //   text-align: center;
+    //   // margin-left: $size-2;
+    //   // margin-right: $size-2;
+
+    //   @include screen-xs {
+    //     // margin-left: $size-base;
+    //     // margin-right: $size-base;
+    //   }
+    // }
+}

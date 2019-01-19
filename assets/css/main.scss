@@ -28,6 +28,34 @@
 
 
 
+
+
+// $testcolors: (
+//   red: #BD5843,
+//   blue: #8BADC2,
+// );
+// $colorMap: colorTintMap($testcolors);
+
+.TestOne {
+  color: black; font-weight: bold;
+  background: map-get($colorMap, phdir-500);
+  padding: 64px;
+}
+
+.Test {
+  color: white; font-weight: bold;
+  background: map-get($colorMap, phdir-300);
+  padding: 64px;
+}
+.TestTwo {
+  color: white; font-weight: bold;
+  background: map-get($colorMap, pink-500);
+  padding: 64px;
+}
+
+
+
+
 /* 
 
   CSS graveyard
@@ -78,5 +106,46 @@
   }
 }
 
+._width-full-xs {
+  @include screen-xs {
+    width: 100%;
+  }
+}
 
+
+
+._wordbreak {
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
+._wordbreak-link { 
+  // main difference is this does NOT create hypthens, in case someone copy/pastes
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+}
 

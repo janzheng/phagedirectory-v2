@@ -5,7 +5,7 @@
       <div class="Footer-left _center-xs _align-vertically">
         <router-link to="/" aria-label="Phage Directory Footer">
           <!-- <img class="Footer-logo-sm" src="~/static/ico_rings.png"/> -->
-          <img class="Footer-logo" src="/static/phagedirectory_negative.png" alt="Phage Directory footer" >
+          <img class="Footer-logo" src="/phagedirectory_negative.png" alt="Phage Directory footer" >
           <!-- <span class="phagedirectory"><span>Phage</span> Directory, </span> -->
           <!-- <span class="_font-small">2017-{{thisYear}}</span> -->
         </router-link>

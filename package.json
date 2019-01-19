@@ -31,7 +31,7 @@
     "@nuxtjs/pwa": "^2.6.0",
     "@nuxtjs/workbox": "^2.6.0",
     "axios": "^0.18.0",
-    "coeur": "^0.2.3",
+    "coeur": "^0.2.6",
     "cross-env": "^5.2.0",
     "cytosis": "^0.0.306",
     "dayjs": "^1.7.7",

@@ -40,3 +40,19 @@ export function loadNews(env, store, routeName='') {
   }
   return data
 }
+
+export function loadLatestNews(env, store, routeName='') {
+  let data
+  if(store.state && !!!store.state['C&T']) {
+    console.log('load cytosis: news')
+    data = store.cache.dispatch('loadCytosis', { // maybe don't want other things to wait?
+      env,
+      tableIndex: 'capsid',
+      caller: routeName,
+    }, {
+      maxRecords: 1,
+    })
+  }
+  return data
+}
+

@@ -18,7 +18,8 @@
 }
 
 body {
-  background-color: $color-gray;
+  background-color: usetheme(bg-blue); //$color-gray;
+  color: usetheme(copy);
 }
 
 h1 {
@@ -42,7 +43,7 @@ h3 {
 
 blockquote {
   &, p {
-    border-color: $color-tertiary;
+    border-color: usetheme(tertiary); //$color-tertiary;
     font-size: $font-large;
     line-height: $font-large-lineheight;
     @extend %font-serif;
@@ -51,30 +52,67 @@ blockquote {
   }
   .source {
     @extend %font-serif;
-    color: $color-gray;
+    color: usetheme(copy-light); //$color-gray;
     font-size: $font-small;
   }
 }
 
 
+p, ul, li, {
+  // font-size: $font-size-base;
+  // line-height: $font-lineheight;
+  @extend %md-sans_serif;
 
-%links-bg,
-._links-bg {
-  position: relative;
-  &:after {
-    content: ' ';
-    position: absolute;
-    left: $offset; bottom: -2px;
-    height: $offset/2;
-    background: $color-main;
-    padding: $offset;
+  padding-left: 0;
+  // @extend %font-serif;
 
-    width: 100%;
-    z-index: -1;
-
-    // clip-path: polygon(0% 20%, 80% 0%, 100% 0, 100% 100%, 0 100%);
+  a { // in-paragraph links
+    font-weight: 700;
+    &+a {
+    }
   }
 }
+
+// links
+a {
+  text-decoration: underline;
+  text-decoration-color: usetheme(links-decoration); //$color-links;
+  color: usetheme(links); //$color-links;
+  border: 0;
+  position: relative;
+  // color: $color-green;
+  // @extend ._pointer-no_events;
+  // @extend %ease-fast;
+  &:hover {
+    color: usetheme(active); //$color-links;
+  }
+
+  &._button {
+    text-decoration: none;
+  }
+}
+
+
+
+
+// adds a bg effect to links
+// %links-bg,
+// ._links-bg {
+//   position: relative;
+//   &:after {
+//     content: ' ';
+//     position: absolute;
+//     left: $offset; bottom: -2px;
+//     height: $offset/2;
+//     background: $color-main;
+//     padding: $offset;
+
+//     width: 100%;
+//     z-index: -1;
+
+//     // clip-path: polygon(0% 20%, 80% 0%, 100% 0, 100% 100%, 0 100%);
+//   }
+// }
 
 
 // some pages have an intro section / overview w/ larger text 
@@ -82,3 +120,8 @@ blockquote {
   @extend ._font-larger;
 
 }
+
+
+
+
+

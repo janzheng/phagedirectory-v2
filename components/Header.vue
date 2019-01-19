@@ -1,6 +1,7 @@
 
 <template>
-  <header class="Header _section-page _padding-top _padding-bottom _margin-center">
+  <!-- <header class="Header _section-page _padding-top _padding-bottom _margin-center"> -->
+  <header class="Header _padding-top _padding-bottom _margin-center">
     <div class="Header-content">
 
       <!-- Mobile Menu -->
@@ -9,7 +10,7 @@
 
         <div class="Header-left _hidden-sm">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
-            <router-link to="/" class="Header-logo-link _border-none-i _margin-right" aria-label="Phage Directory Logo"><img class="logo-xs" src="/static/snow.png" alt="Phage Directory footer"></router-link>
+            <router-link to="/" class="Header-logo-link _border-none-i _margin-right" aria-label="Phage Directory Logo"><img class="logo-xs" src="/snow.png" alt="Phage Directory footer"></router-link>
             <div class=" _flex-2">
               <div class="Header-inset _flex-row _flex-vertically _flex-wrap _padding-right">
                 <div class="_margin-bottom-half-sm _flex-row">
@@ -80,7 +81,7 @@
             <router-link to="/labs" class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">
               Labs
             </router-link>
-            <input id="header_searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline _flex-2" type="text" name="header_searchbar" placeholder="🔍 Labs, PIs, organisms" @input="search">
+            <input id="header_searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline _flex-2" type="text" name="header_searchbar" placeholder="🔍 Labs & Hosts" @input="search">
             <router-link to="/join" class="_button CTA --loud --short _margin-none-i ">
               Join
             </router-link>
@@ -96,6 +97,9 @@
             <router-link to="/jobs" class="_button --text --short _padding-none _margin-none --border-none">
               Jobs
             </router-link>
+            <!-- <router-link to="/community" class="_button --text --short _padding-none _margin-none --border-none">
+              Community
+            </router-link> -->
             <router-link to="/capsid" class="_button --text --short _padding-none _margin-none --border-none">
               Capsid &amp; Tail
             </router-link>

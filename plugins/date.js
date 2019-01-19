@@ -1,9 +1,20 @@
 
 import Vue from 'vue'
 import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+
+dayjs.extend(relativeTime)
 
 Vue.filter('niceDate', function(value) {
   if (value) {
     return dayjs(String(value)).format('MMMM D, YYYY')
+  }
+})
+
+
+Vue.filter('dateTo', function(value) {
+  if (value) {
+    // return dayjs(String(value)).format('MMMM D, YYYY')
+    return dayjs().to(dayjs(String(value)))
   }
 })
