@@ -36,6 +36,9 @@
                 <router-link to="/jobs" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
                   Jobs
                 </router-link>
+                <router-link to="/community" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
+                  Community
+                </router-link>
                 <router-link to="/capsid" class="_button --text --short _padding-none _margin-none _margin-right-sm --border-none">
                   Capsid &amp; Tail
                 </router-link>
@@ -81,7 +84,7 @@
             <router-link to="/labs" class="_button --text --short _padding-none _margin-none _hidden-xs --border-none">
               Labs
             </router-link>
-            <input id="header_searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline _flex-2" type="text" name="header_searchbar" placeholder="🔍 Labs & Hosts" @input="search">
+            <input id="header_searchbar" ref="headerSearch" v-model.trim="searchString" class="Header-search _form-input _inline" type="text" name="header_searchbar" placeholder="🔍 Hosts & Labs" @input="search">
             <router-link to="/join" class="_button CTA --loud --short _margin-none-i ">
               Join
             </router-link>
@@ -97,9 +100,9 @@
             <router-link to="/jobs" class="_button --text --short _padding-none _margin-none --border-none">
               Jobs
             </router-link>
-            <!-- <router-link to="/community" class="_button --text --short _padding-none _margin-none --border-none">
+            <router-link to="/community" class="_button --text --short _padding-none _margin-none --border-none">
               Community
-            </router-link> -->
+            </router-link>
             <router-link to="/capsid" class="_button --text --short _padding-none _margin-none --border-none">
               Capsid &amp; Tail
             </router-link>

@@ -19,8 +19,9 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
   
   @extend ._button;
 
-  font-weight: bold;
+  // font-weight: bold;
   text-decoration: none; // <a>s might have underlines
+  margin-right: $size-half;
 
   &:hover {
     background-color: usetheme(links); //$color-links;
@@ -68,6 +69,16 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
     // }
   }
 }
+  a.CTA._button {
+    color: usetheme(bg);
+    &:hover {
+      background-color: usetheme(active);
+      border-color: usetheme(active);
+    }
+  }
+  a.CTA._button.--outline {
+    color: usetheme(copy);
+  }
 
 
 // ._button.--yellow {

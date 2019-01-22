@@ -63,7 +63,7 @@
 
           <div class="Capsid-jobs">
             <div class="_grid-2-xs">
-              <h4 class="Capsid-new-title">{{ 'Latest Jobs' }}</h4>
+              <h4 class="Capsid-jobs-header">{{ 'Latest Jobs' }}</h4>
               <div class="_right">
                 <div><a href="https://phage.directory/jobs">All jobs</a></div>
                 <div>
@@ -74,13 +74,44 @@
               </div>
             </div>
             <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item ">
-              <div v-if="getAttachment(job)">
+              <div v-if="getAttachment(job)" class="Capsid-logo" >
                 <img :src="getAttachment(job)" alt="Job logo">
               </div>
-              <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div>
+              <!-- <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div> -->
+
+              <div v-if="getJobStatus(job) != 'Expired' && job.fields['Name']">
+                <h5 class="Capsid-job-title _padding-top-half">{{ job.fields['Name'] }}</h5>
+              </div>
+
+              <div v-if="job.fields['Org'] || job.fields['Supervisor']" class="_grid-3-2 _grid-gap-none" >
+                <div v-if="job.fields['Org']">
+                  <!-- <div v-if="job.fields['OrgUrl']">
+                    <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" >{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
+                  </div>
+                  <div v-else> -->
+                  <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
+                  <!-- </div> -->
+                </div>
+
+                <div v-if="job.fields['Supervisor']" class="Job-supervisor _right-sm">
+                  <div>{{ job.fields['Supervisor'] }}</div>
+                </div>
+              </div>
+
               <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
-              <div v-if="job.fields['Tags']" class="_margin-top-half" >
-                <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+
+              <!-- copied from the jobs page code; uses Job's page styles -->
+              <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action _margin-top-half ">
+                <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none-i _margin-right-half">Apply</a>
+                <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline --short _margin-bottom-none-i _margin-right-half">More Details</a> -->
+                <!-- expiration date -->
+                <span v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small --nowrap">
+                  Last day to apply: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
+                </span>
+              </div>
+
+              <div v-if="job.fields['Tags'] || job.fields['JobType']" class="_margin-top-half" >
+                <span v-if="job.fields['JobType']" class="_tag --highlight" >{{ job.fields['JobType'] }}</span> <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
               </div>
             </div>
             <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
@@ -99,12 +130,29 @@
                 <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
               </div>
             </div>
+
             <div class="Capsid-community-description" v-html="$md.render(communityDescription || '')"/>
-            <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item" >
-              <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader" ><span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold">{{ request.fields['Category'] }}</span><span v-if="request.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ request.fields['Date'] }}</span></div>
-              <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
-              <div v-if="request.fields['Tags']" class="_margin-top-half" >
-                <span v-for="tag of request.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
+            <div v-for="post of getCommunity(issue)" v-if="post && post.fields['isPublished']" :key="post.fields['Title']" class="Capsid-community-item" >
+              <div v-if="post.fields['PostedDate']" class="Capsid-community-itemheader" >
+                <span v-if="post.fields['PostedDate']" class="_md-p_fix _font-small _margin-bottom-half" >{{ post.fields['PostedDate'] | niceDate }}</span>
+              </div>
+
+              <div v-if="getPostStatus(post) != 'Expired' && post.fields['Title']">
+                <h5 class="Capsid-community-title _padding-top-half _inline-block">{{ post.fields['Title'] }}</h5><span v-if="post.fields['Org']" class="CommunityPost-org" > — 
+                  <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
+                  <span v-else>{{ post.fields['Org'] }}</span>
+                </span>
+              </div>
+              <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName']" class="CommunityPost-info _margin-bottom">
+                <div v-if="post.fields['PersonName']" >Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
+                <div v-if="post.fields['Location']">Location: <strong>{{ post.fields['Location'] }}</strong></div>
+                <div v-if="post.fields['URL']" class="_wordbreak">Website: <a :href="post.fields['URL']"><strong>{{ post.fields['URL'] }}</strong></a></div>
+              </div>
+
+              <div class="_md-p_fix" v-html="$md.render(post.fields['Markdown'] || '')" />
+              <div v-if="post.fields['Tags'] || post.fields['Type']" class="_margin-top-half" >
+                <span v-if="post.fields['Type']" class="CommunityPost-type _tag --highlight ">{{ post.fields['Type'] }}</span>
+                <span v-for="tag of post.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
               </div>
             </div>
             <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')" />
@@ -205,6 +253,8 @@ export default {
       'Content',
       'C&T',
       'Updates',
+      'Jobs',
+      'Community'
       ]),
   },
 
@@ -242,11 +292,6 @@ export default {
       return sponsors || undefined
     },
 
-    getCommunity(issue) {
-      const requests = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
-      // console.log('get updates:', updates)
-      return requests || undefined
-    },
 
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
@@ -255,10 +300,67 @@ export default {
     },
 
     getJobs(issue) {
-      // jobs also pull from Updates tab
+      // jobs pull from Updates tab AND the jobs page
+      // pull from the jobs page first, then updates tab
+      // jobs are linked manually for each C&T issue, and can be reused
       const jobs = this.$cytosis.getLinkedRecords(issue.fields['Jobs'], this['Updates'], true)
-      console.log('Jobs:', jobs)
-      return jobs || undefined
+      // clean the Name field from Updates and set to false, since Updates don't have meaningful Name fields
+      // for (let job of jobs) {
+      for (const [i, job] of jobs.entries()) {
+        job.fields['Name'] = undefined
+        jobs[i] = job
+      }
+
+      const jobsTab = this.$cytosis.getLinkedRecords(issue.fields['JobsTab'], this['Jobs'], true)
+      // console.log('Jobs:', jobs, jobsTab, issue)
+      return [...jobsTab, ...jobs] || undefined
+    },
+    getJobLink(job) {
+      if (job.fields['URL'])
+        return job.fields['URL']
+
+      return false
+    },
+    showJob(job) {
+      if (!job.fields['isPublished'])
+        return undefined 
+      if (Date(job.fields['ExpirationDate']) < Date.now())
+        return undefined 
+      return true
+    },
+    getJobStatus(job) {
+      return job.fields['Status'] || undefined
+    },
+
+    getCommunity(issue) {
+      // posts pull from Updates tab AND the jobs page
+      // pull from the community page first, then updates tab
+      // posts are linked manually for each C&T issue, and can be reused
+      const posts = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
+      // clean the Name field from Updates and set to false, since Updates don't have meaningful Name fields
+      // for (let job of jobs) {
+      for (const [i, post] of posts.entries()) {
+        post.fields['Name'] = undefined
+        posts[i] = post
+      }
+
+      const postsTab = this.$cytosis.getLinkedRecords(issue.fields['CommunityTab'], this['Community'], true)
+      // console.log('Jobs:', jobs, jobsTab, issue)
+      return [...postsTab, ...posts] || undefined
+    },
+
+    showPost(post) {
+      if (!post.fields['isPublished'])
+        return undefined 
+
+      if (Date(post.fields['ExpirationDate']) < Date.now())
+        return undefined 
+
+      return true
+    },
+
+    getPostStatus(post) {
+      return post.fields['Status'] || undefined
     },
 
     hasNew(issue) {
@@ -295,7 +397,8 @@ export default {
 
       return `https://twitter.com/intent/tweet?url=${url}&text=${text}&hashtags=${tags}`
 
-    }
+    },
+
   }
 
 }

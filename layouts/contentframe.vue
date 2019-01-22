@@ -11,10 +11,10 @@
       <div class="_section-page _margin-center _padding-top-2 _padding-bottom-2">
         <div class="_grid-2">
           <div class="SignupCapsid-container">
-            <SignupCapsid class="_height-100"/>
+            <SignupCapsid class="_height-100 _margin-bottom-none-i"/>
           </div>
           <div class="SignupAlert-container">
-            <SignupAlert class="_height-100" />
+            <SignupAlert class="_height-100 _margin-bottom-none-i" />
           </div>
           <!-- <div class="SignupRequest-container">
             <SignupRequest class="_height-100" :description="true" />

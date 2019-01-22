@@ -30,6 +30,13 @@
       <!-- <CapsidMicroBanner class="_section-article _margin-center _margin-top-2 _margin-bottom" /> -->
       <!-- <div class="_section-article _margin-center _margin-bottom-2" v-html="$md.render(highlight)" /> -->
       <Capsid :issues="issues" :show-preview="showPreview" />
+
+      <div v-if="issues.length == 0">
+        <h4>Sorry, no Capsid & Tail issue was found at this URL</h4>
+        <div>
+          If you think this is a bug, please email us at <a href="mailto:support@phage.directory">support@phage.directory</a>
+        </div>
+      </div>
     </div>
 
     <div class="_section-content _margin-center _padding-bottom-2">

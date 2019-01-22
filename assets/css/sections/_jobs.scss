@@ -20,19 +20,19 @@
 
 
 
-
-.Job {
-	a._button {
-		color: usetheme(bg);
-		&:hover {
-			background-color: usetheme(active);
-			border-color: usetheme(active);
-		}
-	}
-	a._button.--outline {
-		color: usetheme(copy);
-	}
-}
+// moved to buttons
+// .Job {
+// 	a._button {
+// 		color: usetheme(bg);
+// 		&:hover {
+// 			background-color: usetheme(active);
+// 			border-color: usetheme(active);
+// 		}
+// 	}
+// 	a._button.--outline {
+// 		color: usetheme(copy);
+// 	}
+// }
 
 .Job-title {
 	padding-top: 0;

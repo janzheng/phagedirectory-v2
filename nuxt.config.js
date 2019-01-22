@@ -360,6 +360,13 @@ module.exports = {
           component: resolve(__dirname, 'pages/jobpage.vue')
         },
 
+        {
+          // opens each issue separately, good for deeplinking, possibly comments
+          name: 'community-post',
+          path: '/community/:slug',
+          component: resolve(__dirname, 'pages/communitypage.vue')
+        },
+
         // {
         //   name: 'people',
         //   path: '/people',
@@ -437,8 +444,15 @@ module.exports = {
         })
 
         let routeList = []
+
+        // build C&T issues
         for (let capsid of cytosis.tables['C&T']) {
           routeList.push(`/capsid/${capsid.fields['Slug']}`)
+        }
+
+        // build Jobs pages
+        for (let jobs of cytosis.tables['Jobs']) {
+          routeList.push(`/jobs/${jobs.fields['Slug']}`)
         }
 
         callback(null, routeList)

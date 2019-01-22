@@ -300,6 +300,7 @@
   // @extend .Capsid-card;
   padding: $size;
   background-color: usetheme(bg-lighter); //;$color-ui-lighter;
+  border: $border-thin solid usetheme(bg-lighter); //;$color-ui-lighter;
 }
 .Capsid-update-item {
   padding: $size;
@@ -339,7 +340,7 @@
       margin-bottom: $size;
     }
     h5 {
-      padding: 0;
+      // padding: 0;
       padding-bottom: $size-half;
       // line-height: $size-2;
     }

@@ -4,30 +4,38 @@
 
     <div class="_section-content _margin-center">
       <div class="_padding-bottom" v-html="$md.render(intro || '')" />
-    </div>
-
-    <div class="_section-content _margin-center">
       <div class="_padding-bottom" v-html="$md.render(content || '')" />
-      <!-- <SignupAlert class="_section-article _margin-center" /> -->
     </div>
 
-    <div class="Capsid-community">
-      <div class="_grid-3-2-xs">
-        <h4 class="Capsid-new-title">Community Board</h4>
-        <div class="Capsid-community-cta _right">
-          <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
-        </div>
+    <!-- <div class="_section-content _margin-center"> -->
+      <!-- <div class="_padding-bottom" v-html="$md.render(content || '')" /> -->
+    <!-- </div> -->
+
+    <!-- 
+
+      Active Posts
+
+    -->
+    <div v-if="activePosts.length > 0" class="Community-active _section-content _margin-bottom-4 _margin-center">
+      <div v-for="post of activePosts" v-if="showPost(post)" :key="post.id"
+           :class="getPostStatus(post)">
+        <CommunityPost :post="post" class="Community-post _card _margin-bottom _padding"/>
       </div>
-      <!-- <div class="Capsid-community-description" v-html="$md.render(content || '')"/> -->
-      <div v-for="community of getCommunity()" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-community-item" >
-        <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader" ><span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold">{{ request.fields['Category'] }}</span><span v-if="request.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ request.fields['Date'] }}</span></div>
-        <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
-        <div v-if="request.fields['Tags']" class="_margin-top-half" >
-          <span v-for="tag of request.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
-        </div>
-      </div>
-      <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')" />
     </div>
+
+    <!-- 
+
+      Expired Posts
+
+     -->
+    <div v-if="expiredPosts.length > 0" class="Community-expired _section-content _margin-bottom-4 _margin-center">
+      <h6 class="Community-sectiontitle">Expired Posts</h6>
+      <div v-for="post of expiredPosts" v-if="showPost(post)" :key="post.id"
+           :class="getPostStatus(post)">
+          <CommunityPost :post="post" class="Community-post _card _margin-bottom _padding"/>
+      </div>
+    </div>
+
 
 
 <!-- 
@@ -55,12 +63,12 @@
 
 <script>
 
-import SignupAlert from '~/components/SignupAlert.vue'
+import CommunityPost from '~/components/CommunityPost.vue'
 import { mapState } from 'vuex'
 
 export default {
   head () {
-    const title = "Phage Alerts"
+    const title = "Community Board"
 
     return {
       title,
@@ -68,7 +76,7 @@ export default {
   },
 
   components: {
-    SignupAlert
+    CommunityPost,
   },
   
   layout: 'contentframe',
@@ -83,30 +91,68 @@ export default {
     return {
       intro: this.$cytosis.find('Content.community-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       content: this.$cytosis.find('Content.community-content', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      // alert: undefined, // loaded in 'mounted'
     }
   },
 
   computed: {
     ...mapState([
       'Content',
-      'Updates'
+      'Updates',
+      'Community',
       ]),
+
+    activePosts() {
+      let results = []
+      for (let post of this.Community) {
+        if(post.fields['Status'] != 'Expired') {
+          results.push(post)
+        }
+      }
+      return results
+    },
+
+    expiredPosts() {
+      let results = []
+      for (let post of this.Community) {
+        if(post.fields['Status'] == 'Expired') {
+          results.push(post)
+        }
+      }
+      return results
+    }
   },
 
   mounted: async function () {
-    // const slug = unescape(this.$route.params.slug)
-    // const alert = this.cytosis.find(slug, [this.Alerts], ['Slug'])[0]
-    // if (alert && alert.fields.isPublished)
-    //   this.alert = alert
   },
 
   methods: {
     getCommunity() {
-      console.log('community:', this['Updates'])
+      // console.log('community:', this['Community'])
       // const requests = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
       // console.log('get updates:', updates)
       // return requests || undefined
+      return this.Community
+    },
+    getAttachment(post) {
+      // currently only works for the first attachment
+      if(post.fields['Attachments']) {
+        // console.log('attachments', post.fields['Attachments'][0]['url'])
+        return post.fields['Attachments'][0]['url']
+      }
+    },
+
+    showPost(post) {
+      if (!post.fields['isPublished'])
+        return undefined 
+
+      if (Date(post.fields['ExpirationDate']) < Date.now())
+        return undefined 
+
+      return true
+    },
+
+    getPostStatus(post) {
+      return post.fields['Status'] || undefined
     },
   }
 

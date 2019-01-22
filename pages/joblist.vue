@@ -21,7 +21,7 @@
         <div v-if="sponsoredJobs.length > 0" class="Jobs-industry _margin-bottom-4">
           <h6 class="Jobs-sectiontitle">Sponsored Jobs</h6>
           <div v-for="job of sponsoredJobs" v-if="showJob(job)" :key="job.id"
-               :class="getStatus(job)">
+               :class="getJobStatus(job)">
             <Job :job="job" class="Jobs-item _card _margin-bottom _padding"/>
           </div>
         </div>
@@ -32,10 +32,10 @@
           Jobs Stream // all jobs including expired
 
         -->
-        <div class="Jobs-industry _margin-bottom-4">
+        <div v-if="academicJobs.length > 0" class="Jobs-industry _margin-bottom-4">
           <h6 class="Jobs-sectiontitle">Academic Jobs</h6>
           <div v-for="job of academicJobs" v-if="showJob(job)" :key="job.id"
-               :class="getStatus(job)">
+               :class="getJobStatus(job)">
             <Job :job="job" class="Jobs-item _card _margin-bottom _padding"/>
           </div>
         </div>
@@ -46,10 +46,10 @@
           Expired jobs show up last
 
          -->
-        <div class="Jobs-expired _margin-bottom-4">
+        <div v-if="expiredJobs.length > 0" class="Jobs-expired _margin-bottom-4">
           <h6 class="Jobs-sectiontitle">Expired Jobs</h6>
           <div v-for="job of expiredJobs" v-if="showJob(job)" :key="job.id"
-               :class="getStatus(job)">
+               :class="getJobStatus(job)">
             <Job :job="job" class="Jobs-item _card _margin-bottom _padding"/>
           </div>
         </div>
@@ -123,7 +123,7 @@ export default {
     sponsoredJobs() {
       let results = []
       for (let job of this.Jobs) {
-        if(job.fields['isSponsored']) {
+        if(job.fields['isSponsored'] && job.fields['Status'] != 'Expired') {
           results.push(job)
         }
       }
@@ -158,7 +158,7 @@ export default {
     getAttachment(job) {
       // currently only works for the first attachment
       if(job.fields['Attachments']) {
-        console.log('attachments', job.fields['Attachments'][0]['url'])
+        // console.log('attachments', job.fields['Attachments'][0]['url'])
         return job.fields['Attachments'][0]['url']
       }
     },
@@ -176,7 +176,7 @@ export default {
       return true
     },
 
-    getStatus(job) {
+    getJobStatus(job) {
       // todo: return 'Active' if now < expiration date, 'Expired' otherwise
       // return 'Active'
       // const exp = Date(job.fields['ExpirationDate'])

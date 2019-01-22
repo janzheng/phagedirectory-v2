@@ -11,7 +11,7 @@
           </div>
           <div class="">
             <span class="_tag --highlight">{{ job.fields['JobType'] }}</span> <span v-for="tag of job.fields['Tags']" :key="tag" class="_tag">{{ tag }}</span>
-            <span v-if="getStatus(job)" class="Job-status _tag ">{{ getStatus(job) }}</span>
+            <span v-if="getJobStatus(job)" class="Job-status _tag ">{{ getJobStatus(job) }}</span>
           </div>
         </div>
         <div class="Job-date _right-sm _font-small _padding-bottom-quart">
@@ -21,11 +21,11 @@
     </div>
 
     <div class="Job-org">
-      <a v-if="getStatus(job) != 'Expired' && getJobLink(job) != false " :href="getJobLink(job)" class="Job-link"> 
-        <h5 class="Job-title">{{ job.fields['Name'] }}</h5>
+      <a v-if="getJobStatus(job) != 'Expired' && getJobLink(job) != false " :href="getJobLink(job)" class="Job-link"> 
+        <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
       </a>
       <div v-else class="Job-link">
-        <h5 class="Job-title">{{ job.fields['Name'] }}</h5>
+        <h4 class="Job-title">{{ job.fields['Name'] }}</h4>
       </div>
     </div>
 
@@ -44,14 +44,14 @@
       </div>
     </div>
 
-    <div class="Job-description --short _wordbreak-link _padding-top " v-html="$md.render(job.fields['Markdown'] || '')" />
+    <div class="Job-description --short _padding-top " v-html="$md.render(job.fields['Markdown'] || '')" />
 
-    <div class="Job-apply" v-html="$md.render(job.fields['ApplyNotes'] || '')" />
+    <!-- <div v-if="getJobStatus(job) != 'Expired'" class="Job-apply _wordbreak-link" v-html="$md.render(job.fields['ApplyNotes'] || '')" /> -->
 
     <!-- buttons to apply / more -->
-    <div v-if="getStatus(job) != 'Expired' && job.fields['URL']" class="Job-action ">
-      <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply _button --short _margin-bottom-none _margin-right-half">Apply Here</a>
-      <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply _button --outline --short _margin-bottom-none _margin-right-half">More Details</a>
+    <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action ">
+      <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none _margin-right-half">Apply</a>
+      <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline --short _margin-bottom-none _margin-right-half">More Details</a> -->
       <!-- expiration date -->
       <span v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small --nowrap">
         Last day to apply: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
@@ -76,14 +76,14 @@ export default {
     getAttachment(job) {
       // currently only works for the first attachment
       if(job.fields['Attachments']) {
-        console.log('attachments', job.fields['Attachments'][0]['url'])
+        // console.log('attachments', job.fields['Attachments'][0]['url'])
         return job.fields['Attachments'][0]['url']
       }
     },
 
     getJobLink(job) {
-      if (job.fields['DetailsUrl'])
-        return job.fields['DetailsUrl']
+      // if (job.fields['DetailsUrl'])
+      //   return job.fields['DetailsUrl']
 
       if (job.fields['URL'])
         return job.fields['URL']
@@ -104,7 +104,7 @@ export default {
       return true
     },
 
-    getStatus(job) {
+    getJobStatus(job) {
       return job.fields['Status'] || undefined
     },
 

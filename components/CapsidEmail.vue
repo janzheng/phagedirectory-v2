@@ -54,7 +54,7 @@
           background-color: #FCFCFC;
           border-radius: 4px;
           margin-bottom: 16px;
-          padding: 15px;
+          /*padding: 15px;*/
         }
 
         .Section-table {
@@ -87,6 +87,12 @@
           background-color: #FFFFFF;
           margin-bottom: 16px;
         }
+
+        .Capsid-job-logo img {
+          width: 100% !important;
+          max-width: 200px !important;
+        }
+
         .Capsid-community {
           padding: 16px;
           background-color: rgba(250, 84, 134, 0.05);
@@ -101,6 +107,11 @@
           }
           .Capsid-community-itemheader span + span {
             padding-left: 8px !important;
+          }
+          .Capsid-community-title {
+            font-size: 21px;
+            line-height: 28px;
+            font-weight: bold;
           }
         .Capsid-jobs {
           padding: 16px;
@@ -117,6 +128,19 @@
           .Capsid-jobs-itemheader span + span {
             padding-left: 16px !important;
           }
+          .Capsid-job-title {
+            font-size: 21px;
+            line-height: 28px;
+            font-weight: bold;
+          }
+          .Job-action {
+            margin-top: 8px;
+            margin-bottom: 8px;
+          }
+          .Job-small {
+            font-size: 14px !important;
+          }
+
         .Email-card--silver {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
@@ -142,6 +166,7 @@
 
         .--sponsor {
           background-color: rgba(113, 239, 245, 0.5) !important;
+          border-color: rgba(113, 239, 245, 0.5) !important;
         }
 
         .line {
@@ -152,18 +177,6 @@
 
         .Capsid-date {
           font-size: 14px !important;
-        }
-
-        @media only screen and (max-width: 680px){
-          .Email-tag {
-            font-size: 18px;
-          }
-        }
-
-        @media only screen and (max-width:680px) {
-          .footer-share {
-            font-size: 13px !important;
-          }
         }
 
         blockquote p {
@@ -182,12 +195,25 @@
           border-left: solid 3px #FA5486;
         }
 
-        @media only screen and (max-width:680px) {
+
+        @media only screen and (max-width: 680px){
+          .Email-tag {
+            font-size: 18px;
+          }
+          .footer-share {
+            font-size: 13px !important;
+          }
           blockquote, blockquote p {
             margin: 0 !important;
             font-size: 26px !important;
           }
+          .Capsid-item,
+          .Capsid-jobs-item, {
+            margin-left: -15px !important;
+            margin-right: -15px !important;
+          }
         }
+
 
         .Capsid-author img {
           width: 80px !important;
@@ -203,6 +229,41 @@
         }
         .Capsid-content li {
           padding-bottom: 21px;
+        }
+
+        ._button {
+          border-width: 2px;
+          border-style: solid;
+          display: inline-block;
+          border-color: #374F6A;
+          line-height: 8px;
+          text-decoration: none !important;
+          color: #FAFAFA !important;
+          background-color: #374F6A !important;
+          margin-right: 8px;
+          margin-bottom: 6px;
+          border-radius: 4px;
+          padding-left: 24px;
+          padding-right: 24px;
+          padding-top: 7.5px;
+          padding-bottom: 7.5px;
+        }
+        ._button-outline {
+          border-width: 2px;
+          border-style: solid;
+          display: inline-block;
+          border-color: #374F6A;
+          line-height: 8px;
+          text-decoration: none !important;
+          color: #374F6A !important;
+          background-color: transparent !important;
+          margin-right: 8px;
+          margin-bottom: 6px;
+          border-radius: 4px;
+          padding-left: 24px;
+          padding-right: 24px;
+          padding-top: 7.5px;
+          padding-bottom: 7.5px;
         }
 
       </style>
@@ -272,7 +333,7 @@
           <table class="Section-table">
             <tr>
               <td class="" >
-                <h3 class="Capsid-jobs-title_">Latest Jobs</h3>
+                <h3 class="Capsid-jobs-header_">{{ 'Latest Jobs' }}</h3>
               </td>
               <td>
                 <div><a href="https://phage.directory/jobs">All jobs</a></div>
@@ -283,15 +344,50 @@
           <h3 class="line">
             <span style="color:#fa5486">&mdash;</span>
           </h3>
-          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-item Capsid-jobs-item " >
-            <div v-if="getAttachment(job)">
-              <img :src="getAttachment(job)" alt="Job logo"/>
+          <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item Capsid-item">
+            <div class="Capsid-job-logo" v-if="getAttachment(job)">
+              <img :src="getAttachment(job)" alt="Job logo">
             </div>
-            <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ job.fields['Category'] }}</b></span>
+            <!-- <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div> -->
+
+            <div>
+              <!-- <a v-if="getJobStatus(job) != 'Expired' && getJobLink(job) != false " :href="getJobLink(job)" class="Capsid-job-title"> 
+                {{ job.fields['Name'] }}
+              </a> -->
+              <div class="Capsid-job-title">
+                {{ job.fields['Name'] }}
+              </div>
             </div>
+
+            <div class="_grid-3-2 _grid-gap-none" v-if="job.fields['Org'] || job.fields['Supervisor']">
+              <div v-if="job.fields['Org']">
+                <!-- <div v-if="job.fields['OrgUrl']">
+                  <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" >{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
+                </div>
+                <div v-else> -->
+                  <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
+                <!-- </div> -->
+              </div>
+
+              <div v-if="job.fields['Supervisor']" class="Job-supervisor _right-sm">
+                <div>{{ job.fields['Supervisor'] }}</div>
+              </div>
+            </div>
+
             <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
-            <div v-if="job.fields['Tags']" class="_margin-top-half" >
-              <span v-for="tag of job.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+
+            <!-- copied from the jobs page code; uses Job's page styles -->
+            <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action _margin-top-half ">
+              <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none-i _margin-right-half">Apply</a>
+              <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline _button-outline --short _margin-bottom-none-i _margin-right-half">More Details</a> -->
+              <!-- expiration date -->
+              <div v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small Job-small --nowrap">
+                Last day to apply: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
+              </div>
+            </div>
+
+            <div v-if="job.fields['Tags'] || job.fields['JobType']" class="_margin-top-half" >
+              <span class="Email-tag _tag --sponsor" v-if="job.fields['JobType']">{{ job.fields['JobType'] }}</span> <span v-for="tag of job.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag Email-tag _tag" >{{ tag }}</span>
             </div>
           </div>
           <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
@@ -318,14 +414,31 @@
             <span style="color:#fa5486">&mdash;</span>
           </h3>
           <div class="Capsid-community-description" v-html="$md.render(communityDescription || '')"/>
-          <div v-for="request of getCommunity(issue)" v-if="request && request.fields['isPublished']" :key="request.fields['Name']" class="Capsid-item Capsid-community-item _margin-bottom" >
-            <div v-if="request.fields['Date'] || request.fields['Category']" class="Capsid-community-itemheader">
-              <span v-if="request.fields['Category']" class="_md-p_fix _font-small _font-bold" ><b>{{ request.fields['Category'] }}</b></span><span v-if="request.fields['Date']" class="_md-p_fix _font-small">{{ request.fields['Date'] }}</span>
+          <div v-for="post of getCommunity(issue)" v-if="post && post.fields['isPublished']" :key="post.fields['Name']" class="Capsid-item Capsid-community-item _margin-bottom" >
+            <div v-if="post.fields['PostedDate']" class="Capsid-community-itemheader" >
+              <span v-if="post.fields['PostedDate']" class="_md-p_fix _font-small _margin-bottom-half" >{{ post.fields['PostedDate'] | niceDate }}</span>
             </div>
-            <div class="_md-p_fix" v-html="$md.render(request.fields['Markdown'] || '')" />
-            <div v-if="request.fields['Tags']" class="_margin-top-half" >
-              <span v-for="tag of request.fields.Tags" :key="tag"><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
+            <div v-if="getPostStatus(post) != 'Expired' && post.fields['Title']">
+              <div class="Capsid-community-title _padding-top-half _inline-block">{{ post.fields['Title'] }}</div><span class="CommunityPost-org" v-if="post.fields['Org']"> — 
+              <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
+                <span v-else>{{ post.fields['Org'] }}</span>
+              </span>
             </div>
+
+            <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName']" class="CommunityPost-info">
+              <br >
+              <div v-if="post.fields['PersonName']">Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
+              <div v-if="post.fields['Location']">Location: <strong>{{ post.fields['Location'] }}</strong></div>
+              <div v-if="post.fields['URL']" class="_wordbreak">Website: <a :href="post.fields['URL']"><strong>{{ post.fields['URL'] }}</strong></a></div>
+              <br >
+            </div>
+
+            <div class="_md-p_fix" v-html="$md.render(post.fields['Markdown'] || '')" />
+            <div v-if="post.fields['Tags'] || post.fields['Type']" class="_margin-top-half" >
+              <span v-if="post.fields['Type']" class="CommunityPost-type Email-tag _tag --highlight ">{{ post.fields['Type'] }}</span>
+              <span v-for="tag of post.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag Email-tag _tag" >{{ tag }}</span>
+            </div>
+
           </div>
           <div v-if="getCommunity(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyCommunity || '')">
           </div>
@@ -396,6 +509,8 @@ export default {
       'Content',
       'C&T',
       'Updates',
+      'Jobs',
+      'Community',
       ]),
   },
 
@@ -420,12 +535,6 @@ export default {
       return sponsors || undefined
     },
 
-    getCommunity(issue) {
-      const requests = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
-      // console.log('get updates:', updates)
-      return requests || undefined
-    },
-
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
       console.log('Updates:', updates)
@@ -433,10 +542,70 @@ export default {
     },
 
     getJobs(issue) {
-      // jobs also pull from Updates tab
+      // jobs pull from Updates tab AND the jobs page
+      // pull from the jobs page first, then updates tab
+      // jobs are linked manually for each C&T issue, and can be reused
       const jobs = this.$cytosis.getLinkedRecords(issue.fields['Jobs'], this['Updates'], true)
-      console.log('Jobs:', jobs)
-      return jobs || undefined
+      // clean the Name field from Updates and set to false, since Updates don't have meaningful Name fields
+      // for (let job of jobs) {
+      for (const [i, job] of jobs.entries()) {
+        job.fields['Name'] = undefined
+        jobs[i] = job
+      }
+
+      const jobsTab = this.$cytosis.getLinkedRecords(issue.fields['JobsTab'], this['Jobs'], true)
+      // console.log('Jobs:', jobs, jobsTab, issue)
+      return [...jobsTab, ...jobs] || undefined
+    },
+    getJobLink(job) {
+      // if (job.fields['DetailsUrl'])
+        // return job.fields['DetailsUrl']
+
+      if (job.fields['URL'])
+        return job.fields['URL']
+
+      return false
+    },
+    showJob(job) {
+      if (!job.fields['isPublished'])
+        return undefined 
+      if (Date(job.fields['ExpirationDate']) < Date.now())
+        return undefined 
+      return true
+    },
+    getJobStatus(job) {
+      return job.fields['Status'] || undefined
+    },
+
+    getCommunity(issue) {
+      // posts pull from Updates tab AND the jobs page
+      // pull from the community page first, then updates tab
+      // posts are linked manually for each C&T issue, and can be reused
+      const posts = this.$cytosis.getLinkedRecords(issue.fields['Community'], this['Updates'], true)
+      // clean the Name field from Updates and set to false, since Updates don't have meaningful Name fields
+      // for (let job of jobs) {
+      for (const [i, post] of posts.entries()) {
+        post.fields['Name'] = undefined
+        posts[i] = post
+      }
+
+      const postsTab = this.$cytosis.getLinkedRecords(issue.fields['CommunityTab'], this['Community'], true)
+      // console.log('Jobs:', jobs, jobsTab, issue)
+      return [...postsTab, ...posts] || undefined
+    },
+
+    showPost(post) {
+      if (!post.fields['isPublished'])
+        return undefined 
+
+      if (Date(post.fields['ExpirationDate']) < Date.now())
+        return undefined 
+
+      return true
+    },
+
+    getPostStatus(post) {
+      return post.fields['Status'] || undefined
     },
 
     hasNew(issue) {
