@@ -55,6 +55,7 @@ module.exports = {
     "vue/html-indent": ["error", 2, {
         "ignores": ['style']
       }],
+    "vue/no-side-effects-in-computed-properties": "off", // does weird things with ES6 array operators (phagefutures) BUT might be a bad idea to turn off
   }
 }
 

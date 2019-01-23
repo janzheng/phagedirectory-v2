@@ -16,6 +16,7 @@
         </div>
         <div class="Job-date _right-sm _font-small _padding-bottom-quart">
           Added {{ job.fields['PostedDate'] | dateTo }}
+
         </div>
       </div>
     </div>
@@ -45,10 +46,15 @@
 
     <div class="Job-description --short _wordbreak-link _padding-top " v-html="$md.render(job.fields['LongMarkdown'] || '')" />
 
-    <!-- <div v-if="getJobStatus(job) != 'Expired'" class="Job-apply _wordbreak-link" v-html="$md.render(job.fields['ApplyNotes'] || '')" /> -->
-
+    <!-- a job w/ full page should ALWAYS have a way to apply -->
     <div v-if="getJobStatus(job) != 'Expired'" class="Job-apply _wordbreak-link">
-      <div class="Job-apply-notes _wordbreak-link" v-html="$md.render(job.fields['ApplyNotes'] || '')" />
+      <div class="Job-apply-box _card _padding">
+        <h6>Application Process</h6>
+        <div class="Job-apply-notes _wordbreak-link" v-html="$md.render(job.fields['ApplyNotes'] || '')" />
+        <div>
+          <a v-if="job.fields['ApplyUrl']" :href="job.fields['ApplyUrl']" class="Job-action-apply _button CTA --short _margin-bottom-none _margin-right-half">Apply for Position</a>
+        </div>
+      </div>
       <div class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </div>
     </div>
 

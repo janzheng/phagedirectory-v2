@@ -55,8 +55,18 @@
         </div> -->
         
         <div class="Stream">
+
           <StreamCard>
-            <div slot="sidebar">
+            <div slot="sidebar" width="100">
+              <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
+            </div>
+            <div slot="main">
+              Phage Futures content here / card here?
+            </div>
+          </StreamCard>
+
+          <StreamCard>
+            <div slot="sidebar" width="100">
               <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
             </div>
             <div slot="main">
@@ -124,10 +134,10 @@ export default {
 
     // let newsData
     if(store.state && !store.state['C&T']) {
-      console.log('load cytosis: news')
+      // console.log('load cytosis: news')
       await store.cache.dispatch('loadCytosis', { // maybe don't want other things to wait?
         env,
-        tableIndex: 'capsid',
+        tableIndex: 'latestnews',
         caller: 'homepage',
         options: {
           maxRecords: 1,

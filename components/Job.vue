@@ -32,7 +32,7 @@
     <div class="_grid-3-2 _grid-gap-none">
       <div>
         <div v-if="job.fields['OrgUrl']">
-          <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" >{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
+          <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" target="_blank">{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
         </div>
         <div v-else>
           <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
@@ -50,7 +50,8 @@
 
     <!-- buttons to apply / more -->
     <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action ">
-      <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none _margin-right-half">Apply</a>
+      <!-- <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none _margin-right-half">Apply</a> -->
+      <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short --outline _margin-bottom-none _margin-right-half" target="_blank">More Details</a>
       <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline --short _margin-bottom-none _margin-right-half">More Details</a> -->
       <!-- expiration date -->
       <span v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small --nowrap">

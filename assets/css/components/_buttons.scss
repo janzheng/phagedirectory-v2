@@ -35,8 +35,8 @@ button.CTA, ._button.CTA, .CTA { // actionable button; inherits from but overrid
   &.--outline {
     &:hover {
       background-color: inherit;
-      border-color: usetheme(links); //$color-links;
-      color: usetheme(links); //$color-links;
+      border-color: usetheme(active); //$color-links;
+      color: usetheme(active); //$color-links;
       @extend %ease;
     }
   }

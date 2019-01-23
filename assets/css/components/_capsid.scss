@@ -97,8 +97,10 @@
     }
   }
 
-  a {
-    @extend ._wordbreak; // make sure long links get broken up, esp. for mobile
+  p a {
+    @extend ._wordbreak; 
+    // make sure long links get broken up, esp. for mobile
+    // but ONLY within paragraphs
   }
 }
 
@@ -288,13 +290,6 @@
       border-bottom: $border-thin solid usetheme(active); //;
     }
   }
-  .Capsid-new-item {
-    margin-bottom: $size-2;
-    &:last-child {
-      margin-bottom: $size;
-    }
-  }
-
 
 .Capsid-updates {
   // @extend .Capsid-card;
@@ -304,8 +299,12 @@
 }
 .Capsid-update-item {
   padding: $size;
-  background-color: usetheme(purewhite); //$color-purewhite;
+  background-color: usetheme(bg-purewhite); //$color-purewhite;
   margin-bottom: $size-half;
+
+  img {
+    max-width: 100%;
+  }
 }
 
 .Capsid-community {
@@ -314,7 +313,7 @@
   background-color: usetheme(community); //$color-tertiary-05;
 }
   .Capsid-community-cta {
-    padding-top: $size--1;
+    // padding-top: $size--1;
   }
   .Capsid-community-item {
     padding: $size;
@@ -334,7 +333,7 @@
 }
   .Capsid-jobs-item {
     padding: $size;
-    background-color: #F5FDFF; // NEED TO ADD THIS
+    background-color: usetheme(bg-blue-silver); //#F5FDFF; // NEED TO ADD THIS
     margin-bottom: $size-half;
     &:last-child {
       margin-bottom: $size;

@@ -4,7 +4,7 @@
  -->
 <template>
 
-  <div class="StreamCard _grid-1-6">
+  <div class="StreamCard _grid-1-6 _margin-bottom-2">
     <div class="StreamCard-sidebar" >
       <!-- <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" /> -->
       <slot name="sidebar" />

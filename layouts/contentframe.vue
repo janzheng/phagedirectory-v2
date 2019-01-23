@@ -140,7 +140,9 @@ export default {
              offset: -20
            })
           }, 600)
-          scroll()
+          // scrolls too fast / before stuff's loaded, add a small buffer
+          setTimeout(scroll, 200)
+          // scroll()
         }
         scrolled = true
       })
@@ -160,17 +162,20 @@ export default {
     // handle anchor links
     const _this = this
     let scrolled = false
-    this.$nextTick(function () {
+    this.$nextTick(function () { // this waits to all the children are mounted, too
       if(_this.$route.hash && !scrolled) {
         // console.log('-- hash scroll')
       } 
       if(_this.$route.hash) {
         const scroll = _.throttle(function () {
           VueScrollTo.scrollTo(_this.$route.hash, 900, {
-           offset: -20
+           offset: -50
          })
         }, 600)
-        scroll()
+
+        // scrolls too fast / before stuff's loaded, add a small buffer
+        setTimeout(scroll, 300)
+        // scroll()
       }
       scrolled = true
     })

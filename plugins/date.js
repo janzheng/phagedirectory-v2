@@ -11,6 +11,19 @@ Vue.filter('niceDate', function(value) {
   }
 })
 
+Vue.filter('niceTimeDate', function(value) {
+  if (value) {
+    return dayjs(String(value)).format('h:mm a, MMM D')
+  }
+})
+
+Vue.filter('dateTo', function(value) {
+  if (value) {
+    // return dayjs(String(value)).format('MMMM D, YYYY')
+    return dayjs().to(dayjs(String(value)))
+  }
+})
+
 
 Vue.filter('dateTo', function(value) {
   if (value) {

@@ -253,7 +253,7 @@
           border-style: solid;
           display: inline-block;
           border-color: #374F6A;
-          line-height: 8px;
+          /*line-height: 8px;*/
           text-decoration: none !important;
           color: #374F6A !important;
           background-color: transparent !important;
@@ -262,8 +262,8 @@
           border-radius: 4px;
           padding-left: 24px;
           padding-right: 24px;
-          padding-top: 7.5px;
-          padding-bottom: 7.5px;
+          padding-top: 9px;
+          padding-bottom: 9px;
         }
 
       </style>
@@ -336,8 +336,8 @@
                 <h3 class="Capsid-jobs-header_">{{ 'Latest Jobs' }}</h3>
               </td>
               <td>
-                <div><a href="https://phage.directory/jobs">All jobs</a></div>
-                <div><a :href="jobsMailto">Post a job</a></div>
+                <div><a href="https://phage.directory/jobs" target="_blank"><strong>All jobs</strong></a></div>
+                <div><a :href="jobsMailto"><strong>Post a job</strong></a></div>
               </td>
             </tr>
           </table>
@@ -359,28 +359,24 @@
               </div>
             </div>
 
-            <div class="_grid-3-2 _grid-gap-none" v-if="job.fields['Org'] || job.fields['Supervisor']">
+            <!-- show Org and/or Supervisor... or only the Org -->
+            <div v-if="job.fields['Org'] && job.fields['Supervisor']" class="_grid-3-2 _grid-gap-none" >
               <div v-if="job.fields['Org']">
-                <!-- <div v-if="job.fields['OrgUrl']">
-                  <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" >{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
-                </div>
-                <div v-else> -->
-                  <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
-                <!-- </div> -->
+                <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
               </div>
-
               <div v-if="job.fields['Supervisor']" class="Job-supervisor _right-sm">
                 <div>{{ job.fields['Supervisor'] }}</div>
               </div>
+            </div>
+            <div v-else-if="job.fields['Org']">
+              <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
             </div>
 
             <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
 
             <!-- copied from the jobs page code; uses Job's page styles -->
             <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action _margin-top-half ">
-              <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none-i _margin-right-half">Apply</a>
-              <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline _button-outline --short _margin-bottom-none-i _margin-right-half">More Details</a> -->
-              <!-- expiration date -->
+              <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button-outline --short _margin-bottom-none-i _margin-right-half">More Details</a>
               <div v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small Job-small --nowrap">
                 Last day to apply: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
               </div>
@@ -406,7 +402,8 @@
                 <h3 class="Capsid-community-title_">Community Board</h3>
               </td>
               <td>
-                <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
+                <div><a href="https://phage.directory/community" target="_blank"><strong>All posts</strong></a></div>
+                <div><a :href="communityMailto"><strong>Post a message</strong></a></div>
               </td>
             </tr>
           </table>
@@ -500,7 +497,9 @@ export default {
       emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      jobsMailto: "https://phage.directory/services#jobs",
+      communityMailto: this.$cytosis.find('Content.community-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      // jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

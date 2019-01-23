@@ -120,12 +120,13 @@ $colors: (
   yellow: #FCCB4C,
   pink: #FA5486,
   blue-dark: #374F6A,
+  blue-silver: #F5FDFF,
 );
 
 @include addtheme($colors)
 $colorMap: colorTintMap($colors);
 
-$context_: (
+$context: (
   main: usetheme(phdir, $colors),
   secondary: usetheme(blue-dark, $colors),
   tertiary: usetheme(pink, $colors),
@@ -143,14 +144,16 @@ $context_: (
 
   body: usetheme(blue-dark, $colors),
   copy: usetheme(blue-dark, $colors),
-  copy-gray: usetheme(color-gray, $colors_),
-  copy-light: usetheme(color-gray-lighter, $colors_),
+  copy-gray: usetheme(gray, $colors_),
+  copy-light: usetheme(gray-lighter, $colors_),
 
   bg: usetheme(white, $colors_),
   bg-white: usetheme(white, $colors_),
+  bg-purewhite: usetheme(purewhite, $color-presets_),
   bg-silver: usetheme(silver-light, $colors_),
   bg-lighter: usetheme(silver-lighter, $colors_),
   bg-blue: usetheme(blue-dark, $colors_),
+  bg-blue-silver: usetheme(blue-silver, $colors),
   // tbd refactor later
   // blue: usetheme(blue, $colors_), // useful for alert-signup, when a blue color needed (prb needs fix later)
   // white: usetheme(white, $colors_), // contextually useful for text on dark backgrounds
@@ -162,7 +165,7 @@ $context_: (
   alert-color-cta: usetheme(teal_dull, $colors),
 );
 
-@include addtheme($context_)
+@include addtheme($context)
 // @include colorate($context_);
 
 

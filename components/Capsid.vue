@@ -37,7 +37,7 @@
         </div>
 
 
-        <div class="Capsid-new" >
+        <div class="Capsid-update" >
 
           <!-- 
 
@@ -47,7 +47,7 @@
 
           <div v-if="getUpdates(issue).length>0" class="Capsid-updates" >
             <h4 class="Capsid-new-title">{{ issue.fields['UpdatesTitle'] || 'Updates' }}</h4>
-            <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-new-item" >
+            <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-update-item" >
               <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
               <div v-if="update.fields['Tags']" class="_margin-top-half" >
                 <span v-for="tag of update.fields.Tags" :key="tag" :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Capsid-item-tag _tag" >{{ tag }}</span>
@@ -62,13 +62,13 @@
            -->
 
           <div class="Capsid-jobs">
-            <div class="_grid-2-xs">
-              <h4 class="Capsid-jobs-header">{{ 'Latest Jobs' }}</h4>
+            <div class="_grid-3-2-xs _grid-gap-small ">
+              <h4 class="Capsid-new-title">{{ 'Latest Jobs' }}</h4>
               <div class="_right">
-                <div><a href="https://phage.directory/jobs">All jobs</a></div>
+                <div><a href="https://phage.directory/jobs" target="_blank"><strong>All jobs</strong></a></div>
                 <div>
                   <a :href="jobsMailto">
-                    Post a job
+                    <strong>Post a job</strong>
                   </a>
                 </div>
               </div>
@@ -83,30 +83,28 @@
                 <h5 class="Capsid-job-title _padding-top-half">{{ job.fields['Name'] }}</h5>
               </div>
 
-              <div v-if="job.fields['Org'] || job.fields['Supervisor']" class="_grid-3-2 _grid-gap-none" >
+              <!-- show Org and/or Supervisor... or only the Org -->
+              <div v-if="job.fields['Org'] && job.fields['Supervisor']" class="_grid-3-2 _grid-gap-none" >
                 <div v-if="job.fields['Org']">
-                  <!-- <div v-if="job.fields['OrgUrl']">
-                    <a :href="job.fields['OrgUrl']" class="Job-org _font-bold" >{{ job.fields['Org'].join(', ') }}</a>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
-                  </div>
-                  <div v-else> -->
                   <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
-                  <!-- </div> -->
                 </div>
-
                 <div v-if="job.fields['Supervisor']" class="Job-supervisor _right-sm">
                   <div>{{ job.fields['Supervisor'] }}</div>
                 </div>
+              </div>
+              <div v-else-if="job.fields['Org']">
+                <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
               </div>
 
               <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
 
               <!-- copied from the jobs page code; uses Job's page styles -->
               <div v-if="getJobStatus(job) != 'Expired' && job.fields['URL']" class="Job-action _margin-top-half ">
-                <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA _button --short _margin-bottom-none-i _margin-right-half">Apply</a>
+                <a v-if="job.fields['URL']" :href="job.fields['URL']" class="Job-action-apply CTA --outline _button --short _margin-bottom-none-i _margin-right-half" target="_blank">More Details</a>
                 <!-- <a v-if="job.fields['DetailsUrl']" :href="job.fields['DetailsUrl']" class="Job-action-apply CTA _button --outline --short _margin-bottom-none-i _margin-right-half">More Details</a> -->
                 <!-- expiration date -->
                 <span v-if="job.fields['ExpirationDate']" class="Job-expiry _font-small --nowrap">
-                  Last day to apply: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
+                  Last day: <span class="_font-bold">{{ job.fields['ExpirationDate'] | niceDate }} </span>
                 </span>
               </div>
 
@@ -124,10 +122,11 @@
            -->
 
           <div class="Capsid-community">
-            <div class="_grid-3-2-xs">
+            <div class="_grid-3-2-xs _grid-gap-small _margin-bottom-sm">
               <h4 class="Capsid-new-title">Community Board</h4>
               <div class="Capsid-community-cta _right">
-                <div><a href="mailto:board@phage.directory?subject=Phage Directory Community Board&body=Hi Phage Directory, I'd like to post a thing to your community board ...">Post an item</a></div>
+                <div><a href="https://phage.directory/community" target="_blank"><strong>All posts</strong></a></div>
+                <div><a :href="communityMailto"><strong>Post a message</strong></a></div>
               </div>
             </div>
 
@@ -244,7 +243,9 @@ export default {
       emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
       communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      jobsMailto: "https://phage.directory/services#jobs",
+      communityMailto: this.$cytosis.find('Content.community-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      // jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

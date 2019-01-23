@@ -18,7 +18,7 @@
                  class="CapsidStub-item _block _card _padding-2">
       <h6 v-if="isFeatured" class="CapsidStub-latest">Latest Issue</h6>
 
-      <div class="Capsid-header _grid-2-1">
+      <div class="Capsid-header _grid-2-1 _grid-gap-small">
         <div class="Capsid-title">{{ issue.fields['Name'] }}</div>
         <div class="Capsid-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
