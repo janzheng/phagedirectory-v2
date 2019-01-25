@@ -57,16 +57,14 @@
         <div class="Stream">
 
           <StreamCard>
-            <div slot="sidebar" width="100">
+            <div slot="sidebar" style="width:100px">
               <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
             </div>
-            <div slot="main">
-              Phage Futures content here / card here?
-            </div>
+            <div slot="main" class="_card --border-active _padding _md-p_fix" v-html="$md.render(phagefutures || '')" />
           </StreamCard>
 
           <StreamCard>
-            <div slot="sidebar" width="100">
+            <div slot="sidebar" style="width:100px">
               <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
             </div>
             <div slot="main">
@@ -151,6 +149,7 @@ export default {
       cytosis: store.state.cytosis,
       intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown'],
       capsidTitle: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      phagefutures: app.$cytosis.find('Content.phagefutures-index', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 

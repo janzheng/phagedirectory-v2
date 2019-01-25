@@ -73,11 +73,23 @@ import { mapState } from 'vuex'
 
 export default {
   head () {
-    const title = "Phage Jobs"
+    const title = "Phage Directory Jobs"
+    const headDescription = "Make a difference with your phage expertise!"
+
+    let meta = [
+      { hid: 'og-title', property: 'og:title', content: `${title}` },
+      { hid: 'twitter-title', property: 'twitter:title', content: `${title}` },
+
+      { hid: 'twitter-description', property: 'twitter:description', content: `${headDescription}` },
+      { hid: 'og-description', property: 'og:description', content: `${headDescription}` },
+      { hid: 'description', name: 'description', content: `${headDescription}` },
+    ]
 
     return {
       title,
+      meta,
     }
+
   },
 
   components: {

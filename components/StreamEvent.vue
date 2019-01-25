@@ -4,19 +4,17 @@
  -->
 <template>
 
-  <div class="StreamCard _grid-1-6">
-    <div class="StreamCard-sidebar" >
-      <!-- <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" /> -->
-      <slot name="sidebar" />
+  <div class="StreamEvent">
+    <div class="StreamEvent-header _grid-3-1 _align-vertically" >
+      <h6 class="_padding-none"><slot name="type" /></h6>
+      <div class="_right"><slot name="date" /></div>
     </div>
-    <div class="StreamCard-main _margin-bottom" >
+    <div class="StreamEvent-main">
       <slot name="main" />
-      <!-- <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" /> -->
-      <!-- <CapsidBanner /> -->
-      <!-- <CapsidMicroBanner class="CapsidBanner" /> -->
-      <!-- <FormCapsidFeedback class=""/> -->
     </div>
   </div>
+
+
 
 </template>
 

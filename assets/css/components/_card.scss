@@ -15,8 +15,16 @@
     background-color: usetheme(highlight); // $color-teal-50;
     border-color: usetheme(highlight); // $color-teal-50;
   }
+    &.--border-highlight {
+      border-color: usetheme(highlight); // $color-teal-50;
+      border-width: $border-thin;
+    }
+    &.--border-active {
+      border-color: usetheme(active); // $color-teal-50;
+      border-width: $border-thin;
+    }
 
-  &.--advert {
+  &.--advert, &.--active {
     background-color: usetheme(advert); // $color-teal-50;
     border-color: usetheme(advert); // $color-teal-50;
   }

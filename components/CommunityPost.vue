@@ -14,15 +14,14 @@
         <div class="CommunityPost-date _right-sm _font-small">Posted {{ post.fields['PostedDate'] | dateTo }}</div>
       </div>
       <div class="CommunityPost-title _font-bold _margin-top-half _margin-bottom">
-        <h4 v-if="post.fields['Title']" class="_inline">{{ post.fields['Title'] }}</h4> 
-        <span v-if="post.fields['Org']" class="CommunityPost-org"> — 
-          <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
-          <span v-else>{{ post.fields['Org'] }}</span>
-        </span>
+        <h4 v-if="post.fields['Title']" class="_inline _md-p_fix" v-html="$md.strip($md.render( post.fields['Title'] || ''))" />
       </div>
-      <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName'] " class="CommunityPost-info _margin-bottom">
+      <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName'] || post.fields['Org'] " class="CommunityPost-info _margin-bottom">
         <div v-if="post.fields['PersonName']">Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
         <div v-if="post.fields['Location']">Location: <strong>{{ post.fields['Location'] }}</strong></div>
+        <div v-if="post.fields['Org']" class="CommunityPost-org">Organization: 
+          <strong><a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a> <span v-else>{{ post.fields['Org'] }}</span></strong>
+        </div>
         <div v-if="post.fields['URL']" class="_wordbreak">Website: <a :href="post.fields['URL']"><strong>{{ post.fields['URL'] }}</strong></a></div>
       </div>
     </div>
@@ -46,6 +45,11 @@ export default {
   },
 
   methods: {
+    strip(md) {
+      // strips the annoying <p></p> from a rendered markdown
+      console.log('extractRender', md, md.substring(3, md.length-5))
+      return md
+    },
     getAttachment(post) {
       // currently only works for the first attachment
       if(post.fields['Attachments']) {

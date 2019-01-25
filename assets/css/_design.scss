@@ -74,7 +74,8 @@ p, ul, li, {
 }
 
 // links
-a {
+a, ._link {
+  cursor: pointer;
   text-decoration: underline;
   text-decoration-color: usetheme(links-decoration); //$color-links;
   color: usetheme(links); //$color-links;
@@ -89,6 +90,10 @@ a {
 
   &._button {
     text-decoration: none;
+  }
+
+  &.--disabled {
+    color: usetheme(disabled);
   }
 }
 

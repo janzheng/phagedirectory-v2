@@ -113,6 +113,10 @@
             line-height: 28px;
             font-weight: bold;
           }
+          .CommunityPost-info {
+            margin-top: 15px;
+            margin-bottom: 15px;
+          }
         .Capsid-jobs {
           padding: 16px;
           background-color: rgba(113, 239, 245, 0.1);
@@ -217,6 +221,7 @@
 
         .Capsid-author img {
           width: 80px !important;
+          background-color: #FFFFFF !important;
         }
 
         img {
@@ -416,18 +421,17 @@
               <span v-if="post.fields['PostedDate']" class="_md-p_fix _font-small _margin-bottom-half" >{{ post.fields['PostedDate'] | niceDate }}</span>
             </div>
             <div v-if="getPostStatus(post) != 'Expired' && post.fields['Title']">
-              <div class="Capsid-community-title _padding-top-half _inline-block">{{ post.fields['Title'] }}</div><span class="CommunityPost-org" v-if="post.fields['Org']"> — 
-              <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
-                <span v-else>{{ post.fields['Org'] }}</span>
-              </span>
+              <div class="Capsid-community-title _padding-top-half _inline-block" v-html="$md.strip($md.render( post.fields['Title'] || ''))" />
             </div>
 
-            <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName']" class="CommunityPost-info">
-              <br >
+            <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName'] || post.fields['Org']" class="CommunityPost-info">
               <div v-if="post.fields['PersonName']">Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
               <div v-if="post.fields['Location']">Location: <strong>{{ post.fields['Location'] }}</strong></div>
+              <div v-if="post.fields['Org']" class="CommunityPost-org">Organization: <strong>
+                <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
+                <span v-else>{{ post.fields['Org'] }}</span></strong>
+              </div>
               <div v-if="post.fields['URL']" class="_wordbreak">Website: <a :href="post.fields['URL']"><strong>{{ post.fields['URL'] }}</strong></a></div>
-              <br >
             </div>
 
             <div class="_md-p_fix" v-html="$md.render(post.fields['Markdown'] || '')" />

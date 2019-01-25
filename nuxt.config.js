@@ -424,6 +424,25 @@ module.exports = {
           path: '/legal',
           component: resolve(__dirname, 'pages/policies.vue')
         },
+
+
+
+        // experimental
+        {
+          name: 'phagefutures-agenda',
+          path: '/phagefutures/agenda',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+        {
+          name: 'phagefutures-posters',
+          path: '/phagefutures/posters',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+        {
+          name: 'phagefutures-about',
+          path: '/phagefutures/about',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
       )
     },
 

@@ -17,17 +17,19 @@ export default ({ }, inject) => {
     linkify: true,
     breaks: true,
   })
-
-  // breaks IE11, so it's been moved to devDependencies
-  
   md.use(MarkdownItAttrs)
-  // md.use(MarkdownItAttrs)
-  // md.use(MarkdownItAttrs, {
-  //   leftDelimiter: '[',
-  //   rightDelimiter: ']'
-  // });
-  // md.use(require('markdown-it-attrs'), {leftDelimiter: '[', rightDelimiter: ']'})
-  // md.use(require('markdown-it-attrs'), {attrs: {'leftDelimiter': '[', 'rightDelimiter': ']'}})
+
+  md['strip'] = function (md) {
+    // add functionality to strip the annoying <p></p> from a rendered markdown
+    // really useful for rendering markdown content in to an H1, etc.
+    // usage: $md.strip($md.render( post.fields['Title'] || ''))
+    return md.substring(3, md.length-5)
+  }
 
   inject('md', md)
+
+
 }
+
+
+

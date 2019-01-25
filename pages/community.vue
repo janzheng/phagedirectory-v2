@@ -3,8 +3,8 @@
   <div class="Community _section-page _margin-center">
 
     <div class="_section-content _margin-center">
-      <div class="_padding-bottom" v-html="$md.render(intro || '')" />
-      <div class="_padding-bottom" v-html="$md.render(content || '')" />
+      <div class="" v-html="$md.render(intro || '')" />
+      <div class="" v-html="$md.render(content || '')" />
     </div>
 
     <!-- <div class="_section-content _margin-center"> -->

@@ -1,7 +1,7 @@
 
 <template>
 
-  <div class="Capsid _section-article _margin-center">
+  <div class="Capsid _section-article _margin-center ">
     
     <div v-for="issue of issues" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"
          :key="issue.id" 
@@ -137,14 +137,14 @@
               </div>
 
               <div v-if="getPostStatus(post) != 'Expired' && post.fields['Title']">
-                <h5 class="Capsid-community-title _padding-top-half _inline-block">{{ post.fields['Title'] }}</h5><span v-if="post.fields['Org']" class="CommunityPost-org" > — 
-                  <a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a>
-                  <span v-else>{{ post.fields['Org'] }}</span>
-                </span>
+                <h5 class="Capsid-community-title _padding-top-half _inline-block" v-html="$md.strip($md.render( post.fields['Title'] || ''))" />
               </div>
-              <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName']" class="CommunityPost-info _margin-bottom">
-                <div v-if="post.fields['PersonName']" >Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
+              <div v-if="post.fields['URL'] || post.fields['Location'] || post.fields['PersonName'] || post.fields['Org'] " class="CommunityPost-info _margin-bottom">
+                <div v-if="post.fields['PersonName']">Name: <strong>{{ post.fields['PersonName'] }}</strong></div>
                 <div v-if="post.fields['Location']">Location: <strong>{{ post.fields['Location'] }}</strong></div>
+                <div v-if="post.fields['Org']" class="CommunityPost-org">Organization:
+                  <strong><a v-if="post.fields['OrgUrl']" :href="post.fields['OrgUrl']">{{ post.fields['Org'] }}</a><span v-else>{{ post.fields['Org'] }}</span></strong>
+                </div>
                 <div v-if="post.fields['URL']" class="_wordbreak">Website: <a :href="post.fields['URL']"><strong>{{ post.fields['URL'] }}</strong></a></div>
               </div>
 

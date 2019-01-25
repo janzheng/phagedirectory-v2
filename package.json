@@ -19,7 +19,9 @@
     "stage": "NODE_ENV=spa npm run generate --spa; npm run stagedeploy",
     "stagebuild": "npm run generate; npm run stagedeploy",
     "prod": "npm run generate; npm run deploy",
-    "prodspa": "NODE_ENV=spa npm run generate --spa; npm run deploy"
+    "prodspa": "NODE_ENV=spa npm run generate --spa; npm run deploy",
+    "kisacodeploy": "cd dist; surge . -d phagedirectorykisaco.surge.sh; say 'stage ready'",
+    "kisaco": "npm run generate; npm run kisacodeploy"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",

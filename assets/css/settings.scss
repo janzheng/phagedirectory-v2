@@ -163,6 +163,13 @@ $context: (
   capsid-color: map-get($colorMap, teal_dull-400),
   alert-color: map-get($colorMap, pink-300),
   alert-color-cta: usetheme(teal_dull, $colors),
+
+  success: usetheme(green, $colors_),
+  warning: usetheme(yellow, $colors_),
+  info: usetheme(blue-dark, $colors_),
+  danger: usetheme(red, $colors_),
+  disabled: usetheme(silver, $colors_),
+  transparent: usetheme(transparent, $colors_),
 );
 
 @include addtheme($context)
