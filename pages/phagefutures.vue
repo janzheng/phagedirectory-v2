@@ -51,7 +51,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="PhageFutures-post-content _card --transparent _md-p_fix" v-html="$md.render(post.fields['Markdown'] || '')" />
+                  <div class="PhageFutures-post-content _card --transparent _md-p_fix" >
+                    <div v-if="post.fields['Markdown']" class="PhageFutures-post-markdown" v-html="$md.render(post.fields['Markdown'] || '')" />
+                    <div v-if="post.fields['TwitterLink']" class="PhageFutures-post-twitter" >
+                      <blockquote class="twitter-tweet" data-lang="en">
+                        <a :href="post.fields['TwitterLink']"/>
+                      </blockquote>
+                    </div>
+                  </div>
                 </div>
               </StreamCard>
 
@@ -289,6 +296,12 @@ export default {
 
       // merge posts from timeline w/ Agenda items
       timeline = [ ...timeline, ...agenda ]
+
+      // get rid of timeline items that might not have dates associate (will mess up sorting)
+      for (const i of timeline.keys()) {
+        if(!timeline[i].fields['Time'])
+          timeline.splice(i,1)
+      }
 
       // sort timeline by Time
       timeline = this.$cytosis.sort(timeline, 'Time').reverse()
