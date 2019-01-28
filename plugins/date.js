@@ -25,9 +25,15 @@ Vue.filter('dateTo', function(value) {
 })
 
 
-Vue.filter('dateTo', function(value) {
+Vue.filter('dateDiffMinutes', function(value) {
   if (value) {
     // return dayjs(String(value)).format('MMMM D, YYYY')
     return dayjs().to(dayjs(String(value)))
   }
 })
+
+// export default ({ app }, inject) => {
+export default ({ }, inject) => {
+  inject('dayjs', dayjs)
+}
+

@@ -28,6 +28,16 @@ $phagefutures-post-maxwidth: 479.05px;
       border-bottom: $border-thick solid usetheme(active);
     }
   }
+
+  @include screen-xs {
+    display: block;
+
+    a {
+      display: block;
+      text-align: left;
+      margin: 0;
+    }
+  }
 }
 
 
@@ -55,11 +65,30 @@ $phagefutures-post-maxwidth: 479.05px;
 
 .PhageFutures-post {
   margin-bottom: $size;
+
+  @include screen-xs {
+    display: block;
+  }
 }
 
 .PhageFutures-post-header {
   color: usetheme(copy-gray);
 }
+
+.PhageFutures-post-sidebar {
+  @include screen-xs {
+    img {
+      margin-left: 0;
+    }
+  }
+}
+
+.PhageFutures-post-images {
+  img {
+    max-width: 100%;
+  }
+}
+
 a.PhageFutures-post-author {
   // @extend ._font-small;
   font-weight: bold;
@@ -120,6 +149,7 @@ a.PhageFutures-post-author {
 
 
 // up next box
+.PhageFutures-now,
 .PhageFutures-next {
   .AgendaEvent {
     border-left: $border-medium solid usetheme(active);
@@ -133,6 +163,7 @@ a.PhageFutures-post-author {
     opacity: 1 !important;
   }
   .AgendaEvent {
+    &.--now,
     &.--upcoming {
       padding-left: $size;
       border-left: $border-medium solid usetheme(active);
@@ -161,16 +192,18 @@ a.PhageFutures-post-author {
 // AgendaEvent
 
 %line-highlight {
-  position: relative;
-  &:before {
-    $width : 30px;
-    $height: $border-medium;
-    content: ' ';
-    position: absolute;
-    width: $width;
-    border: $height solid usetheme(main);
-    left: - $width - $size;
-    top: calc(50% - #{$height});
+  @include screen-sm {
+    position: relative;
+    &:before {
+      $width : 30px;
+      $height: $border-medium;
+      content: ' ';
+      position: absolute;
+      width: $width;
+      border: $height solid usetheme(main);
+      left: - $width - $size;
+      top: calc(50% - #{$height});
+    }
   }
 }
 
@@ -179,6 +212,9 @@ a.PhageFutures-post-author {
     @extend ._card;
     padding: $size;
     margin-bottom: $size-2;
+  }
+  @include screen-xs {
+    margin-top: $size-2;
   }
 }
 
@@ -266,6 +302,11 @@ a.PhageFutures-post-author {
       padding: 0;
       color: usetheme(copy-light);
     }
+
+    @include screen-xs {
+      padding: $size;
+      background-color: usetheme(highlight);
+    }
   }
   &.--meta-event {
     // describes an event like start, end, lunch, break
@@ -304,12 +345,12 @@ a.PhageFutures-post-author {
   .PhageFutures-poster-name {
     @extend %ease-fast;
   }
-  &:hover {
-    .PhageFutures-poster-name {
-      color: usetheme(active);
-      @extend %ease-fast;
-    }
-  }
+  // &:hover {
+  //   .PhageFutures-poster-name {
+  //     color: usetheme(active);
+  //     @extend %ease-fast;
+  //   }
+  // }
   &.--closed {
     .PhageFutures-poster-more {
       display: none;

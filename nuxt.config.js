@@ -429,6 +429,29 @@ module.exports = {
 
         // experimental
         {
+          name: 'phagefutures-alt',
+          path: '/phage-futures',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+        {
+          name: 'phagefutures-agenda',
+          path: '/phage-futures/agenda',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+        {
+          name: 'phagefutures-posters',
+          path: '/phage-futures/posters',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+        {
+          name: 'phagefutures-about',
+          path: '/phage-futures/about',
+          component: resolve(__dirname, 'pages/phagefutures.vue')
+        },
+
+        
+
+        {
           name: 'phagefutures-agenda',
           path: '/phagefutures/agenda',
           component: resolve(__dirname, 'pages/phagefutures.vue')

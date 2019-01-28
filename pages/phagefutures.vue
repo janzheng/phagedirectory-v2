@@ -27,6 +27,9 @@
 
           <!-- timeline mode -->
           <div v-if="mode == 'timeline'" class="PhageFutures-timeline">
+            <div v-if="nowEvent" class="PhageFutures-now" >
+              <AgendaEvent :event="nowEvent" :is-now="true" class="PhageFutures-event" />
+            </div>
             <div v-if="nextEvent" class="PhageFutures-next" >
               <AgendaEvent :event="nextEvent" :is-next="true" class="PhageFutures-event" />
             </div>
@@ -34,13 +37,13 @@
             <div v-for="post of getTimeline" v-if="post.fields['isPublished']" :key="'timeline_'+post.id" class="PhageFutures-posts">
               <!-- timeline post -->
               <StreamCard v-if="!post['isAgenda']" class="PhageFutures-post _grid-gap-small">
-                <div v-if="getAuthor(post)" slot="sidebar" class="PhageFutures-post-sidebar" >
+                <div v-if="getAuthor(post)" slot="sidebar" class="PhageFutures-post-sidebar _margin-bottom-half-xs" >
                   <a v-if="getAuthor(post).fields['Twitter']" :href="'https://twitter.com/'+getAuthor(post).fields['Twitter']" target="_blank"><img v-if="getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70"></a>
                   <img v-if="!getAuthor(post).fields['Twitter'] && getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70">
                 </div>
                 <div slot="main" class="PhageFutures-post-main">
                   <div v-if="getAuthor(post)" class="PhageFutures-post-header _md-p_fix _margin-bottom-half" >
-                    <div class="PhageFutures-post-meta _grid-2-1">
+                    <div class="PhageFutures-post-meta _grid-3-2-xs _grid-gap-small">
                       <div>
                         <a v-if="getAuthor(post).fields['Twitter']" :href="'https://twitter.com/'+getAuthor(post).fields['Twitter']" class="PhageFutures-post-author" target="_blank">{{ getAuthor(post).fields['Name'] }}</a>
                         <a v-if="getAuthor(post).fields['Twitter']" :href="'https://twitter.com/'+getAuthor(post).fields['Twitter']" class="PhageFutures-post-header-twitter" target="_blank">{{ getAuthor(post).fields['Twitter'] }}</a>
@@ -58,6 +61,11 @@
                         <a :href="post.fields['TwitterLink']"/>
                       </blockquote>
                     </div>
+                    <div v-if="post.fields['Attachments']" class="PhageFutures-post-images" >
+                      <div v-for="image of post.fields['Attachments']" :key="image['url']">
+                        <img :src="image['url']" >
+                      </div>
+                    </div>
                   </div>
                 </div>
               </StreamCard>
@@ -65,7 +73,7 @@
               <!-- agenda post within timeline -->
               <div v-else>
                 <StreamCard class="PhageFutures-post _grid-gap-small _margin-none-i">
-                  <div v-if="getAuthor(post)" slot="sidebar" class="PhageFutures-post-sidebar" >
+                  <div v-if="getAuthor(post)" slot="sidebar" class="PhageFutures-post-sidebar _margin-bottom-half-xs" >
                     <a v-if="getAuthor(post).fields['Twitter']" :href="'https://twitter.com/'+getAuthor(post).fields['Twitter']" target="_blank"><img v-if="getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70"></a>
                     <img v-if="!getAuthor(post).fields['Twitter'] && getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70">
                   </div>
@@ -97,6 +105,12 @@
             <div class="_margin-bottom">
               <span class="_font-bold _link" @click="openAllPosters = !openAllPosters">Open all posters</span>
             </div>
+            <!-- <div v-for="poster of Posters" v-if="poster.fields['isPublished']" :key="poster.id" class="PhageFutures-poster _margin-bottom _card _padding" >
+              <div class="PhageFutures-poster-name _font-bold " v-html="$md.strip($md.render( poster.fields['Name'] || ''))" />
+              <div class="PhageFutures-poster-more _margin-top-half">
+                <div class="PhageFutures-poster-orgs" v-html="$md.render( poster.fields['Orgs'] || '')" />
+              </div>
+            </div> -->
             <Toggle v-for="poster of Posters" v-if="poster.fields['isPublished']" :key="poster.id" :off-class="openAllPosters ? '--open' : '--closed'" class="PhageFutures-poster _margin-bottom _card _padding" on-class="--open" >
               <div class="PhageFutures-poster-name _font-bold " v-html="$md.strip($md.render( poster.fields['Name'] || ''))" />
               <div class="PhageFutures-poster-more _margin-top-half">
@@ -115,7 +129,7 @@
             <div class="_margin-bottom-2" v-html="$md.render(about || '')" />
             <div v-for="author of Authors" v-if="author.fields['isPublished']" :key="author.id" class="PhageFutures-author _margin-bottom">
               <StreamCard class="PhageFutures-post _grid-gap-small _margin-none-i">
-                <div slot="sidebar" class="PhageFutures-post-sidebar" ><img v-if="author.fields['Attachments'] && author.fields['Attachments'][0]" :src="author.fields['Attachments'][0]['thumbnails']['large']['url']" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70">
+                <div slot="sidebar" class="PhageFutures-post-sidebar _margin-bottom-half-xs" ><img v-if="author.fields['Attachments'] && author.fields['Attachments'][0]" :src="author.fields['Attachments'][0]['thumbnails']['large']['url']" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70">
                 </div>
                 <div slot="main" class="PhageFutures-post-main ">
                   <div class="PhageFutures-post-header _md-p_fix _margin-bottom-half">
@@ -244,6 +258,30 @@ export default {
     //   'cytosis',
     //   // 'test'
     //   ]),
+
+    nowEvent() {
+      // shows any event that is currently happening / has been happening for 15 minutes
+      // after 15 minute mark it goes away
+      let agenda = this['Agenda']
+
+      const nowDate = new Date
+      const now = this.$dayjs(nowDate)
+
+      for (const event of agenda) {
+        const minuteDiff = now.diff(this.$dayjs(event.fields['Time']), 'minutes')
+
+        if (minuteDiff < 15 && 
+          minuteDiff >= 0 && 
+          // event.fields['Type'] != 'Day' && // day is actually quite useful
+          event.fields['Type'] != 'Session' && 
+          event.fields['isPublished']) {
+
+          console.log('now event min diff:', minuteDiff, event.fields['Name'])
+          return event
+        }
+      }
+      return false // no more items in the agenda
+    },
 
     nextEvent() {
       // this shows the net event by date listed in Agenda
