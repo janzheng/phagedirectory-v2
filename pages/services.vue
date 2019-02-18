@@ -77,30 +77,26 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_basic"
+  },
   
   fetch() {
   },
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis.tables
-    
-    // if(!store.state.cytosis.tables)
-    //   return false
-
-    return {
-      intro: app.$cytosis.find('Content.services-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      overview: app.$cytosis.find('Content.services-overview', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      ads: app.$cytosis.find('Content.services-ads', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jobs: app.$cytosis.find('Content.services-jobs', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      consulting: app.$cytosis.find('Content.services-consulting', store.state.cytosis.tables)[0]['fields']['Markdown'],
-    }
-  },
+  // async asyncData({app, store}) {
+  //   return {
+  //   }
+  // },
 
   data: function () {
-    // console.log('data:', this.$store.state)
     return {
-      // content: this.$store.state.Content,
+      intro: this.$cytosis.find('Content.services-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      overview: this.$cytosis.find('Content.services-overview', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      ads: this.$cytosis.find('Content.services-ads', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      jobs: this.$cytosis.find('Content.services-jobs', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      consulting: this.$cytosis.find('Content.services-consulting', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

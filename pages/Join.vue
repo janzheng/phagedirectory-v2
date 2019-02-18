@@ -63,35 +63,38 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
-
-  // async asyncData({app, env, route, store}) {
-  async asyncData({app, env, store}) {
-
-    const cytosis = store.state.cytosis
-    return {
-      postUrl: env.ext_handler,
-      cytosis,
-
-      intro: app.$cytosis.find('Content.join-intro', cytosis.tables)[0]['fields']['Markdown'],
-
-      researchFormIntro: app.$cytosis.find('Content.join-research', cytosis.tables)[0]['fields']['Markdown'],
-      researchFormPublished: app.$cytosis.find('Content.join-research-form', cytosis.tables)[0]['fields']['isPublished'] || false,
-      
-      labFormIntro: app.$cytosis.find('Content.join-lab', cytosis.tables)[0]['fields']['Markdown'],
-      labFormPublished: app.$cytosis.find('Content.join-lab-form', cytosis.tables)[0]['fields']['isPublished'] || false,
-      
-      industryFormIntro: app.$cytosis.find('Content.join-industry', cytosis.tables)[0]['fields']['Markdown'],
-      industryFormPublished: app.$cytosis.find('Content.join-industry-form', cytosis.tables)[0]['fields']['isPublished'] || false,
-
-      thanks: app.$cytosis.find('Content.join-form-thanks', cytosis.tables)[0]['fields']['Markdown'],
-      joinCta: app.$cytosis.find('Content.join-cta', cytosis.tables)[0]['fields']['Markdown'],
-      privacy: app.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
-    }
+  meta: {
+    tableQueries: ["_basic"]
   },
 
+  // async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, store}) {
+
+  //   return {
+  //     postUrl: env.ext_handler,
+  //   }
+  // },
+
   data: function () {
+
+    const researchForm = this.$cytosis.find('Content.join-research-form', {'Content': this.$store.state['Content']} )[0]
+
     return {
-      mode: 'select'
+      mode: 'select',
+      intro: this.$cytosis.find('Content.join-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+
+      researchFormIntro: researchForm['fields']['Markdown'],
+      researchFormPublished: researchForm['fields']['isPublished'] || false,
+      
+      labFormIntro: this.$cytosis.find('Content.join-lab', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      labFormPublished: this.$cytosis.find('Content.join-lab-form', {'Content': this.$store.state['Content']} )[0]['fields']['isPublished'] || false,
+      
+      industryFormIntro: this.$cytosis.find('Content.join-industry', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      industryFormPublished: this.$cytosis.find('Content.join-industry-form', {'Content': this.$store.state['Content']} )[0]['fields']['isPublished'] || false,
+
+      thanks: this.$cytosis.find('Content.join-form-thanks', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      joinCta: this.$cytosis.find('Content.join-cta', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      privacy: this.$cytosis.find('Content.privacy-forms', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

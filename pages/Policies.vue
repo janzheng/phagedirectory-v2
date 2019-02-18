@@ -41,18 +41,22 @@ export default {
   
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_basic",
+    // tableQueries: ["_basic", "_alerts"] // combine queries
+  },
   
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis
-    return {
-      intro: app.$cytosis.find('Content.policies-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      policies: app.$cytosis.find('Content.site-policy', store.state.cytosis.tables)[0]['fields']['Markdown'],
-    }
-  },
+  // async asyncData({app, store}) {
+  //   // const cytosis = store.state.cytosis
+  //   return {
+  //   }
+  // },
 
   data: function () {
     return {
+      intro: this.$cytosis.find('Content.policies-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      policies: this.$cytosis.find('Content.site-policy', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

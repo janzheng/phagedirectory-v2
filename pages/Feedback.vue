@@ -2,25 +2,29 @@
 
   <section class="AnonFeedback _section-page _margin-center">
     <div class="_section-content _margin-center">
-      <FormCapsidFeedback />
+      <DynamicForm />
     </div>
   </section>
 </template>
 
 <script>
 
-import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
+// import DynamicForm from '~/forms/FormPhageFutures.vue'
+import DynamicForm from '~/forms/FormContact.vue'
+// import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 // import FormVomFeedback from '~/forms/FormVomFeedback.vue'
 
 export default {
 
   components: {
-    // FormVomFeedback
-    FormCapsidFeedback
+    DynamicForm
   },
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_basic"
+  },
 
   data: function () {
     return {

@@ -1,0 +1,198 @@
+
+
+/* 
+
+    Syntactic Sugar for adding Flex to Classes
+
+    Flexbox, to be used in conjunction with _griddick
+    - https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-basics
+    - https://css-tricks.com/almanac/properties/f/flex/
+
+    - Properties for the Parent (flex container)
+      - display: flex
+      - flex-direction: row | row-reverse | column | column-reverse;
+      - flex-wrap: nowrap | wrap | wrap-reverse;
+      - flex-flow: <‘flex-direction’> || <‘flex-wrap’> (This is a shorthand flex-direction and flex-wrap properties)
+      - justify-content: flex-start | flex-end | center | space-between | space-around | space-evenly;
+      - align-items: flex-start | flex-end | center | baseline | stretch;
+      - align-content: flex-start | flex-end | center | space-between | space-around | stretch;
+
+    - Properties for the Children (flex items)
+      - order: <integer>; /* default is 0 
+      - flex-grow: <number>; /* default 0 
+      - flex-shrink: <number>; /* default 1
+      - flex-basis: <length> | auto;
+      - flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] *** recommended
+      - align-self: auto | flex-start | flex-end | center | baseline | stretch;
+
+
+ */ 
+
+/* 
+
+  Parent 
+
+ */
+
+/* Every object shares a row */
+._flex-row { 
+  display: flex;
+  flex: 1 auto; 
+}
+
+._flex-col {
+  display: flex;
+  flex-direction: column;
+
+  &._flex-inline {
+    // this prevents items from spanning across
+    align-items: baseline;
+  }
+  &._flex-bottom {
+    // this align things to the bottom of the container (or the end of the vertical flex direction)
+    justify-content: flex-end;
+  }
+}
+
+/* 
+
+  Child 
+
+ */
+
+._flex-auto {
+  flex: 1 1 auto
+}
+// auto flex for children
+._flex-1 {
+  flex: 1 auto;
+}
+._flex-2 {
+  flex: 2 auto;
+}
+._flex-3 {
+  flex: 3 auto;
+}
+._flex-4 {
+  flex: 4 auto;
+}
+._flex-5 {
+  flex: 5 auto;
+}
+
+
+
+// basis = minimum width or height
+
+._flex-basis-1 { flex-basis: $size; }
+._flex-basis-2 { flex-basis: $size-2; }
+._flex-basis-3 { flex-basis: $size-3; }
+._flex-basis-4 { flex-basis: $size-4; }
+._flex-basis-5 { flex-basis: $size-5; }
+._flex-basis-6 { flex-basis: $size-6; }
+._flex-basis-7 { flex-basis: $size-7; }
+._flex-basis-8 { flex-basis: $size-8; }
+._flex-basis-9 { flex-basis: $size-9; }
+._flex-basis-10 { flex-basis: $size-10; }
+._flex-basis-11 { flex-basis: $size-11; }
+
+
+
+
+._flex-basis-100 {
+  flex-basis: 100px;
+}
+._flex-basis-200 {
+  flex-basis: 200px;
+}
+._flex-basis-300 {
+  flex-basis: 300px;
+}
+._flex-basis-400 {
+  flex-basis: 400px;
+}
+._flex-basis-500 {
+  flex-basis: 500px;
+}
+._flex-basis-25pc {
+  flex-basis: 25%;
+}
+._flex-basis-50pc {
+  flex-basis: 50%;
+}
+._flex-basis-75pc {
+  flex-basis: 75%;
+}
+._flex-basis-100pc {
+  flex-basis: 100%;
+}
+
+
+/* 
+
+  Helpers
+
+ */
+
+// need to apply _flex-row or _flex-col independently
+._flex-left {
+  justify-content: flex-start;
+}
+._flex-horizontally {
+  justify-content: center;
+}
+._flex-right {
+  justify-content: flex-end;
+}
+
+._flex-vertically {
+  align-items: center;
+}
+._flex-top {
+  align-items: flex-start;
+}
+._flex-baseline {
+  align-items: baseline;
+}
+._flex-bottom {
+  align-items: flex-end;
+}
+
+// fills the rest of the gap
+._flex-grow {
+  flex-grow: 1;
+}
+
+
+._flex-wrap {
+  flex-wrap: wrap;
+}
+  ._flex-wrap-xs {
+    @include screen-xs {
+      flex-wrap: wrap;
+    }
+  }
+
+._flex-space-between {
+  justify-content: space-between;
+}
+
+// Keep in mind flex doesn't have the idea of gutter/gap size
+// Apply this at the parent level
+._flex-list {
+  $flex-gap: $size--4;
+  * {
+    margin-left: $flex-gap;
+    margin-right: $flex-gap;
+
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+
+

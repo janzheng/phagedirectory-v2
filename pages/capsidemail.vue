@@ -27,6 +27,10 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    // tableQuery: "_basic",
+    tableQueries: ["_capsid-content", "_capsid-data"] // combine queries
+  },
 
   // these are dynamic, and aren't grabbed on generation
   // async asyncData({app, env, route, store}) {
@@ -38,9 +42,6 @@ export default {
 
     const slug = unescape(route.params.slug)
     return {
-      title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      fine: app.$cytosis.find('Content.capsid-fine', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }
@@ -48,6 +49,9 @@ export default {
 
   data: function () {
     return {
+      title: this.$cytosis.find('Content.capsid-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      fine: this.$cytosis.find('Content.capsid-fine', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.capsid-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
@@ -74,7 +78,7 @@ export default {
         }
       }
 
-      console.log('issue slug: ', result)
+      // console.log('issue slug: ', result)
       return result // array of issues
     }
 

@@ -29,18 +29,17 @@ export default {
   },
 
   data: function () {
-    const cytosis = this.$store.state.cytosis
     
     return {
       postUrl: this.$store.state.ext_handler,
-      intro: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['Markdown'],
-      source: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['JSON'],
-      isPublished: this.$cytosis.find('Content.contact-form', cytosis.tables)[0]['fields']['isPublished'],
+      intro: this.$cytosis.find('Content.contact-form', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      source: this.$cytosis.find('Content.contact-form', {'Content': this.$store.state['Content']} )[0]['fields']['JSON'],
+      isPublished: this.$cytosis.find('Content.contact-form', {'Content': this.$store.state['Content']} )[0]['fields']['isPublished'],
       
-      error: this.$cytosis.find('Content.error-form', cytosis.tables)[0]['fields']['Markdown'],
-      thanks: this.$cytosis.find('Content.contact-thanks', cytosis.tables)[0]['fields']['Markdown'],
-      cta: this.$cytosis.find('Content.contact-cta', cytosis.tables)[0]['fields']['Markdown'],
-      privacy: this.$cytosis.find('Content.privacy-forms', cytosis.tables)[0]['fields']['Markdown'],
+      error: this.$cytosis.find('Content.error-form', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      thanks: this.$cytosis.find('Content.contact-thanks', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      cta: this.$cytosis.find('Content.contact-cta', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      privacy: this.$cytosis.find('Content.privacy-forms', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

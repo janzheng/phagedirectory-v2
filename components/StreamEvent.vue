@@ -5,7 +5,7 @@
 <template>
 
   <div class="StreamEvent">
-    <div class="StreamEvent-header _grid-3-1 _grid-gap-small _align-vertically _margin-bottom-half-xs " >
+    <div class="StreamEvent-header _grid-3-2 _grid-gap-small _align-vertically _margin-bottom-half-xs _padding-bottom-half " >
       <h6 class="_padding-none"><slot name="type" /></h6>
       <div class="_right-sm"><slot name="date" /></div>
     </div>

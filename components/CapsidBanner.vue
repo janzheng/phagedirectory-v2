@@ -67,8 +67,8 @@ export default {
   data: function () {
     return {
       // intro: this.$cytosis.find('Content.capsid-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      banner: this.$cytosis.find('Content.capsid-banner', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      placeholder: this.$cytosis.find('Content.capsid-placeholder', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      banner: this.$cytosis.find('Content.capsid-banner', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      placeholder: this.$cytosis.find('Content.capsid-placeholder', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

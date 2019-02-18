@@ -1,0 +1,314 @@
+
+// Typography & Fonts
+
+// size, baseline, line-heights defined in main index file
+// don't add any color-dependent copy here. use layout
+// or create another component-contextual sheet
+$font-sans: "-apple-system", "BlinkMacSystemFont", "system-ui", "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", "Helvetica", "arial", "sans-serif" !default;
+$font-serif: "Georgia", serif !default;
+$font-mono: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace !default;
+$font-display: $font-sans !default;
+
+$typography_: (
+  font-sans: $font-sans,
+  font-serif: $font-serif,
+  font-mono: $font-mono,
+  font-display: $font-display,
+
+  font-size: $size,
+  lineheight: $size * 1.5,
+
+  font-ui: $size,
+  lineheight-ui: $size,
+
+  font-large: $size + 3px,
+  lineheight-large: ($size + 2px) * 1.5,
+  font-larger: $size + 6px,
+  lineheight-larger: ($size + 6px) * 1.5,
+  font-largest: $size-2,
+  lineheight-largest: $size-2 * 1.5,
+
+  font-small: $size-smaller,
+  lineheight-small: $size-smaller * 1.5,
+  font-smaller: $size--1,
+  lineheight-smaller: $size--1 * 1.5,
+  font-smallest: $size--2,
+  lineheight-smallest: $size--2 * 1.5,
+
+  font-h1: $size-4,
+  lineheight-h1: $size-4 * 1.14,
+  font-h2: $size-3,
+  lineheight-h2: $size-3 * 1.34,
+  font-h3: $size-2,
+  lineheight-h3: $size-2 * 1.34,
+  font-h4: $size-1,
+  lineheight-h4: $size-1 * 1.34,
+  font-h5: $size-larger,
+  lineheight-h5: $size-larger * 1.34,
+  font-h6: $size--1,
+  lineheight-h6: $size--1 * 1.5,
+
+) !default;
+
+$settings: $typography_;
+
+// $theme-typesizes {
+
+// }
+
+// @include addtheme($theme-typography) // adds all fonts to $theme (dynamic css vars)
+
+%font-sans, ._font-sans,
+%font-basic, ._font-basic {
+  // font-family: -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", "Encode Sans", "Open Sans", "Oxygen-Sans", Helvetica, arial, sans-serif;
+  // font-family: usetheme(font-sans);
+  // @include usevar(font-family, font-sans); // uses dynamic fonts for font-sans
+  font-family: usetheme(font-sans, $settings); // not dynamic
+}
+
+%font-serif,
+._font-serif {
+  // font-family: "Georgia", serif;
+  font-family: usetheme(font-serif, $settings); // not dynamic
+  // font-family: usetheme(font-serif, $theme-typography);
+
+  // makes Georgia and serif fonts look better, darker on some screens
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+%font-mono,
+._font-mono {
+  // font-family: Courier, Consolas, 'Andale Mono WT', 'Andale Mono', 'Lucida Console', 'Lucida Sans Typewriter', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Liberation Mono', 'Nimbus Mono L', Monaco, 'Courier New', monospace;
+  font-family: usetheme(font-mono, $settings);
+} ._font-mono, ._font-code { @extend %font-mono; }
+
+%font-display,
+._font-display {
+  // nothing here for stylecoeur
+  @extend %font-sans;
+}
+
+
+%font-300, ._font-300 { font-weight: 300; }
+%font-400, ._font-400 { font-weight: 400; }
+%font-500, ._font-500 { font-weight: 500; }
+%font-600, ._font-600 { font-weight: 600; }
+%font-700, ._font-700 { font-weight: 700; }
+%font-800, ._font-800 { font-weight: 800; }
+%font-900, ._font-900 { font-weight: 900; }
+
+$font-light: 300 !default;
+$font-normal: 400 !default;
+$font-bold: 700 !default;
+$font-heavy: 900 !default;
+
+.--light, %font-light, ._font-light { font-weight: $font-light; }
+.--normal, %font-normal, ._font-normal {font-weight: $font-normal; }
+.--bold, %font-bold, ._font-bold, strong { font-weight: $font-bold; }
+.--heavy, %font-heavy, ._font-heavy { font-weight: $font-heavy; }
+
+.--lower, %font-lower, ._font-lower { text-transform: lowercase; }
+.--upper, %font-upper, ._font-upper { text-transform: uppercase; }
+.--capitalize, %font-capitalize, ._font-capitalize { text-transform: capitalize; }
+
+
+/* 
+
+  These are for convenience and legacy, and will be replaced over time
+
+ */
+$font-size: usetheme(font-size, $settings) !default; // - 1px;
+$font-lineheight: usetheme(lineheight, $settings) !default;
+
+$font-ui: usetheme(font-ui, $settings); // $size + 2px;
+$font-ui-lineheight: usetheme(lineheight-ui, $settings) !default;
+
+$font-large: usetheme(font-large, $settings) !default;
+  $font-large-lineheight: usetheme(lineheight-large, $settings) !default;
+
+$font-larger: usetheme(font-larger, $settings) !default;
+  $font-larger-lineheight: usetheme(lineheight-larger, $settings) !default;
+
+$font-largest: usetheme(font-largest, $settings) !default;
+  $font-largest-lineheight: usetheme(lineheight-largest, $settings) !default;
+
+$font-small: usetheme(font-small, $settings) !default;
+  $font-small-lineheight: usetheme(lineheight-small, $settings) !default;
+
+$font-smaller: usetheme(font-smaller, $settings) !default;
+  $font-smaller-lineheight: usetheme(lineheight-smaller, $settings) !default;
+
+$font-smallest: usetheme(font-smallest, $settings) !default;
+  $font-smallest-lineheight: usetheme(lineheight-smallest, $settings) !default;
+
+$font-h1: usetheme(font-h1, $settings) !default;
+  $lineheight-h1: usetheme(lineheight-h1, $settings) !default;
+$font-h2: usetheme(font-h2, $settings) !default;
+  $lineheight-h2: usetheme(lineheight-h2, $settings) !default;
+$font-h3: usetheme(font-h3, $settings) !default;
+  $lineheight-h3: usetheme(lineheight-h3, $settings) !default;
+$font-h4: usetheme(font-h4, $settings) !default;
+  $lineheight-h4: usetheme(lineheight-h4, $settings) !default;
+$font-h5: usetheme(font-h5, $settings) !default;
+  $lineheight-h5: usetheme(lineheight-h5, $settings) !default;
+$font-h6: usetheme(font-h6, $settings) !default;
+  $lineheight-h6: usetheme(lineheight-h6, $settings) !default;
+
+
+.--largest, %font-largest, ._font-largest       { &,p {font-size: $font-largest; line-height: $font-largest-lineheight; }}
+.--larger, %font-larger, ._font-larger          { &,p {font-size: $font-larger; line-height: $font-larger-lineheight; }}
+.--large, %font-large, ._font-large             { &,p {font-size: $font-large; line-height: $font-large-lineheight; }}
+%font-base, ._font-base                         { &,p {font-size: $font-size; line-height: $font-lineheight; }}
+.--small, %font-small, ._font-small             { &,p {font-size: $font-small; line-height: $font-small-lineheight;  }}
+.--smaller, %font-smaller, ._font-smaller       { &,p {font-size: $font-smaller; line-height: $font-smaller-lineheight; /*line-height: ($size - 5px) * 1.5 !important;*/ }}
+.--smallest, %font-smallest, ._font-smallest    { &,p {font-size: $font-smallest; line-height: $font-smallest-lineheight; /*line-height: ($size - 5px) * 1.5 !important;*/ }}
+.--tiny, %font-tiny, ._font-tiny                { &,p {font-size: $font-smallest; line-height: $font-smallest-lineheight; /*line-height: ($size - 5px) * 1.5 !important;*/ }}
+// %font-smallest, ._font-smallest { font-size: $size--3 !important; }
+
+// 
+// Contextual typography styles
+// 
+
+%font-italic, ._font-italic {
+  font-style: italic;
+}
+  em {@extend %font-italic}
+
+%font-body, ._font-body {
+  @extend %font-sans;
+  font-size: $font-size;
+  line-height: $font-lineheight;
+  // color: $color-copy;
+}
+
+// side note: use padding instead of margin
+// to prevent margin-folding headers w/ paragraphs
+
+._headline, ._h1,
+h1 {
+  font-size: $font-h1; //$size-base * 3.5;
+  line-height: $lineheight-h1;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  @extend %font-display;
+  // &.--padding {
+    padding: $size 0;
+    padding-bottom: $size*2;
+  // }
+}
+
+._subhead, ._h2,
+h2 {
+  font-size: $font-h2;
+  line-height: $lineheight-h2;
+  font-weight: 700;
+  @extend %font-display;
+  // &.--padding {
+    padding: $size 0;
+  // }
+}
+
+._sectionhead, ._h3,
+h3 {
+  font-size: $font-h3 ;
+  line-height: $lineheight-h3;
+  @extend %font-display;
+  font-weight: 700;
+  // &.--padding {
+    padding: $size 0;
+  // }
+}
+
+._subsectionhead, ._h4,
+h4 {
+  font-size: $font-h4;
+  line-height: $lineheight-h4;
+  font-weight: 700;
+  @extend %font-display;
+  // &.--padding {
+    padding-top: $size/2;
+    padding-bottom: $size;
+  // }
+}
+
+._parahead, ._h5,
+h5 {
+  font-size: $font-h5;
+  line-height: $lineheight-h5;
+  font-weight: 700;
+  @extend %font-sans;
+  // &.--padding {
+    padding-top: $size;
+    padding-bottom: $size;
+  // }
+}
+
+._microhead, ._h6,
+h6 {
+  font-weight: 700;
+  font-size: $font-h6;
+  line-height: $lineheight-h6;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  @extend %font-sans;
+  // &.--padding {
+    padding-bottom: $size-base;
+  // }
+}
+  // h6 could be used as date or section lead before the atual header
+  h6.--lead {
+    padding-bottom: 0;
+    & + h1 {
+      padding-top: 0;
+    }
+  }
+
+
+// this is really powerfully yet possibly destructive, at it forces
+// every paragraph to be overridden
+p, ._p {
+  @extend %font-body;
+  // padding-bottom: $size;
+
+  // using margins here allows for margin folding
+  // margin-top: $size;
+  margin-bottom: $size-base;
+}
+
+  // p+p,
+  // p+ul,
+  // p+ol, { 
+  //   padding-top: $size;
+  // }
+
+  // p+h1, p+h2, p+h3, p+h4, p+h5, p+h6,
+  // pre+h1, pre+h2, pre+h3, pre+h4,  {
+  //   padding-top: $size*2;
+  //   padding-bottom: $size;
+  // }
+
+
+
+
+// font awesome helper
+// makes font awesome icons align properly in buttons
+.fa {
+  line-height: 0 !important;  
+}
+
+// markdown-rendered content tends to always wrap with a p
+// this clears the last p from creating too much space
+._md-p_fix, ._md-pfix {
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+
+
+
+
+
+

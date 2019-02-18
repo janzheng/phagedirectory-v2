@@ -1,0 +1,425 @@
+
+
+/* 
+
+  Coeur Heart
+
+  - where variables are declared
+
+ */
+
+
+
+// OPTIONS
+$use-cssvars: true !default;    // if true, compiles into css vars with the usevar() mixin
+$use-colorate: true !default;   // turns colors into css usable in the html. Save space by turning off
+
+
+
+@import '_utils';  //  core values
+
+
+/* 
+
+  Default Theme
+  - holds sizes, and everything else
+  - compiled into css variables w/ fallback
+
+ */
+
+// Default Theme
+// contextual colors themes -> these are the ones you should use
+// colorate fills this theme up with default colors and contexts
+$theme-sizes: (
+  size: 16px,
+  size-diff: 0,
+  radius: 4px,
+) !default;
+
+@include addtheme($theme-sizes)
+
+
+
+
+
+
+
+
+
+// heart settings
+// derived variables from the default theme (using map-get everywhere is annoying)
+$size-diff: usetheme(size-diff) !default;      // default: 0; in case we’re not using base16, used for some edge cases / alignment
+$size: usetheme(size) - $size-diff !default;   // 16px default; // based on 4*4
+$sizeline: $size * 1.5 !default;               // baseline; base lineheight; line-heights follow 1.5 rule
+$baseline: $sizeline;
+
+// attempt at using "standardized" sizes. success may vary. (fonts are different sized, etc.)
+
+// Size ratios are based on multiples of 4
+// all sizes must be set RELATIVE to $size
+
+// minus sizes
+$size--4:       $size * 4/16     !default; // 4px
+$size--3:       $size * 8/16     !default; // 8px
+$size--2:       $size * 10/16    !default; // 10px
+$size--1:       $size * 12/16    !default; // 12px;  Minus Sizes [m]
+
+$size-smaller:  $size * 14/16    !default; // 14px; dumb but super useful
+$size-base:     $size            !default; // default is 16px
+$size-large:    $size * 18/16    !default; // 18px
+$size-larger:   $size * 20/16    !default; // 20px; hard choice; 20 div by 2,4,5 and halfway; 18 div by 3, 6, 9 
+$size-quart:    $size/4 !default;
+$size-half:     $size/2 !default;
+$size-2x:       $size * 2 !default; // convenience name
+$size-3x:       $size * 3 !default; // convenience name
+
+// plus sizes
+$size-1:        $size * 24/16    !default; // 24px Plus Sizes [p]
+$size-2:        $size * 32/16    !default; // 32 (same as size-2x); or 2 * size
+$size-3:        $size * 40/16    !default; // 40
+$size-4:        $size * 48/16    !default; // 48
+$size-5:        $size * 56/16    !default; // 56
+$size-6:        $size * 64/16    !default; // 64
+$size-7:        $size * 80/16    !default; // 80
+$size-8:        $size * 96/16    !default; // 96
+$size-9:        $size * 112/16   !default; // 112
+$size-10:       $size * 128/16   !default; // 128
+$size-11:       $size * 144/16   !default; // 144
+
+
+// useful vh sizes
+$size-100vh:    100vh;
+$size-50vh:     50vh;
+$size-12vh:     12vh;
+$size-8vh:      8vh;
+$size-4vh:      4vh;
+
+
+// radius sizes
+$radius: map-get($heart_, radius) !default; 
+$radius-none: 0px !default;
+$radius-md: $size-base  !default;
+$radius-lg: $radius * 6 !default;
+$radius-xl: $radius * 9 !default;
+$radius-sm: $radius / 2 !default; // subtle borders
+$gutter: $size-base/2   !default;
+
+
+
+// these are just the bootstrap defaults converted to my own vars
+
+// xs 0   - 767
+// sm 768 - 991
+// md 992 - 1199
+// lg 1200 + 
+
+// b/c of pixel density, these descriptions are just for ease of describing width
+// shouldn't matter what devices people use
+
+// "mobile"
+$width-xs-min: 0px      !default; 
+$width-xs-max: 767px    !default;
+
+// "tablet"
+$width-sm-min: 768px    !default;
+$width-sm-max: 991px    !default;
+
+// "desktop"
+$width-md-min: 992px    !default;
+$width-md-max: 1199px   !default;
+
+// "wide"
+$width-lg-min: 1200px   !default;
+$width-lg-max: 2100px   !default;
+
+
+// Helper Widths
+$width-site-min: 320px  !default; // absolute minimum site width: iPhone 5 (320px), there are thinner but whatever
+
+// sometimes sites have a 'magical' breakpoint based on content structure
+$width-magic: 640px     !default;
+
+$width-content-max: $width-sm-max !default; // max content block width
+$width-content-max-narrow: $width-magic !default; // max content block width
+
+$width-content-paragraph: 77ch !default;
+$width-content-paragraph-narrow: 55ch !default; // deprecated in favor of content-article
+$width-content-article: 60ch !default;
+
+$width-content-input: 42ch !default; // for limiting inline input field width
+// adheres to the 75 ch per paragraph rule; ch uses the '0' symbol as char width
+
+
+$width-header-narrow: 550px !default; // looks good for larger headers
+
+// used by buttons and forms
+$height-input: $size-4 !default;
+$height-input--short: $size-2x !default;
+
+
+// layout widths defined in _neck-layout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+    BASE COLORS
+
+ */
+
+// 
+//    Basic Colors
+//    - most themes will want to define their own / not use this at all
+//
+
+
+
+// fun colors
+// LEGACY: some projects actually extend the following color classes, and mixin-generated classes can't be extended
+
+$colors_: ( // these are all primary colors
+  blue:             #366EA6,
+  blue-dark:        #374F6A,
+  blue-light:       #90D9DD,
+  yellow:           #FFC107,
+  orange:           #F36C00,
+  red:              #D43615,
+  green:            #8BC34A,
+  mint:             #31E3C3,
+  code:             #FCDE93,
+  teal:             #71EFF5,
+  pink:             #FA5486,
+
+  transparent:      rgba(0,0,0, 0.001),
+) !default;
+
+// preset colors that don't need tints
+$color-presets_: (
+  facebook:         #3B5998,
+  google:           #E93F2E,
+  reddit:           #8BBBE3,
+  twitter:          #26C4F1,
+  paypal:           #FEC348,
+
+  purewhite:        #FFFFFF,
+  whiter:           #FCFCFC,
+  white:            #FAFAFA,
+
+  silver-lighter:   #F7F7F7,
+  silver-light:     #EEEEEE,
+  silver:           #DDDDDD,
+  silver-dark:      #CCCCCC,
+
+  gray-lightest:    #BBBBBB,
+  gray-lighter:     #ADADAD,
+  gray-light:       #888888,
+  gray-dark:        #4A4A4A,
+
+  black:            #333333,
+  blacker:          #1A1A1A,
+  blackest:         #111111,
+  pureblack:        #000000,
+
+  gray:             #666666,
+    gray-05:          #FCFCFC,
+    gray-10:          #F7F7F7,
+    gray-20:          #ADADAD,
+    gray-30:          #888888,
+    gray-70:          #4A4A4A,
+    gray-80:          #333333,
+    gray-90:          #1A1A1A,
+    gray-100:         #000000,
+) !default;
+
+// generate tints for colors?
+
+// add presets back into the color map
+$colors_: map-merge($colors_, $color-presets_);
+
+@include colorate($colors_);
+
+// add $colors_ into $heart_
+// @include addtheme($colors_); 
+
+
+// 
+//    CONTEXTUAL COLORS
+// 
+
+$context_: (
+  main: usetheme(blue, $colors_),
+  secondary: usetheme(yellow, $colors_),
+  tertiary: usetheme(orange, $colors_),
+
+  bg: usetheme(white, $colors_),
+  hover: usetheme(blue, $colors_),
+  active: usetheme(orange, $colors_),
+  inactive: usetheme(gray-light, $colors_),
+
+  success: usetheme(green, $colors_),
+  warning: usetheme(yellow, $colors_),
+  info: usetheme(blue-dark, $colors_),
+  danger: usetheme(red, $colors_),
+  disabled: usetheme(gray-light, $colors_),
+  transparent: usetheme(transparent, $colors_),
+
+  body: usetheme(black, $colors_),
+  copy: usetheme(black, $colors_),
+
+  ui-lighter: usetheme(silver-lighter, $colors_),
+  ui-light: usetheme(silver-light, $colors_),
+  ui: usetheme(silver, $colors_),
+  ui-dark: usetheme(gray-lightest, $colors_),
+  ui-hover: usetheme(silver-dark, $colors_),
+) !default;
+
+@include colorate($context_);
+@include addtheme($context_)
+
+
+:root {
+  // loop through the default theme and build the list of css-vars
+  @include themevars($heart_);
+}
+
+
+
+/* 
+
+  Keep these for legacy (for now)
+
+ */
+
+$color-blue:          #366EA6 !default;
+$color-yellow:        #FFC107 !default;
+$color-orange:        #F36C00 !default;
+$color-red:           #D43615 !default;
+$color-green:         #8BC34A !default;
+$color-mint:          #31E3C3 !default;
+$color-code:          #FCDE93 !default;
+
+// social media colors
+$color-facebook:      #3B5998 !default;
+$color-google:        #E93F2E !default;
+$color-reddit:        #8BBBE3 !default;
+$color-twitter:       #26C4F1 !default;
+$color-paypal:        #FEC348 !default;
+
+// white, grays, blacks
+$color-purewhite:     #FFFFFF !default;
+$color-whiter:        #FCFCFC !default;
+$color-white:         #FAFAFA !default;
+
+$color-silver-lighter:#F7F7F7 !default;
+$color-silver-light:  #EEEEEE !default;
+$color-silver:        #DDDDDD !default;
+$color-silver-dark:   #CCCCCC !default;
+
+$color-gray-lightest: #BBBBBB !default;
+$color-gray-lighter:  #ADADAD !default;
+$color-gray-light:    #888888 !default;
+$color-gray:          #666666 !default;
+$color-gray-dark:     #4A4A4A !default;
+
+$color-black:         #333333 !default;
+$color-blacker:       #1A1A1A !default;
+$color-blackest:      #111111 !default;
+$color-pureblack:     #000000 !default;
+
+
+$color-main:          $color-blue !default;
+$color-secondary:     $color-yellow !default;
+
+//     Supporting Colors
+$color-bg:            $color-white !default;
+
+$color-hover:         $color-blue !default;
+$color-active:        $color-orange !default;
+$color-inactive:      $color-gray-light !default;
+
+$color-warning:       $color-yellow !default;
+$color-danger:        $color-red !default;
+$color-success:       $color-green !default;
+$color-disabled:      $color-gray-light !default;
+
+$color-transparent: rgba(0,0,0, 0.001) !default; 
+  // can also be set to 'transparent' but can be buggy
+  // @include colorate('transparent', $color-transparent);
+  // ._color-bg-transparent {background-color: $color-transparent};
+  // .color-transparent { color: $color-transparent }
+  // ._transparent { // transparent block
+  //   opacity: 0.001; // setting to 0 invokes browser bugs
+  // }
+
+$color-body: $color-black !default;
+$color-copy: $color-body !default;
+
+
+// UI Colors
+// for borders and stuff
+$color-ui-lighter: $color-silver-lighter !default;
+$color-ui-light: $color-silver-light !default;
+$color-ui: $color-silver !default;
+$color-ui-dark: $color-gray-lightest !default;
+$color-ui-hover: $color-silver-dark !default;
+
+
+
+
+/* 
+
+  notes for color usage:
+
+  $colors: (
+    red: red,
+    orange: orange,
+    blue: blue,
+    teal: teal,
+  );
+  @include colorate($colors);
+
+  // themes
+  $day: (
+    main: usetheme(red, $colors),
+    secondary: usetheme(orange, $colors),
+  );
+
+  $night: (
+    main: usetheme(blue, $colors),
+    secondary: usetheme(teal, $colors),
+  );
+
+  .--day {
+    @include themevars($day);
+  }
+
+  .--night {
+    @include themevars($night);
+  }
+
+  .Box {
+    background-color: v(main);
+  }
+
+
+
+ */
+
+
+
+
+

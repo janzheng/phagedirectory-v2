@@ -38,35 +38,35 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_therapy"
+  },
   
   fetch() {
   },
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis.tables
+  // async asyncData({app, store}) {
+  //   // const cytosis = store.state.cytosis.tables
     
-    // if(!store.state.cytosis.tables)
-    //   return false
+  //   // if(!store.state.cytosis.tables)
+  //   //   return false
 
-    return {
-      intro: app.$cytosis.find('Content.therapy-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      content: app.$cytosis.find('Content.therapy-content', store.state.cytosis.tables)[0]['fields']['Markdown']
-    }
-  },
+  //   return {
+  //     // intro: app.$cytosis.find('Content.therapy-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+  //     // content: app.$cytosis.find('Content.therapy-content', {'Content': this.$store.state['Content']})[0]['fields']['Markdown']
+  //   }
+  // },
 
   data: function () {
-    // console.log('data:', this.$store.state)
+    // console.log('data:', this.$store.state['Content'])
     return {
-      // content: this.$store.state.Content,
+      intro: this.$cytosis.find('Content.therapy-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      content: this.$cytosis.find('Content.therapy-content', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown']
     }
   },
 
   computed: {
-    // ...mapState([
-    //   'cytosis',
-    //   // 'test'
-    //   ]),
   },
 
   mounted: function () {

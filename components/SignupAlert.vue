@@ -43,8 +43,8 @@ export default {
 
   data: function () {
     return {
-      intro: this.$cytosis.find('Content.alertssignup-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      content: this.$cytosis.find('Content.alertssignup-content', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.alertssignup-intro', {'Content': this.$store.state['Content']})[0]['fields']['Markdown'],
+      content: this.$cytosis.find('Content.alertssignup-content', {'Content': this.$store.state['Content']})[0]['fields']['Markdown'],
     }
   },
 

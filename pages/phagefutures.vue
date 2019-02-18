@@ -2,27 +2,29 @@
 
   <div class="PhageFutures _section-page _margin-center">
 
-    <div class="_section-content _margin-center">
+    <no-ssr>
+    
+      <div class="_section-content _margin-center">
 
-      <div class="_section-article _margin-center _margin-bottom-2">
-        <div class="PhageFutures-title _section-article" v-html="$md.render(intro || '')" />
-        <div class="PhageFutures-details _section-article _card --simple _padding _md-p_fix" v-html="$md.render(details || '')" />
-      </div>
-
-      <div class="PhageFutures-menu _section-article _margin-center _margin-bottom-2 _grid-3-1-xs">
-        <!-- <div>Page Mode: {{ mode }}</div> -->
-        <div>
-          <router-link to="/phagefutures">Live Stream</router-link>
-          <router-link to="/phagefutures/agenda">Agenda</router-link>
-          <router-link to="/phagefutures/posters">Posters</router-link>
-          <!-- <a href="#" class="--disabled">Posters</a> -->
+        <div class="_section-article _margin-center _margin-bottom-2">
+          <div class="PhageFutures-title _section-article" v-html="$md.render(intro || '')" />
+          <div class="PhageFutures-details _section-article _card --simple _padding _md-p_fix" v-html="$md.render(details || '')" />
         </div>
-        <div class="_right">
-          <router-link to="/phagefutures/about" class="_margin-right-none-i">About</router-link>
-        </div>
-      </div>
 
-      <no-ssr>
+        <div class="PhageFutures-menu _section-article _margin-center _margin-bottom-2 _grid-3-1-xs">
+          <!-- <div>Page Mode: {{ mode }}</div> -->
+          <div>
+            <router-link to="/phagefutures">Live Stream</router-link>
+            <router-link to="/phagefutures/agenda">Agenda</router-link>
+            <router-link to="/phagefutures/posters">Posters</router-link>
+            <!-- <router-link to="/phagefutures/feedback">Feedback</router-link> -->
+            <!-- <a href="#" class="--disabled">Posters</a> -->
+          </div>
+          <div class="_right">
+            <router-link to="/phagefutures/about" class="_margin-right-none-i">About</router-link>
+          </div>
+        </div>
+
         <div class="PhageFutures-stream _section-article _margin-center">
 
           <!-- timeline mode -->
@@ -72,7 +74,7 @@
 
               <!-- agenda post within timeline -->
               <div v-else>
-                <StreamCard class="PhageFutures-post _grid-gap-small _margin-none-i">
+                <StreamCard class="PhageFutures-post _grid-gap-small">
                   <div v-if="getAuthor(post)" slot="sidebar" class="PhageFutures-post-sidebar _margin-bottom-half-xs" >
                     <a v-if="getAuthor(post).fields['Twitter']" :href="'https://twitter.com/'+getAuthor(post).fields['Twitter']" target="_blank"><img v-if="getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70"></a>
                     <img v-if="!getAuthor(post).fields['Twitter'] && getAuthorImg(post)" :src="getAuthorImg(post)" class="cnt _block _left _margin-center" style="border-radius: 100%" width="70" height="70">
@@ -103,7 +105,7 @@
           <div v-else-if="mode == 'posters'" class="PhageFutures-posters" >
             <div class="_margin-bottom-2" v-html="$md.render(posters || '')" />
             <div class="_margin-bottom">
-              <span class="_font-bold _link" @click="openAllPosters = !openAllPosters">Open all posters</span>
+              <span class="_font-bold _link" @click="openAllPosters = !openAllPosters">Expand all posters</span>
             </div>
             <!-- <div v-for="poster of Posters" v-if="poster.fields['isPublished']" :key="poster.id" class="PhageFutures-poster _margin-bottom _card _padding" >
               <div class="PhageFutures-poster-name _font-bold " v-html="$md.strip($md.render( poster.fields['Name'] || ''))" />
@@ -122,6 +124,24 @@
             </Toggle>
           </div>
 
+
+
+          <!-- feedback mode -->
+          <!-- <div v-else-if="mode == 'posters'" class="PhageFutures-feedback" >
+            <div class="_margin-bottom-2" v-html="$md.render(posters || '')" />
+            <div class="_margin-bottom">
+              <span class="_font-bold _link" @click="openAllPosters = !openAllPosters">Expand all posters</span>
+            </div>
+            <Toggle v-for="poster of Posters" v-if="poster.fields['isPublished']" :key="poster.id" :off-class="openAllPosters ? '--open' : '--closed'" class="PhageFutures-poster _margin-bottom _card _padding" on-class="--open" >
+              <div class="PhageFutures-poster-name _font-bold " v-html="$md.strip($md.render( poster.fields['Name'] || ''))" />
+              <div class="PhageFutures-poster-more _margin-top-half">
+                <div v-if="poster.fields['AuthorNames']" class="PhageFutures-poster-orgs">{{ poster.fields['AuthorNames'] }}</div>
+                <div v-if="poster.fields['Email']" class="PhageFutures-poster-orgs" v-html="$md.render( poster.fields['Email'] || '')" />
+                <div class="PhageFutures-poster-orgs _font-bold" v-html="$md.render( poster.fields['Orgs'] || '')" />
+                <div class="PhageFutures-poster-abstract" v-html="$md.render( poster.fields['Abstract'] || '')" />
+              </div>
+            </Toggle>
+          </div> -->
 
 
           <!-- about mode -->
@@ -145,14 +165,15 @@
             </div>
           </div>
 
-
         </div>
-      </no-ssr>
 
-    </div>
+      </div>
 
-    <!-- required to render twitter embeds properly -->
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" />
+      <!-- required to render twitter embeds properly -->
+      <!-- <script async src="https://platform.twitter.com/widgets.js" charset="utf-8" /> -->
+      <!-- <script defer src="https://platform.twitter.com/widgets.js" charset="utf-8" /> -->
+    </no-ssr>
+
   </div>
 </template>
 
@@ -162,19 +183,21 @@
 import StreamCard from '~/components/StreamCard.vue'
 import StreamEvent from '~/components/StreamEvent.vue'
 import AgendaEvent from '~/components/AgendaEvent.vue'
+// import FormPhageFutures from '~/forms/FormPhageFutures.vue'
+
 import Toggle from '~/components/Toggle.vue'
 import Cytosis from '~/other/cytosis'
 
-// const loadPhageFutures = async function ({env, tableIndex, options, caller, _key, _base}) {
-const loadPhageFutures = async function ({env, tableIndex, options, _key, _base}) {
+// const loadPhageFutures = async function ({env, tableQuery, options, caller, _key, _base}) {
+const loadPhageFutures = async function ({env, tableQuery, options, _key, _base}) {
   const airKey = _key || env.airtable_api
   const airBase = _base || env.airtable_base
 
-  // console.log(`[actions/loadCytosis] ${caller}: loading:`, tableIndex, options)
+  // console.log(`[actions/loadCytosis] ${caller}: loading:`, tableQuery, options)
   let cytosis = await new Cytosis({
     airKey, 
     airBase, 
-    tableIndex, 
+    tableQuery, 
     options
   })
   // commit('setCytosis', cytosis)
@@ -209,7 +232,7 @@ export default {
     // somehow this is getting cached?!
     // const pfdata = await store.dispatch('loadCytosis', {
     const pfdata = await loadPhageFutures({
-      tableIndex: 'livecontent',
+      tableQuery: 'livecontent',
       caller: 'phagefutures page',
       _key: 'keyAe6M1KoPfg25aO',
       _base: 'appCDyNOczdEtiR2A',
@@ -363,19 +386,22 @@ export default {
 
   created: async function () {
     const pfdata = await loadPhageFutures({
-      tableIndex: 'livecontent',
+      tableQuery: 'livecontent',
       caller: 'phagefutures page',
       _key: 'keyAe6M1KoPfg25aO',
       _base: 'appCDyNOczdEtiR2A',
     })
 
-    // console.log('updated: ', pfdata)
 
     this.Timeline = pfdata.tables['Timeline']
     this.Authors = pfdata.tables['Authors']
     this.Agenda = pfdata.tables['Agenda']
     this.Posters = pfdata.tables['Posters'],
     this.PFContent = pfdata.tables['Content']
+
+    // load twitter on client only
+    if(process.client)
+      setTimeout(this.$twitter, 500)
 
   },
 
@@ -413,6 +439,7 @@ export default {
   }
 
 }
+
 </script>
 
 <style lang="scss" scoped>

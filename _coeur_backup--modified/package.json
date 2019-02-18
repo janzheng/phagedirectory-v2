@@ -1,0 +1,64 @@
+{
+  "_from": "coeur@0.2.6",
+  "_id": "coeur@0.2.6",
+  "_inBundle": false,
+  "_integrity": "sha512-e9xYXyGrbWbblBlxjzTAeFOz9HEZcYso75hBZ03CP5yT+YqPxS2MHi9F2C/1gIk5LMS3gBnOEWbSNCGMGHnIBA==",
+  "_location": "/coeur",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "version",
+    "registry": true,
+    "raw": "coeur@0.2.6",
+    "name": "coeur",
+    "escapedName": "coeur",
+    "rawSpec": "0.2.6",
+    "saveSpec": null,
+    "fetchSpec": "0.2.6"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/coeur/-/coeur-0.2.6.tgz",
+  "_shasum": "0cd81ad462953302218e2079aa4a1d3f22780d82",
+  "_spec": "coeur@0.2.6",
+  "_where": "/Users/janzheng/Desktop/projects/phagedir/phdir",
+  "author": {
+    "name": "Jan Zheng"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "Coeur is a resource for jumpstarting side projects and prototypes",
+  "email": "hello@janzheng.com",
+  "files": [
+    "/styles",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "css",
+    "js",
+    "style guide",
+    "starter",
+    "coeur"
+  ],
+  "name": "coeur",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/janzheng/"
+  },
+  "scripts": {
+    "build": "cd sites/docs ; npm run build -- _src",
+    "commit": "git add . -A ; git commit ; git push origin master ",
+    "deploy": "cd sites/docs ; npm run prod -- _src",
+    "github": "cd sites/docs ; npm run github -- _src",
+    "install_docs": "mkdir sites/docs; cp -a node_modules/coeur/docs/. sites/docs/.",
+    "prod": "cd sites/docs ; npm run prod -- _src",
+    "stage": "cd sites/docs ; npm run stage -- _src",
+    "start": "cd sites/docs ; npm run server -- _src"
+  },
+  "url": "https://janzheng.com/stylecoeur/",
+  "version": "0.2.6",
+  "website": "https://janzheng.com/stylecoeur"
+}

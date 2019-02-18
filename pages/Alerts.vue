@@ -52,6 +52,9 @@ export default {
   
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_alerts"
+  },
 
   // async asyncData({env, route, store}) {
   //   return {
@@ -59,8 +62,9 @@ export default {
   // },
 
   data: function () {
+    // console.log('Alerts data:', this.$store.state['Content'])
     return {
-      intro: this.$cytosis.find('Content.alerts-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.alerts-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       slug: this.$route.params.slug,
       // alert: undefined, // loaded in 'mounted'
     }
@@ -69,7 +73,6 @@ export default {
   computed: {
     ...mapState([
       'Alerts',
-      'Content',
       ]),
   },
 

@@ -8,7 +8,6 @@
 <template>
 
   <div class="Capsid CapsidStub ">
-
     <!-- <div @click="openLink(`/capsid/${issue.fields.Slug}`)" class="CapsidStub-item _block _card _padding-2" :class="isFeatured ? '--featured' :''" v-for="issue of issues" :key="issue.id" v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"> -->
     <router-link v-for="issue of issues" 
                  v-if="(showPreview && issue.fields.isPreview) || issue.fields.isPublished"

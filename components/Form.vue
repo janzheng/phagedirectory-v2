@@ -18,7 +18,7 @@
           <div>
             <span class="Form-privacy _md-p_fix" v-html="$md.render(privacy)" />
           </div>
-          <button v-if="!sending" class="Form-btn _button _margin-none _center" @click="submit" >{{ cta }}</button>
+          <button v-if="!sending" class="Form-btn _button _margin-none _center _padding-left _padding-right" @click="submit" >{{ cta }}</button>
           <button v-if="sending" class="Form-btn _button --outline _margin-none _center" >Sending...</button>
         </div>
       </div>
@@ -103,8 +103,8 @@ export default {
         const data = {
           type: 'form',
           table: this.table,
-          json: this.json,
-          alert: this.alert,
+          json: this.isJson,
+          alert: this.isAlert,
           notes: this.notes,
           data: {
             ... this.form.$model,

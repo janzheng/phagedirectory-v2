@@ -1,3 +1,4 @@
+
 <template>
 
   <div class="Classroom _section-page _margin-center">
@@ -78,24 +79,23 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_classroom"
+  },
   
   fetch() {
   },
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    return {
-      classroomTitle: app.$cytosis.find('Content.classroom-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      classroomBg: app.$cytosis.find('Content.classroom-bg', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      classroomForm: app.$cytosis.find('Content.classroom-form', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      classroomPostForm: app.$cytosis.find('Content.classroom-postform', store.state.cytosis.tables)[0]['fields']['Markdown'],
-    }
-  },
+  // async asyncData({app, store}) {
+  // },
 
   data: function () {
-    // console.log('data:', this.$store.state)
     return {
-      // content: this.$store.state.Content,
+      classroomTitle: this.$cytosis.find('Content.classroom-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      classroomBg: this.$cytosis.find('Content.classroom-bg', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      classroomForm: this.$cytosis.find('Content.classroom-form', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      classroomPostForm: this.$cytosis.find('Content.classroom-postform', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

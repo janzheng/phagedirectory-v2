@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="_section-content _margin-center _padding-bottom-2">
+    <div class="CapsidIssue-footer _section-content _margin-center">
       <!-- <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" /> -->
       <CapsidMicroBanner class="_section-article _margin-center _margin-top-2 _margin-bottom" />
       <div class="_section-article _margin-center _margin-bottom-2" v-html="$md.render(highlight)" />
@@ -61,8 +61,8 @@
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import CapsidMicroBanner from '~/components/CapsidMicroBanner.vue'
 import Capsid from '~/components/Capsid.vue'
-import CapsidTwo from '~/components/CapsidTwo.vue'
-import {loadNews} from '~/other/loaders'
+// import CapsidTwo from '~/components/CapsidTwo.vue'
+// import {loadNews} from '~/other/loaders'
 
 export default {
 
@@ -71,34 +71,36 @@ export default {
     CapsidBanner,
     CapsidMicroBanner,
     Capsid,
-    CapsidTwo,
+    // CapsidTwo,
 
   },
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    // tableQuery: "_basic",
+    tableQueries: ["_capsid-content", "_capsid-data"] // combine queries
+  },
 
   // these are dynamic, and aren't grabbed on generation
-  async asyncData({app, env, route, store}) {
+  // async asyncData({env, route, store}) {
+  async asyncData({route}) {
 
-    // const staticData = await loadStatic(env, store, 'newspage')
-    // const newsData = await loadNews(env, store, 'capsid')
-    await loadNews(env, store, 'capsid')
-    // console.log('newspage:', newsData)
+    // await loadNews(env, store, 'capsid')
 
     const slug = unescape(route.params.slug)
     return {
-      title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      fineprint: app.$cytosis.find('Content.capsid-fine', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
-      highlight: app.$cytosis.find('Content.capsid-highlight', store.state.cytosis.tables)[0]['fields']['Markdown'],
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }
   },
 
   data: function () {
     return {
+      title: this.$cytosis.find('Content.capsid-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      fineprint: this.$cytosis.find('Content.capsid-fine', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.capsid-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      highlight: this.$cytosis.find('Content.capsid-highlight', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
@@ -124,7 +126,7 @@ export default {
         }
       }
 
-      console.log('issue slug: ', result)
+      // console.log('issue slug: ', result)
       return result // array of issues
     }
 

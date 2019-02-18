@@ -52,8 +52,8 @@
             <CapsidMicroBanner class="CapsidBanner" />
             <FormCapsidFeedback class=""/>
           </div>
-        </div> -->
-        
+        </div>
+         -->
         <div class="Stream">
 
           <StreamCard>
@@ -68,7 +68,7 @@
               <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
             </div>
             <div slot="main">
-              <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
+              <CapsidStub :issues="latestCapsid" :is-featured="true" class="_section-article _margin-center" />
               <!-- <CapsidBanner /> -->
               <CapsidMicroBanner class="CapsidBanner" />
               <FormCapsidFeedback class=""/>
@@ -120,59 +120,63 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_basic"
+  },
 
-  // async asyncData({app, env, route, store}) {
-  async asyncData({app, env, store}) {
-    // console.log('asyncdata store: ', store.state.cytosis)
-    // const cytosis = await store.dispatch('loadCytosis', {
-    //   env,
-    //   tableIndex: 'static',
-    // })
-
-
-    // let newsData
+  // runs every time, on generation and page load
+  async fetch({env, store}) {
     if(store.state && !store.state['C&T']) {
-      // console.log('load cytosis: news')
       await store.cache.dispatch('loadCytosis', { // maybe don't want other things to wait?
         env,
-        tableIndex: 'latestnews',
+        tableQuery: '_latestnews',
         caller: 'homepage',
-        options: {
-          maxRecords: 1,
-          sort: [{field: "Issue", direction: "desc"}],
-        }
+        // options: {
+        //   maxRecords: 1,
+        //   sort: [{field: "Issue", direction: "desc"}],
+        //   // filterByFormula: 
+        // }
       })
-    }
-
-    return {
-      postUrl: env.ext_handler,
-      cytosis: store.state.cytosis,
-      intro: app.$cytosis.find('Content.home-intro-new', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      capsidTitle: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      phagefutures: app.$cytosis.find('Content.phagefutures-index', store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
 
-  data: function () {
-    // console.log('data cyt:', this.$store.state.cytosis) 
+  // runs on generation and page route (but not on first page load)
+  async asyncData({env}) {
+    // console.log('asyncdata store: ', store.state.cytosis)
+    // const cytosis = await store.dispatch('loadCytosis', {
+    //   env,
+    //   tableQuery: 'static',
+    // })
+
+
+    // console.log('[asyncData] index', app)
     return {
-      // cytosis: this.$store.state.cytosis,
+      postUrl: env.ext_handler,
+      // _cytosis: app.$cytosis,
+    }
+  },
+
+  data () {
+    return {
+      intro: this.$cytosis.find('Content.home-intro-new', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      capsidTitle: this.$cytosis.find('Content.capsid-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      phagefutures: this.$cytosis.find('Content.phagefutures-index', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
   
   computed: {
     ...mapState([
       'Content',
-      'C&T',
       ]),
-    latest() {
+    latestCapsid() {
       // NOTE: this always pulls the TOP item from airtable. Make sure it's the right one!
-      return [this['C&T'][0]] // return an array of the first issue only
-    },
+      // console.log('latestCapsid', this['C&T'][0])
+      return [this.$store.state['C&T'][0]] // return an array of the first issue only
+    }
 
   },
 
-  mounted: function () {
+  mounted () {
   },
 
   methods: {

@@ -100,25 +100,29 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_jobs"
+  },
+
 
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
+  // async asyncData({app, store}) {
 
-    // const slug = unescape(route.params.slug)
-    return {
-      intro: app.$cytosis.find('Content.jobs-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-    }
-  },
+  //   // const slug = unescape(route.params.slug)
+  //   return {
+  //   }
+  // },
 
   data: function () {
+    // console.log('Joblist data:', this.$store.state['Content'])
     return {
+      intro: this.$cytosis.find('Content.jobs-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
   computed: {
     ...mapState([
-      'Content',
       'Jobs',
       ]),
 

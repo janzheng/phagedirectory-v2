@@ -81,6 +81,9 @@ export default {
   
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_community"
+  },
 
   // async asyncData({env, route, store}) {
   //   return {
@@ -89,15 +92,13 @@ export default {
 
   data: function () {
     return {
-      intro: this.$cytosis.find('Content.community-intro', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      content: this.$cytosis.find('Content.community-content', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.community-intro', {'Content': this.$store.state['Content']}  )[0]['fields']['Markdown'],
+      content: this.$cytosis.find('Content.community-content', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
   computed: {
     ...mapState([
-      'Content',
-      'Updates',
       'Community',
       ]),
 

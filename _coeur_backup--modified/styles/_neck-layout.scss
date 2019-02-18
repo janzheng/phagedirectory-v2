@@ -1,0 +1,269 @@
+
+
+
+// 
+// Layouts / Lost and found / Parts Bin
+// 
+// 
+
+
+
+
+
+
+// ensure more aesthetic content appearance
+
+%width-content-max,
+._width-content-max { 
+  max-width: 100%;
+  padding-right: $size;
+  padding-left: $size;
+  @media (min-width: $width-content-max) {
+    max-width: $width-content-max; 
+  }
+}
+
+%width-content-max-narrow,
+._width-content-max-narrow { 
+  max-width: 100%;
+  padding-right: $size;
+  padding-left: $size;
+  @media (min-width: $width-content-max-narrow) {
+    max-width: $width-content-max-narrow;
+  } 
+}
+
+%width-content-paragraph,
+._width-content-paragraph {
+  max-width: 100%;
+  // padding-right: $size;
+  // padding-left: $size;
+
+  @media (min-width: $width-content-paragraph) {
+    max-width: $width-content-paragraph;
+  } 
+}
+
+%width-content-article,
+._width-content-article {
+  max-width: 100%;
+  // padding-right: $size;
+  // padding-left: $size;
+
+  @media (min-width: $width-content-article) {
+    max-width: $width-content-article;
+  } 
+}
+
+%width-content-magic,
+._width-content-magic {
+  max-width: $width-magic;
+  padding-right: $size;
+  padding-left: $size;
+}
+
+%width-content-min,
+._width-content-min {
+  max-width: $width-site-min;
+  padding-right: $size;
+  padding-left: $size;
+}
+
+
+%width-content-input,
+._width-content-input {
+  max-width: $width-content-input;
+}
+
+// Lists
+
+ul, ol {
+  padding-bottom: $size;
+
+  ul {
+    padding-top: $size/4;
+    padding-bottom: 0;
+  }
+}
+
+li {
+  margin-bottom: $size/2;
+  list-style-position: outside;
+  margin-left: $size + 3px; // this shifts wrapped text 'inside' the list 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// 
+// 
+// 
+// 
+//    GRID LAYOUT #PATTERNS
+// 
+// 
+//    Contextual layout shortcuts
+// 
+// 
+// 
+
+
+
+
+body {
+  @extend %font-body;
+}
+
+._layout-wide {
+  @extend %width-content-max;
+  // padding: $size $size;
+
+  @include screen-sm {
+    // padding: $size-2x;
+    margin: $size;
+  }
+}
+
+._layout-narrow {
+  @extend %width-content-max-narrow;
+  // padding: $size $size-2x;
+
+  @include screen-sm {
+    padding: $size-2x;
+  }
+}
+
+._layout-paragraph,
+._layout-para, {
+  @extend %width-content-paragraph;
+}
+
+._layout-paragraph-narrow,
+._layout-para-narrow {
+  @extend %width-content-article;
+}
+
+._layout-center {
+  @extend ._center-margin;
+  @extend ._center;
+  @extend ._padding-2;
+}
+
+._layout-header-narrow {
+  max-width: $width-header-narrow;
+  @include screen-xs {
+    max-width: 100%;
+  }
+}
+
+// summary,
+// article,
+// section, 
+._section,
+{
+  margin: $size 0; 
+  // margin allows sections on top of each other to only share one gutter
+  // 
+
+  // border-radius: 0;
+  // margin: 0 auto;
+  // @extend %width-content-max;
+}
+
+
+// container for content for verticality
+._container {
+  margin-top: $size;
+  margin-bottom: $size;
+  padding-top: $size;
+  padding-bottom: $size;
+}
+
+._container-large {
+  margin-top: $size;
+  margin-bottom: $size;
+  padding-top: $size-12vh;
+  padding-bottom: $size-12vh;
+}
+
+._padded-lr {
+  padding-left: $size;
+  padding-right: $size;
+}
+
+// 
+._content {
+  // padding-left: $size*2;
+  // padding-right: $size*2;
+  margin-top: $size;
+  padding: $size-4vh $size*2;
+}
+// only perform content padding on mobile elements
+._content-xs {
+  @include screen-xs {
+    padding: $size-4vh $size*2;
+  }
+}
+
+
+
+
+
+/* 
+
+  Semantic section dividers
+  - brought over from Phage Directory
+
+ */
+
+// Creates margins for the page 
+._section-page {
+  @extend ._width-content-max;
+}
+
+// Creates margins for content within a page
+._section-content {
+  @extend %width-content-paragraph;
+  margin-top: $size-3;
+  margin-bottom: $size-3;
+
+  @include screen-xs {
+    margin-top: $size;
+    margin-bottom: $size;
+  }
+}
+
+// Creates margins for articles within content of a page
+// for readable articles, readable content-width
+// refer to sidebar.io's format
+// note: don't use <article> tag as it's a formatting tag
+// some of these are specified in markdown, so the markup should be very simple
+._section-article {
+  // used for pages outside of just Capsid!! including Classroom Initiative
+  @include screen-sm {
+    max-width: $width-content-article;
+    // margin-left: auto;
+    // margin-right: auto;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

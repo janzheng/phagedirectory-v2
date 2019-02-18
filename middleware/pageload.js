@@ -9,14 +9,14 @@
 
 // import _ from 'lodash'
 
-import {loadStatic, loadDynamic} from '~/other/loaders'
+import {loadStatic, loadDynamic, loadQuery} from '~/other/loaders'
 // import {loadStatic, loadDynamic, loadNews} from '~/other/loaders'
 
-async function loadDataOnServer(routeName, store, env) {
+async function loadData(routeName, store, env) {
   // Load static data
   // await store.dispatch('loadCytosis', {
   //   env,
-  //   tableIndex: 'static',
+  //   tableQuery: 'static',
   // })
 
   // if universal mode, don't load data when not server
@@ -39,7 +39,7 @@ async function loadDataOnServer(routeName, store, env) {
 
   // newsData = store.dispatch('loadCytosis', { // maybe don't want other things to wait?
   //   env,
-  //   tableIndex: 'news',
+  //   tableQuery: 'news',
   // })
 
   // const results = await Promise.all([staticData, dynamicData])
@@ -55,9 +55,26 @@ async function loadDataOnServer(routeName, store, env) {
   // }
 }
 
-export default function ({route, env, store}) {
-  const routeName = route.name
-  // console.log('pageload ctx:', context);
+
+async function loadQueryData(routeName, store, env, tableQuery) {
+  let data
+  data = await loadQuery(env, store, routeName, tableQuery)
+  // console.log('[loadQueryData] data', data)
+  return Promise.all([data])
+}
+
+// function loadServerData(routeName, store, env) {
+//   const data = env.site_data
+//   // store.commit('setCytosis', env.site_data)
+//   console.log('Server Data loaded.')
+//   return env.site_data
+// }
+
+
+
+
+export default async function ({route, env, store}) {
+  const routeName = route.name || route.path
 
   // if(routeName != 'phages' && routeName != 'labs') {
   // // console.log('clear search.');
@@ -74,29 +91,49 @@ export default function ({route, env, store}) {
     store.commit('update', {ext_handler: env.ext_handler})
   }
 
-  // console.log('Pageload:', routeName, `[server:${process.server} / client:${process.client} / static:${process.static}]`)
+  // specific data requests can be set through meta: in page templates, to reduce server load
+  let tableQuery, tableQueries
+  route.meta.map((meta) => {
+    tableQuery = meta.tableQuery
+    tableQueries = meta.tableQueries
+  })[0]
+
+
 
   // only do it on server-side
   // static is loaded on client on every page load/refresh, dynamic is only on generation
   
   // nuxt expects a promise for async middleware
   // const data = await loadDataOnServer()
-  return loadDataOnServer(routeName, store, env)
 
-  // console.log('Pageload finished? new state:', `Content:${!!store.state.Content}, Orgs:${!!store.state.Organizations}`)
-  // return true;
-
-  // loads once on client; if cytosis exists it'll 
-  // loadOnce();
-
-  // clear search if we're not on a directory page
-
-  // Populate Phage Directory 
-  // If the user is not authenticated
-  // if (!store.state.authenticated) {
-  //   return redirect('/login')
+  // if (process.server) {
+  //   console.log('Server Pageload:', routeName, `[server:${process.server} / client:${process.client} / static:${process.static}]`)
+  //   return loadServerData(routeName, store, env)
   // }
-}
+  // else {
+    if (tableQuery) {
+      // console.log('[pageload] table query', tableQuery)
+      // loads data from airtable based on a partial query
+      return loadQueryData(routeName, store, env, tableQuery)
+    } else if (tableQueries) {
+      
+      const getData = async function() {
+        // console.log('tableQueries... ', tableQueries)
+        let queryData = tableQueries.map( (query) => {
+          return loadQueryData(routeName, store, env, query)
+        })
+        return Promise.all(queryData)
+      }
+
+      const data = await getData()
+      // console.log('finally', data.flat(2))
+      return data
+
+    } else {
+      return loadData(routeName, store, env)
+    }
+  }
+// }
 
 
 

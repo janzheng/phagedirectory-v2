@@ -102,21 +102,65 @@ export default {
   // },
 
   setCytosis (state, cytosis) {
+    // this takes up a lot of space; don't save cytosis objects in store anymore
+    // but stil generate all the tables into the store
 
     // use the latest cytosis object, but combine all tables
-    // console.log('setCyt before:', cytosis, state.cytosis)
-    const aggregateTables = {...state.cytosis.tables, ...cytosis.tables}
+    // cytosis.tables is actually an object of all the tables, w/ each table name as keys
+    // console.log('setCyt before:', cytosis.tables)
+
+    // clean up the cytosis table by only keeping id and fields
+    let cleanTable = {}
+    Object.keys(cytosis.tables).map(key => {
+      // console.log('cleantable:', key)
+      const cleanData = cytosis.tables[key].map(entry => {
+        // console.log('cleanData . entry', entry)
+        return {
+          fields: entry.fields,
+          id: entry.id
+        }
+      })
+      // console.log('cleanData', cleanData)
+      cleanTable[key] = cleanData
+    })
+
+    // console.log('cleanTable', cleanTable)
+
+    // const aggregateTables = {...state.cytosis.tables, ...cytosis.tables}
+    // const aggregateTables = {...state.cytosis.tables, ...cleanTable}
     // console.log('setCyt aggregate:', aggregateTables)
-    cytosis.tables = aggregateTables
-    state.cytosis = _.cloneDeep(cytosis) 
+
+    // cleanTable = aggregateTables
+    // console.log('aggregateTables:', aggregateTables)
+    // cytosis.tables = Object.keys(aggregateTables).map(table => {
+    //   console.log('agg table:', table)
+    //   return {
+    //     fields: table.fields,
+    //     id: table.id
+    //   }
+    // })
+
+    // this takes up massive space; commented out
+    // state.cytosis = _.cloneDeep(cytosis)
 
     // spread each tables into state so mapstate can use them
     // state = {
     //   ... state,
     //   ... cytosis.tables
     // }
-    for (let key of Object.keys(cytosis.tables)) {
-      state[key] = cytosis.tables[key]
+    for (let key of Object.keys(cleanTable)) {
+      // console.log('merge: ', cleanTable)
+      let aggregate = []
+      if(state[key]) {
+        aggregate = _.union(cleanTable[key], state[key]) //[ ... cleanTable[key], ... state[key]]
+      }
+      else
+        aggregate = cleanTable[key]
+
+      aggregate = _.uniqBy(aggregate, 'id')
+
+      // console.log('agg:', key, aggregate)
+      state[key] = aggregate
     }
     // console.log('setCyt after:', state.cytosis.find)
   },

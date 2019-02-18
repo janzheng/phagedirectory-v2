@@ -75,24 +75,26 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    // tableQuery: "_basic",
+    tableQueries: ["_capsid-content", "_capsid-titles"] // combine queries
+  },
 
 
-  async asyncData({app, env, route, store}) {
+  // async asyncData({app, env, route, store}) {
+  async asyncData({route}) {
 
     // somehow this is getting cached?!
-    const newsData = await store.dispatch('loadCytosis', {
-      env,
-      tableIndex: 'capsid',
-      caller: 'capsidlist',
-    })
+    // const newsData = await store.dispatch('loadCytosis', {
+    //   env,
+    //   tableQuery: 'capsid',
+    //   caller: 'capsidlist',
+    // })
 
     const slug = unescape(route.params.slug)
-    console.log('News loaded:', newsData)
+    // console.log('News loaded:', newsData)
 
     return {
-      title: app.$cytosis.find('Content.capsid-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      intro: app.$cytosis.find('Content.capsid-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      highlight: app.$cytosis.find('Content.capsid-highlight', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
       showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }
@@ -100,6 +102,9 @@ export default {
 
   data: function () {
     return {
+      title: this.$cytosis.find('Content.capsid-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      intro: this.$cytosis.find('Content.capsid-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      highlight: this.$cytosis.find('Content.capsid-highlight', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

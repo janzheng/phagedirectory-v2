@@ -4,7 +4,6 @@
 /*
   - Added to new npm package 9/12
   
-  tmp changes:
   - made lots of functions static
   - added dynamic rows to init, can specify what row in _cytosis to pull from now
   - changed from .get() to .fields[] to get away from using the prototype
@@ -20,12 +19,17 @@
     - can now unsplit Airtable data and data will appear "normal"
   - changed the way getTables is accessed: takes a single object arg now
   - changed _cytosis column from 'Items' to 'Tables' -> will be severely breaking
+
+
+  - 2/17/2019
+    - tableQuery changed to tableQuery
+
+
 */
 
 /*
 
   Cytosis CMS (cytosis)
-
 
     - Cytosis grabs and stores/caches data. Very useful for Airtable.
       - Turns Airtable-centric into a light static CMS like Contentful
@@ -83,16 +87,10 @@
       - this has to be done:: (local needs to be refreshed) this.cytosis.tables.Tags = this.tags // refresh local tags store
 
 
-
-
   Thoughts / Ideas / Notes / Done
 
     - using airtableobject.get('Name') doesn't always work, since sometimes the prototype doesn't get preserved
       - this is true w/ Nuxt 'Universal' (static) mode
-
-    - static (up-front) content
-
-
 
 
 */
@@ -143,8 +141,8 @@
     1. Either set a default Base and Key for Cytosis object itself
     2. myCytosis = await new Cytosis({airKey: '123', airBase: '123'}) — defaults to looking for _cytosis table
     3. myCytosis = await new Cytosis({airKey: '123', airBase: '123', tables: ['table1','table2']}) — just reads/caches the given tables
-    4. myCytosis = await new Cytosis({airKey: '123', airBase: '123', tableIndex: 'tableName'}) — tableName is the name of the table index row in _cytosis. You can add Items to the custom table name for dynamic loading
-    4. myCytosis = await new Cytosis({airKey: '123', airBase: '123', tableIndex: 'tableName'}, {view: 'Grid View'}) — you can also specify an Airtable API options object w/ view, fields, sort, filter
+    4. myCytosis = await new Cytosis({airKey: '123', airBase: '123', tableQuery: 'tableName'}) — tableName is the name of the table index row in _cytosis. You can add Items to the custom table name for dynamic loading
+    4. myCytosis = await new Cytosis({airKey: '123', airBase: '123', tableQuery: 'tableName'}, {view: 'Grid View'}) — you can also specify an Airtable API options object w/ view, fields, sort, filter
 
     // Airtable options: filter is an Airtable filter formula https://support.airtable.com/hc/en-us/articles/203255215-Formula-Field-Reference
 
@@ -218,13 +216,13 @@ class Cytosis {
       _this.airKey = Cytosis.airKey || '';
       _this.airBase = Cytosis.airBase || '';
       _this.airBase.tables = Cytosis.tables || [];
-      _this.airBase.tableIndex = Cytosis.tableIndex || 'tables';
+      _this.airBase.tableQuery = Cytosis.tableQuery || 'tables';
       _this.airBase.options = Cytosis.options || {view: "Grid view"};
     } else {
       _this.airKey = opts.airKey || opts.airKey;
       _this.airBase = { id: opts.airBase || opts.airBaseId };
       _this.airBase.tables = opts.tables || []
-      _this.airBase.tableIndex = opts.tableIndex || 'tables';
+      _this.airBase.tableQuery = opts.tableQuery || 'tables';
       _this.airBase.options = opts.options || {view: "Grid view"};
     }
 
@@ -239,9 +237,10 @@ class Cytosis {
     // return a promise if the callee needs to do something w/ the result
     return new Promise(function(resolve, reject) {
       // first retrieve the _cytosis table of tables
-      _this.init(_this.airBase.tableIndex).then((result) => {
+      _this.init(_this.airBase.tableQuery).then((result) => {
 
         if(result) {
+          // console.log('[Cytosis] _cytosis initiated:', result)
           // then retrieve the actual data
           Cytosis.getTables({options, cytosis: _this, tables: _this.airBase.tables}).then((_result) => {
             _this.tables = _result
@@ -280,17 +279,16 @@ class Cytosis {
 
 
   // Internal
-  // formerly initConfig() {
-  // initializes _config table from Airtable
+  // formerly initConfig() initializes _config table from Airtable; pulls from _cytosis if no init data
   // will overwrite current table data; useful to rehydrate data
   // (but pulls in EVERYTHING from Airtable)
   // assumes you want to "reinitialize" with new data; if passed 'false',
   // skips initialization if data already exists
-  init (tableIndex, reset=true) {
+  init (tableQuery, reset=true) {
     // console.log('Starting cytosis')
     const _this = this
 
-    // console.log('initializing from index: ', tableIndex)
+    // console.log('initializing from index: ', tableQuery)
 
     return new Promise(function(resolve, reject) {
 
@@ -304,27 +302,39 @@ class Cytosis {
         resolve(_this)
 
 
-      // if no table names are provided,
-      // '_cytosis' is required table to initialize
+      // if no table names are provided, it looked for a special '_cytosis' tab
+      // this is required to initialize the Cytosis object
       Cytosis.getTables({options: {}, cytosis: _this, tables: ['_cytosis']}).then( (_config) => {
         if(_config) {
           _this['config'] = _config
 
-          // this requires a table named '_cytosis' with a tableIndex row named 'tableNames' or 'tables' or a user given name and a 
+          // this requires a table named '_cytosis' with a tableQuery row named 'tableNames' or 'tables' or a user given name and a 
           // column 'Tables' with a Multiple Select of all the table names in the base
           // (this is required b/c Airtable API won't let you get all table names)
           // init tables from config if they don't exist
           if ( !_this.airBase.tables || _this.airBase.tables.length == 0 ) {
             for(let config of _config._cytosis) {
-              if ( config.fields['Name'] == tableIndex && config.fields['Tables']) {
+              if ( config.fields['Name'] == tableQuery && config.fields['Tables']) {
                 _this.airBase.tables = config.fields['Tables']
+
+                // some queries can contain options like fields, sort, maxRecords etc.
+                // these can drastically cut back the amount of retrieved data
+                let options = {
+                  fields: config.fields['fields'], // fields to retrieve in the results
+                  filter: config.fields['filterByFormula'],
+                  maxRecords: config.fields['maxRecords'],
+                  pageSize: config.fields['pageSize'],
+                  sort: config.fields['sort'] ? JSON.parse(config.fields['sort'])['sort'] : undefined, // needs to be of format : "{sort: [blahblah]}"
+                  view: config.fields['view'],
+                }
+                _this.airBase['options'] = options
               }
             }
           }
         }
 
         if(!_config || !_this.airBase.tables || _this.airBase.tables.length == 0) {
-          throw new Error(`[Cytosis] — couldn’t find a '_cytosis' table with row ${tableIndex} or 'tables' filled out with the names of tables to load`)
+          throw new Error(`[Cytosis] — couldn’t find a '_cytosis' table with row ${tableQuery} or 'tables' filled out with the names of tables to load`)
           reject(_this)
         }
         // console.log('Cytosis tables: ', _this.airBase, _this.airBase.tables)
@@ -469,9 +479,12 @@ class Cytosis {
             filterObj['pageSize'] = pageSize // limit # of records
           }
 
-          if(fields && fields[table]) { // if a field for this table exists, add it
+          if(fields && fields[table]) { // if a field for this table exists, add it; (old structure)
             filterObj['fields'] = fields[table]
+          } else if (fields) { // new structure
+            filterObj['fields'] = fields
           }
+
 
 
           let promise = new Promise(function(resolve, reject) {
@@ -583,14 +596,21 @@ class Cytosis {
     if(!findStr || !tables)
       return []
 
+
+    // console.log('[find] Tables:', tables)
+
     // match a single string against all columns (fields) in all objects
     function matchField(str, tables, fields) {
       let results = []
+
+      // given an object...
       Object.keys(tables).map((table) => {
         // console.log('Matching', str, tables, fields, table, tables[table])
 
+        // console.log('Current object format:', tables)
+
         if(!tables[table])
-          throw new Error(`[Cytosis] — couldn’t find the reference ${tables[table]} in the given table (@${table}) object. Make sure all the tables specified in the _cytosis table exist.`)
+          throw new Error(`[Cytosis] — Couldn’t find a match. Make sure you're looking in the right place. Reference table/string: (${tables[table]} / ${findStr}). Required Format was probably wrong: { Content: [ row, row, row], Tags: [ row, row, row ] }. `)
         // each airtable record
         for (let record of tables[table]) {
           for (let field of fields) {
@@ -632,13 +652,10 @@ class Cytosis {
     // 4 deep returns the linked field's content, which we assume to be Ids
     if(queries.length == 4) {
       let result = []
-      // console.log('444? fieldContent:' , fieldContent)
       // can't use getLinkedRecords b/c we have no idea where they come from
       // const linkedRecords = Cytosis.getLinkedRecords(fieldContent, tables, true)
-      // console.log('444!!! fieldContent:' , fieldContent, linkedRecords)
       for (let id of fieldContent) {
         const record = Cytosis.get(id, tables)
-        // console.log('4 recordId:' , id, record.fields[queries[3]])
         result.push(record.fields[queries[3]])
       }
       return result.join(', ') // returns a joined string of linked objects' fields (e.g. the names of linked tags)
@@ -792,6 +809,7 @@ class Cytosis {
   // converts a list of record ids into a name (e.g. converts an Id from Tags to the name or the entire object)
   // these are stored inside the data category
   // old version would take a tableName, new one just takes a table
+  // this works like "Lookup" of airtable
   // Input: 
   //    recordIds: ['recordId','recordId']
   //    sourceArray: array of records where the recordIds could be found
@@ -916,15 +934,15 @@ class Cytosis {
 
   // adds "preset" API and Base keys for future instances
   // Input:
-  //    airKey, airBase, tables, and tableIndex ;)
+  //    airKey, airBase, tables, and tableQuery ;)
   // Output:
   //    nothing, but after Cytosis.configure, every time Cytosis is instantiated w/o options
   //    these will be used
-  static configure({airKey, airBase, tables, tableIndex, options}) {
+  static configure({airKey, airBase, tables, tableQuery, options}) {
     Cytosis.airKey = airKey;
     Cytosis.airBase = {id: airBaseId};
     Cytosis.airBase.tables = tables || []
-    Cytosis.airBase.tableIndex = tableIndex || 'tables';
+    Cytosis.airBase.tableQuery = tableQuery || 'tables';
     Cytosis.airBase.options = options || 'Grid view';
   }
 

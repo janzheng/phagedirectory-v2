@@ -28,26 +28,21 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_basic"
+  },
   
   fetch() {
   },
 
-  // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis.tables
-    
-    // if(!store.state.cytosis.tables)
-    //   return false
-
-    return {
-      media: app.$cytosis.find('Content.media-content', store.state.cytosis.tables)[0]['fields']['Markdown']
-    }
-  },
+  // async asyncData({app, store}) {
+  //   return {
+  //   }
+  // },
 
   data: function () {
-    // console.log('data:', this.$store.state)
     return {
-      // content: this.$store.state.Content,
+      media: this.$cytosis.find('Content.media-content', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown']
     }
   },
 

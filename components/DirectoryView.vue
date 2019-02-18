@@ -173,7 +173,13 @@ export default {
 
   computed: {
     ...mapState([
-      'cytosis',
+        'HostGenus',
+        'Organizations',
+        'People',
+        'Hosts',
+        'Phages',
+        'Labs',
+        'HostFamily',
       ]),
 
     getOrgs() {

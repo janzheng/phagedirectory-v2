@@ -48,30 +48,26 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_about"
+  },
   
   fetch() {
   },
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis.tables
-    
-    // if(!store.state.cytosis.tables)
-    //   return false
-
-    return {
-      aboutTitle: app.$cytosis.find('Content.about-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      aboutBg: app.$cytosis.find('Content.about-bg', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      aboutUs: app.$cytosis.find('Content.about-us', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jess: app.$cytosis.find('Content.about-jess', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      jan: app.$cytosis.find('Content.about-jan', store.state.cytosis.tables)[0]['fields']['Markdown'],
-    }
-  },
+  // async asyncData({app, store}) {
+  //   return {
+  //   }
+  // },
 
   data: function () {
-    // console.log('data:', this.$store.state)
     return {
-      // content: this.$store.state.Content,
+      aboutTitle: this.$cytosis.find('Content.about-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      aboutBg: this.$cytosis.find('Content.about-bg', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      aboutUs: this.$cytosis.find('Content.about-us', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      jess: this.$cytosis.find('Content.about-jess', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      jan: this.$cytosis.find('Content.about-jan', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

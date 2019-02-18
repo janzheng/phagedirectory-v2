@@ -15,25 +15,24 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_directory"
+  },
 
   // async asyncData({app, env, route, store}) {
-  async asyncData({app, route, store}) {
-
-    // loaded through contentframe
-    // const staticData = await loadStatic(env, store, route.name)
-    // const dynamicData = await loadDynamic(env, store, route.name)
+  async asyncData({route}) {
 
     const slug = unescape(route.params.slug)
 
     return {
-      intro: app.$cytosis.find('Content.updates-intro', store.state.cytosis.tables)[0]['fields']['Markdown'],
-      title: app.$cytosis.find('Content.updates-title', store.state.cytosis.tables)[0]['fields']['Markdown'],
       slug,
     }
   },
 
   data: function () {
     return {
+      // intro: this.$cytosis.find('Content.updates-intro', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      // title: this.$cytosis.find('Content.updates-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 

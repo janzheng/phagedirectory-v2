@@ -219,11 +219,6 @@
         }
 
 
-        .Capsid-author img {
-          width: 80px !important;
-          background-color: #FFFFFF !important;
-        }
-
         img {
           max-width: 100% !important;
         }
@@ -258,7 +253,6 @@
           border-style: solid;
           display: inline-block;
           border-color: #374F6A;
-          /*line-height: 8px;*/
           text-decoration: none !important;
           color: #374F6A !important;
           background-color: transparent !important;
@@ -269,6 +263,29 @@
           padding-right: 24px;
           padding-top: 9px;
           padding-bottom: 9px;
+        }
+
+
+
+        .Capsid-author img {
+          width: 80px !important;
+          background-color: #FFFFFF !important;
+
+          float: left !important;
+          margin-right: 16px !important;
+          vertical-align: middle;
+
+        }
+
+        @media only screen and (max-width: 680px){
+          .Capsid-author img {
+            float: none !important;
+          }
+        }
+
+        .Capsid-author ._grid-auto-1 {
+          display: inline-block;
+          vertical-align: middle;
         }
 
       </style>
@@ -473,7 +490,7 @@
 
         <br>
 
-        <div v-if="issue.fields['Author']" class="Email-card--silver Capsid-author" v-html="issue.fields['Author']" />
+        <div v-if="issue.fields['Author']" class="Capsid-author " v-html="issue.fields['Author']" />
       </div>
 
 
@@ -498,11 +515,11 @@ export default {
 
   data: function () {
     return {
-      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      communityDescription: this.$cytosis.find('Content.capsid-community-description', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       jobsMailto: "https://phage.directory/services#jobs",
-      communityMailto: this.$cytosis.find('Content.community-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      communityMailto: this.$cytosis.find('Content.community-mailto', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       // jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
@@ -534,13 +551,13 @@ export default {
 
     getSponsors(issue) {
       const sponsors = this.$cytosis.getLinkedRecords(issue.fields['Sponsors'], this['Updates'], true)
-      console.log('Sponsors:', sponsors)
+      // console.log('Sponsors:', sponsors)
       return sponsors || undefined
     },
 
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
-      console.log('Updates:', updates)
+      // console.log('Updates:', updates)
       return updates || undefined
     },
 

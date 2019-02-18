@@ -1,0 +1,215 @@
+
+// If you want a different theme, make a copy of $theme-default
+// and set theme to the new one to avoid editing the default
+// everything added to this map becomes dynamic (if css-vars is on)!
+// take care though b/c too many dynamic vars seem to make browsers unhappy
+$heart_: () !default; // main theme variable to glom on other maps
+
+
+
+// syntactic sugar setter/getters for a theme
+// setting allows passing in a setting value to dictate whether a theme's added or not
+// use !default when creating default themes, and they can be overridden
+// for example, $use-typography could be set to false in a settings file
+@mixin addtheme($map, $use-theme:true) {
+  @if ($use-theme) {
+    $heart_: map-merge($heart_, $map) !global;
+  }
+}
+
+@function usetheme($key, $map:false) {
+  @if $map {
+    @return map-get($map, $key);
+  } @else {
+    @return map-get($heart_, $key);
+  }
+}
+
+@function theme($key, $map:false) {
+  @if $map {
+    @return map-get($map, $key);
+  } @else {
+    @return map-get($heart_, $key);
+  }
+}
+
+/* 
+
+    ESSENTIAL MIXINS
+
+ */
+
+// adds -i to the end of the name
+@mixin importantize($elements) {
+  #{nth($elements, 1)}: #{nth($elements, 2)};
+  &-i {
+    #{nth($elements, 1)}: #{nth($elements, 2)} !important;
+  }
+};
+
+
+// Applies css variables from a theme to a container
+// turns a map of variables and values into css variables
+// useful to run this in :root or a template/container 
+@mixin themevars($themeMap) {
+  @if $use-cssvars {
+    @each $colorName, $colorValue in $themeMap {
+      --#{$colorName}: #{$colorValue};
+    }
+  }
+}
+
+// Applies a property from a theme into a property
+// (note: css variables are officially called 'custom properties')
+// css variable fallback wrapper w/ map
+// each map pairs a variable name w/ the default val (e.g. active)
+// requires a map with contextual variables 
+// @include usevar(background-color, color-bg-day, theme-name);
+// -- if you're planning to use css vars (for theming or dark mode), usevar can provide fallbacks for IE11
+// 
+// USE SPARINGLY:
+// applying this turns variables into css variables, which is powerful but very unperformant
+// for prototyping and toys, this is super useful, but slows things down a lot
+// especially tying it to colorate() adds a ton of not-used colors into css vars which in long run might not be a good idea
+// refer to _head-typography for usage
+@mixin usevar($property, $key, $map:false, $i:false) {
+  @if $map {
+    #{$property}: map-get($map, $key);
+    @if $i { #{$property}: map-get($map, $key) !important; }
+  } @else {
+    #{$property}: map-get($heart_, $key);
+    @if $i { #{$property}: map-get($heart_, $key) !important; }
+  }
+
+  @if $use-cssvars {
+    #{$property}: var(--#{$key});
+    @if $i { #{$property}: var(--#{$key}) !important; }
+  }
+}
+
+// variable accessor
+@function v($name) {
+  @return var(--#{$name});
+}
+
+@mixin prefixer($name, $arguments...) {
+  -webkit-#{$name}: $arguments;
+  -ms-#{$name}: $arguments;
+  -moz-#{$name}: $arguments;
+  -o-#{$name}: $arguments;
+  #{$name}: $arguments;
+}
+
+// generates classes using colorname and color
+@mixin colorateByNameColor($colorName, $color) {
+  @if $use-colorate {
+    ._color-#{$colorName} { @include importantize('color' $color) }
+    ._color-bg-#{$colorName} { @include importantize('background-color' $color) }
+    ._color-border-#{$colorName} { @include importantize('border-color' $color) }
+    ._color-hover-#{$colorName} { &:hover { color: $color; } }
+    ._color-hoverborder-#{$colorName} { &:hover { &:after { background-color: $color; }}}
+
+    // inserts the color into the default theme map
+    // $theme-default: map-merge($theme-default, (color-#{$colorName}: $color)) !global;
+    @include addtheme((color-#{$colorName}: $color))
+  }
+}
+
+
+// converts a map into usable color classes
+// takes a map instead of one colorname and color
+// map: blue: #0000FF
+// output: _color-blue: #0000FF
+@mixin colorate($colormap) {
+  @if $use-colorate {
+    @each $colorName, $color in $colormap {
+      ._color-#{$colorName} { @include importantize('color' $color) }
+      ._color-bg-#{$colorName} { @include importantize('background-color' $color) }
+      ._color-border-#{$colorName} { @include importantize('border-color' $color) }
+      ._color-hover-#{$colorName} { &:hover { color: $color; } }
+      ._color-hoverborder-#{$colorName} { &:hover { &:after { background-color: $color; }}}
+    }
+  }
+}
+
+// adjust color by feeding it a color and a number
+// darken(color, 100) = 100% darker, darken(color, 0) = no difference
+// color(colorName, 100) = no difference ("100%" of current color)
+// color(colorName, 80) = 20% lighter (lighten(colorName, 20%))
+@function color($color, $adjust) {
+  @if ($adjust > 100) {
+    @return darken($color, $adjust - 100 );
+  }
+  @return lighten($color, 100 - $adjust );
+}
+
+// take each color from a map and add tints/shades 
+// sometimes these will have to be manually added, and can't be generated
+// output: new color map of generated colors
+// @mixin colorTintMap($color) {
+//   @each $colorName, $color in $colormap {
+//     map-merge($map, (2: New York));
+// }
+
+// take one color creates a map of tints/shades: [blue-050, blue-100, blue-200, blue-300, blue-900]; 
+// light / dark multipliers are different & customizable since the lighten/darken outputs not predictable
+// output: new color map of generated colors
+@function colorTint($colorName, $color, $light:30, $dark:55) {
+  $range: [50,100,200,300,400,500,600,700,800,900];
+  $output: ();
+  @each $val in $range {
+    $strength: 100 + (($val/500)-1) * $light; // the darken and lighten functions are too sensitive, so we're only adding a max of 25%
+    @if ($val < 500) {
+      $strength: 100 + (($val/500)-1) * $dark; // give lighten a more sensitive multiplier
+    }
+    // @warn "Strength: #{$strength} for:; #{$val}";
+    $output: map-merge($output, (#{$colorName}-#{$val}: color($color,$strength) ));
+  }
+  // reset $color-500 w/ the base color
+  $output: map-merge($output, (#{$colorName}-#{500}: $color));
+  // @warn "outputting: #{$output}";
+  @return $output;
+}
+
+
+// take each color from a map and add create a flat map of colors
+// input: map (green: #00FF00, red: #FF0000);
+// output: new color map of generated colors
+//         (green-50: ..., green-100:; ..., ...red-800: ..., red-900: ...)
+@function colorTintMap($colorMap) {
+  $output: ();
+  @each $colorName, $color in $colorMap {
+    $tintMap: colorTint($colorName, $color); // get a map of colors
+    @each $tintName, $tintColor in $tintMap {
+      // add each tint into output map
+      $output: map-merge($output, (#{$tintName}: $tintColor));
+    }
+  }
+  // @warn "outputting: #{$output}";
+  @return $output;
+}
+
+
+/* 
+  
+  Here's an example on how to use the color tint generator:
+
+  $bluetints: colorTint('blue', #3f51b5);
+  $testcolors: (
+    red: #BD5843,
+    blue: #8BADC2,
+  );
+  $colorMap: colorTintMap($testcolors);
+
+  .TestOne {
+    color: black; font-weight: bold;
+    // background: map-get($bluetints, blue-50);
+    background: map-get($colorMap, blue-50);
+    padding: 64px;
+  }
+
+ */
+
+
+
+

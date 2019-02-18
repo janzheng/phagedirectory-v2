@@ -1,0 +1,40 @@
+
+
+// version 2.0.0
+//    supported by coeur nuxt
+
+
+// Org
+// 
+// Heart [base values]
+// Head
+// Neck
+// Body [components]
+
+@import 'heart';  //  core values
+@import 'head';   //  [ depends on the heart ]
+@import 'neck';   //  [ depends on heart and head ]
+@import 'body';  //  [ depends on heart, head, neck — components] 
+
+// 
+// base layout styles
+// 
+body {
+  @extend %font-body;
+  background-color: $color-bg;
+  color: $color-copy;
+  margin: 0;
+}
+
+
+// re-import to reset default behavior for cascade
+// useful for colors, margin classes, etc.
+@import 'head-colors';
+@import 'head-helpers';
+@import 'head-borders';
+@import 'heart'; // coeur
+
+
+
+
+

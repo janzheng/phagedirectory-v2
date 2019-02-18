@@ -1,0 +1,543 @@
+
+// 
+//    Design — like Layout but prettier
+// 
+
+
+
+// 
+//    SIZE & HEIGHT
+// 
+
+// - works in conjunction with sizer.js if it's included
+// ._vh-5
+// ._vh-20 {
+//   height: 20vh
+// }
+// ._vh-40 {
+//   height: 40vh
+// }
+// ...
+// ._vh-100 
+// 
+@for $i from 0 through 20 {
+  @include named-element-generator('vh', min-height, #{$i * 5}, '#{$i * 5}vh');
+}
+@for $i from 0 through 20 {
+  @include named-element-generator('vh-max', max-height, #{$i * 5}, '#{$i * 5}vh');
+}
+
+// 
+// Width
+// 
+
+// generate ._width-100 ._width-90 etc. 
+@each $width in '100' "100%", '90' "90%", '80' "80%", '70' "70%", '60' "60%", '50' "50%", '40' "40%", '30' "30%", '20' "20%", '10' "10%", {
+  @include element-generator(width, nth($width, 1), nth($width, 2));
+}
+.--width-100 {
+  width: 100%;
+  &.-i {
+    width: 100% !important;
+  }
+}
+
+
+// 
+// Top
+// 
+.--top-0,  ._top-0    { top: 0; }
+.--top,    ._top      { top: $size; }
+.--top-1,  ._top-1    { top: $size-1; }
+.--top-2,  ._top-0    { top: $size-2; }
+.--top-3,  ._top-3    { top: $size-3; }
+.--top-4,  ._top-4    { top: $size-4; }
+.--top-5,  ._top-5    { top: $size-5; }
+.--top-6,  ._top-6    { top: $size-6; }
+.--top-7,  ._top-7    { top: $size-7; }
+.--top-8,  ._top-8    { top: $size-8; }
+.--top-9,  ._top-9    { top: $size-9; }
+.--top-10, ._top-10   { top: $size-10; }
+.--top-11, ._top-11   { top: $size-11; }
+
+
+// 
+//    TEXT & TYPOGRAPHY
+// 
+
+.--pre         { white-space: pre; }
+.--nowrap      { white-space: nowrap; }
+// https://css-tricks.com/almanac/properties/t/text-rendering/
+
+.--speed       { text-rendering:   optimizeSpeed; } 
+.--legibility  { 
+              // can enable ligatures < 20px;
+              // ONLY APPLY THIS for < 1000 words or severely hampers load time
+              text-rendering:   optimizeLegibility; 
+}
+.--geometric  { text-rendering:  geometricPrecision; }
+
+.--antialias, .--antialiased { 
+  // light text on dark backgrounds makes it look lighter
+  // only works on Mac webkit
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.--subpixel {
+  -webkit-font-smoothing: subpixel-antialiased;
+} 
+
+.--kern {
+  -webkit-font-feature-settings: "kern","liga","pnum";
+  font-feature-settings: "kern","liga","pnum";
+}
+.--underline-none {
+  text-decoration: none;
+  &-i {
+    text-decoration: none !important;
+  }
+}
+
+// Transparency has been moved to _color
+
+
+// https://developer.mozilla.org/en-US/docs/Web/CSS/text-decoration-skip
+.--underline-skip {
+  text-decoration: underline;
+  // text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
+}.--underline-edges {
+  text-decoration: underline;
+  text-decoration-skip: edges;
+}
+.--underline-wavy {
+  text-decoration: $color-main underline wavy;
+  // text-decoration-skip: ink;
+  text-decoration-skip-ink: auto;
+}
+
+
+
+
+.--underline {
+  &.--skip {
+    @extend .--underline-skip;
+  }
+  &.--edges {
+    @extend .--underline-edges;
+  }
+}
+
+
+
+// 
+// Special ratio and Sizes
+// 
+
+.--base     {width: $size-base; height: $size-base;}
+.--base-2   {width: $size-2x; height: $size-2x;}
+.--smaller  {width: $size-smaller; height: $size-smaller;}
+.--larger   {width: $size-larger; height: $size-larger;}
+.--p1       {width: $size-1; height: $size-1;}
+.--p2       {width: $size-2; height: $size-2;}
+.--p3       {width: $size-3; height: $size-3;}
+.--p4       {width: $size-4; height: $size-4;}
+.--p5       {width: $size-5; height: $size-5;}
+.--p6       {width: $size-6; height: $size-6;}
+.--p7       {width: $size-7; height: $size-7;}
+.--p8       {width: $size-8; height: $size-8;}
+.--p9       {width: $size-9; height: $size-9;}
+.--p10      {width: $size-10; height: $size-10;}
+.--p11      {width: $size-11; height: $size-11;}
+
+.--m1       {width: $size--1; height: $size--1;}
+.--m2       {width: $size--2; height: $size--2;}
+.--m3       {width: $size--3; height: $size--3;}
+.--m4       {width: $size--4; height: $size--4;}
+
+.--ratio-16_9     {@include responsive-ratio(16,9);}
+
+
+
+
+._line_height-0 {
+  line-height: 0;
+}
+
+
+
+
+// Radius
+
+
+// $radius-none: 0px !default;                 
+._radius-none { @include importantizer(border-radius $radius-none) }
+._radius {  @include importantizer(border-radius $radius) }
+._radius-sm {  @include importantizer(border-radius $radius-sm) }
+._radius-md {  @include importantizer(border-radius $radius-md) }
+._radius-lg {  @include importantizer(border-radius $radius-lg) }
+._radius-xl {  @include importantizer(border-radius $radius-xl) }
+
+._radius-none-right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  &-i {
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+}
+._radius-none-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  &-i {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+}
+
+
+
+
+// Triangles
+
+._triangle-up {
+  @include css-triangle($color-main, up, $size-base, relative, true);
+}
+._triangle-up-left {
+  @include css-triangle($color-main, up-left, $size-base, relative, true);
+}
+._triangle-down {
+  @include css-triangle($color-main, down, $size-base, relative, true);
+}
+._triangle-left {
+  @include css-triangle($color-main, left, $size-base, relative, true);
+}
+._triangle-right {
+  @include css-triangle($color-main, right, $size-base, relative, true);
+}
+
+// 
+// Opacity
+// 
+
+// generate ._opacity-100 ._opacity-90 etc. 
+@each $opacity in '100' 1, '90' 0.9, '80' 0.8, '70' 0.7, '60' 0.6, '50' 0.5, '40' 0.4, '30' 0.3, '20' 0.2, '10' 0.1, '0' 0 {
+  @include element-generator(opacity, nth($opacity, 1), nth($opacity, 2));
+}
+
+
+
+
+
+// 
+//    SHADOWS, GRADIENTS
+// 
+
+// used for card styles and buttons
+// usage: usetheme(edge, $shadows_)
+// 
+// edge: use this one instead of border outlines!
+$shadows_: (
+  raised-dark: 4px 4px 16px rgba(22, 22, 22, .22), // 0px 4px 8px rgba($color-black, 0.1),
+  raised: 0px 4px 8px rgba(70,70,70, 0.1),
+  light: 0px 2px 8px rgba($color-ui-light, 1),
+  edge: 2px 2px 4px rgba(120, 120, 120, .1),
+
+  gridbox: #{0 3px 15px rgba(0,0,0,0.11), 0 3px 6px rgba(0,0,0,0.43)},
+  gridbox_hover: #{0 4px 16px rgba(0,0,0,0.89), 0 10px 10px rgba(0,0,0,0.18)},
+  // edge: 0px 5px 14px rgba(0,0,0,1),
+  edgetop: 0px -6px 12px rgba(0,0,0,0.8),
+
+  // material cards: https://codepen.io/sdthornton/pen/wBZdXq;
+  hover: #{0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)},
+  100: #{0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)},
+  200: #{0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)},
+  300: #{0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)},
+  400: #{0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)},
+  500: #{0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22)},
+
+) !default;
+
+
+// 
+//    SHADOWS
+// 
+
+._shadow-raised-dark {
+  box-shadow: usetheme(raised-dark, $shadows_);
+}
+._shadow-raised {
+  box-shadow: usetheme(raised, $shadows_);
+}
+._shadow-light {
+  box-shadow: usetheme(light, $shadows_);
+}
+._shadow-edge {
+  box-shadow: usetheme(edge, $shadows_);
+}
+
+
+%shadow-internal-light {box-shadow: 0 0px 50px rgba(20, 20, 20, 0.07), 0 0 70px rgba(0, 0, 0, 0.08) inset;}
+%shadow-internal-dark {box-shadow: 0 0px 50px rgba(20, 20, 20, 0.22), 0 0 80px rgba(0, 0, 0, 0.42) inset;}
+%shadow-gray {box-shadow:1px 1px 4px rgba(120,120,120,0.4),inset 1px 0 1px rgba(255,255,255,0.6);}
+
+
+%shadow-inset {
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.1);
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+%shadow-hover {
+  box-shadow: 1px 1px 1px rgba(0,0,0,.5), 0 1px 0 rgba(255,255,255,.1);
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+}
+
+%shadow-drop {
+  box-shadow: 0 5px 23px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,1);
+}
+
+%box-shade-light {
+  -moz-box-shadow: rgba(0,0,0,0.05) 0 1px 3px inset;
+  -webkit-box-shadow: rgba(0,0,0,0.05) 0 1px 3px inset;
+  box-shadow: rgba(0,0,0,0.05) 0 1px 3px inset;
+}
+
+// used for header-float bar
+%box-shadow-under {
+  -moz-box-shadow: 0 0 3px 3px rgba(#888,0.4);
+  -webkit-box-shadow: 0 0 3px 3px rgba(#888,0.4);
+  box-shadow: 0 0 5px 3px rgba(#888,0.4);
+}
+
+
+/* abduzeedo shadow
+box-shadow: rgba(100, 84, 92, 0.2) 0px 2px 2px, rgba(100, 84, 92, 0.2) 0px 4px 4px, rgba(100, 84, 92, 0.2) 0px 8px 8px, rgba(100, 84, 92, 0.2) 0px 16px 16px, rgba(100, 84, 92, 0.2) 0px 32px 32px, rgba(100, 84, 92, 0.2) 0px 64px 64px;
+*/
+
+
+// 
+// Hover effect
+// 
+
+// %hover-effect {
+//   @include selection-color (rgba($light-blue, 0.8), white, none);
+
+//   @extend %ease-fast;
+//   @extend %shadow-hover;
+//   position:relative; bottom: 1px; right: 1px;
+// }
+// %slide-effect {
+//   @extend %ease-fast;
+//   padding: $size-base*0.65 $size-base*1.25; //slide effect
+// }
+// %active-effect {
+//   @extend %ease-fast;
+//   @extend %shadow-inset;
+//   text-decoration: none;
+// }
+
+
+
+
+
+
+
+
+// $box_shadow-raised: 0px 4px 12px rgba($color-black, 0.16) !default; // looks like a raised shadow
+// %box_shadow-raised { box-shadow: $box_shadow-raised; }
+
+// $box_shadow-light: 0px 2px 8px rgba($color-ui-light, 1) !default; // looks like a raised shadow
+// %box_shadow-light { box-shadow: $box_shadow-raised; }
+
+
+
+
+// 
+//    On Focus Styles
+// 
+
+%focus-yellow {
+  border-color: darken($color-yellow, 5%);
+  // border-color: $color-yellow;
+
+  outline: none;
+  // box-shadow: 2px 2px 6px rgba($color-yellow, 0.6);
+  // above is too light
+  box-shadow: 0px 0px 12px rgba($color-yellow, 1);
+}
+%focus-blue {
+  border-color: rgba($color-blue, 0.64);
+  outline: none;
+  box-shadow: 0px 0px 2px 0px rgba($color-blue, 0.6);
+}
+
+%color-sepia {
+  -webkit-filter: sepia(0.2) saturate(0.5);
+  filter: sepia(0.2) saturate(0.5);
+}
+
+
+
+
+
+
+
+// 
+//    List Helpers
+// 
+._commas {
+  &:after {
+    content: ', '
+  }
+  &:last-child:after {
+    content: ''
+  }
+}
+
+
+
+
+
+
+
+
+// 
+// Container and Object Formatting
+// (formatting your kids)
+// 
+
+
+// last object in container has no padding
+._format-padding-last-bottom_none {
+  *:last-child {
+    padding-bottom: 0;
+  }
+}
+._format-margin-last-bottom_none {
+  *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// last object in container has no
+// margin or padding (no extra whitespace)
+._format-last-bottom_none {
+  @extend ._format-padding-last-bottom_none;
+  @extend ._format-margin-last-bottom_none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+
+
+    Design Layouts
+    (formerly in the _neck-layout, these are more like templates)
+
+
+ */
+
+
+
+
+
+
+
+
+// simple layout helper
+._layout-grid-block {
+  padding: $size-base;
+
+  &.--silver {
+    // @extend ._color-bg-silver-light;
+    background: usetheme(color-silver-light, $heart_);
+    box-shadow: usetheme(raised, $shadows_);
+  }
+}
+
+
+
+
+$layout-block-width-max: 55%;
+
+  /*
+      Usage:
+        ._grid-content-image
+          <div> copy </div> 
+          <div> image </div> 
+
+        ._grid-image-content
+          <div> image </div> 
+          <div> copy </div> 
+  */
+
+._layout-content-image {
+
+  @extend %grid-cols-2;
+  @extend ._align-center;
+  // @extend %grid-xs-full-i;
+
+  div:first-child {
+    @extend ._align-right;
+    @extend ._layout-grid-block;
+    // width: $layout-block-width-max;
+    @include screen-xs {
+      justify-items: center;
+      grid-row-start: 2;
+    }
+  }
+  div:last-child {
+    @extend ._align-middle;
+    @extend ._layout-grid-block;
+    @include screen-xs {
+      justify-items: center;
+      grid-row-start: 1; // reflow so image is on top
+    }
+  }
+
+}
+
+._layout-image-content {
+
+  @extend ._grid-two;
+  @extend ._align-center;
+
+  div:first-child {
+    @extend ._align-middle;
+    @extend ._layout-grid-block;
+
+    @include screen-xs {
+      justify-items: center;
+    }
+  }
+  div:last-child {
+    @extend ._align-left;
+    @extend ._layout-grid-block;
+    // width: $layout-block-width-max;
+    @include screen-xs {
+      justify-items: center;
+    }
+  }
+}
+
+
+
+
+

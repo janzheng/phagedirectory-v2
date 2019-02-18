@@ -84,17 +84,17 @@
               </div>
 
               <!-- show Org and/or Supervisor... or only the Org -->
-              <div v-if="job.fields['Org'] && job.fields['Supervisor']" class="_grid-3-2 _grid-gap-none" >
-                <div v-if="job.fields['Org']">
+              <div v-if="job.fields['Org'] || job.fields['Supervisor']" class="_flex _padding-bottom-half" >
+                <div v-if="job.fields['Org']" class="_flex-grow">
                   <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
                 </div>
                 <div v-if="job.fields['Supervisor']" class="Job-supervisor _right-sm">
                   <div>{{ job.fields['Supervisor'] }}</div>
                 </div>
               </div>
-              <div v-else-if="job.fields['Org']">
+              <!-- <div v-else-if="job.fields['Org']" class="_padding-bottom-half" >
                 <strong class="Job-org" >{{ job.fields['Org'].join(', ') }}</strong>, <span v-if="job.fields['Location']" class="Job-location _inline-block">{{ job.fields['Location'] }}</span>
-              </div>
+              </div> -->
 
               <div class="_md-p_fix" v-html="$md.render(job.fields['Markdown'] || '')" />
 
@@ -240,11 +240,11 @@ export default {
       headImage: undefined,
       headDescription: undefined,
 
-      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
-      communityDescription: this.$cytosis.find('Content.capsid-community-description', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      emptyCommunity: this.$cytosis.find('Content.capsid-empty-community', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      emptyJobs: this.$cytosis.find('Content.capsid-empty-jobs', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      communityDescription: this.$cytosis.find('Content.capsid-community-description', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       jobsMailto: "https://phage.directory/services#jobs",
-      communityMailto: this.$cytosis.find('Content.community-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
+      communityMailto: this.$cytosis.find('Content.community-mailto', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
       // jobsMailto: this.$cytosis.find('Content.jobs-mailto', this.$store.state.cytosis.tables)[0]['fields']['Markdown'],
     }
   },
@@ -268,7 +268,8 @@ export default {
     },
 
     setHeader(issue) {
-      console.log('setHeader', issue.fields['BannerImage'])
+      if(issue.fields['BannerImage'])
+      console.log('setHeader Banner:', issue.fields['BannerImage'])
 
       this.headImage = issue.fields['BannerImage'] || 'https://phage.directory/cnt_twitter_card.png'
       this.headDescription = issue.fields['Lede'] || "Capsid & Tail is a micro-publication about all things phages"
@@ -289,14 +290,14 @@ export default {
 
     getSponsors(issue) {
       const sponsors = this.$cytosis.getLinkedRecords(issue.fields['Sponsors'], this['Updates'], true)
-      console.log('Sponsors:', sponsors)
+      // console.log('Sponsors:', sponsors)
       return sponsors || undefined
     },
 
 
     getUpdates(issue) {
       const updates = this.$cytosis.getLinkedRecords(issue.fields['Updates'], this['Updates'], true)
-      console.log('Updates:', updates)
+      // console.log('Updates:', updates)
       return updates || undefined
     },
 

@@ -31,12 +31,14 @@ export default {
 
   layout: 'contentframe',
   middleware: 'pageload',
+  meta: {
+    tableQuery: "_contact"
+  },
   
-  // async asyncData({app, env, route, store}) {
-  async asyncData({app, store}) {
-    // const cytosis = store.state.cytosis
+  data: function () {
     return {
-      content: app.$cytosis.find('Content.about-contact', store.state.cytosis.tables)[0]['fields']['Markdown'],
+      // aboutTitle: this.$cytosis.find('Content.about-title', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
+      content: this.$cytosis.find('Content.about-contact', {'Content': this.$store.state['Content']} )[0]['fields']['Markdown'],
     }
   },
 
