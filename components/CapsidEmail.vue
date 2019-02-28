@@ -32,6 +32,11 @@
           padding: 0;
           padding-top: 16px;
         }
+        h5 {
+          font-size: 1.1em;
+          font-weight: normal;
+          margin-top: 1.5em;
+        }
         .Advert { 
           background-color: #FFD3D3 !important;
           margin-bottom: 16px !important;

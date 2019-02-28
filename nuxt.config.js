@@ -37,13 +37,16 @@ const airtable_base = 'appSCAap8SWbFRtu0';
 
 const analyze = false; // analyzer (webpack; turn off for prod)
 const offline = false;
-let mode = 'universal' // loads airtable dynamically
+let mode = 'universal' 
+// 'spa' loads airtable dynamically
+// 'static' only generates once / use npm run generate
 // const mode = 'universal' // loads airtable during build-time only (any changes to airtable won't be reflected live)
 if (process.env.NODE_ENV == 'spa') {
   console.log('RUNNING IN SPA MODE')
   mode = 'spa'
 }
 
+const site_static = true; // if set to true, the client will never pull data 
 
 let site_routes; // used for the generate process to save on airtable pulls
 
@@ -80,7 +83,8 @@ module.exports = (async function() {
       airtable_base: airtable_base,
       site_policy: site_policy,
       ext_handler: 'https://wt-ece6cabd401b68e3fc2743969a9c99f0-0.sandbox.auth0-extend.com/phdir-input',
-      site_data: site_data
+      site_data: site_data,
+      site_static: site_static,
     },
 
     render: {
@@ -478,32 +482,32 @@ module.exports = (async function() {
 
 
 
-          {
-            name: 'phagefutures-agenda',
-            path: '/phagefutures/agenda',
-            component: resolve(__dirname, 'pages/phagefutures.vue')
-          },
-          {
-            name: 'phagefutures-posters',
-            path: '/phagefutures/posters',
-            component: resolve(__dirname, 'pages/phagefutures.vue')
-          },
-          {
-            name: 'phagefutures-about',
-            path: '/phagefutures/about',
-            component: resolve(__dirname, 'pages/phagefutures.vue')
-          },
-          {
-            name: 'phagefutures-feedback',
-            path: '/phagefutures/feedback',
-            component: resolve(__dirname, 'pages/phagefutures.vue')
-          },
+          // {
+          //   name: 'phagefutures-agenda',
+          //   path: '/phagefutures/agenda',
+          //   component: resolve(__dirname, 'pages/phagefutures.vue')
+          // },
+          // {
+          //   name: 'phagefutures-posters',
+          //   path: '/phagefutures/posters',
+          //   component: resolve(__dirname, 'pages/phagefutures.vue')
+          // },
+          // {
+          //   name: 'phagefutures-about',
+          //   path: '/phagefutures/about',
+          //   component: resolve(__dirname, 'pages/phagefutures.vue')
+          // },
+          // {
+          //   name: 'phagefutures-feedback',
+          //   path: '/phagefutures/feedback',
+          //   component: resolve(__dirname, 'pages/phagefutures.vue')
+          // },
         )
       },
 
     },
     generate: {
-      interval: 50, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
+      interval: 100, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
       fallback: false, // if you want to use '404.html' — for surge, use false if you want to use 200 spa fallback
       // concurrency: 1, // reduce server strain
       routes: async function (callback) {

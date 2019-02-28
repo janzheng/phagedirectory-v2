@@ -13,6 +13,11 @@ export default {
     // console.log(`[actions/loadCytosis loading from:${caller}]: query/options:`, tableQuery, options)
     // console.log(`[actions/loadCytosis loading from:${caller}]: isServer:`, process.server)
     
+    // if generated, not server, and static is true
+    // we DON'T want to pull data to the client
+    // if(env.mode == 'universal' && !process.server && env.site_static) 
+    //   return Promise.reject(undefined) // static set to true / don't pull data
+
     let cytosis = await new Cytosis({
       airKey, 
       airBase, 
@@ -22,6 +27,7 @@ export default {
     commit('setCytosis', cytosis)
     console.log(`[actions/loadCytosis from:${caller}]: done.`)
     return Promise.resolve(cytosis)
+  
   },
 
 

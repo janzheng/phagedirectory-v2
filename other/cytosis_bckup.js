@@ -22,9 +22,7 @@
 
 
   - 2/17/2019
-    - tableNames changed to tableQuery
-    - added multiple querying — given a list of queries in LinkedQueryNames "_content, _tags", will pull data from both queries
-    - added better support for views/formulas/filters
+    - tableQuery changed to tableQuery
 
 
 */
@@ -316,12 +314,12 @@ class Cytosis {
           // init tables from config if they don't exist
           if ( !_this.airBase.tables || _this.airBase.tables.length == 0 ) {
             for(let config of _config._cytosis) {
-              // Option 1: find all the options in the Tables list
               if ( config.fields['Name'] == tableQuery && config.fields['Tables']) {
+                _this.airBase.tables = config.fields['Tables']
 
                 // some queries can contain options like fields, sort, maxRecords etc.
                 // these can drastically cut back the amount of retrieved data
-                const options = {
+                let options = {
                   fields: config.fields['fields'], // fields to retrieve in the results
                   filter: config.fields['filterByFormula'],
                   maxRecords: config.fields['maxRecords'],
@@ -329,45 +327,7 @@ class Cytosis {
                   sort: config.fields['sort'] ? JSON.parse(config.fields['sort'])['sort'] : undefined, // needs to be of format : "{sort: [blahblah]}"
                   view: config.fields['view'],
                 }
-
-                // tables is an array of strings that say which tables (tabs) in Airtable to pull from
-                _this.airBase['tables'] = config.fields['Tables']
                 _this.airBase['options'] = options
-              } 
-
-              // Option 2: find all the tableQueries in the linkedQueryNames (generated lookup) list
-              else if ( config.fields['Name'] == tableQuery && config.fields['LinkedQueryNames']) {
-                const linkedQueries = config.fields['LinkedQueryNames']
-                // console.log('Linked Query Names: ', linkedQueries)
-
-                // this is a special case where instead of an array of strings, it's an
-                // array of objects {query (string), tables (array of strings), options (object)}
-                let tables = []
-                // for each linked query, find and store the correct query
-                linkedQueries.map((linkedquery) => {
-                  _config._cytosis.map((query) => {
-                    if(linkedquery == query.fields['Name']) {
-                      // console.log('match:', linkedquery, query)
-
-                      const options = {
-                        fields: query.fields['fields'], // fields to retrieve in the results
-                        filter: query.fields['filterByFormula'],
-                        maxRecords: query.fields['maxRecords'],
-                        pageSize: query.fields['pageSize'],
-                        sort: query.fields['sort'] ? JSON.parse(query.fields['sort'])['sort'] : undefined, // needs to be of format : "{sort: [blahblah]}"
-                        view: query.fields['view'],
-                      }
-
-                      tables.push({
-                        query: linkedquery,
-                        tables: query.fields['Tables'],
-                        options: options
-                      })
-                    }
-                  })
-                })
-
-                _this.airBase['tables'] = tables
               }
             }
           }
@@ -482,24 +442,22 @@ class Cytosis {
     tables = tables || cytosis.airBase.tables
 
     let pTables = [] // tables (promise)
+    let base = Cytosis.getBase(cytosis.airBase.id)
+    // let _this = this
 
     // need to follow these defaults for airtable:
     // view='', fields=undefined, sort=undefined, filter='', 
+    let {view, fields, sort, filter, maxRecords, pageSize} = options
+    if (!view)
+      view = ''
+    if (!filter)
+      filter = ''
 
     if(!Cytosis.preCheck(cytosis.airKey,cytosis.airBase))
       return {}
 
-    function getTablePromise({tables, options}) {
+    function getTablePromise() {
       try {
-
-        let {view, fields, sort, filter, maxRecords, pageSize} = options
-
-        // console.log('getTables retrieving:', tables, options)
-
-        if (!view)
-          view = ''
-        if (!filter)
-          filter = ''
         // console.log('Retrieving airtables')
         for (let table of tables) {
           let list = []
@@ -521,14 +479,15 @@ class Cytosis {
             filterObj['pageSize'] = pageSize // limit # of records
           }
 
-          if(fields && fields[table]) { // if a field for this table exists, add it; (old structure, v1)
+          if(fields && fields[table]) { // if a field for this table exists, add it; (old structure)
             filterObj['fields'] = fields[table]
           } else if (fields) { // new structure
             filterObj['fields'] = fields
           }
 
-          const promise = new Promise(function(resolve, reject) {
-            const base = Cytosis.getBase(cytosis.airBase.id) // airtable base object
+
+
+          let promise = new Promise(function(resolve, reject) {
             base(table).select(
               filterObj
             ).eachPage(function page(records, fetchNextPage) {
@@ -554,30 +513,7 @@ class Cytosis {
       } catch(e) {
         console.error('Airtable async err', e) // return; 
       }
-    }
-
-    // console.log('getTables:', tables)
-
-    // tables could be an array of strings (table names)
-    if(typeof tables[0] == 'string') {
-      getTablePromise({
-        tables: tables,
-        options: options 
-      })
-    } 
-    // tables could also be an array of objects of { query: 'tablequery', options }
-    else {
-      tables.map((query) => {
-        // console.log('mapping:', query)
-        // need to slow it down
-        // setTimeout(function(){
-          getTablePromise({
-            tables: query.tables, // array of strings 
-            options: query.options 
-          })
-        // }, 200);
-      })
-    }
+    } getTablePromise()
 
     return Promise.all(pTables).then(function(tables) {
       let finalObj = {}
@@ -586,8 +522,6 @@ class Cytosis {
       }
       // _this.airtable = finalObj
       // _this.tables = finalObj
-
-      // console.log('getTables final object:', finalObj)
 
       return finalObj // return as a one promise object
     }, function (reason) {
