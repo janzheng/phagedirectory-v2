@@ -52,6 +52,8 @@ $typography_: (
 
 $settings: $typography_;
 
+@include addtheme($$settings)
+
 // $theme-typesizes {
 
 // }

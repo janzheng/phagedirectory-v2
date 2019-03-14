@@ -27,9 +27,17 @@
 
       <!-- hard-coded styles -->
       <style type="text/css">
+        h3 {
+          padding-top: 21px;
+        }
         h4 {
           /*padding: 16px 0;*/
+          /*padding-top: 16px;*/
           padding: 0;
+          /*padding-top: 21px;*/
+          padding-top: 21px;
+        }
+        h3 + h4 {
           padding-top: 16px;
         }
         h5 {
@@ -59,7 +67,7 @@
           background-color: #FCFCFC;
           border-radius: 4px;
           margin-bottom: 16px;
-          /*padding: 15px;*/
+          padding: 15px;
         }
 
         .Section-table {

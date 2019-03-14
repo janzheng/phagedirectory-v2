@@ -73,6 +73,15 @@
     font-size: $p4;
     line-height: $l4;
   }
+  .Capsid-content {
+    h4 {
+      padding-top: $size;
+      padding-bottom: $size / 2;
+    }
+    h3 + h4 {
+      padding-top: $size / 2;
+    }
+  }
   h5 {
     font-weight: 400;
   }
@@ -98,6 +107,11 @@
       margin-bottom: 0;
       // border: 0;
       // color: usetheme(tertiary); // $color-tertiary;
+    }
+
+    cite {
+      font-size: $font-size;
+      font-style: normal;
     }
   }
 
@@ -468,7 +482,30 @@
   background-color: usetheme(bg-silver);
   padding-top: $size;
   padding-bottom: $size;
+  
+  @include screen-xs {
+    padding-left: $size/2;
+    padding-right: $size/2;
+  }
 }
+
+
+.Capsid-disqus {
+  padding-top: $size-2;
+  padding-bottom: $size-2;
+  background-color: usetheme(bg-silver);
+
+  @include screen-xs {
+    padding-left: $size/2;
+    padding-right: $size/2;
+  }
+}
+  #disqus_thread {
+    margin: 0 auto;
+    @extend %width-content-paragraph;
+  }
+
+
 
 
 

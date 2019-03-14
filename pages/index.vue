@@ -58,13 +58,6 @@
 
           <StreamCard>
             <div slot="sidebar" style="width:100px">
-              <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
-            </div>
-            <div slot="main" class="_card --border-active _padding _md-p_fix" v-html="$md.render(phagefutures || '')" />
-          </StreamCard>
-
-          <StreamCard>
-            <div slot="sidebar" style="width:100px">
               <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
             </div>
             <div slot="main">
@@ -74,6 +67,14 @@
               <FormCapsidFeedback class=""/>
             </div>
           </StreamCard>
+
+          <StreamCard>
+            <div slot="sidebar" style="width:100px">
+              <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
+            </div>
+            <div slot="main" class="_card --border-active _padding _md-p_fix" v-html="$md.render(phagefutures || '')" />
+          </StreamCard>
+
         </div>
 
         <div class="">

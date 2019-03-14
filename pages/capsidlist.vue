@@ -77,6 +77,7 @@ export default {
   middleware: 'pageload',
   meta: {
     // tableQuery: "_basic",
+    // tableQuery: "_capsid-titles",
     tableQueries: ["_capsid-content", "_capsid-titles"] // combine queries
   },
 

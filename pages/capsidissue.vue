@@ -39,6 +39,12 @@
       </div>
     </div>
 
+    <no-ssr>
+      <div id="comment" class="Capsid-disqus" >
+        <div id="disqus_thread" />
+      </div>
+    </no-ssr>
+
     <div class="CapsidIssue-footer _section-content _margin-center">
       <!-- <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" /> -->
       <CapsidMicroBanner class="_section-article _margin-center _margin-top-2 _margin-bottom" />
@@ -54,6 +60,7 @@
 
   </div>
 </template>
+
 
 <script>
 
@@ -133,6 +140,23 @@ export default {
   },
 
   mounted: async function () {
+
+    // load disqus
+    if (!process.server) {
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+      // var disqus_config = function () {
+      //   this.page.url = this.slug; // PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      //   this.page.identifier = this.slug //PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      // };
+      
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script')
+      s.src = 'https://capsid-tail.disqus.com/embed.js'
+      s.setAttribute('data-timestamp', +new Date())(d.head || d.body).appendChild(s)
+      })()
+    }
   },
 
   methods: {

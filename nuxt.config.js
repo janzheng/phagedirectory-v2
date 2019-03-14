@@ -327,6 +327,12 @@ module.exports = (async function() {
             component: resolve(__dirname, 'pages/capsidlist.vue')
           },
           {
+            // always shows the latest capsid; GOES BEFORE capsidIssue / capsid/:slug
+            name: 'capsidLatest',
+            path: '/capsid/latest',
+            component: resolve(__dirname, 'pages/capsidlatest.vue')
+          },
+          {
             // opens each issue separately, good for deeplinking, possibly comments
             name: 'capsidIssue',
             path: '/capsid/:slug',
@@ -508,7 +514,7 @@ module.exports = (async function() {
     },
     generate: {
       interval: 100, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
-      fallback: false, // if you want to use '404.html' — for surge, use false if you want to use 200 spa fallback
+      // fallback: false, // if you want to use '404.html' — for surge, use false if you want to use 200 spa fallback
       // concurrency: 1, // reduce server strain
       routes: async function (callback) {
 
