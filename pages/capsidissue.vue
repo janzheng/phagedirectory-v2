@@ -6,7 +6,7 @@
  -->
 
 <template>
-  <div class="CapsidIssue _section-page _margin-top _margin-center">
+  <div class="CapsidIssue _section-page _margin-top _margin-center _padding-top-3">
 
     <!-- 
         <div class="_section-content _margin-center _grid-2">
@@ -17,20 +17,21 @@
           </div>
         </div>
      -->
-    <div class="_section-content _margin-center _padding-bottom-2">
-      <!-- <div class="_flex _flex-bottom"> -->
-      <!-- <router-link to="/capsid" class="" v-html="$md.render(title || '')" /> -->
-      <div class="" v-html="$md.render(title || '')" />
-      <!-- <div class="" v-html="$md.render(intro || '')" />     -->
-      <!-- </div> -->
-    </div>
-    
-    <div class="_section-content _margin-center">
-      <!-- <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" /> -->
-      <!-- <CapsidMicroBanner class="_section-article _margin-center _margin-top-2 _margin-bottom" /> -->
-      <!-- <div class="_section-article _margin-center _margin-bottom-2" v-html="$md.render(highlight)" /> -->
-      <Capsid :issues="issues" :show-preview="showPreview" />
+    <!-- <div class="_section-content _margin-center _padding-bottom-2"> -->
+    <!-- <div class="" v-html="$md.render(title || '')" /> -->
+    <!-- </div> -->
 
+    <div class="CapsidIssue-masthead _section-article _margin-center _padding-bottom-3">
+      <router-link to="/capsid" class="_grid-auto-1-xs _align-vertically --underline-none">
+        <img class="cnt _block _margin-center" src="/cnt.png" width="120px" alt="Capsid and Tail" >
+        <div class="_left _font-serif">A weekly phage periodical</div>
+      </router-link>
+    </div>
+
+  
+    <CapsidThree :issues="issues" />
+
+    <div class="_section-content _margin-center">
       <div v-if="issues.length == 0">
         <h4>Sorry, no Capsid & Tail issue was found at this URL</h4>
         <div>
@@ -41,19 +42,15 @@
 
     <no-ssr>
       <div id="comment" class="Capsid-disqus" >
-        <div id="disqus_thread" />
+        <vue-disqus :identifier="slug" shortname="capsid-tail" url="https://phage.directory" />
       </div>
     </no-ssr>
 
     <div class="CapsidIssue-footer _section-content _margin-center">
-      <!-- <CapsidBanner class="_margin-center _margin-top-2 _margin-bottom-2" /> -->
       <CapsidMicroBanner class="_section-article _margin-center _margin-top-2 _margin-bottom" />
       <div class="_section-article _margin-center _margin-bottom-2" v-html="$md.render(highlight)" />
-      <!-- <Capsid :issues="issues" :show-preview="showPreview" /> -->
     </div>
     
-    <!-- <CapsidTwo:issues="issues" :show-preview="showPreview"  class="_margin-center" /> -->
-
     <div class="_section-content _margin-center">
       <div class="_section-article _margin-center _font-small" v-html="$md.render(fineprint || '')" />
     </div>
@@ -61,14 +58,14 @@
   </div>
 </template>
 
-
 <script>
 
 // import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import CapsidMicroBanner from '~/components/CapsidMicroBanner.vue'
-import Capsid from '~/components/Capsid.vue'
+// import Capsid from '~/components/Capsid.vue'
 // import CapsidTwo from '~/components/CapsidTwo.vue'
+import CapsidThree from '~/components/CapsidThree.vue'
 // import {loadNews} from '~/other/loaders'
 
 export default {
@@ -77,9 +74,9 @@ export default {
     // Article,
     CapsidBanner,
     CapsidMicroBanner,
-    Capsid,
+    // Capsid,
     // CapsidTwo,
-
+    CapsidThree,
   },
 
   layout: 'contentframe',
@@ -98,7 +95,7 @@ export default {
     const slug = unescape(route.params.slug)
     return {
       slug,
-      showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
+      // showPreview: slug ? true : false, // used to show previews on capsid/slug titles, for testing
     }
   },
 
@@ -139,24 +136,7 @@ export default {
 
   },
 
-  mounted: async function () {
-
-    // load disqus
-    if (!process.server) {
-      /**
-      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
-      // var disqus_config = function () {
-      //   this.page.url = this.slug; // PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      //   this.page.identifier = this.slug //PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      // };
-      
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script')
-      s.src = 'https://capsid-tail.disqus.com/embed.js'
-      s.setAttribute('data-timestamp', +new Date())(d.head || d.body).appendChild(s)
-      })()
-    }
+  created: async function () {
   },
 
   methods: {

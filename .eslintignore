@@ -19,6 +19,7 @@ hostgen.vue
 
 # Mailchimp Generator. eslint doesn't understand <style> tags. Good to check once in a while
 CapsidEmail.vue
+CapsidEmail_old.vue
 
 
 community.vue

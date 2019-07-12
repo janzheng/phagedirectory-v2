@@ -28,8 +28,7 @@
       <!-- hard-coded styles -->
       <style type="text/css">
         h3 {
-          padding-top: 8px;
-          padding-bottom: 8px;
+          padding-top: 21px;
         }
         h4 {
           /*padding: 16px 0;*/
@@ -62,14 +61,14 @@
           font-size: 18px !important;
         }
 
-        .Email-card, {
+        .Email-card, .Periodical-card {
           box-shadow: 0px 4px 8px rgba(70, 70, 70, .1);
           color: #333333;
           background-color: #FCFCFC;
           border-radius: 4px;
           margin-bottom: 16px;
           /*padding: 15px;*/
-          padding: 2px 2px;
+          padding: 8px 8px;
         }
 
         .Section-table {
@@ -98,12 +97,12 @@
         .Capsid-updates {
           /*padding: 16px;*/
           padding: 8px 8px;
-          background-color: #FAFAFA;
+          background-color: #FCFCFC;
         }
         .Capsid-update-item {
           /*padding: 16px;*/
           padding: 8px 8px;
-          background-color: #FFF;
+          background-color: #FFFFFF;
           margin-bottom: 16px;
         }
 
@@ -204,10 +203,6 @@
 
         .Capsid-date {
           font-size: 14px !important;
-        }
-
-        .--featured {
-          border: solid 3px #71EFF5 !important;
         }
 
         blockquote p {
@@ -366,11 +361,16 @@
       <div class="Email-card" >
 
 
-        <!-- WHATS NEW / UPDATES -->
-        <div v-if="getUpdates(issue)" class="Capsid-updates Capsid-section" >
+          <!-- 
+
+              WHATS NEW / UPDATES
+
+           -->
+
+        <div v-if="getUpdates(issue)" class="Capsid-updates" >
           <h3 class="Capsid-updates-title_">{{ issue.fields['UpdatesTitle'] || 'What’s New' }}
           </h3>
-          <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-item Capsid-update-item _margin-bottom" :class="update.fields['classes']" >
+          <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-item Capsid-update-item _margin-bottom" >
             <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
             <div v-if="update.fields['Tags']" class="_margin-top-half" >
               <span v-for="tag of update.fields.Tags" :key="tag" ><span :class="tag == 'Sponsor' || tag == 'Promotion' ? '--sponsor' : ''" class="Email-tag" >{{ tag }}</span>&nbsp;</span> <!-- extra span required for adding space w/o using css -->
@@ -379,20 +379,34 @@
         </div>
 
 
-        <!-- JOBS -->
-        <div class="Capsid-jobs Capsid-section" >
-          <h3 class="Capsid-jobs-header_">{{ 'Latest Jobs' }}</h3>
-          <p>
-            <a href="https://phage.directory/jobs" target="_blank"><strong>All jobs</strong></a> 
-            | <a :href="jobsMailto"><strong>Post a job</strong></a>
-          </p>
+          <!-- 
 
+              JOBS 
+
+           -->
+
+        <div class="Capsid-jobs" >
+          <table class="Section-table">
+            <tr>
+              <td class="" >
+                <h3 class="Capsid-jobs-header_">{{ 'Latest Jobs' }}</h3>
+              </td>
+              <td>
+                <div><a href="https://phage.directory/jobs" target="_blank"><strong>All jobs</strong></a></div>
+                <div><a :href="jobsMailto"><strong>Post a job</strong></a></div>
+              </td>
+            </tr>
+          </table>
           <div v-for="job of getJobs(issue)" v-if="job && job.fields['isPublished']" :key="job.fields['Name']" class="Capsid-jobs-item Capsid-item">
             <div class="Capsid-job-logo" v-if="getAttachment(job)">
               <img :src="getAttachment(job)" alt="Job logo">
             </div>
+            <!-- <div v-if="job.fields['Date'] || job.fields['Category']" class="Capsid-jobs-itemheader _padding-bottom-half" ><span v-if="job.fields['Date']" class="_md-p_fix _font-small _margin-bottom-half" >{{ job.fields['Date'] }}</span><span v-if="job.fields['Category']" class="_md-p_fix _font-small _font-bold" >{{ job.fields['Category'] }}</span></div> -->
 
             <div>
+              <!-- <a v-if="getJobStatus(job) != 'Expired' && getJobLink(job) != false " :href="getJobLink(job)" class="Capsid-job-title"> 
+                {{ job.fields['Name'] }}
+              </a> -->
               <div class="Capsid-job-title">
                 {{ job.fields['Name'] }}
               </div>
@@ -428,14 +442,24 @@
           <div v-if="getJobs(issue).length == 0" class="Capsid-community-empty" v-html="$md.render(emptyJobs || '')" />
         </div>
 
-        <!-- COMMUNITY -->
+        <!-- 
 
-        <div v-if="getCommunity(issue)" class="Capsid-community Capsid-section" >
-          <h3 class="Capsid-community-title_">Community Board</h3>
-          <p>
-            <a href="https://phage.directory/community" target="_blank"><strong>All posts</strong></a> | <a :href="communityMailto"><strong>Post a message</strong></a>
-          </p>
+            COMMUNITY 
 
+         -->
+
+        <div v-if="getCommunity(issue)" class="Capsid-community" >
+          <table class="Section-table">
+            <tr>
+              <td class="" >
+                <h3 class="Capsid-community-title_">Community Board</h3>
+              </td>
+              <td>
+                <div><a href="https://phage.directory/community" target="_blank"><strong>All posts</strong></a></div>
+                <div><a :href="communityMailto"><strong>Post a message</strong></a></div>
+              </td>
+            </tr>
+          </table>
           <div class="Capsid-community-description" v-html="$md.render(communityDescription || '')"/>
           <div v-for="post of getCommunity(issue)" v-if="post && post.fields['isPublished']" :key="post.fields['Name']" class="Capsid-item Capsid-community-item _margin-bottom" >
             <div v-if="post.fields['PostedDate']" class="Capsid-community-itemheader" >

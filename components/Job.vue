@@ -10,8 +10,8 @@
             <img :src="getAttachment(job)" alt="Job logo">
           </div>
           <div class="">
-            <span class="_tag --highlight">{{ job.fields['JobType'] }}</span> <span v-for="tag of job.fields['Tags']" :key="tag" class="_tag">{{ tag }}</span>
-            <span v-if="getJobStatus(job)" class="Job-status _tag ">{{ getJobStatus(job) }}</span>
+            <span class="_tag --highlight">{{ job.fields['JobType'] }}</span> <span v-for="tag of job.fields['Tags']" :key="tag" class="_tag --nowrap">{{ tag }}</span>
+            <span v-if="getJobStatus(job)" class="Job-status _tag --nowrap">{{ getJobStatus(job) }}</span>
           </div>
         </div>
         <div class="Job-date _right-sm _font-small _padding-bottom-quart">
@@ -95,9 +95,6 @@ export default {
     showJob(job) {
       if (!job.fields['isPublished'])
         return undefined 
-
-      // if (job.fields['Status'] == 'Expired')
-      //   return undefined 
 
       if (Date(job.fields['ExpirationDate']) < Date.now())
         return undefined 

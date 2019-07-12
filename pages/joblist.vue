@@ -29,12 +29,12 @@
 
         <!-- 
 
-          Jobs Stream // all jobs including expired
+          Jobs — academic and industry, not sponsored
 
         -->
-        <div v-if="academicJobs.length > 0" class="Jobs-industry _margin-bottom-4">
-          <h6 class="Jobs-sectiontitle">Academic Jobs</h6>
-          <div v-for="job of academicJobs" v-if="showJob(job)" :key="job.id"
+        <div v-if="currentJobs.length > 0" class="Jobs-industry _margin-bottom-4">
+          <!-- <h6 class="Jobs-sectiontitle">Academic Jobs</h6> -->
+          <div v-for="job of currentJobs" v-if="showJob(job)" :key="job.id"
                :class="getJobStatus(job)">
             <Job :job="job" class="Jobs-item _card _margin-bottom _padding"/>
           </div>
@@ -146,10 +146,10 @@ export default {
       return results
     },
 
-    academicJobs() {
+    currentJobs() {
       let results = []
       for (let job of this.Jobs) {
-        if(job.fields['Type'] == 'Academic' && job.fields['Status'] != 'Expired') {
+        if( (job.fields['Type'] == 'Academic' || job.fields['Type'] == 'Industry' ) && job.fields['Status'] != 'Expired') {
           results.push(job)
         }
       }

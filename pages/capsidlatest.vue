@@ -40,7 +40,7 @@
 // import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
 import CapsidMicroBanner from '~/components/CapsidMicroBanner.vue'
-import Capsid from '~/components/Capsid.vue'
+import Capsid from '~/components/CapsidThree.vue'
 
 export default {
 

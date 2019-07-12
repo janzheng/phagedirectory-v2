@@ -2,7 +2,7 @@
   <div id="top" class="ContentFrame Layout" >
     <Header/>
     
-    <div class="" >
+    <div class="">
       <nuxt/>
     </div>
 
@@ -25,12 +25,9 @@
 
     <no-ssr>
       {{ initDrift }}
-    </no-ssr>
-
-    <!-- <no-ssr placeholder="Loading..."> -->
-    <no-ssr>
       <PolicyBanner/>
     </no-ssr>
+
     <Footer/>
   </div>
 </template>
@@ -129,23 +126,22 @@ export default {
       // react to route changes...
       // console.log('ROUTE OBJECT', to, from)
       const _this = this
-      let scrolled = false
-      this.$nextTick(function () {
-        if(_this.$route.hash && !scrolled) {
-          // console.log('-- hash scroll')
+      // this.$nextTick(function () {
+        if(_this.$route.hash) {
+          // console.log('watch -- hash scroll')
         } 
         if(_this.$route.hash) {
           const scroll = _.throttle(function () {
-            VueScrollTo.scrollTo(_this.$route.hash, 900, {
+            console.log('vuescrollto-ing')
+            VueScrollTo.scrollTo(_this.$route.hash, 600, {
              offset: -20
            })
           }, 600)
           // scrolls too fast / before stuff's loaded, add a small buffer
-          setTimeout(scroll, 200)
+          setTimeout(scroll, 100)
           // scroll()
         }
-        scrolled = true
-      })
+      // })
     }
   },
 
@@ -161,14 +157,13 @@ export default {
   mounted () {
     // handle anchor links
     const _this = this
-    let scrolled = false
     this.$nextTick(function () { // this waits to all the children are mounted, too
-      if(_this.$route.hash && !scrolled) {
-        // console.log('-- hash scroll')
+      if(_this.$route.hash) {
+        // console.log('mounted -- hash scroll')
       } 
       if(_this.$route.hash) {
         const scroll = _.throttle(function () {
-          VueScrollTo.scrollTo(_this.$route.hash, 900, {
+          VueScrollTo.scrollTo(_this.$route.hash, 600, {
            offset: -50
          })
         }, 600)
@@ -177,7 +172,6 @@ export default {
         setTimeout(scroll, 300)
         // scroll()
       }
-      scrolled = true
     })
   
   },

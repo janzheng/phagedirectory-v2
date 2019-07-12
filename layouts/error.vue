@@ -27,7 +27,7 @@ export default {
   },
 
   layout: 'contentframe',
-  // middleware: 'pageload',
+  middleware: 'pageload',
   
   // fetch() {
   // },

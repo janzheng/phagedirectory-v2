@@ -5,6 +5,7 @@ const pkg = require('./package')
 
 // dynamic imports for SSR
 import Cytosis from './other/cytosis'
+import axios from 'axios'
 // import { loadNews } from './other/loaders'
 
 
@@ -18,7 +19,7 @@ const site_ga = 'UA-109657404-1'
 const site_url = 'https://phage.directory'
 const site_name = 'Phage Directory';
 const site_twitter = '@phagedirectory';
-const site_twitter_creator = '@janistanian';
+const site_twitter_creator = '@yawnxyz';
 const site_color = '#374F6A';
 const site_title = 'Phage Directory';
 const site_description = 'Phage Directory curates a database of phage labs, phages, and host strains to advance research and phage therapy.';
@@ -62,6 +63,41 @@ const initData = async function() {
   console.log('initData loaded!')
   return cytosis
 }
+
+
+
+// In your `feed` array:
+const createFeed = async function(feed) {
+  feed.options = {
+    title: 'My blog',
+    link: 'https://lichter.io/feed.xml',
+    description: 'This is my personal feed!'
+  }
+
+  const posts = await (axios.get('https://blog-api.lichter.io/posts')).data
+  posts.forEach(post => {
+    feed.addItem({
+      title: post.title,
+      id: post.url,
+      link: post.url,
+      description: post.description,
+      content: post.content
+    })
+  })
+
+  feed.addCategory('Nuxt.js')
+
+  feed.addContributor({
+    name: 'Alexander Lichter',
+    email: 'example@lichter.io',
+    link: 'https://lichter.io/'
+  })
+}
+
+
+
+
+
 
 
 module.exports = (async function() {
@@ -195,7 +231,7 @@ module.exports = (async function() {
       { src: '~/plugins/cytosis.js' },
       { src: '~/plugins/date.js' },
       { src: '~/plugins/twitter.js', ssr: false },
-      // { src: '~/plugins/dynamicData.js' } // done as middleware instead
+      { src: '~/plugins/disqus.js', ssr: false },
     ],
 
     modules: [
@@ -467,17 +503,17 @@ module.exports = (async function() {
           },
           {
             name: 'phagefutures-agenda',
-            path: '/phage-futures/agenda',
+            path: '/phagefutures/agenda',
             component: resolve(__dirname, 'pages/phagefutures.vue')
           },
           {
             name: 'phagefutures-posters',
-            path: '/phage-futures/posters',
+            path: '/phagefutures/posters',
             component: resolve(__dirname, 'pages/phagefutures.vue')
           },
           {
             name: 'phagefutures-about',
-            path: '/phage-futures/about',
+            path: '/phagefutures/about',
             component: resolve(__dirname, 'pages/phagefutures.vue')
           },
           // {
@@ -513,7 +549,7 @@ module.exports = (async function() {
 
     },
     generate: {
-      interval: 100, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
+      interval: 500, // slow down api calls // https://nuxtjs.org/api/configuration-generate/
       // fallback: false, // if you want to use '404.html' — for surge, use false if you want to use 200 spa fallback
       // concurrency: 1, // reduce server strain
       routes: async function (callback) {
@@ -535,10 +571,16 @@ module.exports = (async function() {
         let routeList = []
 
         // build C&T issues
+        let ctr = 0
         for (let capsid of site_routes.tables['C&T']) {
           if(capsid.fields['Slug'])
-            routeList.push(`/capsid/${capsid.fields['Slug']}`
-          )
+            if(ctr > 5) {
+              break
+            } else {
+              console.log('adding Capsid: ', capsid.fields['Slug'])
+              routeList.push(`/capsid/${capsid.fields['Slug']}`)
+              ctr = ctr + 1
+            }
         }
 
         // // build Jobs pages
@@ -556,6 +598,9 @@ module.exports = (async function() {
 
   return obj
 })()
+
+
+
 
 
 

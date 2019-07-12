@@ -19,9 +19,8 @@
 
       <!-- <CapsidBanner /> -->
       <div class="Capsid-content _margin-bottom" v-html="$md.render(highlight)" />
-
     </div>
-    
+
     <!-- <Capsid :issues="latest" :isFeatured="true" /> -->
     <CapsidStub :issues="latest" :is-featured="true" class="_section-article _margin-center" />
 
@@ -38,7 +37,7 @@
 
 // import Article from '~/components/Article.vue'
 import CapsidBanner from '~/components/CapsidBanner.vue'
-import Capsid from '~/components/Capsid.vue'
+// import Capsid from '~/components/Capsid.vue'
 import CapsidStub from '~/components/CapsidStub.vue'
 import FormCapsidFeedback from '~/forms/FormCapsidFeedback.vue'
 import { mapState } from 'vuex'
@@ -66,9 +65,7 @@ export default {
   },
 
   components: {
-    // Article,
     CapsidBanner,
-    Capsid,
     CapsidStub,
     FormCapsidFeedback,
   },

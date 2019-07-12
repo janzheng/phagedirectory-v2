@@ -19,14 +19,12 @@
           <div class="" v-html="$md.render(classroomBg || '')" />
         </div>
 
-
         <div id="pledge" class="Classroom-form FormCard --tertiary-10" >
           <div class="" v-html="$md.render(classroomForm || '')" />
           <form id="mc-embedded-subscribe-form"
                 action="https://directory.us19.list-manage.com/subscribe/post?u=a95319e0a6f57b754b11012a8&amp;id=f7c4e1695f"
                 method="post" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
             <div id="mc_embed_signup_scroll ">
-              <!-- <div class="" v-html="$md.render(intro || '')"></div> -->
               <div id="mce-responses" class="clear hhoney">
                 <div id="mce-error-response" class="response" style="display:none" />
                 <div id="mce-success-response" class="response" style="display:none" />
@@ -53,8 +51,6 @@
           </form>
           <div class="_margin-top" v-html="$md.render(classroomPostForm || '')" />
         </div>
-
-
 
       </div>
 

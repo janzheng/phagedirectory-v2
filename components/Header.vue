@@ -10,7 +10,7 @@
 
         <div class="Header-left _hidden-sm">
           <div class="_flex _left-xs _align-vertically _margin-bottom">
-            <router-link to="/" class="Header-logo-link _border-none-i _margin-right" aria-label="Phage Directory Logo"><img class="logo-xs" src="/snow.png" alt="Phage Directory footer"></router-link>
+            <router-link to="/" class="Header-logo-link _border-none-i _margin-right" aria-label="Phage Directory Logo"><img class="logo-xs" src="/_ico.png" alt="Phage Directory footer"></router-link>
             <div class=" _flex-2">
               <div class="Header-inset _flex-row _flex-vertically _flex-wrap _padding-right">
                 <div class="_margin-bottom-half-sm _flex-row">
@@ -76,7 +76,7 @@
       <!-- Desktop menu -->
       <div class="Header-left _hidden-xs">
         <div class="_flex _left-xs _align-vertically _margin-bottom">
-          <router-link to="/" class=" Header-logo-link _border-none-i"><img class="logo-xs" src="~/static/snow.png"></router-link>
+          <router-link to="/" class=" Header-logo-link _border-none-i"><img class="logo-xs" src="~/static/_ico.png"></router-link>
           <div class="Header-inset _flex-row _flex-2 _flex-vertically _padding-right _margin-left _margin-right">
             <router-link to="/phages" class="_button --text --short _padding-none _margin-none --border-none">
               Phages
@@ -150,7 +150,7 @@ export default {
 
   methods: {
     search() {
-      console.log("handling search:",this.searchString)
+      // console.log("handling search:",this.searchString)
       // const url = `/search/${this.searchString}`
       const url = `/phages`
       // console.log("search url:", url, "?", this.$router.history)

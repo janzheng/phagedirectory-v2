@@ -74,17 +74,34 @@ $use-colorate: false;
 
 //  Phage Directory Measurements
 
+
+// OLD
+// $phdir-sizes: (
+//   size-diff: 0,
+//   lineheight: 24px,
+//   font-small: 13px,
+//   size: 15px,
+//   font-large: 17px,
+
+//   z-top: 90,
+//   z-popup: 100,
+ 
+// ) !default;
+
+// More Readable
 $phdir-sizes: (
   size-diff: 0,
-  lineheight: 24px,
   font-small: 13px,
-  size: 15px,
-  font-large: 17px,
+  size: 16px,
+  lineheight: 24px,
+  font-large: 19px,
 
   z-top: 90,
   z-popup: 100,
  
 ) !default;
+
+
 
 @include addtheme($phdir-sizes)
 

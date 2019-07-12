@@ -15,13 +15,11 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "deploy": "cd dist; surge . -d https://phage.directory; say 'prod ready'",
-    "stagedeploy": "cd dist; surge . -d phagedirectory.surge.sh; say 'stage ready'",
+    "stagedeploy": "cd dist; surge . -d v2.phagedirectory.surge.sh; say 'stage ready'",
     "stage": "NODE_ENV=spa npm run generate --spa; npm run stagedeploy",
     "stagebuild": "npm run generate; npm run stagedeploy",
     "prod": "npm run generate; npm run deploy",
-    "prodspa": "NODE_ENV=spa npm run generate --spa; npm run deploy",
-    "kisacodeploy": "cd dist; surge . -d phagedirectorykisaco.surge.sh; say 'stage ready'",
-    "kisaco": "npm run generate; npm run kisacodeploy"
+    "prodspa": "NODE_ENV=spa npm run generate --spa; npm run deploy"
   },
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
@@ -42,6 +40,7 @@
     "node-sass": "^4.10.0",
     "nuxt": "^2.4.3",
     "sass-loader": "^7.0.3",
+    "vue-disqus": "^3.0.5",
     "vue-scrollto": "^2.11.0",
     "vuelidate": "^0.7.4",
     "vuex-cache": "^1.3.0",

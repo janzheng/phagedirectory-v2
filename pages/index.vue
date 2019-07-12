@@ -61,19 +61,21 @@
               <img class="cnt _block _left" src="/cnt.png" width="100px" alt="Capsid and Tail" >
             </div>
             <div slot="main">
-              <CapsidStub :issues="latestCapsid" :is-featured="true" class="_section-article _margin-center" />
+              <no-ssr>
+                <CapsidStub :issues="latestCapsid" :is-featured="true" class="_section-article _margin-center" />
+              </no-ssr>
               <!-- <CapsidBanner /> -->
               <CapsidMicroBanner class="CapsidBanner" />
               <FormCapsidFeedback class=""/>
             </div>
           </StreamCard>
 
-          <StreamCard>
+          <!-- <StreamCard>
             <div slot="sidebar" style="width:100px">
               <img class="cnt _block _left _margin-center" src="/phagefutures.png" width="80px" alt="Phage Futures" >
             </div>
             <div slot="main" class="_card --border-active _padding _md-p_fix" v-html="$md.render(phagefutures || '')" />
-          </StreamCard>
+          </StreamCard> -->
 
         </div>
 

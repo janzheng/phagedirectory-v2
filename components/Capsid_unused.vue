@@ -12,7 +12,7 @@
         <span class="_tag">{{issue.fields['IssueType']}}</span>
       </div> -->
 
-      <div class="Capsid-header _grid-3-2 _grid-gap-small">
+      <div class="Capsid-meta _grid-3-2 _grid-gap-small">
         <div class="Capsid-title">{{ issue.fields['Name'] }}</div>
         <div class="Capsid-date _right-sm">{{ issue.fields['Date'] | niceDate }}</div>
       </div>
@@ -46,7 +46,7 @@
            -->
 
           <div v-if="getUpdates(issue).length>0" class="Capsid-updates" >
-            <h4 class="Capsid-new-title">{{ issue.fields['UpdatesTitle'] || 'Updates' }}</h4>
+            <h4 class="Capsid-new-title">{{ 'What’s New' }}</h4>
             <div v-for="update of getUpdates(issue)" v-if="update && update.fields['isPublished']" :key="update.fields['Name']" class="Capsid-update-item" >
               <div class="_md-p_fix" v-html="$md.render(update.fields['Markdown'] || '')" />
               <div v-if="update.fields['Tags']" class="_margin-top-half" >
@@ -168,20 +168,26 @@
         </div>
 
 
+
+        <div v-if="issue.fields['Title']" class="Capsid-title" v-html="issue.fields['Title']" />
+
+        <div v-if="issue.fields['PreAuthor']" class="Capsid-preauthor" v-html="issue.fields['PreAuthor']" />
+
         <div v-if="issue.fields['Article']" class="Capsid-content" v-html="$md.render(issue.fields['Article'] || '')" />
 
         <!-- list has been moved to PeriodicalList.vue -->
 
-        <!-- twitter share on bottom -->
-        <div class="Capsid-share" >
-          <p class="Capsid-twitter">
-            <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
-            <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
-          </p>
-        </div>
       </div>
 
       <div v-if="issue.fields['Author']" class="Capsid-author" v-html="issue.fields['Author']" />
+
+      <!-- twitter share on bottom -->
+      <div class="Capsid-share" >
+        <p class="Capsid-twitter">
+          <img src="https://abs.twimg.com/errors/logo23x19@2x.png" width="23px" height="19px" >
+          <a :href="getTwitterLink(issue)" >Tweet this issue!</a>
+        </p>
+      </div>
 
     </div>
 

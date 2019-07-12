@@ -122,11 +122,11 @@
   }
 }
 
-.Capsid-header {
+.Capsid-meta {
   @extend %font-serif;
   // font-style: italic;
   // font-size: $font-large;
-  color: usetheme(copy-light); //$color-gray-light;
+  // color: usetheme(copy-light); //$color-gray-light;
 }
 
 // in favor of plain text instead of lots of links like sidebar
@@ -200,6 +200,7 @@
       height: auto;
     }
   }
+
   // .Capsid-item-date {
   //   font-size: $font-small;
   //   margin-right: $size-half;
@@ -280,6 +281,13 @@
   //   }
   // }
 }
+
+.Capsid-item-tag._tag {
+  white-space: nowrap;
+  display: inline-block;
+  line-height: $size;
+}
+
   
 .Capsid-callout {
   padding: $size;
@@ -322,6 +330,10 @@
 
   img {
     max-width: 100%;
+  }
+
+  &.--featured {
+    border: solid $border-medium usetheme(teal);
   }
 }
 
@@ -412,6 +424,15 @@
   }
 }
 
+.Capsid-author,
+.Capsid-authorCard img {
+  // margin-right: $size;
+  // vertical-align: bottom;
+  // display: inline;
+  // margin-top: $size/2;
+  // max-width: 80px;
+}
+
 .Capsid-author {
   @extend .Capsid-card;
   margin-top: $size;
@@ -420,9 +441,6 @@
   background-color: usetheme(bg-lighter); // $color-ui-lighter;
   border-radius: $radius;
 
-  img {
-    max-width: 80px;
-  }
 }
 
 .Capsid-share {
