@@ -3,7 +3,7 @@
 This is the Phage Directory core project. 
 Transition project from static site (Middleman) to web app using Vue/Nuxt and powered by Airtable as a CMS.
 
-### 7/12/2019
+#### 7/12/2019
 Sunsetting v2 for v3, going forward this version will be for reference and won't be maintained anymore.
 The legacy site can be found at https://v2.phagedirectory.surge.sh
 
