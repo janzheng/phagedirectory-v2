@@ -1,7 +1,7 @@
 # Phage Directory v2
 
 This is the Phage Directory core project. 
-Transition project from static site (Middleman) to web app using Vue/Nuxt and powered by Airtable as a CMS.
+Transition project from static site (Middleman) to web app using Vue/Nuxt and powered by Airtable as a CMS. Using a lot of experimental code borrow from other projects. Some code is proof of concept.
 
 #### 7/12/2019
 Sunsetting v2 for v3, going forward this version will be for reference and won't be maintained anymore.
